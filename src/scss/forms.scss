@@ -1,0 +1,23 @@
+@import "./colors.scss";
+
+mat-form-field {
+  .mat-mdc-text-field-wrapper {
+    padding: 0;
+    background-color: transparent !important;
+  }
+
+  .mdc-floating-label {
+    position: relative;
+    top: -11px !important;
+  }
+
+  .mat-mdc-input-element {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd !important;
+  }
+
+  .mdc-line-ripple {
+    display: none;
+  }
+}

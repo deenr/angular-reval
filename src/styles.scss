@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$angular-reval-primary: mat.define-palette(mat.$indigo-palette);
+$angular-reval-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$angular-reval-warn: mat.define-palette(mat.$red-palette);
+
+$angular-reval-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-reval-primary,
+      accent: $angular-reval-accent,
+      warn: $angular-reval-warn,
+    ),
+  )
+);
+@include mat.all-component-themes($angular-reval-theme);
+
+@import "./scss/forms.scss";
+@import "./scss/typography.scss";
+
+html,
+body {
+  height: 100%;
+}
