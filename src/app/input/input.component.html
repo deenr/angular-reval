@@ -1,0 +1,17 @@
+<mat-form-field class="form-field" [floatLabel]="'always'">
+  <mat-label>Input</mat-label>
+  <div class="input-field">
+    <mat-icon
+      [svgIcon]="leadingIcon"
+      aria-hidden="false"
+      class="icon leading-icon"
+    ></mat-icon>
+    <input matInput [placeholder]="placeholder" />
+    <mat-icon
+      [svgIcon]="trailingIcon"
+      aria-hidden="false"
+      class="icon trailing-icon"
+    ></mat-icon>
+  </div>
+  <ng-content></ng-content>
+</mat-form-field>

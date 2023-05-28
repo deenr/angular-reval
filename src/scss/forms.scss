@@ -1,23 +1,44 @@
 @import "./colors.scss";
+@import "./typography.scss";
 
 mat-form-field {
   .mat-mdc-text-field-wrapper {
+    width: 320px;
     padding: 0;
     background-color: transparent !important;
-  }
 
-  .mdc-floating-label {
-    position: relative;
-    top: -11px !important;
-  }
+    .mat-mdc-form-field-focus-overlay {
+      background-color: transparent;
+    }
 
-  .mat-mdc-input-element {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #d0d5dd !important;
-  }
+    .mat-mdc-form-field-flex {
+      .mat-mdc-form-field-infix {
+        padding: 0;
 
-  .mdc-line-ripple {
-    display: none;
+        .mdc-floating-label {
+          position: relative;
+          top: -5px !important;
+          color: #344054;
+          font-weight: $fw-400;
+        }
+
+        .mat-mdc-input-element {
+          color: #101828;
+          caret-color: #344054;
+        }
+      }
+    }
+
+    .mdc-line-ripple {
+      display: none;
+    }
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    .mat-mdc-form-field-hint-wrapper {
+      padding: 0;
+      font-size: 14px;
+      color: #475467;
+      font-weight: $fw-400;
+    }
   }
 }
