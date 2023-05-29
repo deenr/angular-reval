@@ -85,6 +85,30 @@ export class AppComponent {
       )
     );
     this.iconRegistry.addSvgIcon(
+      'chevron-up',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/chevron-up.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'chevron-down',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/chevron-down.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'chevron-right',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/chevron-right.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'chevron-left',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/chevron-left.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
       'check',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/check.svg')
     );
