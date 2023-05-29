@@ -4,14 +4,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputComponent } from './input/input.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponent],
+  declarations: [AppComponent, InputComponent, DatepickerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatIconModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

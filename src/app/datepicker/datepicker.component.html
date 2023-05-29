@@ -1,0 +1,10 @@
+<mat-form-field floatLabel="always">
+  <mat-label>Choose a date</mat-label>
+  <div class="datepicker-field">
+    <input matInput [matDatepicker]="picker" />
+    <div class="calendar-icon" (click)="picker.open()">
+      <mat-icon svgIcon="calendar"></mat-icon>
+    </div>
+  </div>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
