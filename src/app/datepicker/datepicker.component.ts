@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
-interface CustomDate {
-  date: Date;
-  selected: boolean;
-}
-
+import { DatepickerDate } from './datepicker-date.interface';
 @Component({
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.scss'],
 })
 export class DatepickerComponent implements OnInit {
-  currentDateInView: CustomDate | null = null;
-  selectedStartDate: CustomDate | null = null;
-  selectedEndDate: CustomDate | null = null;
+  currentDateInView: DatepickerDate | null;
+  selectedStartDate: DatepickerDate | null;
+  selectedEndDate: DatepickerDate | null;
   showPicker = false;
   currentMonth: string;
-  calendarDates: CustomDate[] = [];
+  calendarDates: DatepickerDate[] = [];
   weekdays: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   public ngOnInit(): void {
@@ -71,7 +66,7 @@ export class DatepickerComponent implements OnInit {
     }
   }
 
-  public selectDate(date: CustomDate): void {
+  public selectDate(date: DatepickerDate): void {
     if (!this.selectedStartDate) {
       this.selectedStartDate = date;
       date.selected = true;
@@ -87,7 +82,7 @@ export class DatepickerComponent implements OnInit {
     }
   }
 
-  public isDateInRange(givenDate: CustomDate): boolean {
+  public isDateInRange(givenDate: DatepickerDate): boolean {
     if (this.selectedStartDate?.date && this.selectedEndDate?.date) {
       return (
         givenDate.date.getTime() > this.selectedStartDate?.date.getTime() &&
@@ -97,7 +92,7 @@ export class DatepickerComponent implements OnInit {
     return false;
   }
 
-  public isDateInRangeAndSaturday(givenDate: CustomDate): boolean {
+  public isDateInRangeAndSaturday(givenDate: DatepickerDate): boolean {
     return (
       this.isDateInRange(givenDate) &&
       givenDate.date.getDay() === 6 &&
@@ -105,7 +100,7 @@ export class DatepickerComponent implements OnInit {
     );
   }
 
-  public isDateInRangeAndSunday(givenDate: CustomDate): boolean {
+  public isDateInRangeAndSunday(givenDate: DatepickerDate): boolean {
     return (
       this.isDateInRange(givenDate) &&
       givenDate.date.getDay() === 0 &&
@@ -113,13 +108,13 @@ export class DatepickerComponent implements OnInit {
     );
   }
 
-  public isDateInCurrentMonth(date: CustomDate): boolean {
+  public isDateInCurrentMonth(date: DatepickerDate): boolean {
     return date.date.getMonth() === this.currentDateInView?.date.getMonth();
   }
 
-  public getRangeDates(): CustomDate[] {
-    const rangeDates: CustomDate[] = [];
-    this.calendarDates.forEach((customDate: CustomDate) => {
+  public getRangeDates(): DatepickerDate[] {
+    const rangeDates: DatepickerDate[] = [];
+    this.calendarDates.forEach((customDate: DatepickerDate) => {
       const morningDate = new Date(customDate.date);
       morningDate.setHours(0, 0, 0, 0);
       rangeDates.push({ date: morningDate, selected: false });
@@ -166,11 +161,11 @@ export class DatepickerComponent implements OnInit {
     }
   }
 
-  private isDateBefore(date1: CustomDate, date2: CustomDate): boolean {
+  private isDateBefore(date1: DatepickerDate, date2: DatepickerDate): boolean {
     return date1.date.getTime() < date2.date.getTime();
   }
 
-  private isDateAfter(date1: CustomDate, date2: CustomDate): boolean {
+  private isDateAfter(date1: DatepickerDate, date2: DatepickerDate): boolean {
     return date1.date.getTime() > date2.date.getTime();
   }
 }
