@@ -60,6 +60,37 @@ p {
   line-height: 1.5rem;
 }
 
+a {
+  color: $color-primary-700;
+  font-size: $fs-400;
+  font-weight: $fw-600;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-primary-800;
+  }
+
+  &:active {
+    color: $color-primary-700;
+  }
+
+  &:disabled {
+    color: $color-grey-300;
+  }
+
+  &.grey {
+    color: $color-grey-600;
+
+    &:hover {
+      color: $color-grey-700;
+    }
+
+    &:active {
+      color: $color-grey-600;
+    }
+  }
+}
+
 .caption {
   font-size: $fs-100;
   font-weight: $fw-800;
