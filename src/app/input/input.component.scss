@@ -1,5 +1,9 @@
 @import "../../scss/variables.scss";
 
+::ng-deep app-input {
+  margin: 0 -4px -6px -4px !important;
+}
+
 :host {
   .input-field {
     display: flex;
@@ -7,7 +11,8 @@
     gap: 8px;
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid $color-grey-400;
+    border: 1px solid $color-grey-300;
+    font-size: $fs-400;
 
     .leading-icon {
       width: 20px;
@@ -29,6 +34,12 @@
       border: 1px solid $color-primary-400;
       box-shadow: 0px 1px 2px $color-grey-100,
         0px 0px 0px 4px $color-primary-200;
+    }
+  }
+
+  .no-hint {
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      margin-bottom: -1.25em;
     }
   }
 }

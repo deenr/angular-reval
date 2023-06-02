@@ -2,12 +2,15 @@
 @import "./typography.scss";
 
 .mat-mdc-button-base {
+  height: 42px !important;
   padding: 10px 18px !important;
   border-radius: 8px !important;
+  font-weight: $fw-600 !important;
+  letter-spacing: 0 !important;
 
-  .mdc-button__label {
-    // font-size: $fs-400;
-    //   font-weight: $fw-600;
+  .mat-icon {
+    position: relative;
+    z-index: 1;
   }
 
   .mat-mdc-button-persistent-ripple {

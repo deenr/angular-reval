@@ -1,17 +1,19 @@
-<mat-form-field class="form-field" floatLabel="always">
+<mat-form-field class="form-field" [class.no-hint]="!hint" floatLabel="always">
   <mat-label>{{ label }}</mat-label>
   <div class="input-field">
     <mat-icon
+      *ngIf="leadingIcon"
       [svgIcon]="leadingIcon"
       aria-hidden="false"
       class="icon leading-icon"
     ></mat-icon>
-    <input matInput [placeholder]="placeholder" />
+    <input matInput [placeholder]="placeholder" [type]="type" />
     <mat-icon
+      *ngIf="trailingIcon"
       [svgIcon]="trailingIcon"
       aria-hidden="false"
       class="icon trailing-icon"
     ></mat-icon>
   </div>
-  <ng-content></ng-content>
+  <mat-hint>{{ hint }}</mat-hint>
 </mat-form-field>

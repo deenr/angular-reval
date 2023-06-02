@@ -62,5 +62,17 @@ export class AppComponent {
         './assets/svg/calendar.svg'
       )
     );
+    this.iconRegistry.addSvgIcon(
+      'google-color',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/color/google-color.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'logo-color',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/color/logo-color.svg'
+      )
+    );
   }
 }

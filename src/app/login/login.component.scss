@@ -1,0 +1,165 @@
+@import "../../scss/variables.scss";
+
+:host {
+  .login-page {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login {
+    $padding-horizontal: 140px;
+    $padding-top: 128px;
+    position: relative;
+    padding: $padding-top $padding-horizontal 0 $padding-horizontal;
+    width: 45%;
+
+    @include breakpoint-xl() {
+      width: 60%;
+    }
+
+    @include breakpoint-lg() {
+      width: 360px;
+      padding: $padding-top 0;
+    }
+
+    @include breakpoint-sm() {
+      padding: 48px 16px;
+    }
+
+    &::before {
+      width: 768px;
+      height: 768px;
+      position: absolute;
+      z-index: -1;
+      top: $padding-top + 20px;
+      left: $padding-horizontal + 16px;
+      transform: translate(-50%, -50%);
+      mask-image: url("../../assets/svg/illustration/circle-desktop.svg");
+      background: radial-gradient(
+        50% 50% at 50% 50%,
+        $color-grey-200 0%,
+        transparent 100%
+      );
+      content: "";
+
+      @include breakpoint-lg() {
+        left: 16px;
+      }
+
+      @include breakpoint-sm() {
+        top: 68px;
+        left: 32px;
+      }
+    }
+
+    &__logo {
+      gap: 8px;
+      align-items: center;
+
+      mat-icon {
+        min-width: 32px;
+        min-height: 32px;
+      }
+
+      h3 {
+        font-size: $fs-500;
+      }
+    }
+
+    &__header {
+      margin-top: 80px;
+      align-items: start;
+      gap: 12px;
+
+      h2 {
+        color: $color-grey-900;
+      }
+
+      p {
+        color: $color-grey-600;
+      }
+    }
+
+    &__form {
+      margin-top: 32px;
+      gap: 20px;
+    }
+
+    &__remember {
+      margin-top: 24px;
+      gap: 8px;
+
+      p {
+        margin-right: auto;
+      }
+    }
+
+    &__actions {
+      margin-top: 32px;
+      gap: 16px;
+
+      .google-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &__no-account {
+      margin-top: 32px;
+      text-align: center;
+    }
+  }
+
+  .attribution {
+    width: 55%;
+    background-color: $color-grey-100;
+    padding: 96px 64px;
+
+    @include breakpoint-xl() {
+      width: 40%;
+    }
+
+    @include breakpoint-lg() {
+      display: none;
+    }
+
+    .quote {
+      @include breakpoint-xl() {
+        display: none;
+      }
+
+      &__text {
+        font-weight: $fw-500;
+        font-size: 30px;
+        line-height: 38px;
+
+        color: $color-grey-900;
+      }
+
+      &__author {
+        margin-top: 24px;
+
+        &__name {
+          font-weight: $fw-600;
+          font-size: 18px;
+          line-height: 28px;
+
+          color: $color-grey-900;
+        }
+
+        &__function {
+          font-weight: $fw-500;
+          font-size: 16px;
+          line-height: 24px;
+
+          color: $color-grey-600;
+        }
+      }
+    }
+
+    &__image {
+      position: absolute;
+      margin-top: 112px;
+    }
+  }
+}

@@ -16,9 +16,10 @@ import { InputComponent } from './input/input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponent, DatepickerComponent],
+  declarations: [AppComponent, InputComponent, DatepickerComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
