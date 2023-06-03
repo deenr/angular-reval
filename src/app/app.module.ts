@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { LoginComponent } from './login/login.component';
+import { ProgressStepsComponent } from './progress-steps/progress-steps.component';
+import { RegisterComponent } from './register/register.component';
+import { DividerWithTextComponent } from './divider-with-text/divider-with-text.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,9 @@ import { LoginComponent } from './login/login.component';
     InputComponent,
     DatepickerComponent,
     LoginComponent,
+    ProgressStepsComponent,
+    RegisterComponent,
+    DividerWithTextComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import { LoginComponent } from './login/login.component';
     MatCheckboxModule,
     MatRadioModule,
     FormsModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

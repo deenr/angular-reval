@@ -1,0 +1,86 @@
+<section class="register-section flex-column full-height">
+  <div class="full-height">
+    <div class="register__logo flex-row">
+      <mat-icon svgIcon="logo-color"></mat-icon>
+      <h3>Sphience</h3>
+    </div>
+    <div class="register__header flex-column">
+      <h2 class="display-md text-semibold">{{ getTitle() }}</h2>
+      <p *ngIf="getSubtitle()" class="text-md text-regular">
+        {{ getSubtitle() }}
+      </p>
+    </div>
+    <form class="register__form">
+      <div
+        *ngIf="canShowStep(registrationSteps.EMAIL)"
+        class="flex-column form__step-one"
+      >
+        <div class="flex-column form__email">
+          <app-input placeholder="Enter your email"></app-input>
+          <button
+            mat-flat-button
+            color="primary"
+            class="register__continue"
+            (click)="goToPassword()"
+          >
+            Continue
+          </button>
+        </div>
+        <app-divider-with-text text="OR"></app-divider-with-text>
+        <button mat-stroked-button>
+          <mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign
+          up with Google
+        </button>
+        <div class="has-account">
+          <span class="text-sm text-regular">
+            Already have an account? <a href="/">Log in</a>
+          </span>
+        </div>
+      </div>
+      <div
+        *ngIf="canShowStep(registrationSteps.PASSWORD)"
+        class="flex-column form__step-two"
+      >
+        <div class="flex-column form__password">
+          <app-input
+            type="password"
+            placeholder="Choose a password"
+          ></app-input>
+          <app-input type="password" placeholder="Confirm password"></app-input>
+        </div>
+        <button
+          mat-flat-button
+          color="primary"
+          class="register__continue"
+          (click)="goToDetails()"
+        >
+          Continue
+        </button>
+      </div>
+      <div
+        *ngIf="canShowStep(registrationSteps.DETAILS)"
+        class="flex-column form__step-two"
+      >
+        <div class="flex-column form__password">
+          <app-input type="text" label="Department/Faculty"></app-input>
+          <app-input type="text" label="Student/Researcher ID"></app-input>
+          <app-input type="text" label="Year"></app-input>
+          <app-input type="text" label="Field of Study/Research"></app-input>
+          <app-input type="text" label="Contact Number"></app-input>
+        </div>
+        <button
+          mat-flat-button
+          color="primary"
+          class="register__continue"
+          (click)="goToDetails()"
+        >
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+  <app-progress-steps
+    class="register__process"
+    [steps]="steps"
+  ></app-progress-steps>
+</section>

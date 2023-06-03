@@ -1,7 +1,8 @@
 @import "../../scss/variables.scss";
 
 ::ng-deep app-input {
-  margin: 0 -4px -6px -4px !important;
+  // margin: 0 -4px -6px -4px !important;
+  margin: -6px -4px -12px -4px !important;
 }
 
 :host {
@@ -12,19 +13,16 @@
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid $color-grey-300;
-    font-size: $fs-400;
 
     .leading-icon {
       width: 20px;
       height: 20px;
-      font-size: 20px;
       color: $color-grey-600;
     }
 
     .trailing-icon {
       width: 16px;
       height: 16px;
-      font-size: 16px;
       color: $color-grey-500;
     }
 

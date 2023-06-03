@@ -1,0 +1,6 @@
+export enum RegistrationSteps {
+  EMAIL = 'EMAIL',
+  PASSWORD = 'PASSWORD',
+  DETAILS = 'DETAILS',
+  EMAIL_VERIFICATION = 'EMAIL_VERIFICATION',
+}

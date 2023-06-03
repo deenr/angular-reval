@@ -3,6 +3,7 @@
 @import "./reset-file.scss";
 @import "./typography.scss";
 @import "./buttons.scss";
+@import "./other-components.scss";
 
 .flex-column {
   display: flex;
@@ -20,6 +21,18 @@
 
 .full-height {
   height: 100%;
+}
+
+.featured-icon {
+  display: flex !important;
+  align-items: center;
+  height: 40px !important;
+  width: 40px !important;
+  padding: 10px;
+  border: 1px solid $color-grey-200;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  background-color: $color-white;
 }
 
 @mixin breakpoint-xs {

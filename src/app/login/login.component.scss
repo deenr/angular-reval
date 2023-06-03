@@ -29,14 +29,18 @@
 
   .login {
     position: relative;
-    flex: 360px;
+    width: 360px;
+
+    @include breakpoint-xs() {
+      width: 100%;
+    }
 
     &::before {
       width: 768px;
       height: 768px;
       position: absolute;
       z-index: -1;
-      top: 20px;
+      top: 16px;
       left: 16px;
       transform: translate(-50%, -50%);
       mask-image: url("../../assets/svg/illustration/circle-desktop.svg");
@@ -55,10 +59,6 @@
       mat-icon {
         min-width: 32px;
         min-height: 32px;
-      }
-
-      h3 {
-        font-size: $fs-500;
       }
     }
 
@@ -86,7 +86,6 @@
       gap: 8px;
 
       p {
-        font-size: $fs-300;
         margin-right: auto;
       }
     }
@@ -125,32 +124,8 @@
         display: none;
       }
 
-      &__text {
-        font-weight: $fw-500;
-        font-size: 30px;
-        line-height: 38px;
-
-        color: $color-grey-900;
-      }
-
       &__author {
         margin-top: 24px;
-
-        &__name {
-          font-weight: $fw-600;
-          font-size: 18px;
-          line-height: 28px;
-
-          color: $color-grey-900;
-        }
-
-        &__function {
-          font-weight: $fw-500;
-          font-size: 16px;
-          line-height: 24px;
-
-          color: $color-grey-600;
-        }
       }
     }
 

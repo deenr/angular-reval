@@ -1,0 +1,19 @@
+@import "../../scss/variables.scss";
+
+:host {
+  .divider {
+    align-items: center;
+    gap: 8px;
+
+    &__text {
+      color: $color-grey-600;
+    }
+
+    &__left,
+    &__right {
+      height: 1px;
+      background-color: $color-grey-200;
+      width: 100%;
+    }
+  }
+}

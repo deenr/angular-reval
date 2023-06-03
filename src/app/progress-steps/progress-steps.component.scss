@@ -1,0 +1,60 @@
+@import "../../scss/variables.scss";
+
+:host {
+  .steps {
+    gap: 16px;
+
+    .step__base {
+      position: relative;
+      width: 240px;
+      align-items: center;
+      gap: 12px;
+
+      @include breakpoint-lg() {
+        width: 90px;
+      }
+
+      @include breakpoint-sm() {
+        width: 64px;
+      }
+
+      @include breakpoint-xs() {
+        display: none;
+      }
+
+      .base__content {
+        align-items: center;
+
+        @include breakpoint-lg() {
+          display: none;
+        }
+
+        &.incomplete {
+          opacity: 0.6;
+        }
+
+        h5 {
+          color: $color-grey-700;
+        }
+
+        p {
+          color: $color-grey-600;
+        }
+      }
+    }
+
+    .line {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      z-index: -1;
+      width: 100%;
+      height: 2px;
+      background-color: $color-grey-200;
+
+      &.complete {
+        background-color: $color-grey-700;
+      }
+    }
+  }
+}

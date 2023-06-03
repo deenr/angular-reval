@@ -1,0 +1,96 @@
+@import "../../scss/variables.scss";
+
+:host {
+  $padding-form-horizontal: 140px;
+  $padding-form-top: 128px;
+
+  .register-section {
+    align-items: center;
+    padding-top: $padding-form-top;
+
+    @include breakpoint-sm() {
+      padding: 48px 16px;
+    }
+  }
+
+  .register__logo {
+    position: relative;
+    gap: 8px;
+    align-items: center;
+
+    &::before {
+      width: 768px;
+      height: 768px;
+      position: absolute;
+      z-index: -1;
+      top: 16px;
+      left: 16px;
+      transform: translate(-50%, -50%);
+      mask-image: url("../../assets/svg/illustration/circle-desktop.svg");
+      background: radial-gradient(
+        50% 50% at 50% 50%,
+        $color-grey-200 0%,
+        transparent 100%
+      );
+      content: "";
+    }
+
+    mat-icon {
+      min-width: 32px;
+      min-height: 32px;
+    }
+  }
+
+  .register__header {
+    margin-top: 80px;
+    align-items: start;
+    gap: 12px;
+
+    h2 {
+      color: $color-grey-900;
+    }
+
+    p {
+      color: $color-grey-600;
+    }
+  }
+
+  .register__form {
+    width: 360px;
+    margin-top: 32px;
+    position: relative;
+
+    @include breakpoint-xs() {
+      width: 100%;
+    }
+
+    .form__step-one {
+      gap: 24px;
+
+      .form__email {
+        gap: 16px;
+      }
+
+      .has-account {
+        margin-top: 12px;
+        text-align: center;
+      }
+    }
+
+    .form__step-two {
+      gap: 24px;
+
+      .form__password {
+        gap: 20px;
+      }
+    }
+  }
+
+  .register__process {
+    margin-bottom: 64px;
+
+    @include breakpoint-sm() {
+      margin-bottom: 0;
+    }
+  }
+}

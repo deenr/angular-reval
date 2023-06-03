@@ -20,8 +20,9 @@ mat-form-field {
         .mdc-floating-label {
           position: relative;
           top: -5px !important;
-          color: $color-grey-700;
-          font-weight: $fw-400;
+          font-size: $fs-50;
+          line-height: 143%;
+          color: $color-grey-900;
         }
 
         .mat-mdc-input-element {

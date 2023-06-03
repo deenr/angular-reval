@@ -13,8 +13,8 @@ export class AppComponent {
     private readonly domSanitizer: DomSanitizer
   ) {
     this.iconRegistry.addSvgIcon(
-      'mail',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/mail.svg')
+      'email',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/email.svg')
     );
     this.iconRegistry.addSvgIcon(
       'question',
@@ -73,6 +73,24 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         './assets/svg/color/logo-color.svg'
       )
+    );
+    this.iconRegistry.addSvgIcon(
+      'user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/user.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'lock',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/lock.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'details',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/svg/details.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'mail',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/mail.svg')
     );
   }
 }
