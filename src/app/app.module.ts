@@ -19,7 +19,12 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, InputComponent, DatepickerComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    InputComponent,
+    DatepickerComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

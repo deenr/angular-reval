@@ -1,38 +1,43 @@
 @import "../../scss/variables.scss";
 
 :host {
+  $padding-form-horizontal: 140px;
+  $padding-form-top: 128px;
+
   .login-page {
     align-items: center;
     justify-content: center;
   }
 
-  .login {
-    $padding-horizontal: 140px;
-    $padding-top: 128px;
-    position: relative;
-    padding: $padding-top $padding-horizontal 0 $padding-horizontal;
-    width: 45%;
+  .login-section {
+    width: 40%;
+    align-items: center;
+    padding-top: $padding-form-top;
 
     @include breakpoint-xl() {
       width: 60%;
     }
 
     @include breakpoint-lg() {
-      width: 360px;
-      padding: $padding-top 0;
+      width: 100%;
     }
 
     @include breakpoint-sm() {
       padding: 48px 16px;
     }
+  }
+
+  .login {
+    position: relative;
+    flex: 360px;
 
     &::before {
       width: 768px;
       height: 768px;
       position: absolute;
       z-index: -1;
-      top: $padding-top + 20px;
-      left: $padding-horizontal + 16px;
+      top: 20px;
+      left: 16px;
       transform: translate(-50%, -50%);
       mask-image: url("../../assets/svg/illustration/circle-desktop.svg");
       background: radial-gradient(
@@ -41,15 +46,6 @@
         transparent 100%
       );
       content: "";
-
-      @include breakpoint-lg() {
-        left: 16px;
-      }
-
-      @include breakpoint-sm() {
-        top: 68px;
-        left: 32px;
-      }
     }
 
     &__logo {
@@ -90,6 +86,7 @@
       gap: 8px;
 
       p {
+        font-size: $fs-300;
         margin-right: auto;
       }
     }
@@ -111,7 +108,7 @@
   }
 
   .attribution {
-    width: 55%;
+    width: 60%;
     background-color: $color-grey-100;
     padding: 96px 64px;
 
