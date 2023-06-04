@@ -1,15 +1,16 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-custom-input',
+  templateUrl: './custom-input.component.html',
+  styleUrls: ['./custom-input.component.scss'],
 })
-export class InputComponent {
+export class CustomInputComponent {
   @Input() public label: string;
   @Input() public placeholder: string;
   @Input() public hint: string;
   @Input() public leadingIcon: string;
   @Input() public trailingIcon: string;
   @Input() public type = 'text';
+  @Input() public value = '';
 }

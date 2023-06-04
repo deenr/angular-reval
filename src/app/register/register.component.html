@@ -16,7 +16,7 @@
         class="flex-column form__step-one"
       >
         <div class="flex-column form__email">
-          <app-input placeholder="Enter your email"></app-input>
+          <app-custom-input placeholder="Enter your email"></app-custom-input>
           <button
             mat-flat-button
             color="primary"
@@ -42,11 +42,14 @@
         class="flex-column form__step-two"
       >
         <div class="flex-column form__password">
-          <app-input
+          <app-custom-input
             type="password"
             placeholder="Choose a password"
-          ></app-input>
-          <app-input type="password" placeholder="Confirm password"></app-input>
+          ></app-custom-input>
+          <app-custom-input
+            type="password"
+            placeholder="Confirm password"
+          ></app-custom-input>
         </div>
         <button
           mat-flat-button
@@ -62,11 +65,28 @@
         class="flex-column form__step-two"
       >
         <div class="flex-column form__password">
-          <app-input type="text" label="Department/Faculty"></app-input>
-          <app-input type="text" label="Student/Researcher ID"></app-input>
-          <app-input type="text" label="Year"></app-input>
-          <app-input type="text" label="Field of Study/Research"></app-input>
-          <app-input type="text" label="Contact Number"></app-input>
+          <app-custom-dropdown
+            label="Department/Faculty"
+            [options]="faculties"
+          ></app-custom-dropdown>
+          <app-custom-dropdown
+            label="Field of Study/Research"
+            [options]="fields"
+          ></app-custom-dropdown>
+          <div
+            class="flex-row"
+            [ngStyle]="{ 'justify-content': 'space-between' }"
+          >
+            <app-custom-input
+              type="text"
+              label="Student/Researcher ID"
+            ></app-custom-input>
+            <app-custom-input
+              type="text"
+              label="Year of Graduation"
+            ></app-custom-input>
+          </div>
+          <app-custom-input type="text" label="Phone Number"></app-custom-input>
         </div>
         <button
           mat-flat-button

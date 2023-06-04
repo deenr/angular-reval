@@ -1,0 +1,43 @@
+<div class="custom-select">
+  <div class="custom-select__input">
+    <mat-label class="text-sm text-medium">{{ label }}</mat-label>
+    <div
+      class="flex-row select"
+      [class.focused]="showDropdown"
+      (click)="toggleDropdown()"
+    >
+      <input
+        #selectInput
+        class="select__input"
+        type="text"
+        [value]="value"
+        [placeholder]="placeholder"
+        readonly
+      />
+
+      <mat-icon
+        class="select__icon"
+        [svgIcon]="showDropdown ? 'chevron-up' : 'chevron-down'"
+      ></mat-icon>
+    </div>
+    <ul *ngIf="showDropdown" class="flex-column options">
+      <li
+        #listItems
+        *ngFor="let option of options; index as index"
+        class="text-md text-regular"
+        [class.selected]="isOptionSelected(option)"
+        [class.hover]="index === hoverIndex"
+        (click)="selectOption(option)"
+        (keydown.enter)="selectOption(option)"
+      >
+        <span class="flex-row list-text">
+          {{ option }}
+          <mat-icon *ngIf="isOptionSelected(option)" svgIcon="check"></mat-icon
+        ></span>
+      </li>
+    </ul>
+  </div>
+  <div class="custom-select__hint">
+    <mat-hint *ngIf="hint" class="text-sm text-regular">{{ hint }}</mat-hint>
+  </div>
+</div>

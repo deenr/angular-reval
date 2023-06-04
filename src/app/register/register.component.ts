@@ -10,6 +10,39 @@ import { RegistrationSteps } from './registration-steps.enum';
 export class RegisterComponent {
   public registrationSteps = RegistrationSteps;
 
+  public faculties = [
+    'Sales',
+    'Accounting',
+    'Marketing',
+    'Business Development',
+    'Product Management',
+    'Research and Development',
+    'Training',
+    'Support',
+    'Legal',
+    'Services',
+    'Engineering',
+    'Human Resources',
+  ];
+
+  public fields = [
+    'Computer Science',
+    'Biology',
+    'Chemistry',
+    'Physics',
+    'Psychology',
+    'Sociology',
+    'History',
+    'Mathematics',
+    'Engineering',
+    'Environmental Science',
+    'Political Science',
+    'Economics',
+    'Philosophy',
+    'Literature',
+    'Art History',
+  ];
+
   public steps = [
     {
       stepName: RegistrationSteps.EMAIL,

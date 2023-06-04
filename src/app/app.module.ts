@@ -13,7 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputComponent } from './input/input.component';
+import { CustomInputComponent } from './custom-input/custom-input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerComponent } from './datepicker/datepicker.component';
@@ -21,16 +21,18 @@ import { LoginComponent } from './login/login.component';
 import { ProgressStepsComponent } from './progress-steps/progress-steps.component';
 import { RegisterComponent } from './register/register.component';
 import { DividerWithTextComponent } from './divider-with-text/divider-with-text.component';
+import { CustomDropdownComponent } from './custom-dropdown/custom-dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputComponent,
+    CustomInputComponent,
     DatepickerComponent,
     LoginComponent,
     ProgressStepsComponent,
     RegisterComponent,
     DividerWithTextComponent,
+    CustomDropdownComponent,
   ],
   imports: [
     BrowserModule,

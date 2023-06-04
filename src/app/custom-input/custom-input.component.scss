@@ -1,8 +1,8 @@
 @import "../../scss/variables.scss";
 
-::ng-deep app-input {
-  // margin: 0 -4px -6px -4px !important;
-  margin: -6px -4px -12px -4px !important;
+::ng-deep app-custom-input {
+  margin: 0 -4px -6px -4px !important;
+  // margin: -6px -4px -12px -4px !important;
 }
 
 :host {
