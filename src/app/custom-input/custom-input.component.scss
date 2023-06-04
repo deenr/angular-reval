@@ -26,7 +26,10 @@
       color: $color-grey-500;
     }
 
-    &:hover,
+    &:hover {
+      border: 1px solid $color-primary-400;
+    }
+
     &:focus-within,
     &:active {
       border: 1px solid $color-primary-400;

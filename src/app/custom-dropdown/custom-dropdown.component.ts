@@ -26,22 +26,21 @@ export class CustomDropdownComponent {
   @Input() public value = '';
 
   public hoverIndex: number;
-  public showDropdown = false;
 
   public constructor(private readonly elementRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
   public onClick(event: MouseEvent) {
+    console.log(event.target);
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.closeDropdown();
     }
   }
 
-  @HostListener('window:keydown', ['$event']) public onKeyDown(
-    event: KeyboardEvent
-  ) {
-    if (this.showDropdown) {
+  @HostListener('keydown', ['$event']) public onKeyDown(event: KeyboardEvent) {
+    if (this.isDropdownOptionsShown()) {
       if (event.key === 'Tab' || event.key === 'Enter') {
+        console.log('close enter');
         this.selectOption(this.options[this.hoverIndex]);
         this.closeDropdown();
       } else if (event.key === 'ArrowUp' && this.hoverIndex - 1 >= 0) {
@@ -57,17 +56,22 @@ export class CustomDropdownComponent {
         this.closeDropdown();
         this.selectInputElement.nativeElement.focus();
       }
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      this.toggleDropdown();
     }
   }
 
   public toggleDropdown() {
     if (!this.disabled) {
-      this.showDropdown ? this.closeDropdown() : this.openDropdown();
+      this.isDropdownOptionsShown()
+        ? this.closeDropdown()
+        : this.openDropdown();
     }
   }
 
   public openDropdown() {
-    this.showDropdown = true;
+    this.getDropdownOptionsElement().classList.remove('hidden');
 
     this.hoverIndex = this.value
       ? this.options.findIndex((option: string) => option === this.value)
@@ -79,17 +83,21 @@ export class CustomDropdownComponent {
   }
 
   public closeDropdown() {
-    this.showDropdown = false;
+    this.getDropdownOptionsElement().classList.add('hidden');
   }
 
   public selectOption(option: string): void {
     this.value = option;
-    this.showDropdown = false;
+    this.closeDropdown();
     this.selectInputElement.nativeElement.focus();
   }
 
   public isOptionSelected(option: string): boolean {
     return this.value === option;
+  }
+
+  public isDropdownOptionsShown(): boolean {
+    return !this.getDropdownOptionsElement().classList.contains('hidden');
   }
 
   private scrollOptionIntoView(direction: number) {
@@ -106,7 +114,6 @@ export class CustomDropdownComponent {
           behavior: 'smooth',
         });
       } else {
-        // I dont want to scroll instantly to the offset of the target element, I only want to scroll if the offsetTop is outside of the scrollable list
         const elementThatShouldBeVisible =
           itemElements[this.hoverIndex - 5]?.nativeElement;
 
@@ -133,5 +140,11 @@ export class CustomDropdownComponent {
     });
 
     return visibleElements;
+  }
+
+  private getDropdownOptionsElement(): HTMLElement {
+    return (this.elementRef.nativeElement as HTMLElement).getElementsByTagName(
+      'ul'
+    )[0];
   }
 }
