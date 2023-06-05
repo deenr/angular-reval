@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatepickerComponent } from './datepicker.component';
+import { CustomDatepickerComponent } from './custom-datepicker.component';
 
 describe('DatepickerComponent', () => {
-  let component: DatepickerComponent;
-  let fixture: ComponentFixture<DatepickerComponent>;
+  let component: CustomDatepickerComponent;
+  let fixture: ComponentFixture<CustomDatepickerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DatepickerComponent]
+      declarations: [CustomDatepickerComponent],
     });
-    fixture = TestBed.createComponent(DatepickerComponent);
+    fixture = TestBed.createComponent(CustomDatepickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

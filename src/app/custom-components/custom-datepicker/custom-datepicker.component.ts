@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DatepickerDate } from './datepicker-date.interface';
 @Component({
-  selector: 'app-datepicker',
-  templateUrl: 'datepicker.component.html',
-  styleUrls: ['datepicker.component.scss'],
+  selector: 'app-custom-datepicker',
+  templateUrl: 'custom-datepicker.component.html',
+  styleUrls: ['custom-datepicker.component.scss'],
 })
-export class DatepickerComponent implements OnInit {
+export class CustomDatepickerComponent implements OnInit {
   currentDateInView: DatepickerDate | null;
   selectedStartDate: DatepickerDate | null;
   selectedEndDate: DatepickerDate | null;

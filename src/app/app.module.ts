@@ -14,26 +14,28 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomInputComponent } from './custom-input/custom-input.component';
+import { CustomInputComponent } from './custom-components/custom-input/custom-input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
-import { DatepickerComponent } from './datepicker/datepicker.component';
+import { CustomDatepickerComponent } from './custom-components/custom-datepicker/custom-datepicker.component';
 import { LoginComponent } from './login/login.component';
 import { ProgressStepsComponent } from './progress-steps/progress-steps.component';
 import { RegisterComponent } from './register/register.component';
 import { DividerWithTextComponent } from './divider-with-text/divider-with-text.component';
-import { CustomDropdownComponent } from './custom-dropdown/custom-dropdown.component';
+import { CustomDropdownComponent } from './custom-components/custom-dropdown/custom-dropdown.component';
+import { CustomCheckboxComponent } from './custom-components/custom-checkbox/custom-checkbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomInputComponent,
-    DatepickerComponent,
+    CustomDatepickerComponent,
     LoginComponent,
     ProgressStepsComponent,
     RegisterComponent,
     DividerWithTextComponent,
     CustomDropdownComponent,
+    CustomCheckboxComponent,
   ],
   imports: [
     BrowserModule,
