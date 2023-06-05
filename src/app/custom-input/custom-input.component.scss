@@ -26,6 +26,24 @@
       color: $color-grey-500;
     }
 
+    &.invalid {
+      border: 1px solid $color-error-300;
+
+      .trailing-icon {
+        color: $color-error-500;
+      }
+
+      &:hover {
+        border: 1px solid $color-error-400;
+      }
+      &:focus-within,
+      &:active {
+        border: 1px solid $color-error-400;
+        box-shadow: 0px 1px 2px $color-grey-100,
+          0px 0px 0px 4px $color-error-200;
+      }
+    }
+
     &:hover {
       border: 1px solid $color-primary-400;
     }
@@ -36,6 +54,10 @@
       box-shadow: 0px 1px 2px $color-grey-100,
         0px 0px 0px 4px $color-primary-200;
     }
+  }
+
+  mat-hint.invalid {
+    color: $color-error-500;
   }
 
   .no-hint {

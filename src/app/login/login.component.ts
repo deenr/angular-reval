@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public loginForm: FormGroup<{
     email: FormControl<string>;
     password: FormControl<string>;
@@ -14,8 +14,4 @@ export class LoginComponent implements OnInit {
     email: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
   });
-
-  public ngOnInit(): void {
-    this.loginForm.valueChanges.subscribe((test: any) => console.log(test));
-  }
 }

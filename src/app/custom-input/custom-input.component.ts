@@ -20,6 +20,7 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input() public leadingIcon: string;
   @Input() public trailingIcon: string;
   @Input() public type = 'text';
+  public error: string;
 
   public touched = false;
   public disabled = false;
