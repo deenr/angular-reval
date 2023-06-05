@@ -31,7 +31,6 @@ export class CustomDropdownComponent {
 
   @HostListener('document:click', ['$event'])
   public onClick(event: MouseEvent) {
-    console.log(event.target);
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.closeDropdown();
     }
@@ -40,7 +39,6 @@ export class CustomDropdownComponent {
   @HostListener('keydown', ['$event']) public onKeyDown(event: KeyboardEvent) {
     if (this.isDropdownOptionsShown()) {
       if (event.key === 'Tab' || event.key === 'Enter') {
-        console.log('close enter');
         this.selectOption(this.options[this.hoverIndex]);
         this.closeDropdown();
       } else if (event.key === 'ArrowUp' && this.hoverIndex - 1 >= 0) {
@@ -54,7 +52,7 @@ export class CustomDropdownComponent {
         this.scrollOptionIntoView(1);
       } else if (event.key === 'Escape') {
         this.closeDropdown();
-        this.selectInputElement.nativeElement.focus();
+        this.focusSelectElement();
       }
     } else if (event.key === 'Enter') {
       event.preventDefault();
@@ -89,7 +87,7 @@ export class CustomDropdownComponent {
   public selectOption(option: string): void {
     this.value = option;
     this.closeDropdown();
-    this.selectInputElement.nativeElement.focus();
+    this.focusSelectElement();
   }
 
   public isOptionSelected(option: string): boolean {
@@ -98,6 +96,10 @@ export class CustomDropdownComponent {
 
   public isDropdownOptionsShown(): boolean {
     return !this.getDropdownOptionsElement().classList.contains('hidden');
+  }
+
+  public focusSelectElement(): void {
+    this.selectInputElement.nativeElement.focus();
   }
 
   private scrollOptionIntoView(direction: number) {

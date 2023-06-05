@@ -84,6 +84,19 @@
         gap: 20px;
       }
     }
+
+    .form__step-three {
+      gap: 24px;
+
+      .form__details {
+        gap: 16px;
+
+        div {
+          justify-content: space-between;
+          gap: 16px;
+        }
+      }
+    }
   }
 
   .register__process {
