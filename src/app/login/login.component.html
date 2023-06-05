@@ -11,17 +11,19 @@
           Welcome back! Please enter your details.
         </p>
       </div>
-      <div class="login__form flex-column">
+      <form [formGroup]="loginForm" class="login__form flex-column">
         <app-custom-input
           label="Email"
           placeholder="Enter your email"
+          formControlName="email"
         ></app-custom-input>
         <app-custom-input
           label="Password"
           type="password"
           placeholder="••••••••"
+          formControlName="password"
         ></app-custom-input>
-      </div>
+      </form>
       <div class="login__remember flex-row">
         <input type="checkbox" />
         <p class="text-sm text-medium">Remember for 30 days</p>

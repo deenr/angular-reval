@@ -7,7 +7,13 @@
       aria-hidden="false"
       class="icon leading-icon"
     ></mat-icon>
-    <input matInput [placeholder]="placeholder" [type]="type" [value]="value" />
+    <input
+      matInput
+      [placeholder]="placeholder"
+      [type]="type"
+      [(ngModel)]="value"
+      (blur)="markAsTouched()"
+    />
     <mat-icon
       *ngIf="trailingIcon"
       [svgIcon]="trailingIcon"
