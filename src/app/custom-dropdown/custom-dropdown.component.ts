@@ -36,6 +36,20 @@ export class CustomDropdownComponent {
     }
   }
 
+  @HostListener('mousemove', ['$event'])
+  public onMouseMove(event: MouseEvent) {
+    const listItemElements = this.listItemElements.toArray();
+
+    const index = listItemElements.findIndex(
+      (listItem: ElementRef) =>
+        listItem.nativeElement === (event.target as HTMLElement).parentElement
+    );
+
+    if (index !== -1) {
+      this.hoverIndex = index;
+    }
+  }
+
   @HostListener('keydown', ['$event']) public onKeyDown(event: KeyboardEvent) {
     if (this.isDropdownOptionsShown()) {
       if (event.key === 'Tab' || event.key === 'Enter') {

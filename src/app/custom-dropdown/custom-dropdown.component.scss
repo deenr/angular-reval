@@ -67,7 +67,7 @@
 
       .options {
         position: absolute;
-        z-index: 1;
+        z-index: 999;
         width: calc(100% - 2 * $focus-border-width);
         max-height: 320px;
         overflow: scroll;
@@ -84,7 +84,6 @@
         li {
           &.selected,
           &:focus,
-          &:hover,
           &.hover {
             outline: 0;
             background: $color-grey-50;
