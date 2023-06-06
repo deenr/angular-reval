@@ -1,0 +1,237 @@
+@import "./colors.scss";
+@import "./typography.scss";
+
+.mat-mdc-checkbox {
+  --mdc-checkbox-selected-pressed-state-layer-color: #e0d7fe;
+  --mdc-checkbox-selected-focus-state-layer-color: #f4ebff;
+  --mdc-checkbox-unselected-pressed-state-layer-color: #fff;
+  --mdc-checkbox-unselected-focus-state-layer-color: #f4ebff;
+
+  margin-top: -3px;
+  height: 20px;
+
+  .mdc-form-field {
+    .mdc-checkbox {
+      min-width: 20px;
+      max-width: 20px;
+      height: 20px;
+      padding: 0;
+      margin: 0;
+
+      .mat-mdc-checkbox-touch-target {
+        display: none;
+      }
+
+      .mdc-checkbox__native-control {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        &[disabled] ~ .mdc-checkbox__background,
+        &[disabled]:indeterminate ~ .mdc-checkbox__background,
+        &[disabled]:checked ~ .mdc-checkbox__background {
+          background-color: $color-grey-100 !important;
+          border-color: $color-grey-300 !important;
+
+          &:after {
+            border-color: $color-grey-300 !important;
+            background-color: $color-grey-300 !important;
+          }
+        }
+
+        &:focus ~ .mdc-checkbox__ripple {
+          background-color: transparent;
+        }
+
+        &:focus ~ .mdc-checkbox__background {
+          border: 1px solid $color-primary-600 !important;
+        }
+
+        &:hover ~ .mdc-checkbox__background {
+          border: 1px solid $color-primary-600 !important;
+          background-color: $color-primary-100 !important;
+        }
+
+        &:active ~ .mdc-checkbox__background {
+          border: 1px solid $color-primary-300 !important;
+          background-color: $color-white !important;
+        }
+
+        &:active ~ .mdc-checkbox__ripple {
+          top: -4px;
+          left: -4px;
+          height: 28px;
+          width: 28px;
+          background-color: $color-primary-100;
+          opacity: 1;
+        }
+
+        &:indeterminate:hover ~ .mdc-checkbox__background,
+        &:checked:hover ~ .mdc-checkbox__background {
+          border: 1px solid $color-primary-600 !important;
+          background-color: $color-primary-100 !important;
+        }
+
+        &:indeterminate:active ~ .mdc-checkbox__background,
+        &:checked:active ~ .mdc-checkbox__background {
+          border: 1px solid $color-primary-600 !important;
+          background-color: $color-primary-50 !important;
+        }
+
+        &:indeterminate ~ .mdc-checkbox__background {
+          position: relative;
+          border: 1px solid $color-primary-600 !important;
+          background-color: $color-primary-50 !important;
+
+          &:after {
+            opacity: 1;
+            -webkit-transition: opacity 180ms;
+            transition: opacity 180ms;
+            position: absolute;
+            display: block;
+            content: "";
+            width: 10px;
+            height: 20px;
+            height: 0px;
+            border: 1px solid #7f56d9;
+            border-radius: 1.66666px;
+          }
+        }
+
+        &:checked ~ .mdc-checkbox__background {
+          position: relative;
+          border: 1px solid $color-primary-600 !important;
+          background-color: $color-primary-50 !important;
+
+          &:after {
+            opacity: 1;
+            -webkit-transition: opacity 180ms;
+            transition: opacity 180ms;
+            position: absolute;
+            display: block;
+            content: " ";
+            width: 20px;
+            height: 20px;
+            background-color: $color-primary-600;
+            -webkit-mask-image: url("../assets/svg/check.svg");
+            mask-image: url("../assets/svg/check.svg");
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+          }
+        }
+      }
+
+      .mdc-checkbox__ripple {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        bottom: 0;
+        border-radius: 10px;
+        background-color: $color-primary-600;
+        transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+
+      .mdc-checkbox__background {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 6px;
+        border: 1px solid $color-grey-300 !important;
+        background-color: transparent;
+
+        &:after {
+          opacity: 0;
+          content: "";
+        }
+
+        .mdc-checkbox__checkmark,
+        .mdc-checkbox__mixedmark {
+          display: none;
+        }
+      }
+
+      .mat-mdc-checkbox-ripple {
+        height: 18px;
+        width: 18px;
+        border-radius: 5px;
+        margin: 1px;
+      }
+    }
+
+    .mdc-label {
+      padding-left: 12px;
+      font-size: $fs-100;
+      line-height: 150%;
+      color: $color-grey-700;
+      font-weight: $fw-500;
+    }
+  }
+
+  &.small {
+    height: 16px;
+
+    .mdc-form-field {
+      .mdc-checkbox {
+        min-width: 16px;
+        max-width: 16px;
+        height: 16px;
+
+        .mdc-checkbox__native-control {
+          width: 16px;
+          height: 16px;
+
+          &:active ~ .mdc-checkbox__ripple {
+            top: -4px;
+            left: -4px;
+            height: 24px;
+            width: 24px;
+          }
+
+          &:indeterminate ~ .mdc-checkbox__background:after {
+            width: 8px;
+          }
+
+          &:checked ~ .mdc-checkbox__background:after {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        .mdc-checkbox__ripple {
+          width: 16px;
+          height: 16px;
+          border-radius: 8px;
+        }
+
+        .mat-mdc-checkbox-ripple {
+          height: 14px;
+          width: 14px;
+          border-radius: 3px;
+        }
+
+        .mdc-checkbox__background {
+          width: 16px;
+          height: 16px;
+          border-radius: 4px;
+        }
+      }
+
+      .mdc-label {
+        padding-left: 8px;
+        font-size: $fs-50;
+        line-height: 143%;
+        color: $color-grey-900;
+      }
+    }
+  }
+}

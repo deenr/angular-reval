@@ -23,7 +23,6 @@ import { ProgressStepsComponent } from './progress-steps/progress-steps.componen
 import { RegisterComponent } from './register/register.component';
 import { DividerWithTextComponent } from './divider-with-text/divider-with-text.component';
 import { CustomDropdownComponent } from './custom-components/custom-dropdown/custom-dropdown.component';
-import { CustomCheckboxComponent } from './custom-components/custom-checkbox/custom-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { CustomCheckboxComponent } from './custom-components/custom-checkbox/cus
     RegisterComponent,
     DividerWithTextComponent,
     CustomDropdownComponent,
-    CustomCheckboxComponent,
   ],
   imports: [
     BrowserModule,
