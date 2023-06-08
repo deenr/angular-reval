@@ -1,54 +1,40 @@
 <div class="login-page full-width full-height flex-row">
   <section class="login-section flex-column full-height">
-    <div class="login flex-column full-height">
+    <form [formGroup]="loginForm" class="login flex-column full-height">
       <div class="login__logo flex-row">
         <mat-icon svgIcon="logo-color"></mat-icon>
         <h3>Sphience</h3>
       </div>
       <div class="login__header flex-column">
         <h2 class="display-md text-semibold">Log in</h2>
-        <p class="text-md text-regular">
-          Welcome back! Please enter your details.
-        </p>
+        <p class="text-md text-regular">Welcome back! Please enter your details.</p>
       </div>
-      <form [formGroup]="loginForm" class="login__form flex-column">
-        <app-custom-input
-          label="Email"
-          placeholder="Enter your email"
-          formControlName="email"
-        ></app-custom-input>
-        <app-custom-input
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          formControlName="password"
-        ></app-custom-input>
-      </form>
+      <div class="login__form flex-column">
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter your email" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Password</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="••••••••" />
+        </mat-form-field>
+      </div>
       <div class="login__remember flex-row">
-        <mat-checkbox class="small">Remember for 30 days</mat-checkbox>
+        <mat-checkbox class="small" formControlName="remember"> Remember for 30 days </mat-checkbox>
         <a href="/">Forgot password</a>
       </div>
       <div class="login__actions flex-column">
-        <button mat-flat-button color="primary">Sign in</button>
-        <button mat-stroked-button>
-          <mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign
-          in with Google
-        </button>
+        <button mat-flat-button color="primary" (click)="login()">Sign in</button>
+        <button mat-stroked-button><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign in with Google</button>
       </div>
       <div class="login__no-account">
-        <span class="text-sm text-regular"
-          >Don't have an account? <a href="/">Sign up</a></span
-        >
+        <span class="text-sm text-regular">Don't have an account? <a href="/">Sign up</a></span>
       </div>
-    </div>
+    </form>
   </section>
   <div class="attribution full-height">
     <div class="quote">
-      <h4 class="display-sm text-medium">
-        By connecting students and researchers with the equipment they need, it
-        kickstarts their projects and empowers them to achieve incredible
-        breakthroughs.
-      </h4>
+      <h4 class="display-sm text-medium">By connecting students and researchers with the equipment they need, it kickstarts their projects and empowers them to achieve incredible breakthroughs.</h4>
       <!-- <h4 class="quote__text">
         Fueling breakthroughs by connecting researchers and students with
         essential equipment, Sphience kickstarts their projects and empowers
@@ -59,10 +45,6 @@
         <p class="text-md text-medium">Founder Sphience</p>
       </div>
     </div>
-    <img
-      src="../../assets/image/login-mockup.webp"
-      alt="Mockup of the application"
-      class="attribution__image"
-    />
+    <img src="../../assets/image/login-mockup.webp" alt="Mockup of the application" class="attribution__image" />
   </div>
 </div>

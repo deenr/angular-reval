@@ -10,8 +10,14 @@ export class LoginComponent {
   public loginForm: FormGroup<{
     email: FormControl<string>;
     password: FormControl<string>;
+    remember: FormControl<boolean>;
   }> = new FormGroup({
     email: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, Validators.required),
+    remember: new FormControl(null),
   });
+
+  public login(): void {
+    console.log(this.loginForm.value, this.loginForm.controls.email.errors);
+  }
 }

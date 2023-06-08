@@ -1,0 +1,28 @@
+@import '../../../scss/variables.scss';
+
+:host {
+  .text-with-icons {
+    align-items: center;
+    gap: 8px;
+
+    .leading-icon {
+      width: 20px;
+      height: 20px;
+      color: $color-grey-600;
+    }
+
+    .input {
+      height: 24px;
+    }
+
+    .trailing-icon {
+      width: 16px;
+      height: 16px;
+      color: $color-grey-500;
+
+      &.error {
+        color: $color-error-500;
+      }
+    }
+  }
+}

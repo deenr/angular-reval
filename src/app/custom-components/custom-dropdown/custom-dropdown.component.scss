@@ -1,13 +1,37 @@
-@import "../../../scss/variables.scss";
+@import '../../../scss/variables.scss';
+
+$focus-border-width: 4px;
 
 ::ng-deep app-custom-dropdown {
-  margin: 0 -4px -6px -4px !important;
-  // margin: -6px -4px -12px -4px !important;
+  margin: 0 (-$focus-border-width) -6px (-$focus-border-width) !important;
+
+  &.ng-invalid.ng-touched {
+    .select {
+      border-color: $color-error-300 !important;
+
+      &__icon {
+        color: $color-error-500 !important;
+      }
+
+      &:hover {
+        border: 1px solid $color-error-400 !important;
+      }
+
+      &:focus-within,
+      &.focused,
+      &:active {
+        border: 1px solid $color-error-300 !important;
+        box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-error-100 !important;
+      }
+    }
+
+    mat-hint {
+      color: $color-error-500 !important;
+    }
+  }
 }
 
 :host {
-  $focus-border-width: 4px;
-
   .custom-select {
     &__input {
       position: relative;
@@ -53,9 +77,8 @@
         &:focus-within,
         &.focused,
         &:active {
-          border: 1px solid $color-primary-400;
-          box-shadow: 0px 1px 2px $color-grey-100,
-            0px 0px 0px 4px $color-primary-200;
+          border: 1px solid $color-primary-300;
+          box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-primary-100;
         }
 
         &__icon {
@@ -76,8 +99,7 @@
         gap: 4px;
         background-color: $color-white;
         border: 1px solid $color-grey-200;
-        box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08),
-          0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+        box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
         border-radius: 8px;
         list-style: none;
 
@@ -104,9 +126,12 @@
 
     &__hint {
       position: relative;
+
       mat-hint {
         position: absolute;
+        right: 0;
         padding: 0 4px;
+        color: $color-grey-600;
       }
     }
   }

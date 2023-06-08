@@ -1,0 +1,5 @@
+<div class="flex-row text-with-icons">
+  <mat-icon *ngIf="leadingIcon" [svgIcon]="leadingIcon" aria-hidden="false" class="icon leading-icon"></mat-icon>
+  <input #input matInput class="input" placeholder="placeholder" [(ngModel)]="value" [disabled]="disabled" />
+  <mat-icon *ngIf="trailingIcon" [svgIcon]="trailingIcon" aria-hidden="false" class="icon trailing-icon" [class.error]="errorState"></mat-icon>
+</div>
