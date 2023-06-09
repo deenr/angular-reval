@@ -61,12 +61,44 @@
         input::placeholder {
           color: $color-grey-500;
         }
+
+        &:has(.mat-mdc-select[aria-expanded='true']) {
+          border: 1px solid $color-primary-300;
+          box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-primary-100;
+        }
+      }
+
+      .mat-mdc-select {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .mat-mdc-select-trigger {
+          .mat-mdc-select-arrow-wrapper {
+            transform: translateY(0px);
+            .mat-mdc-select-arrow {
+              width: 20px;
+              height: 20px;
+              background-color: $color-grey-600;
+              -webkit-mask-image: url('../assets/svg/chevron-down.svg');
+              -webkit-mask-position: center;
+              mask-image: url('../assets/svg/chevron-down.svg');
+              mask-position: center;
+
+              svg {
+                fill: transparent;
+              }
+            }
+          }
+        }
       }
     }
 
-    &.mdc-text-field--focused .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
-      border: 1px solid $color-primary-300;
-      box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-primary-100;
+    &.mdc-text-field--focused {
+      .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+        border: 1px solid $color-primary-300;
+        box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-primary-100;
+      }
     }
 
     &.mdc-text-field--disabled .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
@@ -132,4 +164,62 @@
       }
     }
   }
+}
+
+.mat-mdc-select-panel {
+  $item-border-radius: 6px;
+  $margin-on-option-item: 6px;
+
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+
+  margin-top: 4px !important;
+  padding: 0 !important;
+  background: $color-white;
+  border: 1px solid $color-grey-200;
+  border-radius: 8px !important;
+  box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03) !important;
+
+  .mat-mdc-option {
+    margin: 0px $margin-on-option-item;
+
+    &:first-of-type {
+      margin-top: $margin-on-option-item;
+    }
+
+    &:last-of-type {
+      margin-bottom: $margin-on-option-item;
+    }
+
+    &:hover:not(.mdc-list-item--disabled) {
+      border-radius: $item-border-radius;
+    }
+
+    .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      top: 0;
+      background-color: $color-primary-600;
+      -webkit-mask-image: url('../assets/svg/check.svg');
+      -webkit-mask-position: center;
+      mask-image: url('../assets/svg/check.svg');
+      mask-position: center;
+      transform: none;
+
+      svg {
+        fill: transparent;
+      }
+    }
+  }
+
+  .mat-mdc-option-active {
+    background: $color-grey-100;
+    border-radius: $item-border-radius;
+  }
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: $color-grey-900 !important;
 }

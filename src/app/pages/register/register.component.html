@@ -37,8 +37,22 @@
       </div>
       <div *ngIf="canShowStep(registrationSteps.DETAILS)" class="flex-column form__step-three">
         <div class="flex-column form__details">
-          <app-custom-dropdown label="Department/Faculty" placeholder="Select your department" [options]="faculties"></app-custom-dropdown>
-          <app-custom-dropdown label="Field of Study/Research" placeholder="Select your field" [options]="fields"></app-custom-dropdown>
+          <mat-form-field>
+            <mat-label>Department/Faculty</mat-label>
+            <mat-select placeholder="Select your department">
+              <mat-option *ngFor="let faculty of faculties" [value]="faculty">
+                {{ faculty }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Field of Study/Research</mat-label>
+            <mat-select placeholder="Select your field">
+              <mat-option *ngFor="let field of fields" [value]="field">
+                {{ field }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
           <div class="flex-row">
             <mat-form-field>
               <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>

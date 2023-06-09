@@ -20,22 +20,12 @@ import {LoginComponent} from './pages/login/login.component';
 import {ProgressStepsComponent} from './custom-components/progress-steps/progress-steps.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/custom-datepicker.component';
-import {CustomDropdownComponent} from '@custom-components/custom-dropdown/custom-dropdown.component';
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
 import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomDatepickerComponent,
-    LoginComponent,
-    ProgressStepsComponent,
-    RegisterComponent,
-    DividerWithTextComponent,
-    CustomDropdownComponent,
-    CustomTextInputWithIconComponent
-  ],
+  declarations: [AppComponent, CustomDatepickerComponent, LoginComponent, ProgressStepsComponent, RegisterComponent, DividerWithTextComponent, CustomTextInputWithIconComponent],
   imports: [
     CommonModule,
     BrowserModule,
