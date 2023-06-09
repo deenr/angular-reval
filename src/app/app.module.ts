@@ -24,6 +24,7 @@ import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/cu
 import {CustomDropdownComponent} from '@custom-components/custom-dropdown/custom-dropdown.component';
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-i
     MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDividerModule
+    MatDividerModule,
+    AppRoutingModule
   ],
   providers: [
     {

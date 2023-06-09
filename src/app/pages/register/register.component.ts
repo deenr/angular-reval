@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ProgressStep} from '../../custom-components/progress-steps/progress-step.interface';
 import {RegistrationSteps} from './registration-steps.enum';
+import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
 
 @Component({
   selector: 'app-register',
