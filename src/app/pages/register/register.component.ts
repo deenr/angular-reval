@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { ProgressStep } from '../progress-steps/progress-step.interface';
-import { RegistrationSteps } from './registration-steps.enum';
+import {Component} from '@angular/core';
+import {ProgressStep} from '../../custom-components/progress-steps/progress-step.interface';
+import {RegistrationSteps} from './registration-steps.enum';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   public registrationSteps = RegistrationSteps;
@@ -22,7 +22,7 @@ export class RegisterComponent {
     'Legal',
     'Services',
     'Engineering',
-    'Human Resources',
+    'Human Resources'
   ];
 
   public fields = [
@@ -40,7 +40,7 @@ export class RegisterComponent {
     'Economics',
     'Philosophy',
     'Literature',
-    'Art History',
+    'Art History'
   ];
 
   public steps = [
@@ -50,7 +50,7 @@ export class RegisterComponent {
       complete: false,
       current: true,
       text: 'Your details',
-      supportingText: 'Enter your email',
+      supportingText: 'Enter your email'
     },
     {
       stepName: RegistrationSteps.PASSWORD,
@@ -58,7 +58,7 @@ export class RegisterComponent {
       complete: false,
       current: false,
       text: 'Choose a password',
-      supportingText: 'Choose a secure password',
+      supportingText: 'Choose a secure password'
     },
     {
       stepName: RegistrationSteps.DETAILS,
@@ -66,7 +66,7 @@ export class RegisterComponent {
       complete: false,
       current: false,
       text: 'Personal information',
-      supportingText: 'Add the required information',
+      supportingText: 'Add the required information'
     },
     {
       stepName: RegistrationSteps.EMAIL_VERIFICATION,
@@ -74,8 +74,8 @@ export class RegisterComponent {
       complete: false,
       current: false,
       text: 'Verification',
-      supportingText: 'Verify your account',
-    },
+      supportingText: 'Verify your account'
+    }
   ] as ProgressStep[];
 
   public getTitle(): string {
@@ -103,9 +103,7 @@ export class RegisterComponent {
   }
 
   public canShowStep(stepName: RegistrationSteps): boolean {
-    return this.steps.find(
-      (progressStep: ProgressStep) => progressStep.stepName === stepName
-    ).current;
+    return this.steps.find((progressStep: ProgressStep) => progressStep.stepName === stepName).current;
   }
 
   public goToPassword(): void {
@@ -121,14 +119,10 @@ export class RegisterComponent {
   }
 
   private getCurrentProgressStep(): ProgressStep {
-    return this.steps.find(
-      (progressStep: ProgressStep) => progressStep.current
-    );
+    return this.steps.find((progressStep: ProgressStep) => progressStep.current);
   }
 
   private getProgressStepByStepName(stepName: RegistrationSteps): ProgressStep {
-    return this.steps.find(
-      (progressStep: ProgressStep) => progressStep.stepName === stepName
-    );
+    return this.steps.find((progressStep: ProgressStep) => progressStep.stepName === stepName);
   }
 }

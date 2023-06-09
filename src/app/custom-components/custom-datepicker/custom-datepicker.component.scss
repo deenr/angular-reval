@@ -1,12 +1,11 @@
-@import "../../../scss/variables.scss";
+@import 'variables';
 
 :host {
   .datepicker {
     width: 354px;
     padding: 20px 24px;
     border: 1px solid #ccc;
-    box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
-      0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+    box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
     border-radius: 8px;
 
     &__header {
