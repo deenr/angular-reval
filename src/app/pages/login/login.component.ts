@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   public loginForm: FormGroup<{
@@ -14,7 +14,7 @@ export class LoginComponent {
   }> = new FormGroup({
     email: new FormControl(null, [Validators.required]),
     password: new FormControl(null, Validators.required),
-    remember: new FormControl(null),
+    remember: new FormControl(null)
   });
 
   public login(): void {

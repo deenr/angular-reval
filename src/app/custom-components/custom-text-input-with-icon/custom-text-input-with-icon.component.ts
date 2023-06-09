@@ -25,9 +25,6 @@ export class CustomTextInputWithIconComponent extends AbstractMatFormField<strin
   @Input() public leadingIcon: string;
   @Input() public trailingIcon: string;
 
-  private control = new FormControl();
-  private subscription: Subscription;
-
   constructor(
     @Optional() @Self() ngControl: NgControl,
     @Optional() _parentForm: NgForm,

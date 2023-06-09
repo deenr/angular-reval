@@ -1,21 +1,11 @@
 <div class="steps flex-row">
-  <div
-    class="step__base flex-column"
-    *ngFor="let step of steps; index as index"
-  >
+  <div class="step__base flex-column" *ngFor="let step of steps; index as index">
     <mat-icon [svgIcon]="step.svgIcon" class="featured-icon"></mat-icon>
-    <div
-      class="base__content flex-column"
-      [class.incomplete]="!step.complete && !step.current"
-    >
+    <div class="base__content flex-column" [class.incomplete]="!step.complete && !step.current">
       <p class="text-sm text-semibold">{{ step.text }}</p>
       <p class="text-sm text-regular">{{ step.supportingText }}</p>
     </div>
 
-    <div
-      *ngIf="index !== steps.length - 1"
-      class="line"
-      [class.complete]="step.complete"
-    ></div>
+    <div *ngIf="index !== steps.length - 1" class="line" [class.complete]="step.complete"></div>
   </div>
 </div>

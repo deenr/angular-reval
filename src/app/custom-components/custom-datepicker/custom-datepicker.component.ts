@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DatepickerDate } from './datepicker-date.interface';
+import {Component, OnInit} from '@angular/core';
+import {DatepickerDate} from './datepicker-date.interface';
 @Component({
   selector: 'app-custom-datepicker',
   templateUrl: 'custom-datepicker.component.html',
-  styleUrls: ['custom-datepicker.component.scss'],
+  styleUrls: ['custom-datepicker.component.scss']
 })
 export class CustomDatepickerComponent implements OnInit {
   currentDateInView: DatepickerDate | null;
@@ -18,7 +18,7 @@ export class CustomDatepickerComponent implements OnInit {
     const today = new Date();
     this.currentDateInView = {
       date: today,
-      selected: false,
+      selected: false
     };
     this.selectedStartDate = null;
     this.selectedEndDate = null;
@@ -32,16 +32,8 @@ export class CustomDatepickerComponent implements OnInit {
 
   public goToPreviousMonth(): void {
     if (this.currentDateInView) {
-      this.currentDateInView.date.setFullYear(
-        this.currentDateInView.date.getMonth() === 1
-          ? this.currentDateInView.date.getFullYear() - 1
-          : this.currentDateInView.date.getFullYear()
-      );
-      this.currentDateInView.date.setMonth(
-        this.currentDateInView.date.getMonth() === 1
-          ? 12
-          : this.currentDateInView.date.getMonth() - 1
-      );
+      this.currentDateInView.date.setFullYear(this.currentDateInView.date.getMonth() === 1 ? this.currentDateInView.date.getFullYear() - 1 : this.currentDateInView.date.getFullYear());
+      this.currentDateInView.date.setMonth(this.currentDateInView.date.getMonth() === 1 ? 12 : this.currentDateInView.date.getMonth() - 1);
       console.log(this.currentDateInView.date);
       this.currentMonth = this.getMonthYearString(this.currentDateInView.date);
       this.generateCalendarDates(this.currentDateInView.date);
@@ -50,16 +42,8 @@ export class CustomDatepickerComponent implements OnInit {
 
   public goToNextMonth(): void {
     if (this.currentDateInView) {
-      this.currentDateInView.date.setFullYear(
-        this.currentDateInView.date.getMonth() === 12
-          ? this.currentDateInView.date.getFullYear() + 1
-          : this.currentDateInView.date.getFullYear()
-      );
-      this.currentDateInView.date.setMonth(
-        this.currentDateInView.date.getMonth() === 12
-          ? 1
-          : this.currentDateInView.date.getMonth() + 1
-      );
+      this.currentDateInView.date.setFullYear(this.currentDateInView.date.getMonth() === 12 ? this.currentDateInView.date.getFullYear() + 1 : this.currentDateInView.date.getFullYear());
+      this.currentDateInView.date.setMonth(this.currentDateInView.date.getMonth() === 12 ? 1 : this.currentDateInView.date.getMonth() + 1);
       console.log(this.currentDateInView.date);
       this.currentMonth = this.getMonthYearString(this.currentDateInView.date);
       this.generateCalendarDates(this.currentDateInView.date);
@@ -84,28 +68,17 @@ export class CustomDatepickerComponent implements OnInit {
 
   public isDateInRange(givenDate: DatepickerDate): boolean {
     if (this.selectedStartDate?.date && this.selectedEndDate?.date) {
-      return (
-        givenDate.date.getTime() > this.selectedStartDate?.date.getTime() &&
-        givenDate.date.getTime() <= this.selectedEndDate?.date.getTime()
-      );
+      return givenDate.date.getTime() > this.selectedStartDate?.date.getTime() && givenDate.date.getTime() <= this.selectedEndDate?.date.getTime();
     }
     return false;
   }
 
   public isDateInRangeAndSaturday(givenDate: DatepickerDate): boolean {
-    return (
-      this.isDateInRange(givenDate) &&
-      givenDate.date.getDay() === 6 &&
-      givenDate.date.getHours() > 12
-    );
+    return this.isDateInRange(givenDate) && givenDate.date.getDay() === 6 && givenDate.date.getHours() > 12;
   }
 
   public isDateInRangeAndSunday(givenDate: DatepickerDate): boolean {
-    return (
-      this.isDateInRange(givenDate) &&
-      givenDate.date.getDay() === 0 &&
-      givenDate.date.getHours() < 12
-    );
+    return this.isDateInRange(givenDate) && givenDate.date.getDay() === 0 && givenDate.date.getHours() < 12;
   }
 
   public isDateInCurrentMonth(date: DatepickerDate): boolean {
@@ -117,35 +90,27 @@ export class CustomDatepickerComponent implements OnInit {
     this.calendarDates.forEach((customDate: DatepickerDate) => {
       const morningDate = new Date(customDate.date);
       morningDate.setHours(0, 0, 0, 0);
-      rangeDates.push({ date: morningDate, selected: false });
+      rangeDates.push({date: morningDate, selected: false});
 
       const nightDate = new Date(customDate.date);
       nightDate.setHours(23, 59, 59, 999);
 
-      rangeDates.push({ date: nightDate, selected: false });
+      rangeDates.push({date: nightDate, selected: false});
     });
 
     return rangeDates;
   }
 
   private getMonthYearString(date: Date): string {
-    return date.toLocaleString('default', { month: 'long', year: 'numeric' });
+    return date.toLocaleString('default', {month: 'long', year: 'numeric'});
   }
 
   private generateCalendarDates(date: Date): void {
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    const startDate = new Date(
-      firstDayOfMonth.getFullYear(),
-      firstDayOfMonth.getMonth(),
-      firstDayOfMonth.getDate()
-    );
+    const startDate = new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth(), firstDayOfMonth.getDate());
     startDate.setDate(startDate.getDate() - startDate.getDay());
-    const endDate = new Date(
-      lastDayOfMonth.getFullYear(),
-      lastDayOfMonth.getMonth(),
-      lastDayOfMonth.getDate()
-    );
+    const endDate = new Date(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), lastDayOfMonth.getDate());
     endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
 
     console.log(startDate, endDate);
@@ -155,7 +120,7 @@ export class CustomDatepickerComponent implements OnInit {
     while (currentDate.getTime() <= endDate.getTime()) {
       this.calendarDates.push({
         date: new Date(currentDate),
-        selected: false,
+        selected: false
       });
       currentDate.setDate(currentDate.getDate() + 1);
     }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CustomTextInputWithIconComponent } from './custom-text-input-with-icon.component';
+import {CustomTextInputWithIconComponent} from './custom-text-input-with-icon.component';
 
 describe('CustomTextInputWithIconComponent', () => {
   let component: CustomTextInputWithIconComponent;

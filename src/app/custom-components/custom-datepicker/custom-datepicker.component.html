@@ -1,18 +1,8 @@
 <div class="datepicker">
   <div class="datepicker__header">
-    <mat-icon
-      svgIcon="chevron-left"
-      aria-hidden="false"
-      class="icon"
-      (click)="goToPreviousMonth()"
-    ></mat-icon>
+    <mat-icon svgIcon="chevron-left" aria-hidden="false" class="icon" (click)="goToPreviousMonth()"></mat-icon>
     <span class="header__title">{{ currentMonth }}</span>
-    <mat-icon
-      svgIcon="chevron-right"
-      aria-hidden="false"
-      class="icon"
-      (click)="goToNextMonth()"
-    ></mat-icon>
+    <mat-icon svgIcon="chevron-right" aria-hidden="false" class="icon" (click)="goToNextMonth()"></mat-icon>
   </div>
 
   <div class="datepicker__calendar">
@@ -23,13 +13,7 @@
     </div>
     <div class="calendar__dates">
       <div class="dates__date">
-        <div
-          *ngFor="let date of calendarDates"
-          class="date"
-          [class.selected]="date.selected"
-          [class.in-current-month]="isDateInCurrentMonth(date)"
-          (click)="selectDate(date)"
-        >
+        <div *ngFor="let date of calendarDates" class="date" [class.selected]="date.selected" [class.in-current-month]="isDateInCurrentMonth(date)" (click)="selectDate(date)">
           {{ date.date.getDate() }}
         </div>
       </div>
