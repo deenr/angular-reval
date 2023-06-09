@@ -10,11 +10,11 @@
         {{ getSubtitle() }}
       </p>
     </div>
-    <form class="register__form">
-      <div *ngIf="canShowStep(registrationSteps.EMAIL)" class="flex-column form__step-one">
+    <div class="register__form">
+      <form *ngIf="canShowStep(registrationSteps.EMAIL)" [formGroup]="emailForm" class="flex-column form__step-one">
         <div class="flex-column form__email">
           <mat-form-field>
-            <input matInput type="text" placeholder="Enter your email" />
+            <input matInput formControlName="email" type="text" placeholder="Enter your email" />
           </mat-form-field>
           <button mat-flat-button color="primary" class="register__continue" (click)="goToPassword()">Continue</button>
         </div>
@@ -23,23 +23,23 @@
         <div class="has-account">
           <span class="text-sm text-regular"> Already have an account? <a href="/">Log in</a> </span>
         </div>
-      </div>
-      <div *ngIf="canShowStep(registrationSteps.PASSWORD)" class="flex-column form__step-two">
+      </form>
+      <form *ngIf="canShowStep(registrationSteps.PASSWORD)" [formGroup]="passwordForm" class="flex-column form__step-two">
         <div class="flex-column form__password">
           <mat-form-field>
-            <input matInput type="password" placeholder="Choose a password" />
+            <input matInput formControlName="password" type="password" placeholder="Choose a password" />
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="password" placeholder="Confirm password" />
+            <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
           </mat-form-field>
         </div>
         <button mat-flat-button color="primary" class="register__continue" type="button" (click)="goToDetails()">Continue</button>
-      </div>
-      <div *ngIf="canShowStep(registrationSteps.DETAILS)" class="flex-column form__step-three">
+      </form>
+      <form *ngIf="canShowStep(registrationSteps.DETAILS)" [formGroup]="detailsForm" class="flex-column form__step-three">
         <div class="flex-column form__details">
           <mat-form-field>
             <mat-label>Department/Faculty</mat-label>
-            <mat-select placeholder="Select your department">
+            <mat-select formControlName="department" placeholder="Select your department">
               <mat-option *ngFor="let faculty of faculties" [value]="faculty">
                 {{ faculty }}
               </mat-option>
@@ -47,7 +47,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Field of Study/Research</mat-label>
-            <mat-select placeholder="Select your field">
+            <mat-select formControlName="field" placeholder="Select your field">
               <mat-option *ngFor="let field of fields" [value]="field">
                 {{ field }}
               </mat-option>
@@ -56,21 +56,21 @@
           <div class="flex-row">
             <mat-form-field>
               <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>
-              <input matInput type="text" placeholder="Enter ID number" />
+              <input formControlName="id" matInput type="text" placeholder="Enter ID number" />
             </mat-form-field>
             <mat-form-field>
               <mat-label class="text-sm text-medium">Year of Graduation</mat-label>
-              <input matInput text="number" placeholder="Graduation year" />
+              <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
             </mat-form-field>
           </div>
           <mat-form-field>
             <mat-label class="text-sm text-medium">Phone Number</mat-label>
-            <input matInput text="text" placeholder="Contact number" />
+            <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
           </mat-form-field>
         </div>
-        <button mat-flat-button color="primary" class="register__continue" disabled>Continue</button>
-      </div>
-    </form>
+        <button mat-flat-button color="primary" class="register__continue">Continue</button>
+      </form>
+    </div>
   </div>
   <app-progress-steps class="register__process" [steps]="steps"></app-progress-steps>
 </section>

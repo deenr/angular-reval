@@ -12,7 +12,7 @@ export class LoginComponent {
     password: FormControl<string>;
     remember: FormControl<boolean>;
   }> = new FormGroup({
-    email: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
     remember: new FormControl(null)
   });

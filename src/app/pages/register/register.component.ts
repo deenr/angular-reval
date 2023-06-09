@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {RegistrationSteps} from './registration-steps.enum';
 import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +9,34 @@ import {ProgressStep} from '@custom-components/progress-steps/progress-step.inte
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  public emailForm: FormGroup<{
+    email: FormControl<string>;
+  }> = new FormGroup({
+    email: new FormControl(null, [Validators.required])
+  });
+
+  public passwordForm: FormGroup<{
+    password: FormControl<string>;
+    confirmPassword: FormControl<string>;
+  }> = new FormGroup({
+    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)])
+  });
+
+  public detailsForm: FormGroup<{
+    department: FormControl<string>;
+    field: FormControl<string>;
+    id: FormControl<string>;
+    yearOfGraduation: FormControl<string>;
+    phoneNumber: FormControl<string>;
+  }> = new FormGroup({
+    department: new FormControl(null),
+    field: new FormControl(null),
+    id: new FormControl(null, [Validators.required]),
+    yearOfGraduation: new FormControl(null),
+    phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')])
+  });
+
   public registrationSteps = RegistrationSteps;
 
   public faculties = [
@@ -94,7 +123,7 @@ export class RegisterComponent {
   public getSubtitle(): string {
     switch (this.getCurrentProgressStep().stepName) {
       case RegistrationSteps.EMAIL:
-        return 'Choose a password';
+        return 'Sign up in less than 2 minutes.';
       case RegistrationSteps.PASSWORD:
         return 'Must be at least 8 characters.';
       default:
@@ -107,15 +136,19 @@ export class RegisterComponent {
   }
 
   public goToPassword(): void {
-    this.getProgressStepByStepName(RegistrationSteps.EMAIL).complete = true;
-    this.getProgressStepByStepName(RegistrationSteps.EMAIL).current = false;
-    this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = true;
+    if (this.emailForm.valid) {
+      this.getProgressStepByStepName(RegistrationSteps.EMAIL).complete = true;
+      this.getProgressStepByStepName(RegistrationSteps.EMAIL).current = false;
+      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = true;
+    }
   }
 
   public goToDetails(): void {
-    this.getProgressStepByStepName(RegistrationSteps.PASSWORD).complete = true;
-    this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = false;
-    this.getProgressStepByStepName(RegistrationSteps.DETAILS).current = true;
+    if (this.passwordForm.valid) {
+      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).complete = true;
+      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = false;
+      this.getProgressStepByStepName(RegistrationSteps.DETAILS).current = true;
+    }
   }
 
   private getCurrentProgressStep(): ProgressStep {
