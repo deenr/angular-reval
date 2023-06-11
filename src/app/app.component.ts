@@ -29,5 +29,7 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('arrow-right', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-right.svg'));
     this.iconRegistry.addSvgIcon('arrow-left', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-left.svg'));
     this.iconRegistry.addSvgIcon('loading', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/loading.svg'));
+    this.iconRegistry.addSvgIcon('check-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/check-circle.svg'));
+    this.iconRegistry.addSvgIcon('search', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/search.svg'));
   }
 }

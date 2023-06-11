@@ -16,9 +16,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
-import {LoginComponent} from './pages/login/login.component';
-import {ProgressStepsComponent} from './custom-components/progress-steps/progress-steps.component';
-import {RegisterComponent} from './pages/register/register.component';
 import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/custom-datepicker.component';
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
@@ -28,11 +25,16 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
-import {LandingPageComponent} from './pages/landing-page/landing-page.component';
 import {environment} from 'src/environments/environment.development';
-import {ProgressButtonComponent} from './custom-components/progress-button/progress-button.component';
-import {SkeletonComponent} from './custom-components/skeleton/skeleton.component';
-import {SkeletonDirective} from './shared/directives/skeleton/skeleton.directive';
+import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
+import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
+import {EmailVerificationComponent} from '@pages/email-verification/email-verification.component';
+import {LandingPageComponent} from '@pages/landing-page/landing-page.component';
+import {LoginComponent} from '@pages/login/login.component';
+import {RegisterComponent} from '@pages/register/register.component';
+import {SkeletonDirective} from '@shared/directives/skeleton/skeleton.directive';
+import {ProgressStepsComponent} from '@custom-components/progress-steps/progress-steps.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +42,15 @@ import {SkeletonDirective} from './shared/directives/skeleton/skeleton.directive
     CustomDatepickerComponent,
     LoginComponent,
     ProgressStepsComponent,
-    RegisterComponent,
     DividerWithTextComponent,
     CustomTextInputWithIconComponent,
     LandingPageComponent,
     ProgressButtonComponent,
     SkeletonComponent,
-    SkeletonDirective
+    SkeletonDirective,
+    RegisterComponent,
+    EmailVerificationComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

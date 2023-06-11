@@ -5,6 +5,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {matchValidator} from '@helper/validator/match-validator';
 import {AuthService} from '@shared/services/auth/auth.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   selector: 'app-register',
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
   });
 
   public registrationStep = RegistrationStep;
+  public skeletonType = SkeletonType;
 
   public faculties = [
     'Sales',
@@ -114,16 +116,18 @@ export class RegisterComponent implements OnInit {
     }
   ] as ProgressStep[];
 
-  public loadingEmailVerification = false;
+  public sendingDetails = false;
 
-  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute) {}
+  public constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   public ngOnInit(): void {
-    this.setCurrentProgressStep(this.registrationStep.DETAILS);
-
-    this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
-
-    this.checkForVerifyingEmail();
+    if (this.authService.isVerified) {
+      this.setCurrentProgressStep(RegistrationStep.DETAILS);
+    } else if (this.authService.isLoggedIn) {
+      this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+    } else {
+      this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
+    }
   }
 
   public getTitle(): string {
@@ -172,11 +176,40 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  public goToDetails(): void {
+    if (this.authService.isVerified) {
+      this.setCurrentProgressStep(RegistrationStep.DETAILS);
+    }
+  }
+
+  public sendDetails(): void {
+    if (this.detailsForm.valid) {
+      this.sendingDetails = true;
+
+      this.authService
+        .setUserDetails(
+          this.detailsForm.value.firstName,
+          this.detailsForm.value.lastName,
+          this.detailsForm.value.department,
+          this.detailsForm.value.field,
+          this.detailsForm.value.studentId,
+          this.detailsForm.value.yearOfGraduation,
+          this.detailsForm.value.phoneNumber
+        )
+        .then(() => this.router.navigateByUrl('/'));
+    }
+  }
+
   private setCurrentProgressStep(registrationStep: RegistrationStep): void {
-    const progressStepChanged = false;
+    let progressStepChanged = false;
     this.steps = this.steps.map((progressStep: ProgressStep) => {
       if (!progressStepChanged) {
-        return progressStep.stepName === registrationStep ? {...progressStep, current: true} : {...progressStep, complete: true, current: false};
+        if (progressStep.stepName === registrationStep) {
+          progressStepChanged = true;
+          return {...progressStep, current: true};
+        } else {
+          return {...progressStep, complete: true, current: false};
+        }
       }
 
       return progressStep;
@@ -185,29 +218,5 @@ export class RegisterComponent implements OnInit {
 
   private getCurrentProgressStep(): ProgressStep {
     return this.steps.find((progressStep: ProgressStep) => progressStep.current);
-  }
-
-  private checkForVerifyingEmail(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      const oobCode = params['oobCode'];
-      if (oobCode) {
-        this.verifyEmail(oobCode);
-      }
-    });
-  }
-
-  private verifyEmail(oobCode: string): void {
-    this.loadingEmailVerification = true;
-    this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
-    this.authService
-      .verifyEmail(oobCode)
-      .then(() => {
-        this.setCurrentProgressStep(RegistrationStep.DETAILS);
-        this.loadingEmailVerification = false;
-      })
-      .catch((reason) => {
-        alert(reason['code']);
-        this.loadingEmailVerification = false;
-      });
   }
 }

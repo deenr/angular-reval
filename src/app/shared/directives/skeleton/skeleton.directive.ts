@@ -1,4 +1,4 @@
-import {Directive, Input, TemplateRef, ViewContainerRef, SimpleChanges, ElementRef} from '@angular/core';
+import {Directive, Input, TemplateRef, ViewContainerRef, SimpleChanges, ElementRef, ComponentRef} from '@angular/core';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
 import {SkeletonType} from './skeleton-type.enum';
 
@@ -9,6 +9,9 @@ export class SkeletonDirective {
   @Input('skeletonWidth') public width: string;
   @Input('skeletonHeight') public height: string;
 
+  private skeletonComponentRef: ComponentRef<SkeletonComponent>; // Reference to the created SkeletonComponent
+  private wrapperDiv: HTMLElement; // Reference to the wrapper div element
+
   constructor(private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef, private elementRef: ElementRef<HTMLElement>) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -18,34 +21,58 @@ export class SkeletonDirective {
       if (changes['isLoading'].currentValue) {
         switch (this.type) {
           case SkeletonType.FORM_FIELD:
-            const wrapperDiv = document.createElement('div');
-            wrapperDiv.style.width = '100%';
-            wrapperDiv.style.marginBottom = '4px';
-            wrapperDiv.style.display = 'flex';
-            wrapperDiv.style.flexDirection = 'column';
-            wrapperDiv.style.gap = '6px';
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.width = '100%';
+            this.wrapperDiv.style.marginBottom = '4px';
+            this.wrapperDiv.style.display = 'flex';
+            this.wrapperDiv.style.flexDirection = 'column';
+            this.wrapperDiv.style.gap = '6px';
 
             const labelRef = this.viewContainerRef.createComponent(SkeletonComponent);
             Object.assign(labelRef.instance, {
               width: '50%',
               height: '18px'
             });
-            wrapperDiv.appendChild(labelRef.location.nativeElement);
+            this.wrapperDiv.appendChild(labelRef.location.nativeElement);
+
             const inputRef = this.viewContainerRef.createComponent(SkeletonComponent);
             Object.assign(inputRef.instance, {
               width: '100%',
               height: '42px'
             });
-            wrapperDiv.appendChild(inputRef.location.nativeElement);
+            this.wrapperDiv.appendChild(inputRef.location.nativeElement);
 
             const parentElement = this.elementRef.nativeElement.parentElement;
-            parentElement.insertBefore(wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            parentElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
             break;
+
+          case SkeletonType.BUTTON:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              width: '100%',
+              height: '42px'
+            });
+            break;
+
+          case SkeletonType.DISPLAY_MD:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              width: '80%',
+              height: '44px'
+            });
+            break;
+
           default:
             break;
         }
       } else {
         this.viewContainerRef.createEmbeddedView(this.templateRef);
+        if (this.skeletonComponentRef) {
+          this.skeletonComponentRef.destroy();
+        }
+        if (this.wrapperDiv) {
+          this.wrapperDiv.remove();
+        }
       }
     }
   }
