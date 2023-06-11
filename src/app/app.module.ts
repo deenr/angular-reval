@@ -31,7 +31,6 @@ import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
 import {LandingPageComponent} from './pages/landing-page/landing-page.component';
 import {environment} from 'src/environments/environment.development';
 import {ProgressButtonComponent} from './custom-components/progress-button/progress-button.component';
-import {SkeletonComponent} from './custom-components/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +42,7 @@ import {SkeletonComponent} from './custom-components/skeleton/skeleton.component
     DividerWithTextComponent,
     CustomTextInputWithIconComponent,
     LandingPageComponent,
-    ProgressButtonComponent,
-    SkeletonComponent
+    ProgressButtonComponent
   ],
   imports: [
     CommonModule,
