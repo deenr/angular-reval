@@ -1,0 +1,23 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: var(--skeleton-width);
+  height: var(--skeleton-height);
+  border-radius: 8px;
+  background: linear-gradient(to right, $color-grey-100 0%, $color-grey-200 50%, $color-grey-100 100%);
+  background-size: 200% auto;
+  animation: skeleton-pulse 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: -200% center;
+  }
+  50% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
