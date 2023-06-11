@@ -23,9 +23,29 @@ import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/cu
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
 import {AppRoutingModule} from './app-routing.module';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
+import {LandingPageComponent} from './pages/landing-page/landing-page.component';
+import {environment} from 'src/environments/environment.development';
+import {ProgressButtonComponent} from './custom-components/progress-button/progress-button.component';
+import {SkeletonComponent} from './custom-components/skeleton/skeleton.component';
 
 @NgModule({
-  declarations: [AppComponent, CustomDatepickerComponent, LoginComponent, ProgressStepsComponent, RegisterComponent, DividerWithTextComponent, CustomTextInputWithIconComponent],
+  declarations: [
+    AppComponent,
+    CustomDatepickerComponent,
+    LoginComponent,
+    ProgressStepsComponent,
+    RegisterComponent,
+    DividerWithTextComponent,
+    CustomTextInputWithIconComponent,
+    LandingPageComponent,
+    ProgressButtonComponent,
+    SkeletonComponent
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -43,7 +63,12 @@ import {AppRoutingModule} from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     MatDividerModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
   providers: [
     {

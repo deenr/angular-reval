@@ -38,6 +38,7 @@
   }
 
   .register__header {
+    width: 360px;
     margin-top: 80px;
     align-items: start;
     gap: 12px;
@@ -78,6 +79,19 @@
 
       .form__password {
         gap: 20px;
+      }
+    }
+
+    .email-verification {
+      max-width: 100%;
+      gap: 32px;
+
+      .resend-verification {
+        text-align: center;
+      }
+
+      &__manual {
+        gap: 24px;
       }
     }
 

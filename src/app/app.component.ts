@@ -28,5 +28,6 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('arrow-down', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-down.svg'));
     this.iconRegistry.addSvgIcon('arrow-right', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-right.svg'));
     this.iconRegistry.addSvgIcon('arrow-left', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-left.svg'));
+    this.iconRegistry.addSvgIcon('loading', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/loading.svg'));
   }
 }

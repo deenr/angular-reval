@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "paths": {
       "@helper/*": ["src/app/helper/*"],
-      "@custom-components/*": ["src/app/custom-components/*"]
+      "@custom-components/*": ["src/app/custom-components/*"],
+      "@shared/*": ["src/app/shared/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

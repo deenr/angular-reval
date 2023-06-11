@@ -1,0 +1,13 @@
+@import 'variables';
+
+:host {
+  .loading {
+    pointer-events: none;
+
+    ::ng-deep .mdc-button__label {
+      display: flex;
+      align-items: center;
+      font-size: $fs-100;
+    }
+  }
+}

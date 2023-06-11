@@ -25,10 +25,10 @@
       </div>
       <div class="login__actions flex-column">
         <button mat-flat-button color="primary" (click)="login()">Sign in</button>
-        <button mat-stroked-button><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign in with Google</button>
+        <button mat-stroked-button type="button" (click)="googleLogin()"><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign in with Google</button>
       </div>
       <div class="login__no-account">
-        <span class="text-sm text-regular">Don't have an account? <a href="/">Sign up</a></span>
+        <span class="text-sm text-regular">Don't have an account? <a routerLink="/register">Sign up</a></span>
       </div>
     </form>
   </section>

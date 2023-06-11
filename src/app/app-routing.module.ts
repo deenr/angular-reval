@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
+import {LandingPageComponent} from './pages/landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: LandingPageComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'verify-email', component: RegisterComponent},
   {path: 'register', component: RegisterComponent}
 ];
 

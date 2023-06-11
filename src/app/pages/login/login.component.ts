@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '@shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,20 @@ export class LoginComponent {
     password: FormControl<string>;
     remember: FormControl<boolean>;
   }> = new FormGroup({
-    email: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, Validators.required),
     remember: new FormControl(null)
   });
 
+  public constructor(private readonly authService: AuthService) {}
+
   public login(): void {
-    console.log(this.loginForm.value, this.loginForm.controls.email.errors);
+    if (this.loginForm.valid) {
+      this.authService.signIn(this.loginForm.value.email, this.loginForm.value.password);
+    }
+  }
+
+  public googleLogin(): void {
+    this.authService.googleSignIn();
   }
 }

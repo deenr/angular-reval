@@ -1,14 +1,17 @@
-import {Component} from '@angular/core';
-import {RegistrationSteps} from './registration-steps.enum';
+import {Component, OnInit} from '@angular/core';
+import {RegistrationStep} from './registration-step.enum';
 import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {matchValidator} from '@helper/validator/match-validator';
+import {AuthService} from '@shared/services/auth/auth.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   public emailForm: FormGroup<{
     email: FormControl<string>;
   }> = new FormGroup({
@@ -24,20 +27,24 @@ export class RegisterComponent {
   });
 
   public detailsForm: FormGroup<{
+    firstName: FormControl<string>;
+    lastName: FormControl<string>;
     department: FormControl<string>;
     field: FormControl<string>;
-    id: FormControl<string>;
+    studentId: FormControl<string>;
     yearOfGraduation: FormControl<string>;
     phoneNumber: FormControl<string>;
   }> = new FormGroup({
+    firstName: new FormControl(null, Validators.required),
+    lastName: new FormControl(null, Validators.required),
     department: new FormControl(null),
     field: new FormControl(null),
-    id: new FormControl(null, [Validators.required]),
+    studentId: new FormControl(null, Validators.required),
     yearOfGraduation: new FormControl(null),
     phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')])
   });
 
-  public registrationSteps = RegistrationSteps;
+  public registrationStep = RegistrationStep;
 
   public faculties = [
     'Sales',
@@ -74,7 +81,7 @@ export class RegisterComponent {
 
   public steps = [
     {
-      stepName: RegistrationSteps.EMAIL,
+      stepName: RegistrationStep.EMAIL,
       svgIcon: 'user',
       complete: false,
       current: true,
@@ -82,7 +89,7 @@ export class RegisterComponent {
       supportingText: 'Enter your email'
     },
     {
-      stepName: RegistrationSteps.PASSWORD,
+      stepName: RegistrationStep.PASSWORD,
       svgIcon: 'lock',
       complete: false,
       current: false,
@@ -90,31 +97,45 @@ export class RegisterComponent {
       supportingText: 'Choose a secure password'
     },
     {
-      stepName: RegistrationSteps.DETAILS,
-      svgIcon: 'details',
-      complete: false,
-      current: false,
-      text: 'Personal information',
-      supportingText: 'Add the required information'
-    },
-    {
-      stepName: RegistrationSteps.EMAIL_VERIFICATION,
+      stepName: RegistrationStep.EMAIL_VERIFICATION,
       svgIcon: 'mail',
       complete: false,
       current: false,
       text: 'Verification',
       supportingText: 'Verify your account'
+    },
+    {
+      stepName: RegistrationStep.DETAILS,
+      svgIcon: 'details',
+      complete: false,
+      current: false,
+      text: 'Personal information',
+      supportingText: 'Add the required information'
     }
   ] as ProgressStep[];
 
+  public loadingEmailVerification = false;
+
+  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute) {}
+
+  public ngOnInit(): void {
+    this.setCurrentProgressStep(this.registrationStep.DETAILS);
+
+    this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
+
+    this.checkForVerifyingEmail();
+  }
+
   public getTitle(): string {
     switch (this.getCurrentProgressStep().stepName) {
-      case RegistrationSteps.EMAIL:
+      case RegistrationStep.EMAIL:
         return 'Create an account';
-      case RegistrationSteps.PASSWORD:
+      case RegistrationStep.PASSWORD:
         return 'Choose a password';
-      case RegistrationSteps.DETAILS:
+      case RegistrationStep.DETAILS:
         return 'Enter your details';
+      case RegistrationStep.EMAIL_VERIFICATION:
+        return 'Check your email';
       default:
         return '';
     }
@@ -122,40 +143,71 @@ export class RegisterComponent {
 
   public getSubtitle(): string {
     switch (this.getCurrentProgressStep().stepName) {
-      case RegistrationSteps.EMAIL:
+      case RegistrationStep.EMAIL:
         return 'Sign up in less than 2 minutes.';
-      case RegistrationSteps.PASSWORD:
+      case RegistrationStep.PASSWORD:
         return 'Must be at least 8 characters.';
+      case RegistrationStep.EMAIL_VERIFICATION:
+        return `We sent a verification link to ${this.emailForm.value.email}`;
       default:
         return '';
     }
   }
 
-  public canShowStep(stepName: RegistrationSteps): boolean {
+  public canShowStep(stepName: RegistrationStep): boolean {
     return this.steps.find((progressStep: ProgressStep) => progressStep.stepName === stepName).current;
   }
 
   public goToPassword(): void {
     if (this.emailForm.valid) {
-      this.getProgressStepByStepName(RegistrationSteps.EMAIL).complete = true;
-      this.getProgressStepByStepName(RegistrationSteps.EMAIL).current = false;
-      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = true;
+      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
     }
   }
 
-  public goToDetails(): void {
+  public goToEmailVerification(): void {
     if (this.passwordForm.valid) {
-      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).complete = true;
-      this.getProgressStepByStepName(RegistrationSteps.PASSWORD).current = false;
-      this.getProgressStepByStepName(RegistrationSteps.DETAILS).current = true;
+      this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+
+      this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password);
     }
+  }
+
+  private setCurrentProgressStep(registrationStep: RegistrationStep): void {
+    const progressStepChanged = false;
+    this.steps = this.steps.map((progressStep: ProgressStep) => {
+      if (!progressStepChanged) {
+        return progressStep.stepName === registrationStep ? {...progressStep, current: true} : {...progressStep, complete: true, current: false};
+      }
+
+      return progressStep;
+    });
   }
 
   private getCurrentProgressStep(): ProgressStep {
     return this.steps.find((progressStep: ProgressStep) => progressStep.current);
   }
 
-  private getProgressStepByStepName(stepName: RegistrationSteps): ProgressStep {
-    return this.steps.find((progressStep: ProgressStep) => progressStep.stepName === stepName);
+  private checkForVerifyingEmail(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      const oobCode = params['oobCode'];
+      if (oobCode) {
+        this.verifyEmail(oobCode);
+      }
+    });
+  }
+
+  private verifyEmail(oobCode: string): void {
+    this.loadingEmailVerification = true;
+    this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+    this.authService
+      .verifyEmail(oobCode)
+      .then(() => {
+        this.setCurrentProgressStep(RegistrationStep.DETAILS);
+        this.loadingEmailVerification = false;
+      })
+      .catch((reason) => {
+        alert(reason['code']);
+        this.loadingEmailVerification = false;
+      });
   }
 }

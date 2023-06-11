@@ -1,0 +1,8 @@
+<button mat-flat-button class="full-width" [class.loading]="loading" color="primary" type="button" (click)="click.emit()">
+  <ng-container *ngIf="!loading; else loadingIcon">
+    <ng-content></ng-content>
+  </ng-container>
+  <ng-template #loadingIcon>
+    <mat-icon class="full-height" svgIcon="loading"></mat-icon>
+  </ng-template>
+</button>
