@@ -1,5 +1,5 @@
-@import "./colors.scss";
-@import "./typography.scss";
+@import './colors.scss';
+@import './typography.scss';
 
 .mat-mdc-button-base {
   height: 42px !important;
@@ -15,6 +15,10 @@
 
   .mat-mdc-button-persistent-ripple {
     display: block;
+  }
+
+  .mdc-button__label {
+    white-space: nowrap;
   }
 
   &.mdc-button--unelevated {
@@ -67,8 +71,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-primary-100,
-        0px 0px 0px 4px $color-primary-100;
+      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100;
     }
 
     &:disabled {
@@ -93,8 +96,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-accent-100,
-        0px 0px 0px 4px $color-accent-100;
+      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100;
     }
 
     &:disabled {
@@ -158,8 +160,7 @@
       background-color: $color-primary-800 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-primary-100,
-        0px 0px 0px 4px $color-primary-100;
+      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100;
     }
 
     &:disabled {
@@ -176,8 +177,7 @@
       background-color: $color-accent-700 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-accent-100,
-        0px 0px 0px 4px $color-accent-100;
+      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100;
     }
 
     &:disabled {

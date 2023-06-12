@@ -1,1 +1,53 @@
-<p>landing-page works!</p>
+<main class="landing-page">
+  <section class="hero flex-column">
+    <div class="hero__content flex-column">
+      <h2 class="display-xl text-semibold" classMd="display-sm">Connect. Collaborate. Innovate.</h2>
+      <p class="text-xl text-regular" classMd="text-lg">
+        Experience a new era of research collaboration. Connect with students, researchers, and professors to access the tools that drive groundbreaking discoveries.
+      </p>
+      <div class="content__sign-up flex-row">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Enter your email" />
+          <mat-hint class="text-sm text-regular">We care about your data in our <u>privacy policy.</u></mat-hint>
+        </mat-form-field>
+        <button mat-flat-button color="primary">Get started</button>
+      </div>
+    </div>
+    <div class="hero__illustration full-width"></div>
+  </section>
+  <mat-divider></mat-divider>
+  <section class="social-proof">
+    <p class="text-md text-medium">Join the 5 universities already empowering research</p>
+    <div class="flex-row universities">
+      <div *ngFor="let university of universities; index as index" class="flex-row university">
+        <mat-icon [svgIcon]="'university-' + index"></mat-icon>
+        <p class="text-md text-bold">{{ university }}</p>
+      </div>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section class="features flex-column">
+    <div class="features__heading">
+      <p class="text-md text-semibold heading__title" classMd="text-sm">Features</p>
+      <h3 class="display-md text-semibold" classMd="display-sm">Discover the power of our platform</h3>
+      <p class="text-xl text-regular heading__supporting-text" classMd="text-lg">
+        Efficient, streamlined tools to enhance research collaboration and equipment access. Trusted by leading universities worldwide.
+      </p>
+    </div>
+    <article class="features__content">
+      <app-feature-card *ngFor="let feature of features" [icon]="feature.icon" [text]="feature.title" [supportingText]="feature.text"></app-feature-card>
+    </article>
+  </section>
+  <mat-divider></mat-divider>
+  <section class="testimonial flex-column">
+    <div class="testimonial__logo flex-row">
+      <mat-icon svgIcon="logo-color"></mat-icon>
+      <h3>Sphience</h3>
+    </div>
+    <p class="testimonial__text display-md text-medium" classMd="display-sm">Sphience unites students, researchers, and professors, fostering collaboration and enabling breakthrough discoveries.</p>
+    <div class="testimonial__author flex-column">
+      <span class="author__name text-lg text-semibold">— Dean Reymen</span>
+      <span class="author__title text-md text-regular">Founder of Sphience</span>
+    </div>
+  </section>
+</main>

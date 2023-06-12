@@ -31,5 +31,16 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('loading', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/loading.svg'));
     this.iconRegistry.addSvgIcon('check-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/check-circle.svg'));
     this.iconRegistry.addSvgIcon('search', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/search.svg'));
+    this.iconRegistry.addSvgIcon('university-0', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/university-0.svg'));
+    this.iconRegistry.addSvgIcon('university-1', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/university-1.svg'));
+    this.iconRegistry.addSvgIcon('university-2', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/university-2.svg'));
+    this.iconRegistry.addSvgIcon('university-3', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/university-3.svg'));
+    this.iconRegistry.addSvgIcon('university-4', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/university-4.svg'));
+    this.iconRegistry.addSvgIcon('toolbox', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/toolbox.svg'));
+    this.iconRegistry.addSvgIcon('document', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/document.svg'));
+    this.iconRegistry.addSvgIcon('analytics', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/analytics.svg'));
+    this.iconRegistry.addSvgIcon('clock', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/clock.svg'));
+    this.iconRegistry.addSvgIcon('network', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/network.svg'));
+    this.iconRegistry.addSvgIcon('bell', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/bell.svg'));
   }
 }

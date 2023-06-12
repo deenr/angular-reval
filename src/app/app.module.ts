@@ -35,6 +35,8 @@ import {RegisterComponent} from '@pages/register/register.component';
 import {SkeletonDirective} from '@shared/directives/skeleton/skeleton.directive';
 import {ProgressStepsComponent} from '@custom-components/progress-steps/progress-steps.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { FeatureCardComponent } from './pages/landing-page/feature-card/feature-card.component';
+import { BreakpointDirective } from './shared/directives/breakpoint/breakpoint.directive';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     SkeletonDirective,
     RegisterComponent,
     EmailVerificationComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FeatureCardComponent,
+    BreakpointDirective
   ],
   imports: [
     CommonModule,

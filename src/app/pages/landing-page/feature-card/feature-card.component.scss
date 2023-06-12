@@ -1,0 +1,41 @@
+@import 'variables';
+
+:host {
+  .feature-card {
+    align-items: center;
+
+    mat-icon {
+      width: 48px !important;
+      height: 48px !important;
+      padding: 12px;
+      border-radius: 10px;
+
+      @include breakpoint-sm() {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 10px;
+        border-radius: 8px;
+      }
+    }
+
+    h4 {
+      margin-top: 20px;
+      color: $color-grey-900;
+      text-align: center;
+
+      @include breakpoint-sm() {
+        margin-top: 16px;
+      }
+    }
+
+    p {
+      margin-top: 8px;
+      color: $color-grey-600;
+      text-align: center;
+
+      @include breakpoint-sm() {
+        margin-top: 4px;
+      }
+    }
+  }
+}
