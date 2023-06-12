@@ -9,7 +9,7 @@
       padding: 0 64px;
     }
 
-    @include breakpoint-xs() {
+    @include breakpoint-sm() {
       padding: 48px 16px;
     }
 
@@ -24,7 +24,6 @@
     }
 
     .policy__header {
-      max-width: 1200px;
       padding: 96px 0;
       text-align: center;
 
@@ -42,6 +41,7 @@
 
       .supporting-text {
         margin-top: 24px;
+        max-width: 768px;
 
         @include breakpoint-md() {
           margin-top: 16px;

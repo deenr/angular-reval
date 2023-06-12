@@ -1,4 +1,4 @@
-$font-family: "Inter", sans-serif;
+$font-family: 'Inter', sans-serif;
 
 $fs-900: 4.5rem;
 $fs-800: 3.75rem;
@@ -92,6 +92,11 @@ a {
       color: $color-grey-600;
     }
   }
+}
+
+.text-link {
+  text-decoration-color: $color-primary-500;
+  cursor: pointer;
 }
 
 .caption {
