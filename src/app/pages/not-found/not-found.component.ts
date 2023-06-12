@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent {
+  panelOpenState = false;
   public constructor(private readonly location: Location) {}
 
   public goBack(): void {

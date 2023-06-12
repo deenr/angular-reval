@@ -139,11 +139,13 @@
   }
 
   .features {
-    padding: 96px 0;
+    padding: 96px calc(50vw - 50%);
+    margin: 0 calc(50% - 50vw);
     align-items: center;
+    background-color: $color-grey-50;
 
     @include breakpoint-sm() {
-      padding: 64px 0;
+      padding: 64px calc(50vw - 50%);
     }
 
     &__heading {
@@ -212,6 +214,37 @@
     &__author {
       margin-top: 20px;
       gap: 4px;
+    }
+  }
+
+  .faq {
+    padding: 96px 0;
+    align-items: center;
+    gap: 64px;
+
+    @include breakpoint-sm() {
+      padding: 64px 0;
+    }
+
+    &__heading {
+      text-align: center;
+
+      p {
+        margin-top: 20px;
+      }
+    }
+
+    &__content {
+      max-width: 768px;
+
+      .faq-item {
+        &:not(:last-child) .expendable-item {
+          margin-bottom: 32px;
+        }
+        &:not(:first-child) .expendable-item {
+          margin-top: 24px;
+        }
+      }
     }
   }
 }

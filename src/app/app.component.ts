@@ -42,5 +42,7 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('clock', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/clock.svg'));
     this.iconRegistry.addSvgIcon('network', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/network.svg'));
     this.iconRegistry.addSvgIcon('bell', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/bell.svg'));
+    this.iconRegistry.addSvgIcon('plus-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/plus-circle.svg'));
+    this.iconRegistry.addSvgIcon('minus-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/minus-circle.svg'));
   }
 }
