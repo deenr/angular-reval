@@ -38,6 +38,7 @@ import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {FeatureCardComponent} from './pages/landing-page/feature-card/feature-card.component';
 import {BreakpointDirective} from './shared/directives/breakpoint/breakpoint.directive';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     EmailVerificationComponent,
     NotFoundComponent,
     FeatureCardComponent,
-    BreakpointDirective
+    BreakpointDirective,
+    PrivacyPolicyComponent
   ],
   imports: [
     CommonModule,

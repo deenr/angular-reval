@@ -108,7 +108,7 @@ export class AuthService {
     return this.fireAuth.currentUser
       .then((user: any) => {
         const actionCodeSettings = {
-          url: 'http://localhost:4200/verify-email', // Replace with your custom URL
+          url: 'http://localhost:4200/verify', // Replace with your custom URL
           handleCodeInApp: true
         };
         return user.sendEmailVerification(actionCodeSettings);
