@@ -1,0 +1,27 @@
+<div class="nav-sidebar flex-column full-height">
+  <div class="sidebar__header flex-row full-width">
+    <div class="nav__logo flex-row">
+      <mat-icon svgIcon="logo-color"></mat-icon>
+      <h3>Sphience</h3>
+    </div>
+    <mat-icon class="close" svgIcon="close" (click)="sidenavClose.emit()"></mat-icon>
+  </div>
+  <div class="sidebar__content flex-column full-height">
+    <ul class="content__links flex-column">
+      <li class="text-md text-semibold">Home</li>
+      <li class="text-md text-semibold">Dashboard</li>
+      <!-- <li class="text-md text-semibold">Contact</li> -->
+    </ul>
+    <mat-divider></mat-divider>
+    <ul class="content__footer flex-column">
+      <li class="text-md text-semibold">About us</li>
+      <li class="text-md text-semibold">Privacy</li>
+      <li class="text-md text-semibold">Support</li>
+      <li class="text-md text-semibold">Contact</li>
+    </ul>
+    <div class="content__actions flex-column">
+      <button mat-flat-button color="primary" routerLink="/register">Sign up</button>
+      <button mat-stroked-button routerLink="/login">Log in</button>
+    </div>
+  </div>
+</div>

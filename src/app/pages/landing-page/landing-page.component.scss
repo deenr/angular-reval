@@ -246,5 +246,30 @@
         }
       }
     }
+
+    &__more {
+      background-color: $color-grey-50;
+      border-radius: 16px;
+      padding: 32px;
+      justify-content: space-between;
+
+      @include breakpoint-lg() {
+        gap: 8px;
+      }
+
+      @include breakpoint-sm() {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .more__title {
+        gap: 8px;
+      }
+
+      button {
+        min-width: 130px;
+        width: 130px;
+      }
+    }
   }
 }

@@ -44,5 +44,11 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('bell', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/bell.svg'));
     this.iconRegistry.addSvgIcon('plus-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/plus-circle.svg'));
     this.iconRegistry.addSvgIcon('minus-circle', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/minus-circle.svg'));
+    this.iconRegistry.addSvgIcon('hamburger', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/hamburger.svg'));
+    this.iconRegistry.addSvgIcon('close', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/close.svg'));
+    this.iconRegistry.addSvgIcon('github', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/github.svg'));
+    this.iconRegistry.addSvgIcon('twitter', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/twitter.svg'));
+    this.iconRegistry.addSvgIcon('linkedin', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/linkedin.svg'));
+    this.iconRegistry.addSvgIcon('instagram', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/instagram.svg'));
   }
 }

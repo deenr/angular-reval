@@ -1,0 +1,66 @@
+@import 'variables';
+
+:host {
+  .nav-sidebar {
+    padding: 20px 16px 24px 16px;
+
+    .sidebar__header {
+      align-items: center;
+
+      .nav__logo {
+        position: relative;
+        margin-right: auto;
+        gap: 8px;
+        align-items: center;
+
+        mat-icon {
+          min-width: 32px;
+          min-height: 32px;
+        }
+      }
+
+      .close {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 8px;
+        color: $color-grey-500;
+      }
+    }
+
+    .sidebar__content {
+      justify-content: space-between;
+
+      .content__links {
+        padding: 36px 16px;
+        gap: 32px;
+        margin-bottom: auto;
+
+        li {
+          color: $color-grey-900;
+          list-style-type: none;
+        }
+      }
+
+      .content__footer {
+        padding: 0;
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        column-gap: 24px;
+        row-gap: 12px;
+        justify-items: stretch;
+
+        li {
+          color: $color-grey-600;
+          list-style-type: none;
+        }
+      }
+
+      .content__actions {
+        margin-top: 32px;
+        gap: 12px;
+      }
+    }
+  }
+}

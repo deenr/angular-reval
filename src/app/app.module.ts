@@ -38,7 +38,12 @@ import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {FeatureCardComponent} from './pages/landing-page/feature-card/feature-card.component';
 import {BreakpointDirective} from './shared/directives/breakpoint/breakpoint.directive';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import {PrivacyPolicyComponent} from './pages/privacy-policy/privacy-policy.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {NavigationHeaderComponent} from './custom-components/navigation-header/navigation-header.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavigationSidebarComponent } from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
+import { FooterComponent } from './custom-components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,10 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
     NotFoundComponent,
     FeatureCardComponent,
     BreakpointDirective,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    NavigationHeaderComponent,
+    NavigationSidebarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +90,9 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule,
+    MatSidenavModule
   ],
   providers: [
     {

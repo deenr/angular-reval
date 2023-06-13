@@ -1,5 +1,24 @@
-@import "./colors.scss";
+@import './colors.scss';
 
 .mat-divider {
   border-top-color: $color-grey-200 !important;
+}
+
+.mat-drawer-container {
+  height: 100%;
+  max-height: 100vh;
+  background-color: transparent !important;
+
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: $color-grey-900;
+    opacity: 0.7;
+  }
+
+  .mat-drawer {
+    width: calc(100% - 64px);
+  }
+
+  .mat-drawer:not(.mat-drawer-side) {
+    box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03) !important;
+  }
 }

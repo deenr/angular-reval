@@ -1,0 +1,122 @@
+@import 'variables';
+
+:host {
+  .footer {
+    &__content {
+      padding: 64px 112px;
+      gap: 16px;
+
+      @include breakpoint-md() {
+        padding: 64px 64px;
+      }
+
+      @include breakpoint-sm() {
+        padding: 48px 16px;
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      .content__logo-and-text {
+        margin-right: auto;
+
+        .logo {
+          position: relative;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .support-text {
+          margin-top: 32px;
+          max-width: 320px;
+
+          @include breakpoint-sm() {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .content__links {
+        gap: 32px;
+
+        @include breakpoint-sm() {
+          justify-content: space-between;
+        }
+
+        @include breakpoint-xs() {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: auto;
+        }
+
+        .link-column {
+          width: 140px;
+
+          @include breakpoint-lg() {
+            width: 88px;
+          }
+
+          .heading {
+            color: $color-grey-500;
+          }
+
+          .links {
+            padding: 0;
+            margin-top: 16px;
+            gap: 12px;
+            list-style-type: none;
+
+            li {
+              color: $color-grey-600;
+            }
+          }
+        }
+      }
+    }
+
+    &__divider {
+      padding: 0 112px;
+
+      @include breakpoint-md() {
+        padding: 0 64px;
+      }
+
+      @include breakpoint-sm() {
+        padding: 0 16px;
+      }
+    }
+
+    &__copyright {
+      padding: 48px 112px;
+      gap: 16px;
+
+      @include breakpoint-md() {
+        padding: 48px 64px;
+      }
+
+      @include breakpoint-sm() {
+        padding: 32px 16px 48px 16px;
+      }
+
+      @include breakpoint-xs() {
+        flex-direction: column-reverse;
+      }
+
+      background-color: $color-grey-50;
+      color: $color-grey-500 !important;
+
+      p {
+        margin-right: auto;
+        color: $color-grey-500 !important;
+      }
+
+      .social-media-icons {
+        margin-left: 32px;
+        gap: 24px;
+
+        @include breakpoint-xs() {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

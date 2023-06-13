@@ -41,6 +41,14 @@
   background-color: $color-white;
 }
 
+.break-word {
+  white-space: nowrap;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @mixin breakpoint-xs {
   @media (max-width: 375px) {
     @content;
