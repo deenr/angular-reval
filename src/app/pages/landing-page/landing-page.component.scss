@@ -41,8 +41,12 @@
       margin-top: 204px;
       align-items: center;
 
-      @include breakpoint-sm() {
+      @include breakpoint-md() {
         margin-top: 160px;
+      }
+
+      @include breakpoint-sm() {
+        margin-top: 80px;
       }
 
       h2 {

@@ -5,6 +5,7 @@
 @import './buttons.scss';
 @import './checkbox.scss';
 @import './accordion.scss';
+@import './breakpoints.scss';
 @import './other-components.scss';
 
 .flex-column {
@@ -47,34 +48,4 @@
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-@mixin breakpoint-xs {
-  @media (max-width: 375px) {
-    @content;
-  }
-}
-
-@mixin breakpoint-sm {
-  @media (max-width: 640px) {
-    @content;
-  }
-}
-
-@mixin breakpoint-md {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
-
-@mixin breakpoint-lg {
-  @media (max-width: 1024px) {
-    @content;
-  }
-}
-
-@mixin breakpoint-xl {
-  @media (max-width: 1280px) {
-    @content;
-  }
 }

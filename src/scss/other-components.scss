@@ -1,4 +1,5 @@
 @import './colors.scss';
+@import './breakpoints.scss';
 
 .mat-divider {
   border-top-color: $color-grey-200 !important;
@@ -16,6 +17,10 @@
 
   .mat-drawer {
     width: calc(100% - 64px);
+
+    @include breakpoint-xs() {
+      width: 100%;
+    }
   }
 
   .mat-drawer:not(.mat-drawer-side) {
