@@ -1,14 +1,11 @@
-@import "./colors.scss";
-@import "./typography.scss";
+@import './colors.scss';
+@import './typography.scss';
 
 .mat-mdc-checkbox {
   --mdc-checkbox-selected-pressed-state-layer-color: #e0d7fe;
   --mdc-checkbox-selected-focus-state-layer-color: #f4ebff;
   --mdc-checkbox-unselected-pressed-state-layer-color: #fff;
   --mdc-checkbox-unselected-focus-state-layer-color: #f4ebff;
-
-  margin-top: -3px;
-  height: 20px;
 
   .mdc-form-field {
     .mdc-checkbox {
@@ -92,7 +89,7 @@
             transition: opacity 180ms;
             position: absolute;
             display: block;
-            content: "";
+            content: '';
             width: 10px;
             height: 20px;
             height: 0px;
@@ -112,12 +109,12 @@
             transition: opacity 180ms;
             position: absolute;
             display: block;
-            content: " ";
+            content: ' ';
             width: 20px;
             height: 20px;
             background-color: $color-primary-600;
-            -webkit-mask-image: url("../assets/svg/check.svg");
-            mask-image: url("../assets/svg/check.svg");
+            -webkit-mask-image: url('../assets/svg/check.svg');
+            mask-image: url('../assets/svg/check.svg');
             -webkit-mask-size: contain;
             mask-size: contain;
             -webkit-mask-position: center;
@@ -151,7 +148,7 @@
 
         &:after {
           opacity: 0;
-          content: "";
+          content: '';
         }
 
         .mdc-checkbox__checkmark,
@@ -195,6 +192,7 @@
             left: -4px;
             height: 24px;
             width: 24px;
+            z-index: -1;
           }
 
           &:indeterminate ~ .mdc-checkbox__background:after {
