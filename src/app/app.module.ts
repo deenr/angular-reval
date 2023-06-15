@@ -8,9 +8,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +24,7 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
+import {environment} from 'src/environments/environment.development';
 import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
 import {EmailVerificationComponent} from '@pages/email-verification/email-verification.component';
@@ -93,13 +93,13 @@ import {CountUpDirective} from './shared/directives/count-up/count-up.directive'
     MatDividerModule,
     AppRoutingModule,
     AngularFireModule.initializeApp({
-      apiKey: process.env['FIREBASE_API_KEY'],
-      authDomain: process.env['FIREBASE_AUTH_DOMAIN'],
-      projectId: process.env['FIREBASE_PROJECT_ID'],
-      storageBucket: process.env['FIREBASE_STORAGE_BUCKET'],
-      messagingSenderId: process.env['FIREBASE_MESSAGING_SENDER_ID'],
-      appId: process.env['FIREBASE_APP_ID'],
-      measurementId: process.env['FIREBASE_MEASUREMENT_ID']
+      apiKey: environment.firebase.apiKey,
+      authDomain: environment.firebase.authDomain,
+      projectId: environment.firebase.projectId,
+      storageBucket: environment.firebase.storageBucket,
+      messagingSenderId: environment.firebase.messagingSenderId,
+      appId: environment.firebase.appId,
+      measurementId: environment.firebase.measurementId
     }),
     AngularFireAuthModule,
     AngularFirestoreModule,
