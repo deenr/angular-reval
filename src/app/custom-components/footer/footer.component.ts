@@ -7,8 +7,30 @@ import {Component} from '@angular/core';
 })
 export class FooterComponent {
   public readonly footerLinks = [
-    {header: 'Company', links: ['About us', 'News', 'Contact']},
-    {header: 'Social', links: ['Twitter', 'LinkedIn', 'Instagram', 'GitHub']},
-    {header: 'Legal', links: ['Terms', 'Privacy', 'Contact']}
+    {
+      header: 'Company',
+      links: [
+        {value: 'About us', url: '/about'},
+        {value: 'News', url: ''},
+        {value: 'Contact', url: '/contact'}
+      ]
+    },
+    {
+      header: 'Social',
+      links: [
+        {value: 'Twitter', url: ''},
+        {value: 'LinkedIn', url: ''},
+        {value: 'Instagram', url: ''},
+        {value: 'GitHub', url: ''}
+      ]
+    },
+    {
+      header: 'Legal',
+      links: [
+        {value: 'Terms', url: ''},
+        {value: 'Privacy', url: ''},
+        {value: 'Contact', url: '/contact'}
+      ]
+    }
   ];
 }

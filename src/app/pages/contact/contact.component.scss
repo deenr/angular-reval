@@ -2,6 +2,19 @@
 
 :host {
   .contact {
+    &::before {
+      width: 100vw;
+      height: 1440px;
+      position: absolute;
+      z-index: -1;
+      top: 28px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      mask-image: url('../../../assets/svg/illustration/grid2-desktop.svg');
+      background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
+      content: '';
+    }
+
     &__form {
       align-items: center;
       padding: 96px 112px;

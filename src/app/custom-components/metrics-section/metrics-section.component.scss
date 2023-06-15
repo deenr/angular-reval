@@ -1,0 +1,33 @@
+@import 'variables';
+
+:host {
+  .metrics {
+    padding: 64px;
+    gap: 32px;
+    flex-wrap: wrap;
+    background-color: $color-primary-50;
+    border-radius: 16px;
+
+    @include breakpoint-md() {
+      flex-direction: column;
+      padding: 40px 24px;
+    }
+
+    .metric {
+      flex: 1 0 250px;
+      text-align: center;
+
+      @include breakpoint-md() {
+        flex: 1;
+      }
+
+      &__value {
+        color: $color-primary-600;
+      }
+
+      &__text {
+        margin-top: 12px;
+      }
+    }
+  }
+}

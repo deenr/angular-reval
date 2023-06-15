@@ -45,6 +45,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavigationSidebarComponent } from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
 import { FooterComponent } from './custom-components/footer/footer.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { MetricsSectionComponent } from './custom-components/metrics-section/metrics-section.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { ContactComponent } from './pages/contact/contact.component';
     NavigationHeaderComponent,
     NavigationSidebarComponent,
     FooterComponent,
-    ContactComponent
+    ContactComponent,
+    AboutUsComponent,
+    MetricsSectionComponent
   ],
   imports: [
     CommonModule,

@@ -92,7 +92,10 @@
     &__illustration {
       height: 480px;
       border-radius: 8px;
-      background-color: $color-primary-600;
+      // background-color: $color-primary-600;
+      background-image: url('../../../assets/image/person-in-lab.webp');
+      background-position: 50% 80%;
+      background-size: cover;
     }
   }
 
