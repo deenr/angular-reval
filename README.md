@@ -1,27 +1,46 @@
-# AngularReval
+# Sphience - Research Equipment Accessibility Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+Sphience is a web application dedicated to revolutionizing research equipment accessibility and fostering collaboration among students, researchers, and professors. Our platform serves as a centralized hub, connecting individuals and institutions and empowering them to make groundbreaking discoveries and advancements in their respective fields.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Code scaffolding
+## About
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+At Sphience, our mission is to break down barriers to research equipment access and facilitate seamless collaboration within the academic community. We strive to provide an intuitive and efficient lending system that enhances the efficiency and effectiveness of scientific research, ultimately driving innovation and contributing to the progress of knowledge.
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Research Equipment Management:** Sphience offers a comprehensive system for managing research equipment, allowing users to easily find and request the resources they need.
 
-## Running unit tests
+- **Collaboration and Knowledge Sharing:** The platform facilitates seamless collaboration among individuals and institutions, fostering an environment of knowledge-sharing and collective growth.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Efficient Lending System:** Sphience's intuitive lending system enhances the efficiency and effectiveness of scientific research by streamlining the process of borrowing and returning equipment.
 
-## Running end-to-end tests
+## Getting Started
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+To start using Sphience, please visit our [website](https://www.sphience.be) and create an account. Once registered, you can explore the available research equipment, make borrowing requests, and collaborate with other users in your field.
 
-## Further help
+## Contributing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+We welcome contributions to enhance Sphience and make it even better for the academic community. If you'd like to contribute, please follow these guidelines:
+
+1. Fork the repository and create a new branch.
+2. Implement your changes and improvements.
+3. Test your changes thoroughly.
+4. Submit a pull request, describing your changes and their purpose.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For any inquiries or feedback regarding the Sphience project, please reach out to us at [email protected]
+
