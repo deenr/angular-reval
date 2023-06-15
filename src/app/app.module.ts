@@ -24,7 +24,6 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
-import {environment} from 'src/environments/environment.development';
 import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
 import {EmailVerificationComponent} from '@pages/email-verification/email-verification.component';
@@ -47,6 +46,7 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {MetricsSectionComponent} from './custom-components/metrics-section/metrics-section.component';
 import {CountUpDirective} from './shared/directives/count-up/count-up.directive';
+import {environment} from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -92,15 +92,7 @@ import {CountUpDirective} from './shared/directives/count-up/count-up.directive'
     ReactiveFormsModule,
     MatDividerModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp({
-      apiKey: environment.firebase.apiKey,
-      authDomain: environment.firebase.authDomain,
-      projectId: environment.firebase.projectId,
-      storageBucket: environment.firebase.storageBucket,
-      messagingSenderId: environment.firebase.messagingSenderId,
-      appId: environment.firebase.appId,
-      measurementId: environment.firebase.measurementId
-    }),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
