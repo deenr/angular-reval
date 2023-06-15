@@ -1,6 +1,6 @@
 <div class="metrics flex-row">
   <div class="metric" *ngFor="let metric of metrics">
-    <h5 class="display-xl text-semibold metric__value break-word" classMd="display-lg">{{ metric.value }}</h5>
+    <h5 class="display-xl text-semibold metric__value break-word" classMd="display-lg"><span [countUp]="metric.value" [duration]="2000"></span>{{ metric.unit }}</h5>
     <p class="text-lg text-semibold metric__text break-word">{{ metric.text }}</p>
   </div>
 </div>

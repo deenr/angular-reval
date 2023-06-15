@@ -42,11 +42,12 @@ import {PrivacyPolicyComponent} from './pages/privacy-policy/privacy-policy.comp
 import {MatTabsModule} from '@angular/material/tabs';
 import {NavigationHeaderComponent} from './custom-components/navigation-header/navigation-header.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { NavigationSidebarComponent } from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
-import { FooterComponent } from './custom-components/footer/footer.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { AboutUsComponent } from './pages/about-us/about-us.component';
-import { MetricsSectionComponent } from './custom-components/metrics-section/metrics-section.component';
+import {NavigationSidebarComponent} from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
+import {FooterComponent} from './custom-components/footer/footer.component';
+import {ContactComponent} from './pages/contact/contact.component';
+import {AboutUsComponent} from './pages/about-us/about-us.component';
+import {MetricsSectionComponent} from './custom-components/metrics-section/metrics-section.component';
+import {CountUpDirective} from './shared/directives/count-up/count-up.directive';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { MetricsSectionComponent } from './custom-components/metrics-section/met
     FooterComponent,
     ContactComponent,
     AboutUsComponent,
-    MetricsSectionComponent
+    MetricsSectionComponent,
+    CountUpDirective
   ],
   imports: [
     CommonModule,

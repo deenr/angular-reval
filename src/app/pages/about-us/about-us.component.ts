@@ -8,8 +8,8 @@ import {Metric} from '@custom-components/metrics-section/metric.interface';
 })
 export class AboutUsComponent {
   public stats = [
-    {value: '+2k', text: 'Active users'},
-    {value: '14 days', text: 'Average lending duration'},
-    {value: '10k', text: 'Documents uploaded'}
+    {value: 2000, text: 'Active users'},
+    {value: 14, unit: ' days', text: 'Average lending duration'},
+    {value: 12000, text: 'Documents uploaded'}
   ] as Metric[];
 }

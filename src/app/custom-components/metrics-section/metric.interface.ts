@@ -1,4 +1,5 @@
 export interface Metric {
-  value: string;
+  value: number;
+  unit: string;
   text: string;
 }
