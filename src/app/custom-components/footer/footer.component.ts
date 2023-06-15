@@ -28,7 +28,7 @@ export class FooterComponent {
       header: 'Legal',
       links: [
         {value: 'Terms', url: ''},
-        {value: 'Privacy', url: ''},
+        {value: 'Privacy', url: '/privacy'},
         {value: 'Contact', url: '/contact'}
       ]
     }

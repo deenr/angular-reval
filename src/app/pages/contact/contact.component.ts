@@ -7,11 +7,11 @@ import {Component} from '@angular/core';
 })
 export class ContactComponent {
   public locations = [
-    {name: 'Campus Hasselt', street: 'Martelarenlaan 42', postalCode: '3500', city: 'Hasselt'},
-    {name: 'Campus Beek', street: 'Agoralaan gebouw D', postalCode: '3590', city: 'Diepenbeek'},
-    {name: 'Campus Ufo', street: 'Sint-Nieuwstraat 33', postalCode: '9000', city: 'Ghent'},
-    {name: 'City Campus', street: 'Sint-Annastraat 7', postalCode: '2000', city: 'Antwerpen'},
-    {name: 'KU Leuven', street: 'Oude Markt 13', postalCode: '3000', city: 'Leuven'},
-    {name: 'VUB Campus', street: 'Pleinlaan 2', postalCode: '1050', city: 'Elsene'}
+    {name: 'Elysian Academy', street: '123 Elysian Street', postalCode: '12345', city: 'Cityville'},
+    {name: 'Exemplar College', street: '456 Exemplar Avenue', postalCode: '23456', city: 'Townsville'},
+    {name: 'Synthesis University', street: '789 Synthesis Road', postalCode: '34567', city: 'Metropolis'},
+    {name: 'Nexus Institute', street: '101 Nexus Lane', postalCode: '45678', city: 'Innovation City'},
+    {name: 'Innovus Polytechnic', street: '222 Innovus Boulevard', postalCode: '56789', city: 'Technoville'},
+    {name: 'Luminary University', street: '333 Luminary Drive', postalCode: '67890', city: 'Illuminaria'}
   ];
 }
