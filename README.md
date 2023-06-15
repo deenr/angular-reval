@@ -1,4 +1,6 @@
-# Sphience - Research Equipment Accessibility Project
+# Work in progress..
+
+## Sphience - Research Equipment Accessibility Project
 
 Sphience is a web application dedicated to revolutionizing research equipment accessibility and fostering collaboration among students, researchers, and professors. Our platform serves as a centralized hub, connecting individuals and institutions and empowering them to make groundbreaking discoveries and advancements in their respective fields.
 
