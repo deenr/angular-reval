@@ -1,7 +1,7 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 @include mat.core();
-@import "./scss/variables.scss";
+@import './scss/variables.scss';
 
 $my-primary: mat.define-palette(
   (
@@ -29,8 +29,8 @@ $my-primary: mat.define-palette(
       700: white,
       800: white,
       900: white,
-      950: white,
-    ),
+      950: white
+    )
   )
 );
 
@@ -61,8 +61,8 @@ $my-accent: mat.define-palette(
       700: white,
       800: white,
       900: white,
-      950: white,
-    ),
+      950: white
+    )
   ),
   500
 );
@@ -93,8 +93,8 @@ $my-error: mat.define-palette(
       700: white,
       800: white,
       900: white,
-      950: white,
-    ),
+      950: white
+    )
   )
 );
 
@@ -103,10 +103,10 @@ $my-theme: mat.define-light-theme(
     color: (
       primary: $my-primary,
       accent: $my-accent,
-      warn: $my-error,
+      warn: $my-error
     ),
     typography: mat.define-typography-config(),
-    density: 0,
+    density: 0
   )
 );
 

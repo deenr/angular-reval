@@ -74,14 +74,14 @@
     }
 
     &__divider {
-      padding: 0 112px;
+      margin: 0 112px;
 
       @include breakpoint-md() {
-        padding: 0 64px;
+        margin: 0 64px;
       }
 
       @include breakpoint-sm() {
-        padding: 0 16px;
+        margin: 0 16px;
       }
     }
 

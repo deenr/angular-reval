@@ -1,0 +1,52 @@
+<section class="contact">
+  <div class="contact__form flex-column">
+    <div class="form__heading">
+      <p class="text-md text-semibold subheading" classMd="text-sm">Contact us</p>
+      <h3 class="display-lg text-semibold heading" classMd="display-md">Get in touch</h3>
+      <p class="text-xl text-regular supporting-text" classMd="text-lg">Our team would love to hear from you.</p>
+    </div>
+    <div class="form__inputs flex-column">
+      <div class="flex-row form-row">
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">First name</mat-label>
+          <input matInput type="text" placeholder="First name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Last name</mat-label>
+          <input matInput type="text" placeholder="Last name" />
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Email</mat-label>
+        <input matInput type="email" placeholder="you@company.com" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Phone number</mat-label>
+        <input matInput type="text" placeholder="+32 (4) 11111111" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Message</mat-label>
+        <textarea class="text-erea" matInput type="text" placeholder="Leave us a message..."></textarea>
+      </mat-form-field>
+      <mat-checkbox>You agree to our friendly <u class="text-link" routerLink="/privacy">privacy policy</u>.</mat-checkbox>
+      <button mat-flat-button color="primary">Send message</button>
+    </div>
+  </div>
+  <div class="contact__location flex-row">
+    <div class="location__heading">
+      <p class="text-md text-semibold subheading" classMd="text-sm">Our locations</p>
+      <h3 class="display-md text-semibold heading" classMd="display-sm">Visit our office</h3>
+      <p class="text-xl text-regular supporting-text" classMd="text-lg">Come visit our team at one of our offices.</p>
+    </div>
+    <div class="location__info flex-column">
+      <div *ngFor="let location of locations" class="location flex-row">
+        <!-- <mat-icon svgIcon="location"></mat-icon> -->
+        <div class="address flex-column">
+          <h4 class="text-xl text-semibold" classMd="text-lg">{{ location.name }}</h4>
+          <p class="text-md text-regular">{{ location.street }}<br />{{ location.postalCode }} {{ location.city }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact__image"></div>
+</section>

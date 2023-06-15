@@ -50,5 +50,6 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('twitter', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/twitter.svg'));
     this.iconRegistry.addSvgIcon('linkedin', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/linkedin.svg'));
     this.iconRegistry.addSvgIcon('instagram', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/instagram.svg'));
+    this.iconRegistry.addSvgIcon('location', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/location.svg'));
   }
 }

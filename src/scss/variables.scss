@@ -43,6 +43,19 @@
   background-color: $color-white;
 }
 
+.featured-purple {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  padding: 8px;
+  margin-top: -4px;
+  outline: 8px solid $color-primary-50;
+  border-radius: 50% !important;
+  background-color: $color-primary-100;
+  color: $color-primary-600;
+}
+
 .break-word {
   white-space: nowrap;
 }
