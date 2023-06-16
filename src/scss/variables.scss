@@ -63,3 +63,7 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+wbr:after {
+  content: '\00200B';
+}
