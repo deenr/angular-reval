@@ -34,7 +34,6 @@ export class CustomDatepickerComponent implements OnInit {
     if (this.currentDateInView) {
       this.currentDateInView.date.setFullYear(this.currentDateInView.date.getMonth() === 1 ? this.currentDateInView.date.getFullYear() - 1 : this.currentDateInView.date.getFullYear());
       this.currentDateInView.date.setMonth(this.currentDateInView.date.getMonth() === 1 ? 12 : this.currentDateInView.date.getMonth() - 1);
-      console.log(this.currentDateInView.date);
       this.currentMonth = this.getMonthYearString(this.currentDateInView.date);
       this.generateCalendarDates(this.currentDateInView.date);
     }
@@ -44,7 +43,6 @@ export class CustomDatepickerComponent implements OnInit {
     if (this.currentDateInView) {
       this.currentDateInView.date.setFullYear(this.currentDateInView.date.getMonth() === 12 ? this.currentDateInView.date.getFullYear() + 1 : this.currentDateInView.date.getFullYear());
       this.currentDateInView.date.setMonth(this.currentDateInView.date.getMonth() === 12 ? 1 : this.currentDateInView.date.getMonth() + 1);
-      console.log(this.currentDateInView.date);
       this.currentMonth = this.getMonthYearString(this.currentDateInView.date);
       this.generateCalendarDates(this.currentDateInView.date);
     }
@@ -112,8 +110,6 @@ export class CustomDatepickerComponent implements OnInit {
     startDate.setDate(startDate.getDate() - startDate.getDay());
     const endDate = new Date(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), lastDayOfMonth.getDate());
     endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
-
-    console.log(startDate, endDate);
 
     this.calendarDates = [];
     let currentDate = new Date(startDate);

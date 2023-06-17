@@ -7,14 +7,16 @@ export class ArticleOverview {
   private _author: string;
   private _published: Date;
   private _categories: ArticleCategory;
+  private _image: string;
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory) {
+  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory, image: string) {
     this._id = id;
     this._title = title;
     this._subtitle = subtitle;
     this._author = author;
     this._published = published;
     this._categories = categories;
+    this._image = image;
   }
 
   public get id(): string {
@@ -65,6 +67,14 @@ export class ArticleOverview {
     this._categories = value;
   }
 
+  public get image(): string {
+    return this._image;
+  }
+
+  public set image(value: string) {
+    this._image = value;
+  }
+
   public toJSON(): object {
     return {
       id: this.id,
@@ -72,19 +82,20 @@ export class ArticleOverview {
       subtitle: this.subtitle,
       author: this.author,
       published: this.published.toISOString(),
-      categories: this.categories
+      categories: this.categories,
+      image: this.image
     };
   }
 
   static fromJSON(json: any): ArticleOverview {
-    console.log(json);
     const id = json.id;
     const title = json.title;
     const subtitle = json.subtitle;
     const author = json.author;
     const published = new Date(json.published);
     const categories = json.categories;
+    const image = json.image;
 
-    return new ArticleOverview(id, title, subtitle, author, published, categories);
+    return new ArticleOverview(id, title, subtitle, author, published, categories, image);
   }
 }

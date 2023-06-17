@@ -9,7 +9,7 @@ import {ArticleOverview} from '@shared/models/article-overview.model';
 })
 export class HttpArticleService {
   public getOverview(): Observable<ArticleOverview[]> {
-    return of(articles.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON))).pipe(delay(5000));
+    return of(articles.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)));
   }
 
   public getAll(): Observable<Article[]> {

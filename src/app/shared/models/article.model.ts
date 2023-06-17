@@ -6,8 +6,8 @@ import {ArticleOverview} from './article-overview.model';
 export class Article extends ArticleOverview {
   private _content: ArticleContent[];
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory, content: ArticleContent[]) {
-    super(id, title, subtitle, author, published, categories);
+  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory, image: string, content: ArticleContent[]) {
+    super(id, title, subtitle, author, published, categories, image);
     this._content = content;
   }
 
@@ -45,6 +45,15 @@ export class Article extends ArticleOverview {
       }
     });
 
-    return new Article(articleOverview.id, articleOverview.title, articleOverview.subtitle, articleOverview.author, articleOverview.published, articleOverview.categories, content);
+    return new Article(
+      articleOverview.id,
+      articleOverview.title,
+      articleOverview.subtitle,
+      articleOverview.author,
+      articleOverview.published,
+      articleOverview.categories,
+      articleOverview.image,
+      content
+    );
   }
 }

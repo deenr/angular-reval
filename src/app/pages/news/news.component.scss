@@ -29,14 +29,19 @@
       padding-bottom: 64px;
     }
 
-    .main-article {
+    .main-article-big {
       background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%), url('../../../assets/image/first-team-picture.webp');
       background-size: cover;
       background-position: center;
-      height: 720px;
+      width: 100%;
+      aspect-ratio: 7/4;
       padding: 32px;
       border-radius: 16px;
       color: $color-white;
+
+      @include breakpoint-lg() {
+        display: none;
+      }
 
       &__header {
         margin-top: auto;
@@ -78,6 +83,16 @@
                 color: $color-white;
                 border: 1.5px solid $color-white;
               }
+
+              @include breakpoint-lg() {
+                p:not(:first-of-type) {
+                  display: none;
+                }
+              }
+            }
+
+            @include breakpoint-md() {
+              display: none;
             }
           }
         }
@@ -99,6 +114,26 @@
               color: $color-white;
             }
           }
+        }
+      }
+    }
+
+    .main-article-small {
+      display: none;
+
+      @include breakpoint-lg() {
+        display: block;
+      }
+
+      ::ng-deep .article__image {
+        height: 400px;
+
+        @include breakpoint-sm() {
+          height: 316px;
+        }
+
+        @include breakpoint-xs() {
+          height: 240px;
         }
       }
     }

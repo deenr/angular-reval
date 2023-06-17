@@ -10,9 +10,9 @@ export class FooterComponent {
     {
       header: 'Company',
       links: [
-        {value: 'About us', url: '/about'},
-        {value: 'News', url: ''},
-        {value: 'Contact', url: '/contact'}
+        {value: 'About us', url: 'about'},
+        {value: 'News', url: 'news'},
+        {value: 'Contact', url: 'contact'}
       ]
     },
     {
@@ -28,8 +28,8 @@ export class FooterComponent {
       header: 'Legal',
       links: [
         {value: 'Terms', url: ''},
-        {value: 'Privacy', url: '/privacy'},
-        {value: 'Contact', url: '/contact'}
+        {value: 'Privacy', url: 'privacy'},
+        {value: 'Contact', url: 'contact'}
       ]
     }
   ];

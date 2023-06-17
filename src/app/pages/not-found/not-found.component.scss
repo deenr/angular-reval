@@ -3,7 +3,7 @@
 :host {
   .not-found-section {
     align-items: center;
-    padding-top: 208px;
+    padding: 208px 0;
     text-align: center;
 
     @include breakpoint-sm() {

@@ -6,6 +6,7 @@ export const articles = [
     author: 'Jessica Adams',
     published: 'January 20, 2024',
     categories: ['RESEARCH_TOOLS', 'APPLICATION_DEVELOPMENT'],
+    image: 'first-team-picture',
     content: [
       {
         title: 'Inception of a Revolutionary Idea',
@@ -22,7 +23,7 @@ export const articles = [
         ]
       },
       {
-        source: 'first-team-picture.webp',
+        source: 'first-team-picture',
         type: 'IMAGE'
       },
       {
@@ -70,6 +71,7 @@ export const articles = [
     author: 'Michael Anderson',
     published: 'March 12, 2024',
     categories: ['PRODUCT_UPDATES', 'RESEARCH_TOOLS'],
+    image: 'sphience-updates',
     content: [
       {
         title: 'Introduction',
@@ -100,7 +102,7 @@ export const articles = [
         ]
       },
       {
-        source: 'https://example.com/sphience-updates.jpg',
+        source: 'sphience-updates',
         type: 'IMAGE'
       },
       {
@@ -120,6 +122,7 @@ export const articles = [
     author: 'Samantha Lewis',
     published: 'May 5, 2024',
     categories: ['TEAM_UPDATES', 'COMPANY_NEWS'],
+    image: 'sphience-team-photo',
     content: [
       {
         title: 'Introduction',
@@ -145,7 +148,7 @@ export const articles = [
         ]
       },
       {
-        source: 'https://example.com/sphience-team-photo.jpg',
+        source: 'sphience-team-photo',
         type: 'IMAGE'
       },
       {
@@ -173,6 +176,7 @@ export const articles = [
     author: 'Ryan Turner',
     published: 'July 18, 2024',
     categories: ['FUTURE_PLANS', 'RESEARCH_TOOLS', 'INNOVATION'],
+    image: 'sphience-roadmap',
     content: [
       {
         title: 'Introduction',
@@ -198,7 +202,7 @@ export const articles = [
         ]
       },
       {
-        source: 'https://example.com/sphience-roadmap.jpg',
+        source: 'sphience-roadmap',
         type: 'IMAGE'
       },
       {
@@ -226,6 +230,7 @@ export const articles = [
     author: 'Emily Roberts',
     published: 'September 9, 2024',
     categories: ['AWARDS', 'INNOVATIONS', 'RESEARCH_TOOLS'],
+    image: 'sphience-award',
     content: [
       {
         title: 'Introduction',
@@ -251,7 +256,7 @@ export const articles = [
         ]
       },
       {
-        source: 'https://example.com/sphience-award.jpg',
+        source: 'sphience-award',
         type: 'IMAGE'
       },
       {
@@ -271,6 +276,7 @@ export const articles = [
     author: 'David Miller',
     published: 'November 22, 2024',
     categories: ['COLLABORATION', 'RESEARCH_TOOLS', 'PRODUCT_UPDATES'],
+    image: 'sphience-new-features',
     content: [
       {
         title: 'Introduction',
@@ -327,6 +333,7 @@ export const articles = [
     author: 'Olivia Taylor',
     published: 'January 5, 2025',
     categories: ['GLOBAL_EXPANSION', 'RESEARCH_TOOLS', 'COMPANY_NEWS'],
+    image: 'sphience-global-presence',
     content: [
       {
         title: 'Introduction',
@@ -362,7 +369,7 @@ export const articles = [
       {
         title: 'Illustrating Global Presence',
         type: 'IMAGE',
-        source: 'https://example.com/sphience-global-presence.jpg'
+        source: 'sphience-global-presence'
       },
       {
         title: 'Conclusion',
@@ -382,6 +389,7 @@ export const articles = [
     author: 'Rebecca Carter',
     published: 'March 15, 2025',
     categories: ['PRODUCT_UPDATES', 'RESEARCH_TOOLS', 'DATA_ANALYSIS'],
+    image: 'sphience-new-modules',
     content: [
       {
         title: 'Introduction',
@@ -393,7 +401,7 @@ export const articles = [
       {
         title: 'Showcasing Functionality and Benefits',
         type: 'IMAGE',
-        source: 'https://example.com/sphience-new-modules.jpg'
+        source: 'sphience-new-modules'
       },
       {
         title: 'Enhanced Data Analysis',
@@ -433,6 +441,7 @@ export const articles = [
     author: 'Daniel Williams',
     published: 'June 5, 2025',
     categories: ['COLLABORATION', 'RESEARCH_PARTNERSHIPS', 'INNOVATION'],
+    image: 'sphience-university-collaboration',
     content: [
       {
         title: 'Introduction',
@@ -465,7 +474,7 @@ export const articles = [
       {
         title: 'Illustrating Collaborative Setting',
         type: 'IMAGE',
-        source: 'https://example.com/sphience-university-collaboration.jpg'
+        source: 'sphience-university-collaboration'
       },
       {
         title: 'Future Impact',
@@ -492,6 +501,7 @@ export const articles = [
     author: 'Sophia Rodriguez',
     published: 'September 12, 2025',
     categories: ['USER_EXPERIENCE', 'APPLICATION_DESIGN', 'PRODUCT_UPDATES'],
+    image: 'sphience-interface-comparison',
     content: [
       {
         title: 'Introduction',
@@ -540,7 +550,7 @@ export const articles = [
       {
         title: 'Illustrating Interface Enhancements',
         type: 'IMAGE',
-        source: 'https://example.com/sphience-interface-comparison.jpg'
+        source: 'sphience-interface-comparison'
       },
       {
         title: 'Conclusion',

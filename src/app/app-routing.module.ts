@@ -10,6 +10,7 @@ import {PrivacyPolicyComponent} from '@pages/privacy-policy/privacy-policy.compo
 import {ContactComponent} from '@pages/contact/contact.component';
 import {AboutUsComponent} from '@pages/about-us/about-us.component';
 import {NewsComponent} from '@pages/news/news.component';
+import {ArticleComponent} from '@pages/news/article/article.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -20,12 +21,13 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'about', component: AboutUsComponent},
-  {path: 'news', component: NewsComponent}
+  {path: 'news', component: NewsComponent},
+  {path: 'news/:id', component: ArticleComponent}
 ];
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule.forRoot(routes)],
+  imports: [CommonModule, RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

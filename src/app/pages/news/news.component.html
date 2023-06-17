@@ -4,13 +4,13 @@
     <h2 class="display-lg text-semibold heading" classMd="display-md">Stay in touch with our application</h2>
     <p class="text-xl text-regular supporting-text" classMd="text-lg">The latest industry news, interviews, technologies, and resources.</p>
   </div>
-  <div class="main-article flex-column full-width">
-    <div class="main-article__header flex-row">
+  <section class="main-article-big flex-column full-width cursor-pointer" [routerLink]="mainArticle.id">
+    <div class="main-article-big__header flex-row">
       <h3 class="display-xs text-semibold">{{ mainArticle.title }}</h3>
       <mat-icon svgIcon="arrow-up-right"></mat-icon>
     </div>
-    <p class="text-md text-regular main-article__supporting-text">{{ mainArticle.subtitle }}</p>
-    <div class="flex-row main-article__author-and-categories">
+    <p class="text-md text-regular main-article-big__supporting-text">{{ mainArticle.subtitle }}</p>
+    <div class="flex-row main-article-big__author-and-categories">
       <div class="flex-column">
         <p class="text-sm text-semibold author-and-categories__heading">Written by</p>
         <div class="flex-row author-and-categories__content author">
@@ -25,14 +25,33 @@
       <div class="flex-column categories">
         <p class="text-sm text-semibold author-and-categories__heading">File under</p>
         <div class="flex-row category__items author-and-categories__content">
-          <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium category">{{ category }}</p>
+          <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium">{{ category }}</p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="other-articles">
+  </section>
+  <app-article-card
+    class="main-article-small cursor-pointer"
+    [image]="mainArticle.image"
+    [subHeading]="mainArticle.categories[0]"
+    [heading]="mainArticle.title"
+    [supportingText]="mainArticle.subtitle"
+    [author]="mainArticle.author"
+    [published]="getDate(mainArticle.published)"
+    [routerLink]="mainArticle.id"
+  ></app-article-card>
+  <section class="other-articles">
     <div *ngFor="let article of otherArticles">
-      <app-article [subHeading]="article.categories[0]" [heading]="article.title" [supportingText]="article.subtitle" [author]="article.author" [published]="getDate(article.published)"></app-article>
+      <app-article-card
+        class="cursor-pointer"
+        [image]="article.image"
+        [subHeading]="article.categories[0]"
+        [heading]="article.title"
+        [supportingText]="article.subtitle"
+        [author]="article.author"
+        [published]="getDate(article.published)"
+        [routerLink]="article.id"
+      ></app-article-card>
     </div>
-  </div>
+  </section>
 </div>

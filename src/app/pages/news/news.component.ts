@@ -19,8 +19,6 @@ export class NewsComponent implements OnInit {
     this.articleService.getOverview().subscribe((news: ArticleOverview[]) => {
       this.mainArticle = news.shift();
       this.otherArticles = news;
-
-      console.log(this.mainArticle, this.otherArticles);
     });
   }
 
