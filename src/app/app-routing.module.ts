@@ -9,6 +9,7 @@ import {NotFoundComponent} from '@pages/not-found/not-found.component';
 import {PrivacyPolicyComponent} from '@pages/privacy-policy/privacy-policy.component';
 import {ContactComponent} from '@pages/contact/contact.component';
 import {AboutUsComponent} from '@pages/about-us/about-us.component';
+import {NewsComponent} from '@pages/news/news.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'privacy', component: PrivacyPolicyComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'about', component: AboutUsComponent}
+  {path: 'about', component: AboutUsComponent},
+  {path: 'news', component: NewsComponent}
 ];
 
 @NgModule({

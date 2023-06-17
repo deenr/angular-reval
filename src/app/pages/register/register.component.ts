@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationStep} from './registration-step.enum';
 import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {matchValidator} from '@helper/validator/match-validator';
+import {matchValidator} from '@shared/helper/validator/match-validator';
 import {AuthService} from '@shared/services/auth/auth.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';

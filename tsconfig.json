@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@helper/*": ["src/app/helper/*"],
+      "@helper/*": ["src/app/shared/helper/*"],
       "@custom-components/*": ["src/app/custom-components/*"],
       "@shared/*": ["src/app/shared/*"],
       "@pages/*": ["src/app/pages/*"]
@@ -12,7 +12,6 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -27,7 +26,9 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "strictPropertyInitialization": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "resolveJsonModule": true,
+    "noImplicitOverride": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

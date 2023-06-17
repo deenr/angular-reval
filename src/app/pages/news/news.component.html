@@ -1,0 +1,38 @@
+<div class="news">
+  <div class="news__heading">
+    <p class="text-md text-semibold subheading" classMd="text-sm">Latest news</p>
+    <h2 class="display-lg text-semibold heading" classMd="display-md">Stay in touch with our application</h2>
+    <p class="text-xl text-regular supporting-text" classMd="text-lg">The latest industry news, interviews, technologies, and resources.</p>
+  </div>
+  <div class="main-article flex-column full-width">
+    <div class="main-article__header flex-row">
+      <h3 class="display-xs text-semibold">{{ mainArticle.title }}</h3>
+      <mat-icon svgIcon="arrow-up-right"></mat-icon>
+    </div>
+    <p class="text-md text-regular main-article__supporting-text">{{ mainArticle.subtitle }}</p>
+    <div class="flex-row main-article__author-and-categories">
+      <div class="flex-column">
+        <p class="text-sm text-semibold author-and-categories__heading">Written by</p>
+        <div class="flex-row author-and-categories__content author">
+          <mat-icon svgIcon="user"></mat-icon>
+          <p class="text-sm text-semibold">{{ mainArticle.author }}</p>
+        </div>
+      </div>
+      <div class="flex-column">
+        <p class="text-sm text-semibold author-and-categories__heading">Published on</p>
+        <p class="text-md text-semibold author-and-categories__content">{{ getDate(mainArticle.published) }}</p>
+      </div>
+      <div class="flex-column categories">
+        <p class="text-sm text-semibold author-and-categories__heading">File under</p>
+        <div class="flex-row category__items author-and-categories__content">
+          <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium category">{{ category }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="other-articles">
+    <div *ngFor="let article of otherArticles">
+      <app-article [subHeading]="article.categories[0]" [heading]="article.title" [supportingText]="article.subtitle" [author]="article.author" [published]="getDate(article.published)"></app-article>
+    </div>
+  </div>
+</div>

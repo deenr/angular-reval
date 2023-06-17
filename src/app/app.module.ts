@@ -47,6 +47,8 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {MetricsSectionComponent} from './custom-components/metrics-section/metrics-section.component';
 import {CountUpDirective} from './shared/directives/count-up/count-up.directive';
 import {environment} from 'src/environments/environment';
+import { NewsComponent } from './pages/news/news.component';
+import { ArticleComponent } from './custom-components/article/article.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import {environment} from 'src/environments/environment';
     ContactComponent,
     AboutUsComponent,
     MetricsSectionComponent,
-    CountUpDirective
+    CountUpDirective,
+    NewsComponent,
+    ArticleComponent
   ],
   imports: [
     CommonModule,
