@@ -143,6 +143,7 @@
     &__conclusion {
       padding: 32px;
       background-color: $color-grey-50;
+      border-radius: 16px;
 
       @include breakpoint-md() {
         padding: 24px 20px;
