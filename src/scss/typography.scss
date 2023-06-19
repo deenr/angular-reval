@@ -20,7 +20,7 @@ $fw-400: 400;
 
 html,
 body {
-  font-family: $font-family;
+  font-family: $font-family !important;
 }
 
 // h1 {

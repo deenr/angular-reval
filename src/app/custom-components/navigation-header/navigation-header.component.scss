@@ -40,6 +40,10 @@
       li {
         color: $color-grey-600;
         list-style-type: none;
+
+        &.mat-mdc-menu-trigger {
+          margin-right: 28px;
+        }
       }
     }
 

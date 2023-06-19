@@ -51,6 +51,8 @@ import {NewsComponent} from './pages/news/news.component';
 import {ArticleCardComponent} from './custom-components/article-card/article-card.component';
 import {ArticleComponent} from './pages/news/article/article.component';
 import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { NavigationItemComponent } from './custom-components/navigation-header/navigation-item/navigation-item.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service
     NewsComponent,
     ArticleCardComponent,
     ArticleComponent,
-    TermsOfServiceComponent
+    TermsOfServiceComponent,
+    NavigationItemComponent
   ],
   imports: [
     CommonModule,
@@ -107,7 +110,8 @@ import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service
     AngularFireDatabaseModule,
     MatExpansionModule,
     MatTabsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatMenuModule
   ],
   providers: [
     {

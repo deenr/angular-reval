@@ -52,5 +52,8 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('instagram', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/logos/instagram.svg'));
     this.iconRegistry.addSvgIcon('location', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/location.svg'));
     this.iconRegistry.addSvgIcon('arrow-up-right', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/arrow-up-right.svg'));
+    this.iconRegistry.addSvgIcon('users', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/users.svg'));
+    this.iconRegistry.addSvgIcon('newspaper', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/newspaper.svg'));
+    this.iconRegistry.addSvgIcon('phone-volume', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/svg/phone-volume.svg'));
   }
 }
