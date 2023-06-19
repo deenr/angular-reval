@@ -50,6 +50,7 @@ import {environment} from 'src/environments/environment';
 import {NewsComponent} from './pages/news/news.component';
 import {ArticleCardComponent} from './custom-components/article-card/article-card.component';
 import {ArticleComponent} from './pages/news/article/article.component';
+import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {ArticleComponent} from './pages/news/article/article.component';
     CountUpDirective,
     NewsComponent,
     ArticleCardComponent,
-    ArticleComponent
+    ArticleComponent,
+    TermsOfServiceComponent
   ],
   imports: [
     CommonModule,
