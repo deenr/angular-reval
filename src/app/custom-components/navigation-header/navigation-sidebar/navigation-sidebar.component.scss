@@ -28,12 +28,14 @@
     }
 
     .sidebar__content {
+      overflow-y: scroll;
       justify-content: space-between;
 
       .content__links {
         margin-top: 56px;
-        gap: 32px;
         margin-bottom: auto;
+        padding-bottom: 36px;
+        gap: 32px;
 
         li {
           color: $color-grey-900;
