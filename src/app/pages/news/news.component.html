@@ -4,27 +4,35 @@
     <h2 class="display-lg text-semibold heading" classMd="display-md">Stay in touch with our application</h2>
     <p class="text-xl text-regular supporting-text" classMd="text-lg">The latest industry news, interviews, technologies, and resources.</p>
   </div>
-  <section class="main-article-big flex-column full-width cursor-pointer" [routerLink]="mainArticle.id">
-    <div class="main-article-big__header flex-row">
+  <section class="main-article-big flex-column full-width cursor-pointer" [class.padding]="!loadingArticles" [class.overlay]="!loadingArticles" [routerLink]="mainArticle.id">
+    <img
+      class="main-article-big__image full-width full-height"
+      [src]="getImageSource(mainArticle.image)"
+      [alt]="mainArticle.image"
+      *skeleton="loadingArticles; type: skeletonType.IMAGE; height: 'calc(100% - 180px)'"
+    />
+    <div class="main-article-big__header flex-row" *skeleton="loadingArticles; type: skeletonType.DISPLAY_XS; marginTop: '24px'">
       <h3 class="display-xs text-semibold">{{ mainArticle.title }}</h3>
       <mat-icon svgIcon="arrow-up-right"></mat-icon>
     </div>
-    <p class="text-md text-regular main-article-big__supporting-text">{{ mainArticle.subtitle }}</p>
+    <p class="text-md text-regular main-article-big__supporting-text" *skeleton="loadingArticles; type: skeletonType.TEXT_MD; marginTop: '8px'">{{ mainArticle.subtitle }}</p>
     <div class="flex-row main-article-big__author-and-categories">
       <div class="flex-column">
-        <p class="text-sm text-semibold author-and-categories__heading">Written by</p>
-        <div class="flex-row author-and-categories__content author">
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">Written by</p>
+        <div class="flex-row author-and-categories__content author" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
           <mat-icon svgIcon="user"></mat-icon>
           <p class="text-sm text-semibold">{{ mainArticle.author }}</p>
         </div>
       </div>
       <div class="flex-column">
-        <p class="text-sm text-semibold author-and-categories__heading">Published on</p>
-        <p class="text-md text-semibold author-and-categories__content">{{ getDate(mainArticle.published) }}</p>
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">Published on</p>
+        <p class="text-md text-semibold author-and-categories__content" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
+          {{ getDate(mainArticle.published) }}
+        </p>
       </div>
       <div class="flex-column categories">
-        <p class="text-sm text-semibold author-and-categories__heading">File under</p>
-        <div class="flex-row category__items author-and-categories__content">
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">File under</p>
+        <div class="flex-row category__items author-and-categories__content" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '300px'; marginTop: '16px'">
           <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium">{{ category }}</p>
         </div>
       </div>
@@ -32,6 +40,7 @@
   </section>
   <app-article-card
     class="main-article-small cursor-pointer"
+    [loadingArticle]="loadingArticles"
     [image]="mainArticle.image"
     [subHeading]="mainArticle.categories[0]"
     [heading]="mainArticle.title"
@@ -44,6 +53,7 @@
     <div *ngFor="let article of otherArticles">
       <app-article-card
         class="cursor-pointer"
+        [loadingArticle]="loadingArticles"
         [image]="article.image"
         [subHeading]="article.categories[0]"
         [heading]="article.title"

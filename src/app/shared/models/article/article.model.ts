@@ -6,7 +6,7 @@ import {ArticleOverview} from './article-overview.model';
 export class Article extends ArticleOverview {
   private _content: ArticleContent[];
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory, image: string, content: ArticleContent[]) {
+  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory[], image: string, content: ArticleContent[]) {
     super(id, title, subtitle, author, published, categories, image);
     this._content = content;
   }

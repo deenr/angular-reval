@@ -49,7 +49,7 @@ import {CountUpDirective} from './shared/directives/count-up/count-up.directive'
 import {environment} from 'src/environments/environment';
 import {NewsComponent} from './pages/news/news.component';
 import {ArticleCardComponent} from './custom-components/article-card/article-card.component';
-import { ArticleComponent } from './pages/news/article/article.component';
+import {ArticleComponent} from './pages/news/article/article.component';
 
 @NgModule({
   declarations: [

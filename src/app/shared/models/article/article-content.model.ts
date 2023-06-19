@@ -1,4 +1,4 @@
-import {ArticleContentType} from '../enums/article-content-type.enum';
+import {ArticleContentType} from '../../enums/article-content-type.enum';
 
 export abstract class ArticleContent {
   private _type: ArticleContentType;

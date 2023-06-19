@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ArticleCategory} from '@shared/enums/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article-content-type.enum';
-import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article-content.model';
-import {Article} from '@shared/models/article.model';
+import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
+import {Article} from '@shared/models/article/article.model';
 import {HttpArticleService} from '@shared/services/article/http-article.service';
 import * as moment from 'moment';
 

@@ -4,8 +4,7 @@ import {ProgressStep} from '@custom-components/progress-steps/progress-step.inte
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {matchValidator} from '@shared/helper/validator/match-validator';
 import {AuthService} from '@shared/services/auth/auth.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -46,7 +45,6 @@ export class RegisterComponent implements OnInit {
   });
 
   public registrationStep = RegistrationStep;
-  public skeletonType = SkeletonType;
 
   public faculties = [
     'Sales',

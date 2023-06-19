@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {AuthService} from '@shared/services/auth/auth.service';
 

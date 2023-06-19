@@ -6,10 +6,10 @@ export class ArticleOverview {
   private _subtitle: string;
   private _author: string;
   private _published: Date;
-  private _categories: ArticleCategory;
+  private _categories: ArticleCategory[];
   private _image: string;
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory, image: string) {
+  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory[], image: string) {
     this._id = id;
     this._title = title;
     this._subtitle = subtitle;
@@ -59,11 +59,11 @@ export class ArticleOverview {
     this._published = value;
   }
 
-  public get categories(): ArticleCategory {
+  public get categories(): ArticleCategory[] {
     return this._categories;
   }
 
-  public set categories(value: ArticleCategory) {
+  public set categories(value: ArticleCategory[]) {
     this._categories = value;
   }
 
