@@ -6,6 +6,7 @@
   <ul class="nav__items flex-row">
     <li class="text-md text-semibold cursor-pointer" routerLink="/">Home</li>
     <li class="text-md text-semibold cursor-pointer navigation-menu" [matMenuTriggerFor]="menu">Company</li>
+    <li class="text-md text-semibold cursor-pointer" (click)="openDashboard()">Dashboard</li>
   </ul>
   <div class="nav__actions flex-row">
     <button mat-button routerLink="/login">Log in</button>

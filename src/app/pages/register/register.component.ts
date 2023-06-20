@@ -5,6 +5,9 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {matchValidator} from '@shared/helper/validator/match-validator';
 import {AuthService} from '@shared/services/auth/auth.service';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
+import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -116,7 +119,7 @@ export class RegisterComponent implements OnInit {
 
   public sendingDetails = false;
 
-  public constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  public constructor(private readonly authService: AuthService, private readonly router: Router, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
     if (this.authService.isVerified) {
@@ -161,9 +164,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public goToPassword(): void {
-    if (this.emailForm.valid) {
-      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-    }
+    this.openDashboard();
+    // if (this.emailForm.valid) {
+    //   this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+    // }
   }
 
   public goToEmailVerification(): void {
@@ -216,5 +220,17 @@ export class RegisterComponent implements OnInit {
 
   private getCurrentProgressStep(): ProgressStep {
     return this.steps.find((progressStep: ProgressStep) => progressStep.current);
+  }
+
+  public openDashboard(): void {
+    this.dialog.open(StackedLeftDialogComponent, {
+      width: '400px',
+      data: {
+        type: DialogType.WARNING,
+        icon: 'mail',
+        title: 'Dashboard is not available yet',
+        description: 'Our team is diligently working towards making our incredible dashboard available to you.'
+      }
+    });
   }
 }

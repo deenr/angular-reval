@@ -1,0 +1,6 @@
+export enum DialogType {
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
+  INFORMATION = 'INFORMATION'
+}

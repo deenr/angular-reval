@@ -7,7 +7,8 @@
       "@helper/*": ["src/app/shared/helper/*"],
       "@custom-components/*": ["src/app/custom-components/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@pages/*": ["src/app/pages/*"]
+      "@pages/*": ["src/app/pages/*"],
+      "@layouts/*": ["src/app/layouts/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

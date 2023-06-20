@@ -1,0 +1,75 @@
+@import 'variables';
+
+:host {
+  .header {
+    position: relative;
+    padding: 24px 24px 0 24px;
+
+    @include breakpoint-md() {
+      padding: 16px 16px 0 16px;
+    }
+
+    &__icon {
+      margin: 4px;
+
+      &::before {
+        width: 768px;
+        height: 768px;
+        top: -336px;
+        left: -336px;
+        position: absolute;
+        z-index: -1;
+        mask-image: url('../../../../assets/svg/illustration/circle-desktop.svg');
+        background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
+        content: '';
+
+        @include breakpoint-md() {
+          top: -344px;
+          left: -344px;
+        }
+      }
+    }
+
+    &__close {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+    }
+  }
+
+  .content {
+    margin-top: 16px;
+    padding: 0 24px;
+
+    h3,
+    p {
+      font-family: $font-family;
+    }
+
+    p {
+      margin-top: 4px;
+      color: $color-grey-600;
+    }
+
+    @include breakpoint-md() {
+      margin-top: 12px;
+      padding: 0 16px;
+    }
+  }
+
+  .actions {
+    margin-top: 32px;
+    padding: 0 24px 24px 24px;
+    gap: 12px;
+    align-content: stretch;
+
+    @include breakpoint-md() {
+      flex-direction: column-reverse;
+      margin-top: 24px;
+      padding: 0 16px 16px 16px;
+    }
+  }
+}

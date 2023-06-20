@@ -19,7 +19,7 @@
           <app-navigation-item link="contact" icon="phone-volume" title="Contact" text="Your gateway to reach us, start a conversation." (click)="sidenavClose.emit()"></app-navigation-item>
         </mat-expansion-panel>
       </mat-accordion>
-      <p class="text-md text-semibold">Dashboard</p>
+      <p class="text-md text-semibold" (click)="sidenavClose.emit(); openDashboard()">Dashboard</p>
     </div>
     <mat-divider></mat-divider>
     <ul class="content__footer flex-column">

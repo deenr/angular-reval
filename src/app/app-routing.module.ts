@@ -12,19 +12,34 @@ import {AboutUsComponent} from '@pages/about-us/about-us.component';
 import {NewsComponent} from '@pages/news/news.component';
 import {ArticleComponent} from '@pages/news/article/article.component';
 import {TermsOfServiceComponent} from '@pages/terms-of-service/terms-of-service.component';
+import {AuthenticationComponent} from '@layouts/authentication/authentication.component';
+import {HomeComponent} from '@layouts/home/home.component';
 
 const routes: Routes = [
-  {path: '', component: LandingPageComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'verify', component: EmailVerificationComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'privacy', component: PrivacyPolicyComponent},
-  {path: 'terms', component: TermsOfServiceComponent},
-  {path: 'not-found', component: NotFoundComponent},
-  {path: 'contact', component: ContactComponent},
-  {path: 'about', component: AboutUsComponent},
-  {path: 'news', component: NewsComponent},
-  {path: 'news/:id', component: ArticleComponent}
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {path: '', component: LandingPageComponent},
+      {path: 'verify', component: EmailVerificationComponent},
+      {path: 'privacy', component: PrivacyPolicyComponent},
+      {path: 'terms', component: TermsOfServiceComponent},
+      {path: 'not-found', component: NotFoundComponent},
+      {path: 'contact', component: ContactComponent},
+      {path: 'about', component: AboutUsComponent},
+      {path: 'news', component: NewsComponent},
+      {path: 'news/:id', component: ArticleComponent}
+    ]
+  },
+  {
+    path: '',
+    component: AuthenticationComponent,
+    children: [
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
+    ]
+  },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

@@ -52,7 +52,11 @@ import {ArticleCardComponent} from './custom-components/article-card/article-car
 import {ArticleComponent} from './pages/news/article/article.component';
 import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { NavigationItemComponent } from './custom-components/navigation-header/navigation-item/navigation-item.component';
+import {NavigationItemComponent} from './custom-components/navigation-header/navigation-item/navigation-item.component';
+import {AuthenticationComponent} from './layouts/authentication/authentication.component';
+import {HomeComponent} from './layouts/home/home.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { StackedLeftDialogComponent } from './custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +87,10 @@ import { NavigationItemComponent } from './custom-components/navigation-header/n
     ArticleCardComponent,
     ArticleComponent,
     TermsOfServiceComponent,
-    NavigationItemComponent
+    NavigationItemComponent,
+    AuthenticationComponent,
+    HomeComponent,
+    StackedLeftDialogComponent
   ],
   imports: [
     CommonModule,
@@ -111,7 +118,8 @@ import { NavigationItemComponent } from './custom-components/navigation-header/n
     MatExpansionModule,
     MatTabsModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [
     {
