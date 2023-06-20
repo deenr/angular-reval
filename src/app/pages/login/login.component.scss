@@ -104,11 +104,15 @@
 
   .attribution {
     width: 60%;
+    position: relative;
     background-color: $color-grey-100;
     padding: 96px 64px;
+    overflow: hidden;
 
     @include breakpoint-xl() {
       width: 40%;
+      display: flex;
+      align-items: center;
     }
 
     @include breakpoint-lg() {
@@ -128,6 +132,14 @@
     &__image {
       position: absolute;
       margin-top: 112px;
+      transform-origin: top left;
+      scale: 1.5;
+
+      @include breakpoint-xl() {
+        transform-origin: center left;
+        scale: 2;
+        margin-top: 0;
+      }
     }
   }
 }
