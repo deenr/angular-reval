@@ -1,11 +1,11 @@
-<mat-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen cdkscrollable>
   <mat-sidenav position="end" #sidenav role="navigation">
     <app-navigation-sidebar (sidenavClose)="sidenav.close()"></app-navigation-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
     <main>
       <app-navigation-header (sidenavToggle)="sidenav.toggle()"></app-navigation-header>
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="onActivate()"></router-outlet>
       <app-footer></app-footer>
     </main>
   </mat-sidenav-content>
