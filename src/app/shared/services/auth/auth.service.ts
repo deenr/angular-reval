@@ -124,7 +124,6 @@ export class AuthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      photoURL: user.photoURL,
       emailVerified: user.emailVerified,
       ...updatedUser
     };
@@ -132,7 +131,7 @@ export class AuthService {
     return userRef.set(data, {merge: true});
   }
 
-  public setUserDetails(firstName: string, lastName: string, department: string, field: string, studentId: string, yearOfGraduation: string, phoneNumber: string): Promise<void> {
+  public setUserDetails(firstName: string, lastName: string, department: string, field: string, universityId: string, yearOfGraduation: string, phoneNumber: string): Promise<void> {
     const currentUser = this.fireAuth.currentUser;
 
     if (currentUser) {
@@ -141,7 +140,7 @@ export class AuthService {
         lastName,
         department,
         field,
-        studentId,
+        universityId,
         yearOfGraduation,
         phoneNumber,
         setDetails: true

@@ -7,5 +7,6 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class ProgressButtonComponent {
   @Input() public loading = false;
+  @Input() public type = 'button';
   @Output() public click = new EventEmitter<void>();
 }

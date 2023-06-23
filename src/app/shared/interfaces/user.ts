@@ -5,7 +5,7 @@ export interface User extends FirebaseUser {
   lastName: string;
   department: string;
   field: string;
-  studentId: string;
+  universityId: string;
   yearOfGraduation: string;
   phoneNumber: string;
   setDetails: boolean;

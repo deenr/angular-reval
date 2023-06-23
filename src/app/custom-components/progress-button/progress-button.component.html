@@ -1,4 +1,4 @@
-<button mat-flat-button class="full-width" [class.loading]="loading" color="primary" type="button" (click)="click.emit()">
+<button mat-flat-button [type]="type" class="full-width" [class.loading]="loading" color="primary" type="button" (click)="click.emit()">
   <ng-container *ngIf="!loading; else loadingIcon">
     <ng-content></ng-content>
   </ng-container>

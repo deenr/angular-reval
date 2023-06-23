@@ -1,5 +1,5 @@
 <section class="register-section flex-column full-height">
-  <div class="full-height">
+  <div class="full-width full-height" [ngStyle]="{'max-width': getSectionMaxWidth()}">
     <div class="register__logo flex-row cursor-pointer" routerLink="/">
       <mat-icon svgIcon="logo-color"></mat-icon>
       <h3>Sphience</h3>
@@ -41,7 +41,7 @@
           <span class="text-sm text-regular">Didn&#8217;t receive the email? <a>Click to resend</a></span>
         </div>
       </div>
-      <form *ngIf="canShowStep(registrationStep.DETAILS)" [formGroup]="detailsForm" class="flex-column form__step-three">
+      <form *ngIf="canShowStep(registrationStep.DETAILS)" [formGroup]="detailsForm" class="flex-column form__step-three" (ngSubmit)="sendDetails()">
         <div class="flex-column form__details">
           <div class="flex-row">
             <mat-form-field>
@@ -53,22 +53,38 @@
               <input formControlName="lastName" matInput text="number" placeholder="Enter last name" />
             </mat-form-field>
           </div>
-          <mat-form-field>
-            <mat-label>Department/Faculty</mat-label>
-            <mat-select formControlName="department" placeholder="Select your department">
-              <mat-option *ngFor="let faculty of faculties" [value]="faculty">
-                {{ faculty }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Field of Study/Research</mat-label>
-            <mat-select formControlName="field" placeholder="Select your field">
-              <mat-option *ngFor="let field of fields" [value]="field">
-                {{ field }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="flex-row">
+            <mat-form-field>
+              <mat-label class="text-sm text-medium">Phone Number</mat-label>
+              <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label class="text-sm text-medium">Academic role</mat-label>
+              <mat-select formControlName="role" placeholder="Select your role">
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{ getRoleTranslation(role) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="flex-row">
+            <mat-form-field>
+              <mat-label class="text-sm text-medium">Faculty</mat-label>
+              <mat-select formControlName="faculty" placeholder="Select your department" (selectionChange)="onFacultyChange($event)">
+                <mat-option *ngFor="let faculty of faculties" [value]="faculty">
+                  {{ getFacultyTranslation(faculty) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label class="text-sm text-medium">Program</mat-label>
+              <mat-select formControlName="program" placeholder="Select your program">
+                <mat-option *ngFor="let program of getPrograms()" [value]="program">
+                  {{ getProgramTranslation(program) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="flex-row">
             <mat-form-field>
               <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>
@@ -79,12 +95,8 @@
               <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
             </mat-form-field>
           </div>
-          <mat-form-field>
-            <mat-label class="text-sm text-medium">Phone Number</mat-label>
-            <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
-          </mat-form-field>
         </div>
-        <app-progress-button class="register__continue" [loading]="sendingDetails" (click)="sendDetails()">Continue</app-progress-button>
+        <app-progress-button type="submit" class="register__continue" [loading]="sendingDetails">Continue</app-progress-button>
       </form>
     </div>
   </div>

@@ -76,8 +76,13 @@
         gap: 8px;
 
         .mat-mdc-select-trigger {
+          .mat-mdc-select-value .mat-mdc-select-placeholder {
+            color: $color-grey-500;
+          }
+
           .mat-mdc-select-arrow-wrapper {
             transform: translateY(0px);
+
             .mat-mdc-select-arrow {
               width: 20px;
               height: 20px;
@@ -107,8 +112,13 @@
       border: 1px solid $color-grey-300;
       background-color: $color-grey-50;
 
-      .mat-mdc-input-element {
+      .mat-mdc-input-element,
+      .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value .mat-mdc-select-value-text .mat-mdc-select-min-line {
         color: $color-grey-500;
+      }
+
+      .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+        background-color: $color-grey-400;
       }
     }
   }
