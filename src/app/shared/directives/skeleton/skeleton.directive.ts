@@ -9,13 +9,14 @@ export class SkeletonDirective {
   @Input('skeletonWidth') public width: string;
   @Input('skeletonHeight') public height: string;
   @Input('skeletonMarginTop') public marginTop: string;
+  @Input('skeletonAmount') public amount: number;
 
   private skeletonComponentRef: ComponentRef<SkeletonComponent>;
   private wrapperDiv: HTMLElement;
 
   constructor(private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef, private elementRef: ElementRef<HTMLElement>) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     if (changes['isLoading']) {
       this.viewContainerRef.clear();
 
@@ -63,6 +64,28 @@ export class SkeletonDirective {
               height: this.height ?? '100%'
             });
             break;
+          case SkeletonType.CHIP:
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.width = '100%';
+            this.wrapperDiv.style.display = 'flex';
+            this.wrapperDiv.style.flexDirection = 'row';
+            this.wrapperDiv.style.justifyContent = 'center';
+            this.wrapperDiv.style.gap = '8px';
+            this.wrapperDiv.style.marginTop = this.marginTop;
+
+            [...Array(this.amount ?? 1).keys()].forEach(() => {
+              const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
+              Object.assign(chipRef.instance, {
+                borderRadius: '27px',
+                width: '120px',
+                height: this.height ?? '27px'
+              });
+              this.wrapperDiv.appendChild(chipRef.location.nativeElement);
+            });
+
+            const chipsElement = this.elementRef.nativeElement.parentElement;
+            chipsElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            break;
           case SkeletonType.ARTICLE_IMAGE:
             this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
             Object.assign(this.skeletonComponentRef.instance, {
@@ -106,6 +129,14 @@ export class SkeletonDirective {
             const authorNameElement = this.elementRef.nativeElement.parentElement;
             authorNameElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
             break;
+          case SkeletonType.DISPLAY_LG:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              marginTop: this.marginTop,
+              width: this.width ?? '80%',
+              height: '60px'
+            });
+            break;
           case SkeletonType.DISPLAY_MD:
             this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
             Object.assign(this.skeletonComponentRef.instance, {
@@ -114,12 +145,28 @@ export class SkeletonDirective {
               height: '44px'
             });
             break;
+          case SkeletonType.DISPLAY_SM:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              marginTop: this.marginTop,
+              width: this.width ?? '80%',
+              height: '38px'
+            });
+            break;
           case SkeletonType.DISPLAY_XS:
             this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
             Object.assign(this.skeletonComponentRef.instance, {
               marginTop: this.marginTop,
               width: this.width ?? '75%',
               height: '32px'
+            });
+            break;
+          case SkeletonType.TEXT_XL:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              marginTop: this.marginTop,
+              width: this.width ?? '66%',
+              height: '30px'
             });
             break;
           case SkeletonType.TEXT_MD:
@@ -137,6 +184,27 @@ export class SkeletonDirective {
               width: this.width ?? '40%',
               height: '20px'
             });
+            break;
+          case SkeletonType.PARAGRAPH_LG:
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.width = '100%';
+            this.wrapperDiv.style.display = 'flex';
+            this.wrapperDiv.style.flexDirection = 'column';
+            this.wrapperDiv.style.justifyContent = 'center';
+            this.wrapperDiv.style.gap = '8px';
+            this.wrapperDiv.style.marginTop = this.marginTop;
+
+            [...Array(4).keys()].forEach(() => {
+              const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
+              Object.assign(chipRef.instance, {
+                width: '100%',
+                height: this.height ?? '20px'
+              });
+              this.wrapperDiv.appendChild(chipRef.location.nativeElement);
+            });
+
+            const paragraphLgElement = this.elementRef.nativeElement.parentElement;
+            paragraphLgElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
             break;
           // case SkeletonType.ARTICLE:
           //   this.wrapperDiv = document.createElement('div');

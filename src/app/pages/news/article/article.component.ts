@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleContentType} from '@shared/enums/article-content-type.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {Article} from '@shared/models/article/article.model';
+import {StubArticle} from '@shared/models/article/stub-article';
 import {HttpArticleService} from '@shared/services/article/http-article.service';
 import * as moment from 'moment';
 
@@ -12,12 +14,14 @@ import * as moment from 'moment';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  public loadingArticle = true;
   public article: Article;
+  public skeletonType = SkeletonType;
 
   public constructor(private readonly route: ActivatedRoute, private readonly articleService: HttpArticleService) {}
 
   public ngOnInit() {
-    this.articleService.getArticleById(this.route.snapshot.paramMap.get('id')).subscribe((article: Article) => (this.article = article));
+    this.getArticle();
   }
 
   public isContentIntroduction(articleContentType: ArticleContentType): boolean {
@@ -62,5 +66,14 @@ export class ArticleComponent implements OnInit {
 
   public getDate(date: Date): string {
     return moment(date).format('D MMMM YYYY');
+  }
+
+  private getArticle(): void {
+    this.loadingArticle = true;
+    this.article = StubArticle.getEmptyArticle();
+    this.articleService.getArticleById(this.route.snapshot.paramMap.get('id')).subscribe((article: Article) => {
+      this.article = article;
+      this.loadingArticle = false;
+    });
   }
 }

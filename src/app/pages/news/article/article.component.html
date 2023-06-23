@@ -1,26 +1,30 @@
 <div class="article">
-  <div class="article__heading">
-    <p class="text-md text-semibold published" classMd="text-sm">Published {{ getDate(article.published) }}</p>
-    <h2 class="display-lg text-semibold title" classMd="display-md">{{ article.title }}</h2>
-    <p class="text-xl text-regular subtitle" classMd="text-lg">{{ article.subtitle }}</p>
-    <div class="flex-row categories">
+  <div class="article__heading flex-column">
+    <p class="text-md text-semibold published" classMd="text-sm" *skeleton="loadingArticle; type: skeletonType.TEXT_MD">Published {{ getDate(article.published) }}</p>
+    <h2 class="display-lg text-semibold title" classMd="display-md" *skeleton="loadingArticle; type: skeletonType.DISPLAY_LG; marginTop: '12px'">{{ article.title }}</h2>
+    <p class="text-xl text-regular subtitle" classMd="text-lg" *skeleton="loadingArticle; type: skeletonType.TEXT_XL; marginTop: '24px'">{{ article.subtitle }}</p>
+    <div class="flex-row categories" *skeleton="loadingArticle; type: skeletonType.CHIP; marginTop: '40px'; amount: 2">
       <p *ngFor="let category of article.categories" class="text-sm text-medium">{{ category }}</p>
     </div>
   </div>
   <div class="content flex-column">
     <ng-container *ngFor="let content of article.content">
-      <div class="content__item content__introduction" *ngIf="isContentIntroduction(content.type)">
-        <h3 class="display-sm text-semibold title" classMd="display-xs">
+      <div class="content__item content__introduction full-width" *ngIf="isContentIntroduction(content.type)">
+        <h3 class="display-sm text-semibold title" classMd="display-xs" *skeleton="loadingArticle; type: skeletonType.DISPLAY_SM">
           {{ getTitle(content) }}
         </h3>
-        <p *ngFor="let text of getText(content)">{{ text }}</p>
+        <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '20px'">
+          <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
+        </div>
       </div>
       <div class="content__item content__image" *ngIf="isContentImage(content.type)">
         <img [src]="getImageSource(content)" alt="" srcset="" />
       </div>
-      <div class="content__item content__text" *ngIf="isContentText(content.type)">
-        <h4 class="display-xs text-semibold" classMd="text-xl">{{ getTitle(content) }}</h4>
-        <p *ngFor="let text of getText(content)">{{ text }}</p>
+      <div class="content__item content__text full-width" *ngIf="isContentText(content.type)">
+        <h4 class="display-xs text-semibold" classMd="text-xl" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS">{{ getTitle(content) }}</h4>
+        <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '16px'">
+          <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
+        </div>
       </div>
       <div class="content__item content__quote" *ngIf="isContentQuote(content.type)">
         <p class="display-xs text-medium text-italic quote" classMd="text-xl">''{{ getQuoteText(content) }}''</p>
@@ -30,7 +34,7 @@
         <h4 class="display-sm text-semibold title" classMd="display-xs">
           {{ getTitle(content) }}
         </h4>
-        <p *ngFor="let text of getText(content)">{{ text }}</p>
+        <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
       </div>
     </ng-container>
   </div>

@@ -17,6 +17,6 @@ export class HttpArticleService {
   }
 
   public getArticleById(id: string): Observable<Article> {
-    return of(Article.fromJSON(articles.find((articleJSON: any) => articleJSON.id === id)));
+    return of(Article.fromJSON(articles.find((articleJSON: any) => articleJSON.id === id))).pipe(delay(2000));
   }
 }
