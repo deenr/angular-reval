@@ -25,6 +25,10 @@
       padding: 64px 16px;
     }
 
+    &.loading {
+      pointer-events: none;
+    }
+
     &__heading {
       padding-bottom: 64px;
     }
