@@ -2,6 +2,7 @@
 @import './typography.scss';
 
 .mat-mdc-checkbox {
+  margin-top: -3px;
   --mdc-checkbox-selected-pressed-state-layer-color: #e0d7fe;
   --mdc-checkbox-selected-focus-state-layer-color: #f4ebff;
   --mdc-checkbox-unselected-pressed-state-layer-color: #fff;
@@ -14,6 +15,11 @@
       height: 20px;
       padding: 0;
       margin: 0;
+
+      &:hover .mdc-checkbox__background {
+        border: 1px solid $color-primary-600 !important;
+        background-color: $color-primary-100 !important;
+      }
 
       .mat-mdc-checkbox-touch-target {
         display: none;
@@ -45,11 +51,6 @@
 
         &:focus ~ .mdc-checkbox__background {
           border: 1px solid $color-primary-600 !important;
-        }
-
-        &:hover ~ .mdc-checkbox__background {
-          border: 1px solid $color-primary-600 !important;
-          background-color: $color-primary-100 !important;
         }
 
         &:active ~ .mdc-checkbox__background {
@@ -175,8 +176,6 @@
   }
 
   &.small {
-    height: 16px;
-
     .mdc-form-field {
       .mdc-checkbox {
         min-width: 16px;
