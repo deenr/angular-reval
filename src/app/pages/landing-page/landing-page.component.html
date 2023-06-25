@@ -2,15 +2,18 @@
   <section class="hero flex-column">
     <div class="hero__content flex-column">
       <h2 class="display-xl text-semibold" classMd="display-sm">Connect. Collaborate. Innovate.</h2>
-      <p class="text-xl text-regular" classMd="text-lg">
+      <p class="text-xl text-regular supporting-text" classMd="text-lg">
         Experience a new era of research collaboration. Connect with students, researchers, and professors to access the tools that drive groundbreaking discoveries.
       </p>
-      <div class="content__sign-up flex-row">
-        <mat-form-field>
-          <input matInput type="email" placeholder="Enter your email" />
-          <mat-hint class="text-sm text-regular">We care about your data in our <u class="text-link" routerLink="/privacy">privacy policy</u>.</mat-hint>
-        </mat-form-field>
-        <button mat-flat-button color="primary">Get started</button>
+      <div class="content__sign-up full-width flex-column">
+        <div class="sign-up__input flex-row">
+          <mat-form-field>
+            <input matInput type="email" placeholder="Enter your email" />
+            <mat-hint class="text-sm text-regular">We care about your data in our <u class="text-link" routerLink="/privacy">privacy policy</u>.</mat-hint>
+          </mat-form-field>
+          <button mat-flat-button color="primary">Get started</button>
+        </div>
+        <p class="text-sm text-regular">We care about your data in our <u class="text-link" routerLink="/privacy">privacy policy</u>.</p>
       </div>
     </div>
     <div class="hero__illustration full-width"></div>
@@ -51,7 +54,7 @@
     </div>
   </section>
   <mat-divider></mat-divider>
-  <section class="faq flex-column">
+  <section class="faq__section flex-column">
     <div class="faq__heading">
       <h4 class="display-md text-semibold">Frequently asked questions</h4>
       <p class="text-xl text-regular">Everything you need to know about the product and billing.</p>

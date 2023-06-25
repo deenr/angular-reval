@@ -13,7 +13,7 @@
     }
 
     @include breakpoint-sm() {
-      padding: 48px 16px;
+      padding: 0 16px;
     }
 
     p {
@@ -54,7 +54,7 @@
         color: $color-grey-900;
       }
 
-      p {
+      .supporting-text {
         max-width: 800px;
         margin-top: 24px;
         text-align: center;
@@ -63,15 +63,12 @@
       .content__sign-up {
         max-width: 480px;
         margin-top: 48px;
-        gap: 16px;
 
         ::ng-deep mat-hint {
-          white-space: nowrap;
-        }
+          display: none;
 
-        @include breakpoint-sm() {
-          ::ng-deep mat-hint {
-            white-space: normal;
+          @include breakpoint-xs() {
+            display: block;
           }
         }
 
@@ -79,12 +76,20 @@
           min-width: 128px;
         }
 
-        @include breakpoint-sm() {
-          width: 100%;
+        .sign-up__input {
+          gap: 16px;
+
+          @include breakpoint-xs() {
+            flex-direction: column;
+          }
         }
 
-        @include breakpoint-xs() {
-          flex-direction: column;
+        p {
+          display: block;
+
+          @include breakpoint-xs() {
+            display: none;
+          }
         }
       }
     }
@@ -224,16 +229,20 @@
     }
   }
 
-  .faq {
+  .faq__section {
     padding: 96px 0;
     align-items: center;
     gap: 64px;
+
+    @include breakpoint-md() {
+      gap: 48px;
+    }
 
     @include breakpoint-sm() {
       padding: 64px 0;
     }
 
-    &__heading {
+    .faq__heading {
       text-align: center;
 
       p {
@@ -241,7 +250,7 @@
       }
     }
 
-    &__content {
+    .faq__content {
       max-width: 768px;
 
       .faq-item {
@@ -254,7 +263,7 @@
       }
     }
 
-    &__more {
+    .faq__more {
       background-color: $color-grey-50;
       border-radius: 16px;
       padding: 32px;
