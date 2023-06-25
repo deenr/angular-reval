@@ -1,0 +1,18 @@
+@import 'variables';
+
+:host {
+  .pages {
+    gap: 16px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $color-grey-100;
+
+    &.active {
+      background-color: $color-primary-700;
+    }
+  }
+}

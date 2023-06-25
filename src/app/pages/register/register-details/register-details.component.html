@@ -1,0 +1,108 @@
+<form [formGroup]="detailsForm" class="flex-column full-height">
+  <div class="desktop-form flex-column form__details">
+    <div class="form__inputs--desktop">
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">First name</mat-label>
+        <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Last name</mat-label>
+        <input formControlName="lastName" matInput text="number" placeholder="Enter last name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Phone Number</mat-label>
+        <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Academic role</mat-label>
+        <mat-select formControlName="role" placeholder="Select your role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ getRoleTranslation(role) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Faculty</mat-label>
+        <mat-select formControlName="faculty" placeholder="Select your department" (selectionChange)="onFacultyChange($event)">
+          <mat-option *ngFor="let faculty of faculties" [value]="faculty">
+            {{ getFacultyTranslation(faculty) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Program</mat-label>
+        <mat-select formControlName="program" placeholder="Select your program">
+          <mat-option *ngFor="let program of getPrograms()" [value]="program">
+            {{ getProgramTranslation(program) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>
+        <input formControlName="universityId" matInput type="text" placeholder="Enter ID number" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-sm text-medium">Year of Graduation</mat-label>
+        <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
+      </mat-form-field>
+    </div>
+    <app-progress-button [loading]="sendingDetails">Continue</app-progress-button>
+  </div>
+  <div class="mobile-form flex-column full-height">
+    <div *ngIf="getActiveStepPageNumber() === 1" class="flex-column form__details full-width">
+      <div class="flex-column form__inputs">
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">First name</mat-label>
+          <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Last name</mat-label>
+          <input formControlName="lastName" matInput text="number" placeholder="Enter last name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Phone Number</mat-label>
+          <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
+        </mat-form-field>
+      </div>
+      <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
+    </div>
+    <div *ngIf="getActiveStepPageNumber() === 2" class="flex-column form__details full-width">
+      <div class="flex-column form__inputs">
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Academic role</mat-label>
+          <mat-select formControlName="role" placeholder="Select your role">
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ getRoleTranslation(role) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Faculty</mat-label>
+          <mat-select formControlName="faculty" placeholder="Select your department" (selectionChange)="onFacultyChange($event)">
+            <mat-option *ngFor="let faculty of faculties" [value]="faculty">
+              {{ getFacultyTranslation(faculty) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Program</mat-label>
+          <mat-select formControlName="program" placeholder="Select your program">
+            <mat-option *ngFor="let program of getPrograms()" [value]="program">
+              {{ getProgramTranslation(program) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>
+          <input formControlName="universityId" matInput type="text" placeholder="Enter ID number" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="text-sm text-medium">Year of Graduation</mat-label>
+          <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
+        </mat-form-field>
+      </div>
+      <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
+    </div>
+    <app-paginator class="paginator" [activePage]="getActiveStepPageNumber()" [pages]="mobileDetailSteps.length"></app-paginator>
+  </div>
+</form>

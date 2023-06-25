@@ -57,6 +57,8 @@ import {AuthenticationComponent} from './layouts/authentication/authentication.c
 import {HomeComponent} from './layouts/home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { StackedLeftDialogComponent } from './custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { RegisterDetailsComponent } from './pages/register/register-details/register-details.component';
+import { PaginatorComponent } from './custom-components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,9 @@ import { StackedLeftDialogComponent } from './custom-components/dialogs/stacked-
     NavigationItemComponent,
     AuthenticationComponent,
     HomeComponent,
-    StackedLeftDialogComponent
+    StackedLeftDialogComponent,
+    RegisterDetailsComponent,
+    PaginatorComponent
   ],
   imports: [
     CommonModule,

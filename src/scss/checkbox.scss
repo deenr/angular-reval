@@ -232,3 +232,11 @@
     }
   }
 }
+
+.cdk-overlay-container {
+  .cdk-overlay-connected-position-bounding-box {
+    .cdk-overlay-pane {
+      min-width: fit-content !important;
+    }
+  }
+}

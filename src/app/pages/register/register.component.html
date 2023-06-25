@@ -1,22 +1,22 @@
-<section class="register-section flex-column full-height">
-  <div class="full-width full-height" [ngStyle]="{'max-width': getSectionMaxWidth()}">
+<section class="register-section flex-column full-height" [class.details]="canShowStep(registrationStep.DETAILS)">
+  <div class="full-width full-height flex-column" [ngClass]="canShowStep(registrationStep.DETAILS) ? 'detail-form' : 'other-form'">
     <div class="register__logo flex-row cursor-pointer" routerLink="/">
       <mat-icon svgIcon="logo-color"></mat-icon>
       <h3>Sphience</h3>
     </div>
     <div class="register__header flex-column">
-      <h2 class="display-md text-semibold">{{ getTitle() }}</h2>
+      <h2 class="display-md text-semibold" classMd="display-xs">{{ getTitle() }}</h2>
       <p *ngIf="getSubtitle()" class="text-md text-regular">
         {{ getSubtitle() }}
       </p>
     </div>
-    <div class="register__form">
+    <div class="register__form full-height">
       <form *ngIf="canShowStep(registrationStep.EMAIL)" [formGroup]="emailForm" class="flex-column form__step-one">
         <div class="flex-column form__email">
           <mat-form-field>
             <input matInput formControlName="email" type="text" placeholder="Enter your email" />
           </mat-form-field>
-          <button mat-flat-button color="primary" class="register__continue" (click)="goToPassword()">Continue</button>
+          <button mat-flat-button color="primary" (click)="goToPassword()">Continue</button>
         </div>
         <app-divider-with-text text="OR"></app-divider-with-text>
         <button mat-stroked-button (click)="openDashboard()"><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign up with Google</button>
@@ -33,7 +33,7 @@
             <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
           </mat-form-field>
         </div>
-        <button mat-flat-button color="primary" class="register__continue" type="button" (click)="goToEmailVerification()">Continue</button>
+        <button mat-flat-button color="primary" type="button" (click)="goToEmailVerification()">Continue</button>
       </form>
       <div *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" class="flex-column email-verification">
         <button mat-flat-button color="primary" (click)="goToDetails()">Email is verified</button>
@@ -41,63 +41,7 @@
           <span class="text-sm text-regular">Didn&#8217;t receive the email? <a>Click to resend</a></span>
         </div>
       </div>
-      <form *ngIf="canShowStep(registrationStep.DETAILS)" [formGroup]="detailsForm" class="flex-column form__step-three" (ngSubmit)="sendDetails()">
-        <div class="flex-column form__details">
-          <div class="flex-row">
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">First name</mat-label>
-              <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Last name</mat-label>
-              <input formControlName="lastName" matInput text="number" placeholder="Enter last name" />
-            </mat-form-field>
-          </div>
-          <div class="flex-row">
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Phone Number</mat-label>
-              <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Academic role</mat-label>
-              <mat-select formControlName="role" placeholder="Select your role">
-                <mat-option *ngFor="let role of roles" [value]="role">
-                  {{ getRoleTranslation(role) }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="flex-row">
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Faculty</mat-label>
-              <mat-select formControlName="faculty" placeholder="Select your department" (selectionChange)="onFacultyChange($event)">
-                <mat-option *ngFor="let faculty of faculties" [value]="faculty">
-                  {{ getFacultyTranslation(faculty) }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Program</mat-label>
-              <mat-select formControlName="program" placeholder="Select your program">
-                <mat-option *ngFor="let program of getPrograms()" [value]="program">
-                  {{ getProgramTranslation(program) }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="flex-row">
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Student/Researcher ID</mat-label>
-              <input formControlName="studentId" matInput type="text" placeholder="Enter ID number" />
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label class="text-sm text-medium">Year of Graduation</mat-label>
-              <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
-            </mat-form-field>
-          </div>
-        </div>
-        <app-progress-button type="submit" class="register__continue" [loading]="sendingDetails">Continue</app-progress-button>
-      </form>
+      <app-register-details *ngIf="canShowStep(registrationStep.DETAILS)"></app-register-details>
     </div>
   </div>
   <app-progress-steps class="register__process" [steps]="steps"></app-progress-steps>

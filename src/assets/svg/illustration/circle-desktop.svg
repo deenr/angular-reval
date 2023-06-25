@@ -7,4 +7,5 @@
 <rect x="96.5" y="96.5" width="575" height="575" rx="287.5" stroke="black"/>
 <rect x="0.5" y="0.5" width="767" height="767" rx="383.5" stroke="black"/>
 <rect x="48.5" y="48.5" width="671" height="671" rx="335.5" stroke="black"/>
+<rect x="368" y="368" width="32" height="32" rx="16" fill="#BB4B4B"/>
 </svg>

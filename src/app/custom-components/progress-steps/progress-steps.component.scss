@@ -15,10 +15,6 @@
       }
 
       @include breakpoint-sm() {
-        width: 64px;
-      }
-
-      @include breakpoint-xs() {
         display: none;
       }
 

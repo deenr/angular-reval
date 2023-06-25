@@ -5,11 +5,64 @@
   $padding-form-top: 128px;
 
   .register-section {
-    align-items: center;
+    position: relative;
     padding-top: $padding-form-top;
+    align-items: center;
+    overflow-x: hidden;
 
     @include breakpoint-sm() {
       padding: 48px 16px;
+    }
+
+    &::before {
+      width: 768px;
+      height: 768px;
+      position: absolute;
+      z-index: -1;
+      top: 144px;
+      left: calc(50% - 164px);
+      transform: translate(-50%, -50%);
+      mask-image: url('../../../assets/svg/illustration/circle-desktop.svg');
+      background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
+      content: '';
+
+      @include breakpoint-sm() {
+        top: 64px;
+      }
+
+      @include breakpoint-xs() {
+        left: 32px !important;
+      }
+    }
+
+    &.details {
+      &::before {
+        left: calc(50% - 234px);
+
+        @include breakpoint-sm() {
+          left: calc(50% - 164px);
+        }
+
+        @include breakpoint-xs() {
+          left: 32px !important;
+        }
+      }
+    }
+
+    .detail-form {
+      width: 500px;
+
+      @include breakpoint-sm() {
+        width: 360px;
+      }
+
+      @include breakpoint-xs() {
+        width: 100%;
+      }
+    }
+
+    .other-form {
+      max-width: 360px;
     }
   }
 
@@ -17,19 +70,6 @@
     position: relative;
     gap: 8px;
     align-items: center;
-
-    &::before {
-      width: 768px;
-      height: 768px;
-      position: absolute;
-      z-index: -1;
-      top: 16px;
-      left: 16px;
-      transform: translate(-50%, -50%);
-      mask-image: url('../../../assets/svg/illustration/circle-desktop.svg');
-      background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
-      content: '';
-    }
 
     mat-icon {
       min-width: 32px;
@@ -76,7 +116,7 @@
       gap: 24px;
 
       .form__password {
-        gap: 20px;
+        gap: 16px;
       }
     }
 
@@ -90,19 +130,6 @@
 
       &__manual {
         gap: 24px;
-      }
-    }
-
-    .form__step-three {
-      gap: 24px;
-
-      .form__details {
-        gap: 16px;
-
-        div {
-          justify-content: space-between;
-          gap: 16px;
-        }
       }
     }
   }
