@@ -30,28 +30,41 @@
       .mat-expansion-indicator {
         transform: none !important;
 
-        &:after {
+        &::after {
           transform: none;
           content: '';
-          min-width: 20px;
+          min-width: 28px;
           min-height: 28px;
           background-color: $color-grey-400;
-          -webkit-mask-image: url('../assets/svg/plus-circle.svg');
-          mask-image: url('../assets/svg/plus-circle.svg');
+          -webkit-mask-image: url('../assets/svg/arrow-down.svg');
+          mask-image: url('../assets/svg/arrow-down.svg');
           -webkit-mask-size: contain;
           mask-size: contain;
           -webkit-mask-position: center;
           mask-position: center;
           -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
+
+          -webkit-animation: accordion-close 450ms cubic-bezier(0.4, 0, 0.2, 1);
+          -webkit-animation-fill-mode: both;
+          -moz-animation: accordion-close 450ms cubic-bezier(0.4, 0, 0.2, 1);
+          -moz-animation-fill-mode: both;
+          animation: accordion-close 450ms cubic-bezier(0.4, 0, 0.2, 1);
+          animation-fill-mode: both;
+          animation-duration: alternate;
         }
       }
 
       &.mat-expanded {
         .mat-expansion-indicator {
-          &:after {
-            -webkit-mask-image: url('../assets/svg/minus-circle.svg');
-            mask-image: url('../assets/svg/minus-circle.svg');
+          &::after {
+            -webkit-animation: accordion-open 450ms cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-animation-fill-mode: both;
+            -moz-animation: accordion-open 450ms cubic-bezier(0.4, 0, 0.2, 1);
+            -moz-animation-fill-mode: both;
+            animation: accordion-open 450ms cubic-bezier(0.4, 0, 0.2, 1);
+            animation-fill-mode: both;
+            animation-duration: alternate;
           }
         }
       }
@@ -102,7 +115,7 @@
       .mat-expansion-indicator {
         transform: none !important;
 
-        &:after {
+        &::after {
           position: absolute;
           transform: none;
           content: '';
@@ -123,7 +136,7 @@
 
       &.mat-expanded {
         .mat-expansion-indicator {
-          &:after {
+          &::after {
             -webkit-mask-image: url('../assets/svg/chevron-up.svg');
             mask-image: url('../assets/svg/chevron-up.svg');
           }
@@ -151,5 +164,87 @@
   }
   .mat-expansion-panel-spacing {
     margin: 0;
+  }
+}
+
+@-webkit-keyframes accordion-open {
+  0% {
+    rotate: 0deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  49% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 180deg;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    rotate: 180deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes accordion-open {
+  0% {
+    rotate: 0deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  49% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 180deg;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    rotate: 180deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes accordion-close {
+  0% {
+    rotate: 180deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  49% {
+    rotate: 180deg;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  50% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 0deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes accordion-close {
+  0% {
+    rotate: 180deg;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  49% {
+    rotate: 180deg;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  50% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 0deg;
+    opacity: 1;
+    transform: translateY(0);
   }
 }

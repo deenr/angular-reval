@@ -9,6 +9,11 @@
     &:hover {
       cursor: pointer;
       background-color: $color-grey-50;
+
+      .arrow-right {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+      }
     }
 
     mat-icon {
@@ -16,19 +21,31 @@
       width: 24px;
       min-height: 24px;
       height: 24px;
-      color: $color-primary-600 !important;
+      color: $color-primary-600;
     }
 
     div {
       gap: 4px;
 
-      h6 {
-        font-family: $font-family !important;
+      .header {
+        justify-content: space-between;
+
+        h6 {
+          font-family: $font-family !important;
+        }
+
+        .arrow-right {
+          color: $color-grey-900;
+          opacity: 0;
+          transform: translateX(-4px);
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
       }
 
       p {
         font-family: $font-family !important;
         color: $color-grey-600;
+        letter-spacing: normal;
       }
     }
   }

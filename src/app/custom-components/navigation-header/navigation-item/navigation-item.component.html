@@ -1,7 +1,10 @@
 <div class="flex-row navigation-menu-item" [routerLink]="link" routerLinkActive="router-link-active">
   <mat-icon [svgIcon]="icon"></mat-icon>
   <div class="flex-column">
-    <h6 class="text-md text-semibold">{{ title }}</h6>
+    <div class="flex-row header">
+      <h6 class="text-md text-semibold">{{ title }}</h6>
+      <mat-icon svgIcon="arrow-right" class="arrow-right"></mat-icon>
+    </div>
     <p class="text-sm text-regular">{{ text }}</p>
   </div>
 </div>

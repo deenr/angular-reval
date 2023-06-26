@@ -39,7 +39,7 @@
           background-color: $color-grey-100 !important;
           border-color: $color-grey-300 !important;
 
-          &:after {
+          &::after {
             border-color: $color-grey-300 !important;
             background-color: $color-grey-300 !important;
           }
@@ -84,7 +84,7 @@
           border: 1px solid $color-primary-600 !important;
           background-color: $color-primary-50 !important;
 
-          &:after {
+          &::after {
             opacity: 1;
             -webkit-transition: opacity 180ms;
             transition: opacity 180ms;
@@ -104,7 +104,7 @@
           border: 1px solid $color-primary-600 !important;
           background-color: $color-primary-50 !important;
 
-          &:after {
+          &::after {
             opacity: 1;
             -webkit-transition: opacity 180ms;
             transition: opacity 180ms;
@@ -147,7 +147,7 @@
         border: 1px solid $color-grey-300 !important;
         background-color: transparent;
 
-        &:after {
+        &::after {
           opacity: 0;
           content: '';
         }
