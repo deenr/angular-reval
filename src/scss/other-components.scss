@@ -78,6 +78,8 @@
 }
 
 .mat-mdc-dialog-surface {
+  position: relative;
+  overflow: hidden !important;
   z-index: -2 !important;
   border-radius: 12px !important;
   box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03) !important;

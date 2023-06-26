@@ -18,7 +18,7 @@ export class NavigationSidebarComponent {
       width: '400px',
       data: {
         type: DialogType.WARNING,
-        icon: 'mail',
+        icon: 'lock',
         title: 'Dashboard is not available yet',
         description: 'Our team is diligently working towards making our incredible dashboard available to you.'
       }

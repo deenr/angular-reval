@@ -6,9 +6,11 @@
     </div>
     <mat-icon class="close" svgIcon="close" (click)="sidenavClose.emit()"></mat-icon>
   </div>
+
+  <mat-divider class="divider"></mat-divider>
   <div class="sidebar__content flex-column full-height">
     <div class="content__links flex-column">
-      <p class="text-md text-semibold">Home</p>
+      <p class="text-md text-semibold cursor-pointer" routerLink="/" (click)="sidenavClose.emit()">Home</p>
       <mat-accordion class="navigation">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -21,7 +23,9 @@
       </mat-accordion>
       <p class="text-md text-semibold" (click)="sidenavClose.emit(); openDashboard()">Dashboard</p>
     </div>
-    <mat-divider></mat-divider>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div class="sidebar__footer">
     <ul class="content__footer flex-column">
       <li class="text-md text-semibold">About us</li>
       <li class="text-md text-semibold">Privacy</li>
