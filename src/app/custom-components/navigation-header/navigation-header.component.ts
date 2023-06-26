@@ -15,7 +15,6 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
   public constructor(private readonly dialog: MatDialog) {}
 
   public ngOnInit() {
-    console.log(document);
     document.getElementsByClassName('mat-drawer-content')[0].addEventListener('scroll', this.onWindowScroll.bind(this));
   }
 
