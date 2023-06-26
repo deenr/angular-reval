@@ -36,7 +36,7 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
   }
 
   private onWindowScroll(): void {
-    const scrollTop = document.getElementsByClassName('mat-drawer-content')[0].scrollTop / 80;
-    this.opacity = scrollTop < 1 ? scrollTop : 1;
+    const scrollTop = document.getElementsByClassName('mat-drawer-content')[0].scrollTop;
+    this.opacity = scrollTop / 80 < 1 ? scrollTop / 80 : 1;
   }
 }
