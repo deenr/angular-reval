@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
@@ -8,10 +8,20 @@ import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-lef
   templateUrl: './navigation-header.component.html',
   styleUrls: ['./navigation-header.component.scss']
 })
-export class NavigationHeaderComponent {
+export class NavigationHeaderComponent implements OnInit, OnDestroy {
   @Output() public sidenavToggle = new EventEmitter();
+  public opacity = 0;
 
   public constructor(private readonly dialog: MatDialog) {}
+
+  public ngOnInit() {
+    console.log(document);
+    document.getElementsByClassName('mat-drawer-content')[0].addEventListener('scroll', this.onWindowScroll.bind(this));
+  }
+
+  public ngOnDestroy() {
+    document.getElementsByClassName('mat-drawer-content')[0].removeEventListener('scroll', this.onWindowScroll.bind(this));
+  }
 
   public openDashboard(): void {
     this.dialog.open(StackedLeftDialogComponent, {
@@ -23,5 +33,10 @@ export class NavigationHeaderComponent {
         description: 'Our team is diligently working towards making our incredible dashboard available to you.'
       }
     });
+  }
+
+  private onWindowScroll(): void {
+    const scrollTop = document.getElementsByClassName('mat-drawer-content')[0].scrollTop / 80;
+    this.opacity = scrollTop < 1 ? scrollTop : 1;
   }
 }

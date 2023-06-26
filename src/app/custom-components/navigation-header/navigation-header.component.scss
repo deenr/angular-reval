@@ -2,6 +2,8 @@
 
 :host {
   .nav {
+    position: fixed;
+    z-index: 9999;
     height: 80px;
     max-height: 80px;
     padding: 20px 112px;
@@ -17,6 +19,7 @@
 
     &__logo {
       position: relative;
+      z-index: 1;
       gap: 8px;
       align-items: center;
 
@@ -27,6 +30,8 @@
     }
 
     &__items {
+      position: relative;
+      z-index: 1;
       padding: 0;
       margin-left: 40px;
       gap: 32px;
@@ -47,6 +52,8 @@
     }
 
     &__actions {
+      position: relative;
+      z-index: 1;
       gap: 12px;
 
       @include breakpoint-sm() {
@@ -55,6 +62,8 @@
     }
 
     &__hamburger {
+      position: relative;
+      z-index: 1;
       display: none;
       margin-left: auto;
 
@@ -69,6 +78,17 @@
         color: $color-grey-700;
         cursor: pointer;
       }
+    }
+
+    &__background {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      background-color: rgba($color-white, 0.7);
+      box-shadow: 0 16px 32px 12px rgba(16, 24, 40, 0.05);
+      -webkit-backdrop-filter: saturate(150%) blur(24px);
+      backdrop-filter: saturate(150%) blur(24px);
     }
   }
 }
