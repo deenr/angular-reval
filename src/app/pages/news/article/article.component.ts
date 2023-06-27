@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
+import {ArticleCategory} from '@shared/enums/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article-content-type.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {Article} from '@shared/models/article/article.model';
@@ -17,6 +18,24 @@ export class ArticleComponent implements OnInit {
   public loadingArticle = true;
   public article: Article;
   public skeletonType = SkeletonType;
+
+  private categoryTranslation = new Map<ArticleCategory, string>([
+    [ArticleCategory.RESEARCH_TOOLS, 'Tools'],
+    [ArticleCategory.APPLICATION_DEVELOPMENT, 'Development'],
+    [ArticleCategory.TEAM_UPDATES, 'Team updates'],
+    [ArticleCategory.COMPANY_NEWS, 'Company news'],
+    [ArticleCategory.FUTURE_PLANS, 'Future plans'],
+    [ArticleCategory.INNOVATION, 'Innovation'],
+    [ArticleCategory.AWARDS, 'Awards'],
+    [ArticleCategory.INNOVATIONS, 'Innovations'],
+    [ArticleCategory.COLLABORATION, 'Collaboration'],
+    [ArticleCategory.PRODUCT_UPDATES, 'Product updates'],
+    [ArticleCategory.GLOBAL_EXPANSION, 'Global expension'],
+    [ArticleCategory.DATA_ANALYSIS, 'Data analysis'],
+    [ArticleCategory.RESEARCH_PARTNERSHIPS, 'Research partnerships'],
+    [ArticleCategory.USER_EXPERIENCE, 'User experience'],
+    [ArticleCategory.APPLICATION_DESIGN, 'Application design']
+  ]);
 
   public constructor(private readonly route: ActivatedRoute, private readonly articleService: HttpArticleService) {}
 
@@ -66,6 +85,10 @@ export class ArticleComponent implements OnInit {
 
   public getDate(date: Date): string {
     return moment(date).format('D MMMM YYYY');
+  }
+
+  public getCategoryTranslation(category: ArticleCategory): string {
+    return this.categoryTranslation.get(category);
   }
 
   private getArticle(): void {

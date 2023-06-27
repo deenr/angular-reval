@@ -33,7 +33,7 @@
       <div class="flex-column categories">
         <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">File under</p>
         <div class="flex-row category__items author-and-categories__content" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '300px'; marginTop: '16px'">
-          <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium">{{ category }}</p>
+          <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium">{{ getCategoryTranslation(category) }}</p>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
     class="main-article-small cursor-pointer"
     [loadingArticle]="loadingArticles"
     [image]="mainArticle.image"
-    [subHeading]="mainArticle.categories[0]"
+    [subHeading]="getCategoryTranslation(mainArticle.categories[0])"
     [heading]="mainArticle.title"
     [supportingText]="mainArticle.subtitle"
     [author]="mainArticle.author"
@@ -55,7 +55,7 @@
         class="cursor-pointer"
         [loadingArticle]="loadingArticles"
         [image]="article.image"
-        [subHeading]="article.categories[0]"
+        [subHeading]="getCategoryTranslation(article.categories[0])"
         [heading]="article.title"
         [supportingText]="article.subtitle"
         [author]="article.author"
