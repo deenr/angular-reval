@@ -123,10 +123,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public goToPassword(): void {
-    // this.openDashboard();
-    if (this.emailForm.valid) {
-      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-    }
+    this.openDashboard();
+    // if (this.emailForm.valid) {
+    //   this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+    // }
   }
 
   public goToEmailVerification(): void {
