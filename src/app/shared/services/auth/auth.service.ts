@@ -4,7 +4,7 @@ import * as auth from 'firebase/auth';
 import {User as FirebaseUser} from 'firebase/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import {User} from '@shared/interfaces/user';
+import {User} from '@shared/interfaces/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class AuthService {
 
   public get isVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user?.emailVerified;
   }
 
   public constructor(private readonly fireAuth: AngularFireAuth, private readonly fireStore: AngularFirestore, private readonly router: Router, private readonly ngZone: NgZone) {
@@ -44,9 +44,9 @@ export class AuthService {
         this.fireAuth.authState.subscribe((user: FirebaseUser) => {
           if (user) {
             if (this.isVerified) {
-              this.router.navigateByUrl('register');
-            } else {
               this.router.navigate(['/']);
+            } else {
+              this.router.navigateByUrl('register');
             }
           }
         });
@@ -131,15 +131,15 @@ export class AuthService {
     return userRef.set(data, {merge: true});
   }
 
-  public setUserDetails(firstName: string, lastName: string, department: string, field: string, universityId: string, yearOfGraduation: string, phoneNumber: string): Promise<void> {
+  public setUserDetails(firstName: string, lastName: string, faculty: string, program: string, universityId: string, yearOfGraduation: string, phoneNumber: string): Promise<void> {
     const currentUser = this.fireAuth.currentUser;
 
     if (currentUser) {
       const updatedUser = {
         firstName,
         lastName,
-        department,
-        field,
+        faculty,
+        program,
         universityId,
         yearOfGraduation,
         phoneNumber,

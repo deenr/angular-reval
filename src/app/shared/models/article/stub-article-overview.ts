@@ -1,4 +1,4 @@
-import {ArticleCategory} from '@shared/enums/article-category.enum';
+import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from './article-overview.model';
 
 export class StubArticleOverview {

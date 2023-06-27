@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
-import {UserRole} from '@shared/enums/user-role.enum';
+import {UserRole} from '@shared/enums/user/user-role.enum';
 import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
 import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
 import {EngineeringTechnologyProgram} from '@shared/enums/faculty-and-department/engineering-technology-program.enum';
@@ -16,6 +16,7 @@ import {Program} from '../register.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {AuthService} from '@shared/services/auth/auth.service';
+import {User} from '@shared/interfaces/user/user';
 
 @Component({
   selector: 'app-register-details',
@@ -23,7 +24,7 @@ import {AuthService} from '@shared/services/auth/auth.service';
   styleUrls: ['./register-details.component.scss']
 })
 export class RegisterDetailsComponent {
-  public detailsForm: FormGroup<{
+  public desktopDetailsForm: FormGroup<{
     firstName: FormControl<string>;
     lastName: FormControl<string>;
     faculty: FormControl<Faculty>;
@@ -38,9 +39,37 @@ export class RegisterDetailsComponent {
     phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')]),
     faculty: new FormControl(null),
     program: new FormControl({value: null, disabled: true}),
-    universityId: new FormControl(null),
+    universityId: new FormControl(null, Validators.required),
     yearOfGraduation: new FormControl(null),
-    role: new FormControl(null)
+    role: new FormControl(null, Validators.required)
+  });
+
+  public mobileDetailsForm: FormGroup<{
+    personal: FormGroup<{
+      firstName: FormControl<string>;
+      lastName: FormControl<string>;
+      phoneNumber: FormControl<string>;
+    }>;
+    university: FormGroup<{
+      faculty: FormControl<Faculty>;
+      program: FormControl<Program>;
+      universityId: FormControl<string>;
+      yearOfGraduation: FormControl<string>;
+      role: FormControl<UserRole>;
+    }>;
+  }> = new FormGroup({
+    personal: new FormGroup({
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')])
+    }),
+    university: new FormGroup({
+      faculty: new FormControl(null),
+      program: new FormControl({value: null, disabled: true}),
+      universityId: new FormControl(null, Validators.required),
+      yearOfGraduation: new FormControl(null),
+      role: new FormControl(null, Validators.required)
+    })
   });
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
@@ -93,9 +122,13 @@ export class RegisterDetailsComponent {
 
   public sendingDetails = false;
   public mobileDetailSteps: MobileDetailStep[] = [
-    {page: 1, active: true},
-    {page: 2, active: false}
+    {page: MobileDetailForm.PERSONAL, active: true},
+    {page: MobileDetailForm.UNIVERISTY, active: false}
   ];
+  private mobileDetailFormPageNumber = new Map<MobileDetailForm, number>([
+    [MobileDetailForm.PERSONAL, 1],
+    [MobileDetailForm.UNIVERISTY, 2]
+  ]);
 
   public constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
@@ -108,7 +141,7 @@ export class RegisterDetailsComponent {
   }
 
   public getPrograms(): Program[] {
-    switch (this.detailsForm.value.faculty) {
+    switch (this.desktopDetailsForm.value.faculty || this.mobileDetailsForm.controls.university.value.faculty) {
       case Faculty.ARCHITECTURE_AND_ARTS:
         return Object.keys(ArchitectureAndArtsProgram).map((program: string) => program as ArchitectureAndArtsProgram);
       case Faculty.BUSINESS_ECONOMICS:
@@ -139,53 +172,87 @@ export class RegisterDetailsComponent {
 
   public onFacultyChange(selectChange: MatSelectChange): void {
     const faculty = selectChange.value as Faculty;
-    Object.values(Faculty).includes(faculty) ? this.detailsForm.controls.program.enable() : this.detailsForm.controls.program.disable();
-  }
-
-  public sendDetails(): void {
-    if (this.detailsForm.valid) {
-      this.sendingDetails = true;
-
-      this.authService
-        .setUserDetails(
-          this.detailsForm.value.firstName,
-          this.detailsForm.value.lastName,
-          this.detailsForm.value.faculty,
-          this.detailsForm.value.program,
-          this.detailsForm.value.universityId,
-          this.detailsForm.value.yearOfGraduation,
-          this.detailsForm.value.phoneNumber
-        )
-        .then(() => this.router.navigateByUrl('/'));
+    if (Object.values(Faculty).includes(faculty)) {
+      this.desktopDetailsForm.controls.program.enable();
+      this.mobileDetailsForm.controls.university.controls.program.enable();
+    } else {
+      this.desktopDetailsForm.controls.program.disable();
+      this.mobileDetailsForm.controls.university.controls.program.disable();
     }
   }
 
-  public getActiveStepPageNumber(): number {
+  public sendingDesktopDetails(): void {
+    this.desktopDetailsForm.markAllAsTouched();
+
+    if (this.desktopDetailsForm.valid) {
+      this.sendingDetails = true;
+      this.sendUserDetails({
+        firstName: this.desktopDetailsForm.value.firstName,
+        lastName: this.desktopDetailsForm.value.lastName,
+        phoneNumber: this.desktopDetailsForm.value.phoneNumber,
+        faculty: this.desktopDetailsForm.value.faculty,
+        program: this.desktopDetailsForm.value.program ?? null,
+        universityId: this.desktopDetailsForm.value.universityId,
+        yearOfGraduation: this.desktopDetailsForm.value.yearOfGraduation
+      } as User);
+    }
+  }
+
+  public getActiveStepPage(): MobileDetailForm {
     return this.mobileDetailSteps.find((step: MobileDetailStep) => step.active).page;
   }
 
+  public getActiveStepPageNumber(): number {
+    return this.mobileDetailFormPageNumber.get(this.getActiveStepPage());
+  }
+
+  public isMobileStepPersonal(): boolean {
+    return this.getActiveStepPage() === MobileDetailForm.PERSONAL;
+  }
+
+  public isMobileStepUniversity(): boolean {
+    return this.getActiveStepPage() === MobileDetailForm.UNIVERISTY;
+  }
+
   public continueMobileDetails(): void {
-    this.detailsForm.markAllAsTouched();
+    const activePageNumber = this.getActiveStepPageNumber() - 1;
 
-    if (this.detailsForm.valid && !this.sendingDetails) {
-      const currentActiveStepPageNumber = this.getActiveStepPageNumber();
-      if (currentActiveStepPageNumber === this.mobileDetailSteps.length) {
-        this.sendingDetails = true;
-        this.sendDetails();
-      } else {
-        this.mobileDetailSteps[currentActiveStepPageNumber - 1].active = false;
-        this.mobileDetailSteps[currentActiveStepPageNumber].active = true;
-
-        this.detailsForm.controls.universityId.addValidators(Validators.required);
-        this.detailsForm.controls.role.addValidators(Validators.required);
-
-        this.detailsForm.markAsUntouched();
+    if (!this.sendingDetails) {
+      if (this.getActiveStepPage() === MobileDetailForm.PERSONAL) {
+        this.mobileDetailsForm.controls.personal.markAllAsTouched();
+        if (this.mobileDetailsForm.controls.personal.valid) {
+          this.mobileDetailSteps[activePageNumber].active = false;
+          this.mobileDetailSteps[activePageNumber + 1].active = true;
+        }
+      } else if (this.getActiveStepPage() === MobileDetailForm.UNIVERISTY) {
+        this.mobileDetailsForm.controls.university.markAllAsTouched();
+        if (this.mobileDetailsForm.controls.university.valid) {
+          this.sendingDetails = true;
+          this.sendUserDetails({
+            firstName: this.mobileDetailsForm.value.personal.firstName,
+            lastName: this.mobileDetailsForm.value.personal.lastName,
+            phoneNumber: this.mobileDetailsForm.value.personal.phoneNumber,
+            faculty: this.mobileDetailsForm.value.university.faculty,
+            program: this.mobileDetailsForm.value.university.program ?? null,
+            universityId: this.mobileDetailsForm.value.university.universityId,
+            yearOfGraduation: this.mobileDetailsForm.value.university.yearOfGraduation
+          } as User);
+        }
       }
     }
+  }
+
+  private sendUserDetails(user: User): void {
+    this.authService.setUserDetails(user.firstName, user.lastName, user.faculty, user.program, user.universityId, user.yearOfGraduation, user.phoneNumber).then(() => this.router.navigateByUrl('/'));
   }
 }
 
 interface MobileDetailStep {
-  page: number;
+  page: MobileDetailForm;
   active: boolean;
+}
+
+enum MobileDetailForm {
+  PERSONAL = 'PERSONAL',
+  UNIVERISTY = 'UNIVERISTY'
 }

@@ -21,7 +21,6 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {path: '', component: LandingPageComponent},
-      {path: 'verify', component: EmailVerificationComponent},
       {path: 'privacy', component: PrivacyPolicyComponent},
       {path: 'terms', component: TermsOfServiceComponent},
       {path: 'not-found', component: NotFoundComponent},
@@ -36,7 +35,8 @@ const routes: Routes = [
     component: AuthenticationComponent,
     children: [
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent}
+      {path: 'register', component: RegisterComponent},
+      {path: 'verify', component: EmailVerificationComponent}
     ]
   },
   {path: '**', redirectTo: ''}

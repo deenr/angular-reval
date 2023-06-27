@@ -1,4 +1,4 @@
-import {ArticleCategory} from '@shared/enums/article-category.enum';
+import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 
 export class ArticleOverview {
   private _id: string;

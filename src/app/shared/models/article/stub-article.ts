@@ -1,4 +1,4 @@
-import {ArticleCategory} from '@shared/enums/article-category.enum';
+import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {Article} from './article.model';
 import {IntroductionContent, TextContent} from './article-content.model';
 

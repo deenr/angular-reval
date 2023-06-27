@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {UserRole} from '@shared/enums/user-role.enum';
+import {UserRole} from '@shared/enums/user/user-role.enum';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
 import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
@@ -123,10 +123,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public goToPassword(): void {
-    this.openDashboard();
-    // if (this.emailForm.valid) {
-    //   this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-    // }
+    // this.openDashboard();
+    if (this.emailForm.valid) {
+      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+    }
   }
 
   public goToEmailVerification(): void {

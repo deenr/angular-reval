@@ -1,7 +1,7 @@
-import {ArticleContentType} from '@shared/enums/article-content-type.enum';
 import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent} from './article-content.model';
-import {ArticleCategory} from '@shared/enums/article-category.enum';
+import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from './article-overview.model';
+import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 
 export class Article extends ArticleOverview {
   private _content: ArticleContent[];

@@ -1,6 +1,6 @@
-<form [formGroup]="detailsForm" class="flex-column full-height">
+<div class="flex-column full-height">
   <div class="desktop-form flex-column form__details">
-    <div class="form__inputs--desktop">
+    <form [formGroup]="desktopDetailsForm" class="form__inputs--desktop">
       <mat-form-field>
         <mat-label class="text-sm text-medium">First name</mat-label>
         <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
@@ -45,11 +45,11 @@
         <mat-label class="text-sm text-medium">Year of Graduation</mat-label>
         <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
       </mat-form-field>
-    </div>
-    <app-progress-button [loading]="sendingDetails">Continue</app-progress-button>
+    </form>
+    <app-progress-button [loading]="sendingDetails" (click)="sendingDesktopDetails()">Continue</app-progress-button>
   </div>
-  <div class="mobile-form flex-column full-height">
-    <div *ngIf="getActiveStepPageNumber() === 1" class="flex-column form__details full-width">
+  <form [formGroup]="mobileDetailsForm" class="mobile-form flex-column full-height">
+    <div *ngIf="isMobileStepPersonal()" formGroupName="personal" class="flex-column form__details full-width">
       <div class="flex-column form__inputs">
         <mat-form-field>
           <mat-label class="text-sm text-medium">First name</mat-label>
@@ -66,7 +66,7 @@
       </div>
       <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
     </div>
-    <div *ngIf="getActiveStepPageNumber() === 2" class="flex-column form__details full-width">
+    <div *ngIf="isMobileStepUniversity()" formGroupName="university" class="flex-column form__details full-width">
       <div class="flex-column form__inputs">
         <mat-form-field>
           <mat-label class="text-sm text-medium">Academic role</mat-label>
@@ -104,5 +104,5 @@
       <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
     </div>
     <app-paginator class="paginator" [activePage]="getActiveStepPageNumber()" [pages]="mobileDetailSteps.length"></app-paginator>
-  </div>
-</form>
+  </form>
+</div>
