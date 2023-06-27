@@ -6,7 +6,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent {
-  public universities = ['Elysian Academy', 'Exemplar College', 'Synthesis University', 'Nexus Institute', 'Innovus Polytechnic', 'Stellar University', 'Quantum College', 'Prodigy Institute'];
+  public universities = ['Elysian Academy', 'Exemplar College', 'Synthesis University', 'Nexus Institute', 'Innovus Polytechnic'];
+  // public universities = ['Elysian Academy', 'Exemplar College', 'Synthesis University', 'Nexus Institute', 'Innovus Polytechnic', 'Stellar University', 'Quantum College', 'Prodigy Institute'];
   public features = [
     {
       icon: 'toolbox',
