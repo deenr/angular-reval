@@ -35,34 +35,23 @@
       }
     }
 
-    &.details {
-      &::before {
-        left: calc(50% - 234px);
-
-        @include breakpoint-sm() {
-          left: calc(50% - 164px);
-        }
-
-        @include breakpoint-xs() {
-          left: 32px !important;
-        }
-      }
-    }
-
-    .detail-form {
-      width: 500px;
-
-      @include breakpoint-sm() {
-        width: 360px;
-      }
-
-      @include breakpoint-xs() {
-        width: 100%;
-      }
-    }
-
-    .other-form {
+    > div {
       max-width: 360px;
+    }
+
+    &.email-verification {
+      > div {
+        max-width: 100%;
+        align-items: center;
+
+        > div {
+          align-items: center;
+        }
+      }
+
+      &::before {
+        left: calc(50% - 48px);
+      }
     }
   }
 
@@ -122,6 +111,7 @@
 
     .email-verification {
       max-width: 100%;
+      align-items: center;
       gap: 32px;
 
       .resend-verification {
@@ -130,6 +120,32 @@
 
       &__manual {
         gap: 24px;
+      }
+
+      ::ng-deep app-verification-code-input {
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+
+        form {
+          justify-content: center;
+        }
+
+        @include breakpoint-sm() {
+          all: unset;
+          width: 100%;
+
+          form {
+            justify-content: space-around;
+          }
+        }
+      }
+
+      > p {
+        align-items: center;
+        gap: 8px;
       }
     }
   }

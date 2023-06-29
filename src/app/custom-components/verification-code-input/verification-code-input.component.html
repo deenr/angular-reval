@@ -1,0 +1,80 @@
+<form [formGroup]="verificationCodeForm" class="flex-row verification-code" autocomplete="off" [class.invalid]="invalid" (click)="focus()">
+  <input
+    [class.active]="hasCode(1)"
+    [class.invalid]="isFormControlInvalid(1)"
+    type="tel"
+    inputmode="numeric"
+    id="codeOne"
+    placeholder="0"
+    formControlName="codeOne"
+    maxlength="1"
+    (input)="handleInput($event, 1)"
+    (paste)="handlePaste($event, 1)"
+  />
+  <input
+    [class.active]="hasCode(2)"
+    [class.invalid]="isFormControlInvalid(2)"
+    type="tel"
+    inputmode="numeric"
+    id="codeTwo"
+    placeholder="0"
+    formControlName="codeTwo"
+    maxlength="1"
+    (input)="handleInput($event, 2)"
+    (paste)="handlePaste($event, 2)"
+    (keydown.backspace)="handleBackspace($event, 2)"
+  />
+  <input
+    [class.active]="hasCode(3)"
+    [class.invalid]="isFormControlInvalid(3)"
+    type="tel"
+    inputmode="numeric"
+    id="codeThree"
+    placeholder="0"
+    formControlName="codeThree"
+    maxlength="1"
+    (input)="handleInput($event, 3)"
+    (paste)="handlePaste($event, 3)"
+    (keydown.backspace)="handleBackspace($event, 3)"
+  />
+  <p [class.active]="hasCode(3)" class="display-xl text-medium" classMd="display-lg" classSm="display-sm">-</p>
+  <input
+    [class.active]="hasCode(4)"
+    [class.invalid]="isFormControlInvalid(4)"
+    type="tel"
+    inputmode="numeric"
+    id="codeFour"
+    placeholder="0"
+    formControlName="codeFour"
+    maxlength="1"
+    (input)="handleInput($event, 4)"
+    (paste)="handlePaste($event, 43)"
+    (keydown.backspace)="handleBackspace($event, 4)"
+  />
+  <input
+    [class.active]="hasCode(5)"
+    [class.invalid]="isFormControlInvalid(5)"
+    type="tel"
+    inputmode="numeric"
+    id="codeFive"
+    placeholder="0"
+    formControlName="codeFive"
+    maxlength="1"
+    (input)="handleInput($event, 5)"
+    (paste)="handlePaste($event, 5)"
+    (keydown.backspace)="handleBackspace($event, 5)"
+  />
+  <input
+    [class.active]="hasCode(6)"
+    [class.invalid]="isFormControlInvalid(6)"
+    type="tel"
+    inputmode="numeric"
+    id="codeSix"
+    placeholder="0"
+    formControlName="codeSix"
+    maxlength="1"
+    (input)="handleInput($event, 6)"
+    (paste)="handlePaste($event, 6)"
+    (keydown.backspace)="handleBackspace($event, 6)"
+  />
+</form>

@@ -3,8 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
-import {AuthService} from '@shared/services/auth/auth.service';
+import {SupabaseService} from '@shared/services/supabase/supabase.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +21,12 @@ export class LoginComponent {
     remember: new FormControl(null)
   });
 
-  public constructor(private readonly authService: AuthService, private readonly dialog: MatDialog) {}
+  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService) {}
 
   public login(): void {
     this.openDashboard();
     // if (this.loginForm.valid) {
-    //   this.authService.signIn(this.loginForm.value.email, this.loginForm.value.password);
+    //   this.supabaseService.signIn(this.loginForm.value.email, this.loginForm.value.password)
     // }
   }
 

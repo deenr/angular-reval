@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {RegistrationStep} from '@pages/register/registration-step.enum';
-import {AuthService} from '@shared/services/auth/auth.service';
+import {SupabaseService} from '@shared/services/supabase/supabase.service';
 
 @Component({
   selector: 'app-email-verification',
@@ -9,9 +8,9 @@ import {AuthService} from '@shared/services/auth/auth.service';
   styleUrls: ['./email-verification.component.scss']
 })
 export class EmailVerificationComponent implements OnInit {
-  public isEmailVerified = true;
+  public isEmailVerified = false;
 
-  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute, private readonly router: Router) {}
+  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly supabaseService: SupabaseService) {}
 
   public ngOnInit(): void {
     this.checkForVerifyingEmail();
@@ -34,26 +33,18 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private checkForVerifyingEmail(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      const oobCode = params['oobCode'];
-      if (oobCode) {
-        this.verifyEmail(oobCode);
-      } else {
-        this.router.navigateByUrl('not-found');
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      const token = params['token'];
+      const email = params['email'];
+      if (token && email) {
+        this.verifyEmail(params['token'], params['email']);
       }
     });
   }
 
-  private verifyEmail(oobCode: string): void {
-    this.isEmailVerified = false;
-    this.authService
-      .verifyEmail(oobCode)
-      .then(() => {
-        this.authService.refreshUser();
-        this.isEmailVerified = true;
-      })
-      .catch((reason) => {
-        alert(reason['code']);
-      });
+  private verifyEmail(token: string, email: string): void {
+    this.supabaseService.verifyEmail(token, email).then(() => {
+      this.isEmailVerified = true;
+    });
   }
 }

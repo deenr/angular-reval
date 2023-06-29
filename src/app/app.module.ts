@@ -19,11 +19,6 @@ import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/cu
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AngularFireModule} from '@angular/fire/compat';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFireStorageModule} from '@angular/fire/compat/storage';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
 import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
 import {EmailVerificationComponent} from '@pages/email-verification/email-verification.component';
@@ -56,9 +51,10 @@ import {NavigationItemComponent} from './custom-components/navigation-header/nav
 import {AuthenticationComponent} from './layouts/authentication/authentication.component';
 import {HomeComponent} from './layouts/home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { StackedLeftDialogComponent } from './custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import { RegisterDetailsComponent } from './pages/register/register-details/register-details.component';
-import { PaginatorComponent } from './custom-components/paginator/paginator.component';
+import {StackedLeftDialogComponent} from './custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import {RegisterDetailsComponent} from './pages/register/register-details/register-details.component';
+import {PaginatorComponent} from './custom-components/paginator/paginator.component';
+import { VerificationCodeInputComponent } from './custom-components/verification-code-input/verification-code-input.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +90,8 @@ import { PaginatorComponent } from './custom-components/paginator/paginator.comp
     HomeComponent,
     StackedLeftDialogComponent,
     RegisterDetailsComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    VerificationCodeInputComponent
   ],
   imports: [
     CommonModule,
@@ -114,11 +111,6 @@ import { PaginatorComponent } from './custom-components/paginator/paginator.comp
     ReactiveFormsModule,
     MatDividerModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
     MatExpansionModule,
     MatTabsModule,
     MatSidenavModule,

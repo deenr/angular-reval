@@ -3,13 +3,9 @@ import {RegistrationStep} from './registration-step.enum';
 import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {matchValidator} from '@shared/helper/validator/match-validator';
-import {AuthService} from '@shared/services/auth/auth.service';
-import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {UserRole} from '@shared/enums/user/user-role.enum';
-import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
 import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
 import {EngineeringTechnologyProgram} from '@shared/enums/faculty-and-department/engineering-technology-program.enum';
@@ -19,7 +15,8 @@ import {RehabilitationSciencesProgram} from '@shared/enums/faculty-and-departmen
 import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-program.enum';
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
-import {MatSelectChange} from '@angular/material/select';
+import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {finalize, interval, scan, take, tap} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -41,6 +38,12 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)])
   });
 
+  public verificationCodeForm: FormGroup<{
+    verificationCode: FormControl<string>;
+  }> = new FormGroup({
+    verificationCode: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)])
+  });
+
   public registrationStep = RegistrationStep;
 
   public steps = [
@@ -48,7 +51,7 @@ export class RegisterComponent implements OnInit {
       stepName: RegistrationStep.EMAIL,
       svgIcon: 'user',
       complete: false,
-      current: true,
+      current: false,
       text: 'Your details',
       supportingText: 'Enter your email'
     },
@@ -64,30 +67,21 @@ export class RegisterComponent implements OnInit {
       stepName: RegistrationStep.EMAIL_VERIFICATION,
       svgIcon: 'mail',
       complete: false,
-      current: false,
+      current: true,
       text: 'Verification',
       supportingText: 'Verify your account'
-    },
-    {
-      stepName: RegistrationStep.DETAILS,
-      svgIcon: 'details',
-      complete: false,
-      current: false,
-      text: 'Personal information',
-      supportingText: 'Add the required information'
     }
   ] as ProgressStep[];
 
-  public constructor(private readonly authService: AuthService, private readonly router: Router, private readonly dialog: MatDialog) {}
+  public loadingSignUp = false;
+  public timeToSendNewEmailVerification: number;
+  public canResendVerification = false;
+  public canEnterCodeManually = false;
+
+  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService) {}
 
   public ngOnInit(): void {
-    if (this.authService.isVerified) {
-      this.setCurrentProgressStep(RegistrationStep.DETAILS);
-    } else if (this.authService.isLoggedIn) {
-      this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
-    } else {
-      this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
-    }
+    this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
   }
 
   public getTitle(): string {
@@ -96,8 +90,6 @@ export class RegisterComponent implements OnInit {
         return 'Create an account';
       case RegistrationStep.PASSWORD:
         return 'Choose a password';
-      case RegistrationStep.DETAILS:
-        return 'Enter your details';
       case RegistrationStep.EMAIL_VERIFICATION:
         return 'Check your email';
       default:
@@ -123,23 +115,31 @@ export class RegisterComponent implements OnInit {
   }
 
   public goToPassword(): void {
-    this.openDashboard();
-    // if (this.emailForm.valid) {
-    //   this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-    // }
+    // this.openDashboard();
+    if (this.emailForm.valid) {
+      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+    }
   }
 
   public goToEmailVerification(): void {
     if (this.passwordForm.valid) {
-      this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+      this.loadingSignUp = true;
 
-      this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password);
+      this.supabaseService.signUp(this.emailForm.value.email, this.passwordForm.value.password).then(() => {
+        this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+        this.loadingSignUp = false;
+      });
     }
   }
 
-  public goToDetails(): void {
-    if (this.authService.isVerified) {
-      this.setCurrentProgressStep(RegistrationStep.DETAILS);
+  public getResendText(): string {
+    return this.canResendVerification ? 'Click to resend' : `Wait ${this.timeToSendNewEmailVerification} seconds to resend`;
+  }
+
+  public resendVerification(): void {
+    if (this.canResendVerification) {
+      this.setResendCountdown();
+      this.supabaseService.resendEmailVerification(this.emailForm.value.email);
     }
   }
 
@@ -155,8 +155,34 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  public getSectionMaxWidth(): string {
-    return this.getCurrentProgressStep().stepName === RegistrationStep.DETAILS ? '500px' : '360px';
+  public getVerificationButtonText(): string {
+    return this.canEnterCodeManually ? 'Verify email' : 'Enter code manually';
+  }
+
+  public onVerificationButtonClick(): void {
+    if (!this.canEnterCodeManually) {
+      this.setResendCountdown();
+      this.canEnterCodeManually = true;
+    } else {
+      this.verificationCodeForm.markAllAsTouched();
+
+      if (this.verificationCodeForm.valid) {
+        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email);
+      }
+    }
+  }
+
+  private setResendCountdown(): void {
+    this.canResendVerification = false;
+    this.timeToSendNewEmailVerification = 60;
+    const numberOfSeconds = this.timeToSendNewEmailVerification - 1;
+    interval(1000)
+      .pipe(
+        scan((accumulator: number, _current: number) => accumulator - 1, numberOfSeconds + 1),
+        take(numberOfSeconds + 1),
+        finalize(() => (this.canResendVerification = true))
+      )
+      .subscribe((value: number) => (this.timeToSendNewEmailVerification = value));
   }
 
   private setCurrentProgressStep(registrationStep: RegistrationStep): void {

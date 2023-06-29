@@ -13,10 +13,7 @@ import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {MatSelectChange} from '@angular/material/select';
 import {Program} from '../register.component';
-import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {AuthService} from '@shared/services/auth/auth.service';
-import {User} from '@shared/interfaces/user/user';
 
 @Component({
   selector: 'app-register-details',
@@ -130,7 +127,7 @@ export class RegisterDetailsComponent {
     [MobileDetailForm.UNIVERISTY, 2]
   ]);
 
-  public constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  public constructor(private readonly router: Router) {}
 
   public getRoleTranslation(userRole: UserRole): string {
     return this.rolesTranslation.get(userRole);
@@ -186,15 +183,6 @@ export class RegisterDetailsComponent {
 
     if (this.desktopDetailsForm.valid) {
       this.sendingDetails = true;
-      this.sendUserDetails({
-        firstName: this.desktopDetailsForm.value.firstName,
-        lastName: this.desktopDetailsForm.value.lastName,
-        phoneNumber: this.desktopDetailsForm.value.phoneNumber,
-        faculty: this.desktopDetailsForm.value.faculty,
-        program: this.desktopDetailsForm.value.program ?? null,
-        universityId: this.desktopDetailsForm.value.universityId,
-        yearOfGraduation: this.desktopDetailsForm.value.yearOfGraduation
-      } as User);
     }
   }
 
@@ -228,22 +216,9 @@ export class RegisterDetailsComponent {
         this.mobileDetailsForm.controls.university.markAllAsTouched();
         if (this.mobileDetailsForm.controls.university.valid) {
           this.sendingDetails = true;
-          this.sendUserDetails({
-            firstName: this.mobileDetailsForm.value.personal.firstName,
-            lastName: this.mobileDetailsForm.value.personal.lastName,
-            phoneNumber: this.mobileDetailsForm.value.personal.phoneNumber,
-            faculty: this.mobileDetailsForm.value.university.faculty,
-            program: this.mobileDetailsForm.value.university.program ?? null,
-            universityId: this.mobileDetailsForm.value.university.universityId,
-            yearOfGraduation: this.mobileDetailsForm.value.university.yearOfGraduation
-          } as User);
         }
       }
     }
-  }
-
-  private sendUserDetails(user: User): void {
-    this.authService.setUserDetails(user.firstName, user.lastName, user.faculty, user.program, user.universityId, user.yearOfGraduation, user.phoneNumber).then(() => this.router.navigateByUrl('/'));
   }
 }
 

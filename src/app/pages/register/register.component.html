@@ -1,5 +1,5 @@
-<section class="register-section flex-column full-height" [class.details]="canShowStep(registrationStep.DETAILS)">
-  <div class="full-width full-height flex-column" [ngClass]="canShowStep(registrationStep.DETAILS) ? 'detail-form' : 'other-form'">
+<section class="register-section flex-column full-height" [class.email-verification]="canShowStep(registrationStep.EMAIL_VERIFICATION)">
+  <div class="full-width full-height flex-column">
     <div class="register__logo flex-row cursor-pointer" routerLink="/">
       <mat-icon svgIcon="logo-color"></mat-icon>
       <h3>Sphience</h3>
@@ -33,15 +33,22 @@
             <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
           </mat-form-field>
         </div>
-        <button mat-flat-button color="primary" type="button" (click)="goToEmailVerification()">Continue</button>
+        <app-progress-button type="button" [loading]="loadingSignUp" (click)="goToEmailVerification()">Continue</app-progress-button>
       </form>
-      <div *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" class="flex-column email-verification">
-        <button mat-flat-button color="primary" (click)="goToDetails()">Email is verified</button>
+      <form *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" [formGroup]="verificationCodeForm" class="flex-column email-verification full-width">
+        <app-verification-code-input
+          *ngIf="canEnterCodeManually"
+          formControlName="verificationCode"
+          [invalid]="verificationCodeForm.invalid && verificationCodeForm.touched"
+        ></app-verification-code-input>
+        <button mat-flat-button color="primary" class="full-width" (click)="onVerificationButtonClick()">{{ getVerificationButtonText() }}</button>
         <div class="resend-verification">
-          <span class="text-sm text-regular">Didn&#8217;t receive the email? <a>Click to resend</a></span>
+          <span class="text-sm text-regular">
+            Didn&#8217;t receive the email? <a [class.cursor-pointer]="canResendVerification" (click)="resendVerification()">{{ getResendText() }}</a>
+          </span>
         </div>
-      </div>
-      <app-register-details *ngIf="canShowStep(registrationStep.DETAILS)"></app-register-details>
+        <p class="text-sm text-semibold flex-row cursor-pointer" routerLink="/login"><mat-icon svgIcon="arrow-left"></mat-icon>Back to log in</p>
+      </form>
     </div>
   </div>
   <app-progress-steps class="register__process" [steps]="steps"></app-progress-steps>
