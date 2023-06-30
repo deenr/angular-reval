@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
+import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthResponse} from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-email-verification',
@@ -10,7 +14,7 @@ import {SupabaseService} from '@shared/services/supabase/supabase.service';
 export class EmailVerificationComponent implements OnInit {
   public isEmailVerified = false;
 
-  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly supabaseService: SupabaseService) {}
+  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly supabaseService: SupabaseService, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.checkForVerifyingEmail();
@@ -28,8 +32,8 @@ export class EmailVerificationComponent implements OnInit {
     return this.isEmailVerified ? 'Congratulations! Your email has been successfully verified.' : 'Please wait while we verify your email. This process may take a few moments. ';
   }
 
-  public continueToRegister(): void {
-    this.router.navigateByUrl('register');
+  public continueToLogin(): void {
+    this.router.navigateByUrl('login');
   }
 
   private checkForVerifyingEmail(): void {
@@ -43,8 +47,22 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private verifyEmail(token: string, email: string): void {
-    this.supabaseService.verifyEmail(token, email).then(() => {
-      this.isEmailVerified = true;
+    this.supabaseService.verifyEmail(token, email).then(({data, error}: AuthResponse) => {
+      if (error) {
+        this.dialog.open(StackedLeftDialogComponent, {
+          width: '450px',
+          data: {
+            type: DialogType.ERROR,
+            icon: 'exclamation-circle',
+            title: 'Error verifying email',
+            description: error.message,
+            cancelRoute: '/login',
+            confirmRoute: '/login'
+          }
+        });
+      } else {
+        this.isEmailVerified = true;
+      }
     });
   }
 }

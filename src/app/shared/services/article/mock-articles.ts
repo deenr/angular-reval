@@ -1,6 +1,6 @@
 export const articles = [
   {
-    id: 'behind-the-scenes',
+    news_id: 'behind-the-scenes',
     title: 'The Journey of Creating the Sphience Web Application',
     subtitle: 'From Concept to Reality: Building a Platform for Research Equipment Accessibility',
     author: 'Jessica Adams',
@@ -65,7 +65,7 @@ export const articles = [
     ]
   },
   {
-    id: 'enhanced-functionality',
+    news_id: 'enhanced-functionality',
     title: 'New Features and Improvements in the Sphience Application',
     subtitle: 'Making Research Equipment Management Easier and More Efficient',
     author: 'Michael Anderson',
@@ -116,7 +116,7 @@ export const articles = [
     ]
   },
   {
-    id: 'meet-our-growing-team',
+    news_id: 'meet-our-growing-team',
     title: 'Welcoming New Members to Sphience',
     subtitle: 'Expanding Our Talent Pool for Better Innovations and Support',
     author: 'Samantha Lewis',
@@ -170,7 +170,7 @@ export const articles = [
     ]
   },
   {
-    id: 'looking-ahead',
+    news_id: 'looking-ahead',
     title: "Sphience's Vision and Roadmap for the Future",
     subtitle: 'Empowering Researchers with Cutting-edge Tools and Collaborative Solutions',
     author: 'Ryan Turner',
@@ -224,7 +224,7 @@ export const articles = [
     ]
   },
   {
-    id: 'revolutionizing-research-equipment-accessibility',
+    news_id: 'revolutionizing-research-equipment-accessibility',
     title: 'Sphience Wins Innovation Award',
     subtitle: 'Recognizing our Commitment to Advancing Scientific Discoveries',
     author: 'Emily Roberts',
@@ -270,7 +270,7 @@ export const articles = [
     ]
   },
   {
-    id: 'streamlining-collaboration',
+    news_id: 'streamlining-collaboration',
     title: 'New Teamwork Features in the Sphience Application',
     subtitle: 'Empowering Research Groups to Work Seamlessly Together',
     author: 'David Miller',
@@ -327,7 +327,7 @@ export const articles = [
     ]
   },
   {
-    id: 'connecting-researchers-worldwide',
+    news_id: 'connecting-researchers-worldwide',
     title: 'Sphience Expands to International Markets',
     subtitle: 'Breaking Boundaries to Facilitate Global Research Collaborations',
     author: 'Olivia Taylor',
@@ -383,7 +383,7 @@ export const articles = [
     ]
   },
   {
-    id: 'unlocking-research-potential',
+    news_id: 'unlocking-research-potential',
     title: 'Introducing New Modules in the Sphience Web Application',
     subtitle: 'Expanding Capabilities for Enhanced Data Analysis and Collaboration',
     author: 'Rebecca Carter',
@@ -435,7 +435,7 @@ export const articles = [
     ]
   },
   {
-    id: 'driving-innovation',
+    news_id: 'driving-innovation',
     title: 'Sphience Collaborates with Leading Universities for Research Advancement',
     subtitle: 'Forging Strategic Partnerships to Foster Scientific Breakthroughs',
     author: 'Daniel Williams',
@@ -495,7 +495,7 @@ export const articles = [
     ]
   },
   {
-    id: 'building-user-centric-experience',
+    news_id: 'building-user-centric-experience',
     title: "Enhancing Sphience Web Application's Interface",
     subtitle: 'Improving Usability and Accessibility for Seamless Research Equipment Management',
     author: 'Sophia Rodriguez',

@@ -59,9 +59,11 @@ export class NewsComponent implements OnInit {
     this.mainArticle = StubArticleOverview.getEmptyArticleOverview();
     this.otherArticles = [...Array(9).keys()].map((index: number) => StubArticleOverview.getEmptyArticleOverviewWithId(`${index}`));
     this.articleService.getOverview().subscribe((news: ArticleOverview[]) => {
-      this.mainArticle = news.shift();
-      this.otherArticles = news;
-      this.loadingArticles = false;
+      if (news) {
+        this.mainArticle = news?.shift();
+        this.otherArticles = news;
+        this.loadingArticles = false;
+      }
     });
   }
 }

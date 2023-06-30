@@ -1,49 +1,39 @@
 import {Injectable} from '@angular/core';
-import {Observable, map} from 'rxjs';
+import {Observable, catchError, from, map, of, throwError} from 'rxjs';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {Article} from '@shared/models/article/article.model';
-import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from '@angular/fire/compat/firestore';
+import {supabase} from '../supabase/supabase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpArticleService {
-  private newsRef: AngularFirestoreCollection<Article>;
-
-  public constructor(private readonly fireStore: AngularFirestore) {
-    this.newsRef = fireStore.collection<Article>('news');
-  }
-
   public getOverview(): Observable<ArticleOverview[]> {
-    return this.newsRef.snapshotChanges().pipe(
-      map((changes: DocumentChangeAction<Article>[]) =>
-        changes.map((change: DocumentChangeAction<Article>) =>
-          ArticleOverview.fromJSON({
-            id: change.payload.doc.id,
-            ...change.payload.doc.data()
-          })
-        )
-      )
+    return from(
+      supabase
+        .from('articles')
+        .select('*')
+        .then(({data}) => data.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
     );
   }
 
   public getAll(): Observable<Article[]> {
-    return this.newsRef.snapshotChanges().pipe(
-      map((changes: DocumentChangeAction<Article>[]) =>
-        changes.map((change: DocumentChangeAction<Article>) =>
-          Article.fromJSON({
-            id: change.payload.doc.id,
-            ...change.payload.doc.data()
-          })
-        )
-      )
+    return from(
+      supabase
+        .from('articles')
+        .select('*')
+        .then(({data}) => data.map((articleJSON: any) => Article.fromJSON(articleJSON)))
     );
   }
 
   public getArticleById(id: string): Observable<Article> {
-    return this.newsRef
-      .doc(id)
-      .get()
-      .pipe(map((articleFirestoreJSON: any) => Article.fromJSON(articleFirestoreJSON.data())));
+    return from(
+      supabase
+        .from('articles')
+        .select('*')
+        .eq('id', id)
+        .single()
+        .then(({data}) => Article.fromJSON(data))
+    );
   }
 }

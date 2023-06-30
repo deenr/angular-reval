@@ -157,8 +157,15 @@
   }
 
   .mat-mdc-form-field-subscript-wrapper {
+    .mat-mdc-form-field-error-wrapper {
+      padding: 0;
+
+      .mat-mdc-form-field-error {
+        color: $color-error-500;
+      }
+    }
+
     .mat-mdc-form-field-hint-wrapper {
-      margin-top: 4px;
       padding: 0;
 
       .mat-mdc-form-field-hint {

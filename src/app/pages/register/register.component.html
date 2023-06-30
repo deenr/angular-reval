@@ -37,12 +37,12 @@
       </form>
       <form *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" [formGroup]="verificationCodeForm" class="flex-column email-verification full-width">
         <app-verification-code-input
-          *ngIf="canEnterCodeManually"
+          *ngIf="canEnterCodeManually && !emailVerified"
           formControlName="verificationCode"
           [invalid]="verificationCodeForm.invalid && verificationCodeForm.touched"
         ></app-verification-code-input>
-        <button mat-flat-button color="primary" class="full-width" (click)="onVerificationButtonClick()">{{ getVerificationButtonText() }}</button>
-        <div class="resend-verification">
+        <app-progress-button type="button" class="full-width" [loading]="loadingVerification" (click)="onVerificationButtonClick()">{{ getVerificationButtonText() }}</app-progress-button>
+        <div *ngIf="!emailVerified" class="resend-verification">
           <span class="text-sm text-regular">
             Didn&#8217;t receive the email? <a [class.cursor-pointer]="canResendVerification" (click)="resendVerification()">{{ getResendText() }}</a>
           </span>

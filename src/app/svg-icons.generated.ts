@@ -84,6 +84,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/email.svg"
   },
   {
+    "name": "exclamation-circle",
+    "path": "./assets/svg/exclamation-circle.svg"
+  },
+  {
     "name": "hamburger",
     "path": "./assets/svg/hamburger.svg"
   },

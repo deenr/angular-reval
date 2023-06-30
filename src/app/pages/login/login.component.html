@@ -13,6 +13,7 @@
         <mat-form-field>
           <mat-label class="text-sm text-medium">Email</mat-label>
           <input matInput formControlName="email" placeholder="Enter your email" />
+          <mat-error *hasError="'email'; code: 'invalid'">Incorrect email or password</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label class="text-sm text-medium">Password</mat-label>

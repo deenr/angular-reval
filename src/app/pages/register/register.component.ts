@@ -16,7 +16,8 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
-import {finalize, interval, scan, take, tap} from 'rxjs';
+import {finalize, interval, scan, take} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -51,7 +52,7 @@ export class RegisterComponent implements OnInit {
       stepName: RegistrationStep.EMAIL,
       svgIcon: 'user',
       complete: false,
-      current: false,
+      current: true,
       text: 'Your details',
       supportingText: 'Enter your email'
     },
@@ -67,18 +68,21 @@ export class RegisterComponent implements OnInit {
       stepName: RegistrationStep.EMAIL_VERIFICATION,
       svgIcon: 'mail',
       complete: false,
-      current: true,
+      current: false,
       text: 'Verification',
       supportingText: 'Verify your account'
     }
   ] as ProgressStep[];
 
   public loadingSignUp = false;
+
   public timeToSendNewEmailVerification: number;
   public canResendVerification = false;
   public canEnterCodeManually = false;
+  public loadingVerification = false;
+  public emailVerified = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService) {}
+  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService, private readonly router: Router) {}
 
   public ngOnInit(): void {
     this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
@@ -91,7 +95,7 @@ export class RegisterComponent implements OnInit {
       case RegistrationStep.PASSWORD:
         return 'Choose a password';
       case RegistrationStep.EMAIL_VERIFICATION:
-        return 'Check your email';
+        return this.emailVerified ? 'Email verified' : 'Check your email';
       default:
         return '';
     }
@@ -104,7 +108,7 @@ export class RegisterComponent implements OnInit {
       case RegistrationStep.PASSWORD:
         return 'Must be at least 8 characters.';
       case RegistrationStep.EMAIL_VERIFICATION:
-        return `We sent a verification link to ${this.emailForm.value.email}`;
+        return this.emailVerified ? 'Your password has been successfully reset. Click below to log in magically.' : `We sent a verification link to ${this.emailForm.value.email}`;
       default:
         return '';
     }
@@ -127,6 +131,7 @@ export class RegisterComponent implements OnInit {
 
       this.supabaseService.signUp(this.emailForm.value.email, this.passwordForm.value.password).then(() => {
         this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+        this.setResendCountdown();
         this.loadingSignUp = false;
       });
     }
@@ -156,18 +161,28 @@ export class RegisterComponent implements OnInit {
   }
 
   public getVerificationButtonText(): string {
-    return this.canEnterCodeManually ? 'Verify email' : 'Enter code manually';
+    if (this.emailVerified) {
+      return 'Continue';
+    } else {
+      return this.canEnterCodeManually ? 'Verify email' : 'Enter code manually';
+    }
   }
 
   public onVerificationButtonClick(): void {
-    if (!this.canEnterCodeManually) {
-      this.setResendCountdown();
+    if (this.emailVerified) {
+      this.router.navigateByUrl('/login');
+    } else if (!this.canEnterCodeManually) {
       this.canEnterCodeManually = true;
     } else {
       this.verificationCodeForm.markAllAsTouched();
 
       if (this.verificationCodeForm.valid) {
-        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email);
+        this.loadingVerification = true;
+
+        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(() => {
+          this.emailVerified = true;
+          this.loadingVerification = false;
+        });
       }
     }
   }
