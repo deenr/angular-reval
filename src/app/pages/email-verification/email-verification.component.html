@@ -7,6 +7,6 @@
       <h2 class="display-sm text-semibold full-width">{{ getHeaderTitle() }}</h2>
       <p class="text-md text-regular full-width">{{ getHeaderDescription() }}</p>
     </div>
-    <app-progress-button class="flex-column verify__button" [loading]="!isEmailVerified" (click)="continueToLogin()">Back to login</app-progress-button>
+    <app-progress-button class="flex-column verify__button" [loading]="!isEmailVerified" (progressClick)="continueToLogin()">Back to login</app-progress-button>
   </div>
 </section>

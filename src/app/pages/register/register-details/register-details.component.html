@@ -46,7 +46,7 @@
         <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
       </mat-form-field>
     </form>
-    <app-progress-button [loading]="sendingDetails" (click)="sendingDesktopDetails()">Continue</app-progress-button>
+    <app-progress-button [loading]="sendingDetails" (progressClick)="sendingDesktopDetails()">Continue</app-progress-button>
   </div>
   <form [formGroup]="mobileDetailsForm" class="mobile-form flex-column full-height">
     <div *ngIf="isMobileStepPersonal()" formGroupName="personal" class="flex-column form__details full-width">
@@ -64,7 +64,7 @@
           <input formControlName="phoneNumber" matInput text="tel" placeholder="Contact number" />
         </mat-form-field>
       </div>
-      <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
+      <app-progress-button class="full-width" [loading]="sendingDetails" (progressClick)="continueMobileDetails()">Continue</app-progress-button>
     </div>
     <div *ngIf="isMobileStepUniversity()" formGroupName="university" class="flex-column form__details full-width">
       <div class="flex-column form__inputs">
@@ -101,7 +101,7 @@
           <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
         </mat-form-field>
       </div>
-      <app-progress-button class="full-width" [loading]="sendingDetails" (click)="continueMobileDetails()">Continue</app-progress-button>
+      <app-progress-button class="full-width" [loading]="sendingDetails" (progressClick)="continueMobileDetails()">Continue</app-progress-button>
     </div>
     <app-paginator class="paginator" [activePage]="getActiveStepPageNumber()" [pages]="mobileDetailSteps.length"></app-paginator>
   </form>

@@ -10,12 +10,12 @@
         <p class="text-md text-regular">Welcome back! Please enter your details.</p>
       </div>
       <div class="login__form flex-column">
-        <mat-form-field>
+        <mat-form-field [hideRequiredMarker]="true">
           <mat-label class="text-sm text-medium">Email</mat-label>
           <input matInput formControlName="email" placeholder="Enter your email" />
           <mat-error *hasError="'email'; code: 'invalid'">Incorrect email or password</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field [hideRequiredMarker]="true">
           <mat-label class="text-sm text-medium">Password</mat-label>
           <input matInput formControlName="password" type="password" placeholder="••••••••" />
         </mat-form-field>
@@ -25,7 +25,7 @@
         <a href="/">Forgot password</a>
       </div>
       <div class="login__actions flex-column">
-        <button mat-flat-button type="button" color="primary" (click)="login()">Sign in</button>
+        <app-progress-button type="button" [loading]="loadingLogin" (progressClick)="login()">Sign in</app-progress-button>
         <button mat-stroked-button type="button" (click)="googleLogin()"><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign in with Google</button>
       </div>
       <div class="login__no-account">

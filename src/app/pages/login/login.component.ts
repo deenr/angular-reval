@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl(null, Validators.required),
     remember: new FormControl(null)
   });
+  public loadingLogin = false;
 
   public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService) {}
 
@@ -41,7 +42,10 @@ export class LoginComponent implements OnInit {
   public login(): void {
     // this.openDashboard();
     if (this.loginForm.valid) {
+      this.loadingLogin = true;
       this.supabaseService.signIn(this.loginForm.value.email, this.loginForm.value.password).then(({data, error}: AuthTokenResponse) => {
+        this.loadingLogin = false;
+
         if (error) {
           this.loginForm.controls.email.setErrors({invalid: true});
           this.loginForm.controls.password.setErrors({invalid: true});
@@ -54,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   public googleLogin(): void {
     this.openDashboard();
-    this.supabaseService.googleSignIn();
+    // this.supabaseService.googleSignIn();
   }
 
   private openDashboard(): void {

@@ -65,8 +65,6 @@ export class StackedLeftDialogComponent {
         return 'featured-icon-primary';
       case DialogType.WARNING:
         return 'featured-icon-warning';
-      case DialogType.INFORMATION:
-        return 'featured-icon-primary';
     }
   }
 }

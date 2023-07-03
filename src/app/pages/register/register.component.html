@@ -33,22 +33,22 @@
             <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
           </mat-form-field>
         </div>
-        <app-progress-button type="button" [loading]="loadingSignUp" (click)="goToEmailVerification()">Continue</app-progress-button>
+        <app-progress-button type="confirm" [loading]="loadingSignUp" (progressClick)="goToEmailVerification()">Continue</app-progress-button>
       </form>
-      <form *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" [formGroup]="verificationCodeForm" class="flex-column email-verification full-width">
+      <div *ngIf="canShowStep(registrationStep.EMAIL_VERIFICATION)" [formGroup]="verificationCodeForm" class="flex-column email-verification full-width">
         <app-verification-code-input
           *ngIf="canEnterCodeManually && !emailVerified"
           formControlName="verificationCode"
           [invalid]="verificationCodeForm.invalid && verificationCodeForm.touched"
         ></app-verification-code-input>
-        <app-progress-button type="button" class="full-width" [loading]="loadingVerification" (click)="onVerificationButtonClick()">{{ getVerificationButtonText() }}</app-progress-button>
+        <app-progress-button type="button" class="full-width" [loading]="loadingVerification" (progressClick)="onVerificationButtonClick()">{{ getVerificationButtonText() }}</app-progress-button>
         <div *ngIf="!emailVerified" class="resend-verification">
           <span class="text-sm text-regular">
             Didn&#8217;t receive the email? <a [class.cursor-pointer]="canResendVerification" (click)="resendVerification()">{{ getResendText() }}</a>
           </span>
         </div>
         <p class="text-sm text-semibold flex-row cursor-pointer" routerLink="/login"><mat-icon svgIcon="arrow-left"></mat-icon>Back to log in</p>
-      </form>
+      </div>
     </div>
   </div>
   <app-progress-steps class="register__process" [steps]="steps"></app-progress-steps>

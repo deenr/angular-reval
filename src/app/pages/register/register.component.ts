@@ -6,15 +6,6 @@ import {matchValidator} from '@shared/helper/validator/match-validator';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
-import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
-import {EngineeringTechnologyProgram} from '@shared/enums/faculty-and-department/engineering-technology-program.enum';
-import {LawProgram} from '@shared/enums/faculty-and-department/law-program.enum';
-import {MedicineAndLifeProgram} from '@shared/enums/faculty-and-department/medicine-and-life-program.enum';
-import {RehabilitationSciencesProgram} from '@shared/enums/faculty-and-department/rehabilitation-sciences-program.enum';
-import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-program.enum';
-import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
-import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
 import {finalize, interval, scan, take} from 'rxjs';
 import {Router} from '@angular/router';
@@ -28,7 +19,7 @@ export class RegisterComponent implements OnInit {
   public emailForm: FormGroup<{
     email: FormControl<string>;
   }> = new FormGroup({
-    email: new FormControl(null, [Validators.required])
+    email: new FormControl(null, [Validators.required, Validators.email])
   });
 
   public passwordForm: FormGroup<{
@@ -179,8 +170,20 @@ export class RegisterComponent implements OnInit {
       if (this.verificationCodeForm.valid) {
         this.loadingVerification = true;
 
-        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(() => {
-          this.emailVerified = true;
+        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({data, error}) => {
+          if (error) {
+            this.dialog.open(StackedLeftDialogComponent, {
+              width: '450px',
+              data: {
+                type: DialogType.ERROR,
+                icon: 'exclamation-circle',
+                title: 'Error verifying email',
+                description: error.message
+              }
+            });
+          } else {
+            this.emailVerified = true;
+          }
           this.loadingVerification = false;
         });
       }
@@ -220,14 +223,3 @@ export class RegisterComponent implements OnInit {
     return this.steps.find((progressStep: ProgressStep) => progressStep.current);
   }
 }
-
-export type Program =
-  | ArchitectureAndArtsProgram
-  | BusinessProgram
-  | EngineeringTechnologyProgram
-  | LawProgram
-  | MedicineAndLifeProgram
-  | RehabilitationSciencesProgram
-  | SciencesProgram
-  | SocialSciencesProgram
-  | TransportationSciencesProgram;

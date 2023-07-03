@@ -1,0 +1,7 @@
+export enum UserPermission {
+  STUDENT = 'STUDENT',
+  PHD = 'PHD',
+  PROFESSOR = 'PROFESSOR',
+  ADMIN = 'ADMIN',
+  INCOMPLETE_PROFILE = 'INCOMPLETE_PROFILE'
+}
