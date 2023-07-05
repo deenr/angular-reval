@@ -1,0 +1,11 @@
+<mat-sidenav-container fullscreen cdkscrollable>
+  <mat-sidenav class="sidenav" position="end" #sidenav role="navigation" [opened]="true" position="start" mode="side">
+    <app-interface-sidebar [collapsedWidth]="collapsedWidth" [expandedWidth]="expandedWidth" (sidenavClose)="sidenav.close()" (collapsedChange)="collapsedChange($event)"></app-interface-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content" [ngStyle]="{'margin-left': getLeftMargin()}">
+    <div class="foreground"></div>
+    <div class="test full-height">
+      <p>Interface</p>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

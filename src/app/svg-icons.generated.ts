@@ -16,6 +16,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/arrow-right.svg"
   },
   {
+    "name": "arrow-to-right",
+    "path": "./assets/svg/arrow-to-right.svg"
+  },
+  {
     "name": "arrow-up-right",
     "path": "./assets/svg/arrow-up-right.svg"
   },
@@ -28,8 +32,24 @@ export const SVG_ICONS = [
     "path": "./assets/svg/bell.svg"
   },
   {
+    "name": "box",
+    "path": "./assets/svg/box.svg"
+  },
+  {
+    "name": "buoy",
+    "path": "./assets/svg/buoy.svg"
+  },
+  {
     "name": "calendar",
     "path": "./assets/svg/calendar.svg"
+  },
+  {
+    "name": "chart-pie",
+    "path": "./assets/svg/chart-pie.svg"
+  },
+  {
+    "name": "chart",
+    "path": "./assets/svg/chart.svg"
   },
   {
     "name": "check-circle",
@@ -64,16 +84,16 @@ export const SVG_ICONS = [
     "path": "./assets/svg/close.svg"
   },
   {
-    "name": "google-color",
-    "path": "./assets/svg/color/google-color.svg"
-  },
-  {
-    "name": "logo-color",
-    "path": "./assets/svg/color/logo-color.svg"
-  },
-  {
     "name": "details",
     "path": "./assets/svg/details.svg"
+  },
+  {
+    "name": "device-fold",
+    "path": "./assets/svg/device-fold.svg"
+  },
+  {
+    "name": "devices",
+    "path": "./assets/svg/devices.svg"
   },
   {
     "name": "document",
@@ -88,8 +108,20 @@ export const SVG_ICONS = [
     "path": "./assets/svg/exclamation-circle.svg"
   },
   {
+    "name": "file",
+    "path": "./assets/svg/file.svg"
+  },
+  {
+    "name": "files",
+    "path": "./assets/svg/files.svg"
+  },
+  {
     "name": "hamburger",
     "path": "./assets/svg/hamburger.svg"
+  },
+  {
+    "name": "home",
+    "path": "./assets/svg/home.svg"
   },
   {
     "name": "circle-desktop",
@@ -116,8 +148,20 @@ export const SVG_ICONS = [
     "path": "./assets/svg/illustration/grid4-desktop.svg"
   },
   {
+    "name": "logo-illustration",
+    "path": "./assets/svg/illustration/logo-illustration.svg"
+  },
+  {
     "name": "square-desktop",
     "path": "./assets/svg/illustration/square-desktop.svg"
+  },
+  {
+    "name": "layer-group",
+    "path": "./assets/svg/layer-group.svg"
+  },
+  {
+    "name": "left-arrow-from-left",
+    "path": "./assets/svg/left-arrow-from-left.svg"
   },
   {
     "name": "loading",
@@ -133,55 +177,71 @@ export const SVG_ICONS = [
   },
   {
     "name": "github",
-    "path": "./assets/svg/logos/github.svg"
+    "path": "./assets/svg/logo/github.svg"
+  },
+  {
+    "name": "google-color",
+    "path": "./assets/svg/logo/google-color.svg"
   },
   {
     "name": "instagram",
-    "path": "./assets/svg/logos/instagram.svg"
+    "path": "./assets/svg/logo/instagram.svg"
   },
   {
     "name": "linkedin",
-    "path": "./assets/svg/logos/linkedin.svg"
+    "path": "./assets/svg/logo/linkedin.svg"
+  },
+  {
+    "name": "logo-color",
+    "path": "./assets/svg/logo/logo-color.svg"
+  },
+  {
+    "name": "logo-white",
+    "path": "./assets/svg/logo/logo-white.svg"
   },
   {
     "name": "twitter",
-    "path": "./assets/svg/logos/twitter.svg"
+    "path": "./assets/svg/logo/twitter.svg"
   },
   {
     "name": "university-0",
-    "path": "./assets/svg/logos/university-0.svg"
+    "path": "./assets/svg/logo/university-0.svg"
   },
   {
     "name": "university-1",
-    "path": "./assets/svg/logos/university-1.svg"
+    "path": "./assets/svg/logo/university-1.svg"
   },
   {
     "name": "university-2",
-    "path": "./assets/svg/logos/university-2.svg"
+    "path": "./assets/svg/logo/university-2.svg"
   },
   {
     "name": "university-3",
-    "path": "./assets/svg/logos/university-3.svg"
+    "path": "./assets/svg/logo/university-3.svg"
   },
   {
     "name": "university-4",
-    "path": "./assets/svg/logos/university-4.svg"
+    "path": "./assets/svg/logo/university-4.svg"
   },
   {
     "name": "university-5",
-    "path": "./assets/svg/logos/university-5.svg"
+    "path": "./assets/svg/logo/university-5.svg"
   },
   {
     "name": "university-6",
-    "path": "./assets/svg/logos/university-6.svg"
+    "path": "./assets/svg/logo/university-6.svg"
   },
   {
     "name": "university-7",
-    "path": "./assets/svg/logos/university-7.svg"
+    "path": "./assets/svg/logo/university-7.svg"
   },
   {
     "name": "mail",
     "path": "./assets/svg/mail.svg"
+  },
+  {
+    "name": "microscope",
+    "path": "./assets/svg/microscope.svg"
   },
   {
     "name": "minus-circle",
@@ -212,8 +272,20 @@ export const SVG_ICONS = [
     "path": "./assets/svg/search.svg"
   },
   {
+    "name": "setting",
+    "path": "./assets/svg/setting.svg"
+  },
+  {
+    "name": "sign-out",
+    "path": "./assets/svg/sign-out.svg"
+  },
+  {
     "name": "toolbox",
     "path": "./assets/svg/toolbox.svg"
+  },
+  {
+    "name": "truck-loading",
+    "path": "./assets/svg/truck-loading.svg"
   },
   {
     "name": "user",

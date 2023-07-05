@@ -41,7 +41,6 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {MetricsSectionComponent} from './custom-components/metrics-section/metrics-section.component';
 import {CountUpDirective} from './shared/directives/count-up/count-up.directive';
-import {environment} from 'src/environments/environment';
 import {NewsComponent} from './pages/news/news.component';
 import {ArticleCardComponent} from './custom-components/article-card/article-card.component';
 import {ArticleComponent} from './pages/news/article/article.component';
@@ -56,6 +55,8 @@ import {RegisterDetailsComponent} from './pages/register/register-details/regist
 import {PaginatorComponent} from './custom-components/paginator/paginator.component';
 import {VerificationCodeInputComponent} from './custom-components/verification-code-input/verification-code-input.component';
 import {HasErrorDirective} from './shared/directives/has-error/has-error.directive';
+import {InterfaceComponent} from './layouts/interface//interface.component';
+import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/interface-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,9 @@ import {HasErrorDirective} from './shared/directives/has-error/has-error.directi
     RegisterDetailsComponent,
     PaginatorComponent,
     VerificationCodeInputComponent,
-    HasErrorDirective
+    HasErrorDirective,
+    InterfaceComponent,
+    InterfaceSidebarComponent
   ],
   imports: [
     CommonModule,

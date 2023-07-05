@@ -1,0 +1,34 @@
+@import 'variables';
+
+:host {
+  .sidenav,
+  .sidenav-content,
+  .foreground {
+    background-color: $color-primary-700;
+  }
+
+  .sidenav {
+    border: none;
+    overflow: visible;
+
+    ::ng-deep .mat-drawer-inner-container {
+      overflow: visible;
+    }
+  }
+
+  .sidenav-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 200ms ease;
+  }
+
+  .foreground {
+    height: 12px;
+  }
+
+  .test {
+    border-top-left-radius: 40px;
+    background-color: $color-white;
+  }
+}

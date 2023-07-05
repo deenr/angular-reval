@@ -7,7 +7,7 @@
   height: var(--skeleton-height);
   margin-top: var(--skeleton-margin-top);
   border-radius: var(--skeleton-border-radius);
-  background: linear-gradient(to right, $color-grey-100 0%, $color-grey-200 50%, $color-grey-100 100%);
+  background: linear-gradient(to right, $color-grey-50 0%, $color-grey-200 50%, $color-grey-50 100%);
   background-size: 200% auto;
   animation: skeleton-pulse 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 }

@@ -63,6 +63,7 @@
       .content__sign-up {
         max-width: 480px;
         margin-top: 48px;
+        gap: 2px;
 
         ::ng-deep mat-hint {
           display: none;

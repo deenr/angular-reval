@@ -1,0 +1,39 @@
+<div class="full-height sidebar flex-column" [class.collapsed]="collapsed" [ngStyle]="{width: getSidebarWidth()}">
+  <div class="sidebar__logo flex-row">
+    <div class="logomark">
+      <mat-icon class="full-width full-height" svgIcon="logo-illustration"></mat-icon>
+      <div class="logo-blur"></div>
+    </div>
+    <h3 [class.hidden]="collapsed">Sphience</h3>
+  </div>
+
+  <div class="sidebar__navigation flex-column full-height full-width">
+    <div class="navigation__top navigation__items flex-column">
+      <div class="navigation-item flex-row" *ngFor="let item of topNavigationItems" [class.active]="isNavigationItemActive(item.id)">
+        <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
+        <p class="text text-md text-semibold" [class.hidden]="collapsed">{{ item.name }}</p>
+      </div>
+    </div>
+    <div class="navigation__items flex-column">
+      <div class="navigation-item flex-row" *ngFor="let item of bottomNavigationItems" [class.active]="isNavigationItemActive(item.id)">
+        <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
+        <p class="text text-md text-semibold" [class.hidden]="collapsed">{{ item.name }}</p>
+      </div>
+      <div class="navigation-item collapse-item flex-row" [class.collapsed]="collapsed" (click)="changeSidebarSize()">
+        <mat-icon class="icon" svgIcon="arrow-to-right"></mat-icon>
+        <p class="text text-md text-semibold" [class.hidden]="collapsed">Close</p>
+      </div>
+    </div>
+    <!-- <mat-divider class="divider" [class.hidden]="collapsed"></mat-divider> -->
+    <div class="profile-item" [class.collapsed]="collapsed">
+      <div class="profile flex-row" (click)="changeSidebarSize()">
+        <div class="profile__avatar"></div>
+        <div [class.hidden]="collapsed">
+          <h3 class="profile__name text-sm text-semibold">Dean Reymen</h3>
+          <p class="profile__email text-sm text-regular">reymen@outlook.be</p>
+        </div>
+        <mat-icon class="profile__signout icon" svgIcon="sign-out" [class.hidden]="collapsed"></mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
