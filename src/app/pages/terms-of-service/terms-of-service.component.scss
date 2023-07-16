@@ -16,14 +16,14 @@
     }
 
     align-items: center;
-    padding: 0 80px;
+    padding: 0 80px 96px 80px;
 
     @include breakpoint-md() {
-      padding: 0 64px;
+      padding: 0 64px 64px 64px;
     }
 
     @include breakpoint-sm() {
-      padding: 48px 16px;
+      padding: 0 16px 48px 16px;
     }
 
     h2,
@@ -64,7 +64,6 @@
 
     .terms__content {
       max-width: 720px;
-      padding-bottom: 96px;
 
       .question {
         margin-top: 40px;
@@ -102,6 +101,18 @@
 
     .contact {
       margin-top: 32px;
+    }
+  }
+
+  .terms__divider {
+    margin: 0 112px;
+
+    @include breakpoint-md() {
+      margin: 0 64px;
+    }
+
+    @include breakpoint-sm() {
+      margin: 0 16px;
     }
   }
 }
