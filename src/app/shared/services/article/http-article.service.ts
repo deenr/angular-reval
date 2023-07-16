@@ -13,7 +13,7 @@ export class HttpArticleService {
       supabase
         .from('articles')
         .select('*')
-        .then(({data}) => data.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
+        .then(({data}) => data?.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
     );
   }
 
@@ -22,7 +22,7 @@ export class HttpArticleService {
       supabase
         .from('articles')
         .select('*')
-        .then(({data}) => data.map((articleJSON: any) => Article.fromJSON(articleJSON)))
+        .then(({data}) => data?.map((articleJSON: any) => Article.fromJSON(articleJSON)))
     );
   }
 

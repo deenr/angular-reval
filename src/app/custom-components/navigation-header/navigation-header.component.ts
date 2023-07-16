@@ -10,6 +10,7 @@ import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-lef
 })
 export class NavigationHeaderComponent implements OnInit, OnDestroy {
   @Output() public sidenavToggle = new EventEmitter();
+
   public opacity = 0;
 
   public constructor(private readonly dialog: MatDialog) {}
@@ -32,6 +33,14 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
         description: 'Our team is diligently working towards making our incredible dashboard available to you.'
       }
     });
+  }
+
+  public isSidenavOpen(): boolean {
+    return document.getElementsByClassName('mat-drawer-opened').length !== 0;
+  }
+
+  public getHamburgerIcon(): string {
+    return this.isSidenavOpen() ? 'close' : 'hamburger';
   }
 
   private onWindowScroll(): void {

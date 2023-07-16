@@ -2,31 +2,6 @@
 
 :host {
   .nav-sidebar {
-    .sidebar__header {
-      max-height: 56px;
-      padding: 20px 16px;
-      align-items: center;
-
-      .nav__logo {
-        position: relative;
-        margin-right: auto;
-        gap: 8px;
-        align-items: center;
-
-        mat-icon {
-          min-width: 32px;
-          min-height: 32px;
-        }
-      }
-
-      .close {
-        min-width: 40px;
-        min-height: 40px;
-        padding: 8px;
-        color: $color-grey-500;
-      }
-    }
-
     .sidebar__content {
       padding: 36px 16px;
       overflow-y: scroll;
