@@ -1,5 +1,9 @@
 :host {
-  .sidebar-open {
-    overflow: hidden;
+  .content {
+    overflow-x: hidden;
+
+    &.sidebar-open {
+      overflow: hidden;
+    }
   }
 }

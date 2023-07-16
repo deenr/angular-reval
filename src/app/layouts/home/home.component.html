@@ -2,7 +2,7 @@
   <mat-sidenav class="home" position="end" #sidenav role="navigation">
     <app-navigation-sidebar (sidenavClose)="sidenav.close()"></app-navigation-sidebar>
   </mat-sidenav>
-  <mat-sidenav-content [class.sidebar-open]="isSidenavOpen()">
+  <mat-sidenav-content class="content" [class.sidebar-open]="isSidenavOpen()">
     <main>
       <app-navigation-header (sidenavToggle)="sidenav.toggle()"></app-navigation-header>
       <router-outlet (activate)="onActivate()"></router-outlet>

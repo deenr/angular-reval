@@ -89,18 +89,25 @@
       margin-left: auto;
 
       @include breakpoint-sm() {
-        display: flex;
+        display: inline-block;
       }
 
-      mat-icon {
-        width: 40px;
-        height: 40px;
-        padding: 4px;
-        color: $color-grey-700;
-        cursor: pointer;
+      .hamburger-icon > * {
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
 
-        &.opened {
-          padding: 8px;
+      &.opened {
+        #top-line {
+          transform: translate(3.5px, -3.5px) rotate(45deg);
+        }
+
+        #middle-line {
+          opacity: 0;
+        }
+
+        #bottom-line {
+          transform: translate(3.5px, 3.5px) rotate(-45deg);
         }
       }
     }
