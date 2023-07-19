@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import {UserRole} from '@shared/enums/user/user-role.enum';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
-import {AuthTokenResponse, OAuthResponse} from '@supabase/supabase-js';
+import {AuthError, AuthTokenResponse, OAuthResponse} from '@supabase/supabase-js';
 import {combineLatest} from 'rxjs';
 
 @Component({
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
   });
   public loadingLogin = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService) {}
+  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService, private readonly router: Router) {}
 
   public ngOnInit(): void {
     combineLatest([this.loginForm.controls.email.valueChanges, this.loginForm.controls.password.valueChanges]).subscribe(() => {
@@ -40,17 +42,20 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    // this.openDashboard();
     if (this.loginForm.valid) {
       this.loadingLogin = true;
-      this.supabaseService.signIn(this.loginForm.value.email, this.loginForm.value.password).then(({data, error}: AuthTokenResponse) => {
+      this.supabaseService.signIn(this.loginForm.value.email, this.loginForm.value.password).then(([user, error]: [{id: string; role: UserRole}, AuthError]) => {
         this.loadingLogin = false;
 
         if (error) {
           this.loginForm.controls.email.setErrors({invalid: true});
           this.loginForm.controls.password.setErrors({invalid: true});
         } else {
-          console.log(data);
+          if (user.role === UserRole.INCOMPLETE_PROFILE) {
+            this.router.navigate([`/app/settings/${user.id}`]);
+          } else {
+            this.router.navigate([`/app`]);
+          }
         }
       });
     }

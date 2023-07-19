@@ -9,6 +9,7 @@ import {Subject, throttleTime} from 'rxjs';
 export class ProgressButtonComponent implements OnInit {
   @Input() public loading = false;
   @Input() public type = 'button';
+  @Input() public size = 'lg';
   @Output() public progressClick = new EventEmitter<void>();
   private clickSubject = new Subject<void>();
 
@@ -19,8 +20,11 @@ export class ProgressButtonComponent implements OnInit {
   }
 
   public onClick(event: MouseEvent): void {
-    console.log(event);
     event.stopPropagation();
     this.clickSubject.next();
+  }
+
+  public getClassList(): string {
+    return `full-width ${this.size}`;
   }
 }

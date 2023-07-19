@@ -11,7 +11,6 @@ export class HomeComponent {
   @ViewChild('sidenav') public sidenav: MatSidenav;
 
   public onSidenavToggle(openSidenav: boolean): void {
-    console.log(openSidenav);
     openSidenav ? this.sidenav.toggle() : this.sidenav.close();
   }
 

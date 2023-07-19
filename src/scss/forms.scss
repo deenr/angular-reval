@@ -40,7 +40,7 @@
         display: flex;
         align-items: center;
         margin-top: 24px;
-        padding: 8px 12px;
+        padding: 0;
         min-height: 40px;
         border-radius: 8px;
         border: 1px solid $color-grey-300;
@@ -58,6 +58,9 @@
           font-weight: $fw-400;
           font-size: $fs-100;
           line-height: 150%;
+
+          padding: 8px 12px;
+          border-radius: 7px;
         }
 
         input::placeholder {

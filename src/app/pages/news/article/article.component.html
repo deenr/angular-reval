@@ -26,7 +26,7 @@
           <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
         </div>
       </div>
-      <div class="content__item content__quote" *ngIf="isContentQuote(content.type)">
+      <div class="content__item content__quote full-width" *ngIf="isContentQuote(content.type)">
         <p class="display-xs text-medium text-italic quote" classMd="text-xl">''{{ getQuoteText(content) }}''</p>
         <p class="text-md text-regular author">— {{ getQuoteAuthor(content) }}</p>
       </div>

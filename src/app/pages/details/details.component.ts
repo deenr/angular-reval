@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
-import {UserPermission} from '@shared/enums/user/user-permission.enum';
+import {UserRole} from '@shared/enums/user/user-role.enum';
 import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
 import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
 import {EngineeringTechnologyProgram} from '@shared/enums/faculty-and-department/engineering-technology-program.enum';
@@ -12,15 +12,17 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {MatSelectChange} from '@angular/material/select';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
+import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
+import {SupabaseService} from '@shared/services/supabase/supabase.service';
 
 @Component({
-  selector: 'app-register-details',
-  templateUrl: './register-details.component.html',
-  styleUrls: ['./register-details.component.scss']
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.scss']
 })
-export class RegisterDetailsComponent {
+export class DetailsComponent implements OnInit {
   public desktopDetailsForm: FormGroup<{
     firstName: FormControl<string>;
     lastName: FormControl<string>;
@@ -29,7 +31,7 @@ export class RegisterDetailsComponent {
     universityId: FormControl<string>;
     yearOfGraduation: FormControl<string>;
     phoneNumber: FormControl<string>;
-    role: FormControl<UserPermission>;
+    role: FormControl<UserRole>;
   }> = new FormGroup({
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
@@ -52,7 +54,7 @@ export class RegisterDetailsComponent {
       program: FormControl<Program>;
       universityId: FormControl<string>;
       yearOfGraduation: FormControl<string>;
-      role: FormControl<UserPermission>;
+      role: FormControl<UserRole>;
     }>;
   }> = new FormGroup({
     personal: new FormGroup({
@@ -110,11 +112,11 @@ export class RegisterDetailsComponent {
     [TransportationSciencesProgram.TRANSPORTATION_SCIENCES, 'Transportation Sciences']
   ]);
 
-  public roles = [UserPermission.STUDENT, UserPermission.PHD, UserPermission.PROFESSOR];
-  public rolesTranslation = new Map<UserPermission, string>([
-    [UserPermission.STUDENT, 'Student'],
-    [UserPermission.PHD, 'PhD student'],
-    [UserPermission.PROFESSOR, 'Professor']
+  public roles = [UserRole.STUDENT, UserRole.PHD, UserRole.PROFESSOR];
+  public rolesTranslation = new Map<UserRole, string>([
+    [UserRole.STUDENT, 'Student'],
+    [UserRole.PHD, 'PhD student'],
+    [UserRole.PROFESSOR, 'Professor']
   ]);
 
   public sendingDetails = false;
@@ -127,10 +129,23 @@ export class RegisterDetailsComponent {
     [MobileDetailForm.UNIVERISTY, 2]
   ]);
 
-  public constructor(private readonly router: Router) {}
+  public loadingUserRole = true;
+  public skeletonType = SkeletonType;
 
-  public getRoleTranslation(UserPermission: UserPermission): string {
-    return this.rolesTranslation.get(UserPermission);
+  public constructor(private readonly route: ActivatedRoute, private readonly router: Router, private readonly supabaseService: SupabaseService) {}
+
+  public ngOnInit(): void {
+    this.supabaseService.getUserRole(this.route.snapshot.paramMap.get('id')).subscribe((userRole: UserRole) => {
+      if (userRole) {
+        this.loadingUserRole = false;
+      } else {
+        this.router.navigate(['login']);
+      }
+    });
+  }
+
+  public getRoleTranslation(UserRole: UserRole): string {
+    return this.rolesTranslation.get(UserRole);
   }
 
   public getFacultyTranslation(faculty: Faculty): string {

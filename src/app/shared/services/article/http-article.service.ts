@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Observable, catchError, from, map, of, throwError} from 'rxjs';
+import {Observable, from} from 'rxjs';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {Article} from '@shared/models/article/article.model';
-import {supabase} from '../supabase/supabase.service';
+import {SupabaseService} from '../supabase/supabase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpArticleService {
+  public constructor(private readonly supabaseService: SupabaseService) {}
+
   public getOverview(): Observable<ArticleOverview[]> {
     return from(
-      supabase
+      this.supabaseService.supabase
         .from('articles')
         .select('*')
         .then(({data}) => data?.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
@@ -19,7 +21,7 @@ export class HttpArticleService {
 
   public getAll(): Observable<Article[]> {
     return from(
-      supabase
+      this.supabaseService.supabase
         .from('articles')
         .select('*')
         .then(({data}) => data?.map((articleJSON: any) => Article.fromJSON(articleJSON)))
@@ -28,7 +30,7 @@ export class HttpArticleService {
 
   public getArticleById(id: string): Observable<Article> {
     return from(
-      supabase
+      this.supabaseService.supabase
         .from('articles')
         .select('*')
         .eq('id', id)

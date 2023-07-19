@@ -6,8 +6,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/mater
 import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
+import {LayoutModule} from '@angular/cdk/layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {MatDividerModule} from '@angular/material/divider';
@@ -32,7 +34,7 @@ import {FeatureCardComponent} from './pages/landing-page/feature-card/feature-ca
 import {BreakpointDirective} from './shared/directives/breakpoint/breakpoint.directive';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PrivacyPolicyComponent} from './pages/privacy-policy/privacy-policy.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import {MAT_TABS_CONFIG, MatTabsModule} from '@angular/material/tabs';
 import {NavigationHeaderComponent} from './custom-components/navigation-header/navigation-header.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {NavigationSidebarComponent} from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
@@ -51,12 +53,13 @@ import {AuthenticationComponent} from './layouts/authentication/authentication.c
 import {HomeComponent} from './layouts/home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {StackedLeftDialogComponent} from './custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {RegisterDetailsComponent} from './pages/register/register-details/register-details.component';
 import {PaginatorComponent} from './custom-components/paginator/paginator.component';
 import {VerificationCodeInputComponent} from './custom-components/verification-code-input/verification-code-input.component';
 import {HasErrorDirective} from './shared/directives/has-error/has-error.directive';
 import {InterfaceComponent} from './layouts/interface//interface.component';
 import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/interface-sidebar.component';
+import {DetailsComponent} from '@pages/details/details.component';
+import {SettingsComponent} from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -91,12 +94,13 @@ import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/i
     AuthenticationComponent,
     HomeComponent,
     StackedLeftDialogComponent,
-    RegisterDetailsComponent,
+    DetailsComponent,
     PaginatorComponent,
     VerificationCodeInputComponent,
     HasErrorDirective,
     InterfaceComponent,
-    InterfaceSidebarComponent
+    InterfaceSidebarComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -120,12 +124,19 @@ import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/i
     MatTabsModule,
     MatSidenavModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    LayoutModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {appearance: 'outline', floatLabel: 'always', subscriptSizing: 'dynamic'}
+    },
+    {
+      provide: MAT_TABS_CONFIG,
+      useValue: {stretchTabs: false}
     }
   ],
   bootstrap: [AppComponent]

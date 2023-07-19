@@ -1,5 +1,9 @@
 @import 'variables';
 
+::ng-deep body {
+  background-color: $color-primary-700 !important;
+}
+
 :host {
   .sidenav,
   .sidenav-content,
@@ -24,12 +28,13 @@
   }
 
   .foreground {
-    height: 12px;
+    flex: 0 0 12px;
   }
 
   .main {
-    padding: 32px;
+    padding: 32px 0px 16px 0px;
     border-top-left-radius: 40px;
     background-color: $color-white;
+    overflow: hidden;
   }
 }
