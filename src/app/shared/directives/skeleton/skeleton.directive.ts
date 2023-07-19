@@ -22,6 +22,13 @@ export class SkeletonDirective {
 
       if (changes['isLoading'].currentValue) {
         switch (this.type) {
+          case SkeletonType.FORM_FIELD_WITHOUT_LABEL:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              width: this.width ?? '100%',
+              height: '42px'
+            });
+            break;
           case SkeletonType.FORM_FIELD:
             this.wrapperDiv = document.createElement('div');
             this.wrapperDiv.style.width = '100%';

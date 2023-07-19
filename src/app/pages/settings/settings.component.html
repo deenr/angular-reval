@@ -12,10 +12,10 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Name</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="lastName" matInput text="text" placeholder="Enter last name" />
               </mat-form-field>
             </div>
@@ -24,7 +24,7 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Phone</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="phoneNumber" matInput text="tel" placeholder="Enter phonenumber" />
               </mat-form-field>
             </div>
@@ -33,7 +33,7 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Email</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="email" matInput text="tel" placeholder="Enter email" />
               </mat-form-field>
             </div>
@@ -48,7 +48,7 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Academic role</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <mat-select formControlName="role" placeholder="Select your role">
                   <mat-option *ngFor="let role of roles" [value]="role">
                     {{ getRoleTranslation(role) }}
@@ -61,14 +61,14 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Field of Study</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <mat-select formControlName="faculty" placeholder="Select your department" (selectionChange)="onFacultyChange($event)">
                   <mat-option *ngFor="let faculty of faculties" [value]="faculty">
                     {{ getFacultyTranslation(faculty) }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <mat-select formControlName="program" placeholder="Select your program">
                   <mat-option *ngFor="let program of getPrograms()" [value]="program">
                     {{ getProgramTranslation(program) }}
@@ -81,7 +81,7 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">University ID</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="universityId" matInput type="text" placeholder="Enter ID number" />
               </mat-form-field>
             </div>
@@ -90,7 +90,7 @@
           <div class="flex-row content-field">
             <p class="text-sm text-semibold">Year of Graduation</p>
             <div class="flex-row form-fields full-width">
-              <mat-form-field>
+              <mat-form-field *skeleton="loadingUser; type: skeletonType.FORM_FIELD_WITHOUT_LABEL">
                 <input formControlName="yearOfGraduation" matInput text="number" placeholder="Graduation year" />
               </mat-form-field>
             </div>

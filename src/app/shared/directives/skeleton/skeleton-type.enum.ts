@@ -1,5 +1,6 @@
 export enum SkeletonType {
   FORM_FIELD = 'FORM_FIELD',
+  FORM_FIELD_WITHOUT_LABEL = 'FORM_FIELD_WITHOUT_LABEL',
   BUTTON = 'BUTTON',
   IMAGE = 'IMAGE',
   CHIP = 'CHIP',

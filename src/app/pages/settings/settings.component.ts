@@ -98,6 +98,7 @@ export class SettingsComponent implements OnInit {
 
   public skeletonType = SkeletonType;
   public savingDetails = false;
+  public loadingUser = true;
 
   public constructor(
     private readonly route: ActivatedRoute,
@@ -109,8 +110,12 @@ export class SettingsComponent implements OnInit {
   public ngOnInit(): void {
     if (this.route.snapshot.paramMap.get('id') && this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
       this.desktopDetailsForm.controls.email.setValue(this.supabaseService.session.user.email);
+      this.loadingUser = false;
     } else {
-      this.httpUserService.getUserDetailsById(this.supabaseService.session.user.id).subscribe((user: SphienceUser) => this.setSettingsDetailsForm(user));
+      this.httpUserService.getUserDetailsById(this.supabaseService.session.user.id).subscribe((user: SphienceUser) => {
+        this.setSettingsDetailsForm(user);
+        this.loadingUser = false;
+      });
     }
   }
 

@@ -19,7 +19,7 @@ export class InterfaceSidebarComponent implements OnInit {
   public collapsed = true;
 
   public topNavigationItems = [
-    {id: 'home', name: 'Home', icon: 'home', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
+    {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'dashboard', name: 'Dashboard', icon: 'chart', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'equipments', name: 'Equipment', icon: 'microscope', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'documents', name: 'Documents', icon: 'file', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
@@ -29,7 +29,7 @@ export class InterfaceSidebarComponent implements OnInit {
 
   public bottomNavigationItems = [
     {id: 'support', name: 'Support', icon: 'buoy', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'settings', name: 'Settings', icon: 'setting', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN, UserRole.INCOMPLETE_PROFILE]}
+    {id: 'settings', name: 'Settings', icon: 'setting', routerLink: '/app/settings', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN, UserRole.INCOMPLETE_PROFILE]}
   ] as NavigationItem[];
 
   public urlToNavigationIdMap = new Map<string, string>([
