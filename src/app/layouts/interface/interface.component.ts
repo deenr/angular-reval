@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Breakpoint} from '@shared/services/breakpoint/breakpoint.enum';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 
 @Component({
@@ -11,7 +12,16 @@ export class InterfaceComponent {
   public readonly expandedWidth = 280;
   public collapsed = true;
 
+  public sidebarMode: 'over' | 'side';
+
   public constructor(private readonly breakpointService: BreakpointService) {}
+
+  public ngOnInit(): void {
+    this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
+      this.sidebarMode = breakpoint === Breakpoint.XL ? 'side' : 'over';
+      console.log(breakpoint);
+    });
+  }
 
   public onActivate(): void {
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
@@ -22,6 +32,6 @@ export class InterfaceComponent {
   }
 
   public getLeftMargin(): string {
-    return this.collapsed ? `${this.collapsedWidth}px` : `${this.expandedWidth}px`;
+    return this.collapsed && this.sidebarMode === 'side' ? `${this.collapsedWidth}px` : `${this.expandedWidth}px`;
   }
 }

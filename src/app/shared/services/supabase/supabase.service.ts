@@ -58,6 +58,8 @@ export class SupabaseService {
         if (data) {
           this.getUserRole(data.user.id).subscribe((userRole: UserRole) => {
             localStorage.setItem('role', JSON.stringify({id: data.user.id, role: userRole}));
+
+            this.session = data.session;
             resolve([{id: data.user.id, role: userRole}, null]);
           });
         } else {

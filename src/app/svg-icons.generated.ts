@@ -284,6 +284,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/toolbox.svg"
   },
   {
+    "name": "top-left-circle-corner",
+    "path": "./assets/svg/top-left-circle-corner.svg"
+  },
+  {
     "name": "truck-loading",
     "path": "./assets/svg/truck-loading.svg"
   },

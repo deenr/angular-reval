@@ -14,7 +14,6 @@ import {ArticleComponent} from '@pages/news/article/article.component';
 import {TermsOfServiceComponent} from '@pages/terms-of-service/terms-of-service.component';
 import {AuthenticationComponent} from '@layouts/authentication/authentication.component';
 import {HomeComponent} from '@layouts/home/home.component';
-import {DetailsComponent} from '@pages/details/details.component';
 import {InterfaceComponent} from '@layouts/interface/interface.component';
 import {SettingsComponent} from '@pages/settings/settings.component';
 
@@ -39,7 +38,6 @@ const routes: Routes = [
     children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      // {path: 'incomplete/:id', component: DetailsComponent},
       {path: 'verify', component: EmailVerificationComponent}
     ]
   },

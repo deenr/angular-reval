@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
   .settings {
     position: relative;
@@ -5,53 +7,27 @@
     gap: 30px;
     overflow: hidden;
 
-    .details-card {
-      overflow: scroll;
-      padding-bottom: 24px;
-
-      &__header {
-        gap: 24px;
-
-        &.university-header {
-          margin-top: 20px;
-        }
-      }
-
-      &__content {
-        display: flex !important;
-        flex-direction: column;
-        margin-top: 24px;
-        gap: 20px;
-
-        p {
-          flex: 0 1 200px;
-        }
-
-        .content-field {
-          gap: 32px;
-
-          .form-fields {
-            max-width: 512px;
-            gap: 24px;
-          }
-        }
-      }
-    }
-
-    .details__footer {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 20px;
-
-      .actions {
-        gap: 12px;
-        justify-content: end;
-      }
+    @include breakpoint-sm() {
+      padding: 0 16px;
     }
 
     .mat-tab-group {
       overflow: hidden;
       flex: 1 1 auto;
+    }
+
+    .mobile-tab-selector {
+      display: none;
+
+      @include breakpoint-sm() {
+        display: block;
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-tab-header {
+    @include breakpoint-sm() {
+      display: none;
     }
   }
 

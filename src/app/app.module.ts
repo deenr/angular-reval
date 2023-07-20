@@ -58,8 +58,8 @@ import {VerificationCodeInputComponent} from './custom-components/verification-c
 import {HasErrorDirective} from './shared/directives/has-error/has-error.directive';
 import {InterfaceComponent} from './layouts/interface//interface.component';
 import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/interface-sidebar.component';
-import {DetailsComponent} from '@pages/details/details.component';
 import {SettingsComponent} from './pages/settings/settings.component';
+import {DetailsComponent} from '@pages/settings/details/details.component';
 
 @NgModule({
   declarations: [

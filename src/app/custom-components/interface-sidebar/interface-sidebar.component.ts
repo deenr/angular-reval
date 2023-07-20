@@ -55,7 +55,7 @@ export class InterfaceSidebarComponent implements OnInit {
     this.role = this.roleService.getCurrentRole();
 
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
-      if (breakpoint === Breakpoint.MD) {
+      if (breakpoint === Breakpoint.MD || breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS) {
         this.minimizeSidebar();
       }
     });

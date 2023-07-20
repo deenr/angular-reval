@@ -19,9 +19,12 @@
         <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
         <p class="text text-md text-semibold" [class.hidden]="collapsed">{{ item.name }}</p>
       </div>
-      <div class="navigation-item flex-row" (click)="changeSidebarSize()" classMd="hidden">
+      <div class="navigation-item change-sidebar flex-row" (click)="changeSidebarSize()">
         <mat-icon class="icon" [svgIcon]="collapsed ? 'arrow-to-right' : 'left-arrow-from-left'"></mat-icon>
         <p class="text text-md text-semibold" [class.hidden]="collapsed">Close</p>
+      </div>
+      <div class="navigation-item signout flex-row">
+        <mat-icon class="icon" svgIcon="sign-out" (click)="signOut()"></mat-icon>
       </div>
     </div>
     <div class="profile-item" [class.collapsed]="collapsed">

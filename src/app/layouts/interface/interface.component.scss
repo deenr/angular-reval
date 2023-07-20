@@ -1,7 +1,7 @@
 @import 'variables';
 
 ::ng-deep body {
-  background-color: $color-primary-700 !important;
+  overflow: hidden;
 }
 
 :host {
@@ -18,6 +18,27 @@
     ::ng-deep .mat-drawer-inner-container {
       overflow: visible;
     }
+
+    .desktop-sidebar {
+      position: relative;
+      display: flex;
+
+      @include breakpoint-sm() {
+        display: none;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: -40px;
+        top: 12px;
+        mask-image: url('../../../assets/svg/top-left-circle-corner.svg');
+        mask-size: contain;
+        background-color: $color-primary-700;
+      }
+    }
   }
 
   .sidenav-content {
@@ -25,16 +46,28 @@
     display: flex;
     flex-direction: column;
     transition: margin-left 200ms ease;
+    margin-left: 82px;
+
+    @include breakpoint-sm() {
+      margin-left: 0px;
+    }
   }
 
   .foreground {
     flex: 0 0 12px;
+
+    @include breakpoint-sm() {
+      display: none;
+    }
   }
 
   .main {
     padding: 32px 0px 16px 0px;
-    border-top-left-radius: 40px;
     background-color: $color-white;
     overflow: hidden;
+
+    @include breakpoint-sm() {
+      padding: 32px 0px 48px 0px;
+    }
   }
 }
