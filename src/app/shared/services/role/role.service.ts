@@ -6,9 +6,7 @@ import {SphienceUser} from '@shared/interfaces/user/sphience-user';
   providedIn: 'root'
 })
 export class RoleService {
-  constructor() {}
-
   public getCurrentRole(): UserRole {
-    return (JSON.parse(localStorage.getItem('role')) as {id: string; role: UserRole}).role;
+    return (JSON.parse(localStorage.getItem('user')) as {id: string; role: UserRole}).role;
   }
 }

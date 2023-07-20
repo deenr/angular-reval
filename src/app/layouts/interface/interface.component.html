@@ -1,4 +1,4 @@
-<mat-sidenav-container fullscreen cdkscrollable>
+<mat-sidenav-container fullscreen cdkscrollable [hasBackdrop]="false">
   <mat-sidenav class="sidenav" position="end" #sidenav role="navigation" [opened]="true" position="start" [mode]="sidebarMode">
     <app-interface-sidebar
       class="desktop-sidebar full-height"
@@ -9,7 +9,6 @@
     ></app-interface-sidebar>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content" [ngStyle]="{'margin-left': getLeftMargin()}">
-    <div class="foreground"></div>
     <main class="main full-height">
       <router-outlet></router-outlet>
     </main>

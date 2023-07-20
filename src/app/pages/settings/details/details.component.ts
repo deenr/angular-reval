@@ -110,11 +110,12 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    const localUserIdAndEmail = JSON.parse(localStorage.getItem('user')) as {id: string; email: string};
     if (this.route.snapshot.paramMap.get('id') && this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
-      this.desktopDetailsForm.controls.email.setValue(this.supabaseService.session.user.email);
+      this.desktopDetailsForm.controls.email.setValue(localUserIdAndEmail.email);
       this.loadingUser = false;
     } else {
-      this.httpUserService.getUserDetailsById(this.supabaseService.session.user.id).subscribe((user: SphienceUser) => {
+      this.httpUserService.getUserDetailsById(localUserIdAndEmail.id).subscribe((user: SphienceUser) => {
         this.setSettingsDetailsForm(user);
         this.loadingUser = false;
       });

@@ -53,20 +53,14 @@
     }
   }
 
-  .foreground {
-    flex: 0 0 12px;
-
-    @include breakpoint-sm() {
-      display: none;
-    }
-  }
-
   .main {
     padding: 32px 0px 16px 0px;
     background-color: $color-white;
     overflow: hidden;
+    margin-top: 12px;
 
     @include breakpoint-sm() {
+      margin-top: 0;
       padding: 32px 0px 48px 0px;
     }
   }

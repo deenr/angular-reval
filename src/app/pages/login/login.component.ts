@@ -44,20 +44,22 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.loginForm.valid) {
       this.loadingLogin = true;
-      this.supabaseService.signIn(this.loginForm.value.email, this.loginForm.value.password).then(([user, error]: [{id: string; role: UserRole}, AuthError]) => {
-        this.loadingLogin = false;
-
-        if (error) {
+      this.supabaseService
+        .signIn(this.loginForm.value.email, this.loginForm.value.password)
+        .then(([user, error]: [{id: string; role: UserRole}, AuthError]) => {
+          if (user) {
+            if (user.role === UserRole.INCOMPLETE_PROFILE) {
+              this.router.navigate([`/app/settings/${user.id}`]);
+            } else {
+              this.router.navigate([`/app`]);
+            }
+          }
+        })
+        .catch(([error]: [AuthError]) => {
+          this.loadingLogin = false;
           this.loginForm.controls.email.setErrors({invalid: true});
           this.loginForm.controls.password.setErrors({invalid: true});
-        } else {
-          if (user.role === UserRole.INCOMPLETE_PROFILE) {
-            this.router.navigate([`/app/settings/${user.id}`]);
-          } else {
-            this.router.navigate([`/app`]);
-          }
-        }
-      });
+        });
     }
   }
 

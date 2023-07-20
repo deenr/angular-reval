@@ -17,6 +17,8 @@ export class InterfaceSidebarComponent implements OnInit {
   @Input() public expandedWidth = 280;
   @Output() public collapsedChange = new EventEmitter<boolean>();
   public collapsed = true;
+  public userName: string;
+  public userEmail: string;
 
   public topNavigationItems = [
     {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
@@ -59,6 +61,10 @@ export class InterfaceSidebarComponent implements OnInit {
         this.minimizeSidebar();
       }
     });
+
+    const localUserNameAndEmail = JSON.parse(localStorage.getItem('user')) as {email: string; name: string};
+    this.userEmail = localUserNameAndEmail.email;
+    this.userName = localUserNameAndEmail.name;
   }
 
   public canShowNavigationItem(permissions: UserRole[]): boolean {

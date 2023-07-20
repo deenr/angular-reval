@@ -17,30 +17,27 @@ import {
   VerifyEmailOtpParams,
   createClient
 } from '@supabase/supabase-js';
-import {Observable, from} from 'rxjs';
+import {BehaviorSubject, Observable, forkJoin, from} from 'rxjs';
 import {environment} from 'src/environments/environment';
+import {HttpUserService} from '../user/http-user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupabaseService {
-  private _session: AuthSession;
+  private _currentSession: BehaviorSubject<boolean | AuthSession> = new BehaviorSubject(null);
 
-  public get session(): AuthSession {
-    return this._session;
-  }
+  private supabase: SupabaseClient;
 
-  private set session(session: AuthSession) {
-    this._session = session;
-  }
-
-  public supabase: SupabaseClient;
-
-  public constructor() {
+  public constructor(private readonly userService: HttpUserService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
-    this.supabase.auth.getSession().then(({data}) => {
-      this.session = data.session;
+    this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
+      this._currentSession.next(value.data?.session ? value.data.session : false);
+    });
+
+    this.supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: AuthSession) => {
+      this._currentSession.next(event === 'SIGNED_IN' ? session : false);
     });
   }
 
@@ -55,15 +52,13 @@ export class SupabaseService {
   public signIn(email: string, password: string): Promise<[user: {id: string; role: UserRole}, error: AuthError]> {
     return new Promise<[user: {id: string; role: UserRole}, error: AuthError]>((resolve, reject) => {
       this.supabase.auth.signInWithPassword({email, password}).then(({data, error}: AuthTokenResponse) => {
-        if (data) {
-          this.getUserRole(data.user.id).subscribe((userRole: UserRole) => {
-            localStorage.setItem('role', JSON.stringify({id: data.user.id, role: userRole}));
-
-            this.session = data.session;
+        if (error) {
+          reject([null, error]);
+        } else if (data) {
+          forkJoin([this.userService.getUserRole(data.user.id), this.userService.getUserDetailsById(data.user.id)]).subscribe(([userRole, user]: [UserRole, SphienceUser]) => {
+            localStorage.setItem('user', JSON.stringify({id: data.user.id, name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '', email, role: userRole}));
             resolve([{id: data.user.id, role: userRole}, null]);
           });
-        } else {
-          reject([null, error]);
         }
       });
     });
@@ -88,7 +83,7 @@ export class SupabaseService {
 
         await Promise.all([updateUserProfile, updateUserRole]);
 
-        localStorage.setItem('role', JSON.stringify({id: user.id, role: user.role}));
+        localStorage.setItem('user', JSON.stringify({id: user.id, name: `${user.firstName} ${user.lastName}`, email: user.email, role: user.role}));
         resolve(null);
       } catch (error) {
         console.error('Transaction failed:', error);
@@ -108,6 +103,7 @@ export class SupabaseService {
   }
 
   public signOut(): Promise<{error: AuthError}> {
+    localStorage.removeItem('user');
     return this.supabase.auth.signOut();
   }
 
@@ -116,18 +112,12 @@ export class SupabaseService {
     return this.supabase.auth.verifyOtp(params);
   }
 
-  public getUserRole(userId: string): Observable<UserRole> {
-    return from(
-      this.supabase
-        .from('user_roles')
-        .select('*')
-        .eq('user_id', userId)
-        .single()
-        .then(({data}) => data?.role)
-    );
-  }
   public resendEmailVerification(email: string): Promise<AuthOtpResponse> {
     const params = {email, type: 'signup'} as ResendParams;
     return this.supabase.auth.resend(params);
+  }
+
+  public getCurrentSession(): Observable<AuthSession | boolean> {
+    return this._currentSession.asObservable();
   }
 }

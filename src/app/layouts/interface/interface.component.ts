@@ -19,7 +19,6 @@ export class InterfaceComponent {
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
       this.sidebarMode = breakpoint === Breakpoint.XL ? 'side' : 'over';
-      console.log(breakpoint);
     });
   }
 

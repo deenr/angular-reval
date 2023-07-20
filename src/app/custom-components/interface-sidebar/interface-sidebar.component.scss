@@ -154,6 +154,10 @@
 
           &__email {
             color: $color-primary-200;
+            max-width: 144px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
 
           &__signout {
