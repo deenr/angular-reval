@@ -57,7 +57,7 @@ export class InterfaceSidebarComponent implements OnInit {
     this.role = this.roleService.getCurrentRole();
 
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
-      if (breakpoint === Breakpoint.MD || breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS) {
+      if (this.isScreenSmall(breakpoint)) {
         this.minimizeSidebar();
       }
     });
@@ -90,8 +90,20 @@ export class InterfaceSidebarComponent implements OnInit {
     });
   }
 
+  public canShowLogoutNavigationItem(): boolean {
+    return this.isScreenSmall(this.breakpointService.currentBreakpoint) || this.isUserProfileIncomplete();
+  }
+
+  public isUserProfileIncomplete(): boolean {
+    return this.role === UserRole.INCOMPLETE_PROFILE;
+  }
+
   private minimizeSidebar(): void {
     this.collapsed = true;
     this.collapsedChange.emit(this.collapsed);
+  }
+
+  private isScreenSmall(breakpoint: Breakpoint): boolean {
+    return breakpoint === Breakpoint.MD || breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS;
   }
 }

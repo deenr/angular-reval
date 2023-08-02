@@ -23,11 +23,12 @@
         <mat-icon class="icon" [svgIcon]="collapsed ? 'arrow-to-right' : 'left-arrow-from-left'"></mat-icon>
         <p class="text text-md text-semibold" [class.hidden]="collapsed">Close</p>
       </div>
-      <div class="navigation-item signout flex-row">
-        <mat-icon class="icon" svgIcon="sign-out" (click)="signOut()"></mat-icon>
+      <div *ngIf="canShowLogoutNavigationItem()" class="navigation-item flex-row" (click)="signOut()">
+        <mat-icon class="icon" svgIcon="sign-out"></mat-icon>
+        <p class="text text-md text-semibold" [class.hidden]="collapsed">Logout</p>
       </div>
     </div>
-    <div class="profile-item" [class.collapsed]="collapsed">
+    <div *ngIf="!isUserProfileIncomplete()" class="profile-item" [class.collapsed]="collapsed">
       <div class="profile flex-row cursor-pointer">
         <div class="profile__avatar"></div>
         <div [class.hidden]="collapsed">

@@ -90,14 +90,6 @@
             display: none;
           }
         }
-
-        &.signout {
-          display: none;
-
-          @include breakpoint-md() {
-            display: flex;
-          }
-        }
       }
 
       .divider {
