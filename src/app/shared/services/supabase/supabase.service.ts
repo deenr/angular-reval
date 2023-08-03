@@ -17,7 +17,7 @@ import {
   VerifyEmailOtpParams,
   createClient
 } from '@supabase/supabase-js';
-import {BehaviorSubject, Observable, forkJoin, from} from 'rxjs';
+import {Observable, Subject, forkJoin} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {HttpUserService} from '../user/http-user.service';
 
@@ -25,7 +25,7 @@ import {HttpUserService} from '../user/http-user.service';
   providedIn: 'root'
 })
 export class SupabaseService {
-  private _currentSession: BehaviorSubject<boolean | AuthSession> = new BehaviorSubject(null);
+  private _currentSession: Subject<boolean | AuthSession> = new Subject();
 
   private supabase: SupabaseClient;
 
