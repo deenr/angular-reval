@@ -16,6 +16,7 @@ import {AuthenticationComponent} from '@layouts/authentication/authentication.co
 import {HomeComponent} from '@layouts/home/home.component';
 import {InterfaceComponent} from '@layouts/interface/interface.component';
 import {SettingsComponent} from '@pages/settings/settings.component';
+import {canActivateApp} from '@shared/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
   {
     path: 'app',
     component: InterfaceComponent,
+    canActivate: [canActivateApp],
     children: [
       {path: 'settings', component: SettingsComponent},
       {path: 'settings/:id', component: SettingsComponent}
