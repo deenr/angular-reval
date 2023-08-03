@@ -77,6 +77,12 @@ export class RegisterComponent implements OnInit {
 
   public ngOnInit(): void {
     this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
+
+    const getStartedEmail = this.router.lastSuccessfulNavigation.extras.state?.['email'];
+    if (getStartedEmail) {
+      this.emailForm.controls.email.setValue(getStartedEmail);
+      this.goToPassword();
+    }
   }
 
   public getTitle(): string {

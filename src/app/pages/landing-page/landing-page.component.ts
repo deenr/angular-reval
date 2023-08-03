@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,6 +8,10 @@ import {Component} from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent {
+  public getStartedForm = new FormGroup({
+    email: new FormControl(null, [Validators.required, Validators.email])
+  });
+
   public universities = ['Elysian Academy', 'Exemplar College', 'Synthesis University', 'Nexus Institute', 'Innovus Polytechnic'];
   // public universities = ['Elysian Academy', 'Exemplar College', 'Synthesis University', 'Nexus Institute', 'Innovus Polytechnic', 'Stellar University', 'Quantum College', 'Prodigy Institute'];
   public features = [
@@ -78,4 +84,12 @@ export class LandingPageComponent {
         'Admins utilize device usage statistics to gain valuable insights into equipment demand, usage patterns, and overall utilization. This data helps them make informed decisions about resource allocation and device procurement to optimize the lending system.'
     }
   ];
+
+  public constructor(private readonly router: Router) {}
+
+  public onGetStartedSubmit(): void {
+    if (this.getStartedForm.valid) {
+      this.router.navigate(['/register'], {state: {email: this.getStartedForm.value.email}});
+    }
+  }
 }

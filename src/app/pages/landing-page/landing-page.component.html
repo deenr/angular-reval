@@ -6,13 +6,13 @@
         Experience a new era of research collaboration. Connect with students, researchers, and professors to access the tools that drive groundbreaking discoveries.
       </p>
       <div class="content__sign-up full-width flex-column">
-        <div class="sign-up__input flex-row">
+        <form class="sign-up__input flex-row" [formGroup]="getStartedForm" (ngSubmit)="onGetStartedSubmit()">
           <mat-form-field>
-            <input matInput type="email" placeholder="Enter your email" />
+            <input matInput type="email" placeholder="Enter your email" formControlName="email" />
             <mat-hint class="text-sm text-regular">We care about your data in our <u class="text-link" routerLink="/privacy">privacy policy</u>.</mat-hint>
           </mat-form-field>
           <button mat-flat-button color="primary">Get started</button>
-        </div>
+        </form>
         <p class="text-sm text-regular">We care about your data in our <u class="text-link" routerLink="/privacy">privacy policy</u>.</p>
       </div>
     </div>
