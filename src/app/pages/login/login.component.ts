@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
             if (user.role === UserRole.INCOMPLETE_PROFILE) {
               this.router.navigate([`/app/settings/${user.id}`]);
             } else {
-              this.router.navigate([`/app`]);
+              this.router.navigate(['/app']);
             }
           }
         })
