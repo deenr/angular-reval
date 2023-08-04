@@ -1,7 +1,7 @@
 <mat-sidenav-container fullscreen cdkscrollable [hasBackdrop]="false">
-  <mat-sidenav class="sidenav" position="end" #sidenav role="navigation" [opened]="true" position="start" [mode]="sidebarMode">
+  <mat-sidenav class="sidenav" position="end" #sidenav role="navigation" [opened]="sidenavOpened" position="start" [mode]="sidenavMode">
     <app-interface-sidebar
-      class="desktop-sidebar full-height"
+      class="sidebar full-height"
       [collapsedWidth]="collapsedWidth"
       [expandedWidth]="expandedWidth"
       (sidenavClose)="sidenav.close()"
@@ -9,7 +9,8 @@
     ></app-interface-sidebar>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content" [ngStyle]="{'margin-left': getLeftMargin()}">
-    <main class="main full-height" [class.over-opened]="!collapsed && sidebarMode === 'over'">
+    <app-interface-header *ngIf="isMobile" [sidenavOpened]="sidenavOpened" (sidenavToggle)="onSidenavToggle()"></app-interface-header>
+    <main class="main full-height" [class.over-opened]="!collapsed && sidenavMode === 'over'">
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>

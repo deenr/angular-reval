@@ -44,6 +44,8 @@ export class InterfaceSidebarComponent implements OnInit {
     ['/app/settings', 'settings']
   ]);
 
+  public isMobile: boolean;
+
   private role: UserRole;
 
   public constructor(
@@ -60,6 +62,7 @@ export class InterfaceSidebarComponent implements OnInit {
       if (this.isScreenSmall(breakpoint)) {
         this.minimizeSidebar();
       }
+      this.isMobile = this.breakpointService.isMobile;
     });
 
     const localUserNameAndEmail = JSON.parse(localStorage.getItem('user')) as {email: string; name: string};
@@ -91,11 +94,15 @@ export class InterfaceSidebarComponent implements OnInit {
   }
 
   public canShowLogoutNavigationItem(): boolean {
-    return this.isScreenSmall(this.breakpointService.currentBreakpoint) || this.isUserProfileIncomplete();
+    return (this.isScreenSmall(this.breakpointService.currentBreakpoint) && !this.isMobile) || this.isUserProfileIncomplete();
   }
 
   public isUserProfileIncomplete(): boolean {
     return this.role === UserRole.INCOMPLETE_PROFILE;
+  }
+
+  public isDesktopSidebarCollapsed(): boolean {
+    return !this.isMobile && this.collapsed;
   }
 
   private minimizeSidebar(): void {

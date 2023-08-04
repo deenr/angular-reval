@@ -26,7 +26,7 @@ export class SettingsComponent implements OnInit {
     {id: SettingsType.PROFILE, name: 'Profile'},
     {id: SettingsType.PASSWORD, name: 'Password'}
   ];
-  public canShowMobileSelector: boolean;
+  public isMobile: boolean;
 
   private settingsTypesTranslation = new Map<SettingsType, string>([
     [SettingsType.DETAILS, 'My details'],
@@ -37,7 +37,7 @@ export class SettingsComponent implements OnInit {
   public constructor(private readonly breakpointService: BreakpointService) {}
 
   public ngOnInit(): void {
-    this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => (this.canShowMobileSelector = breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS));
+    this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => (this.isMobile = breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS));
   }
 
   public onTabChange(change: MatSelectChange): void {

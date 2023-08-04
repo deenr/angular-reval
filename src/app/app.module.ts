@@ -57,9 +57,10 @@ import {PaginatorComponent} from './custom-components/paginator/paginator.compon
 import {VerificationCodeInputComponent} from './custom-components/verification-code-input/verification-code-input.component';
 import {HasErrorDirective} from './shared/directives/has-error/has-error.directive';
 import {InterfaceComponent} from './layouts/interface//interface.component';
-import {InterfaceSidebarComponent} from './custom-components/interface-sidebar/interface-sidebar.component';
+import {InterfaceSidebarComponent} from './custom-components/interface/interface-sidebar/interface-sidebar.component';
 import {SettingsComponent} from './pages/settings/settings.component';
 import {DetailsComponent} from '@pages/settings/details/details.component';
+import { InterfaceHeaderComponent } from './custom-components/interface/interface-header/interface-header.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {DetailsComponent} from '@pages/settings/details/details.component';
     HasErrorDirective,
     InterfaceComponent,
     InterfaceSidebarComponent,
-    SettingsComponent
+    SettingsComponent,
+    InterfaceHeaderComponent
   ],
   imports: [
     CommonModule,

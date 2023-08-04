@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSidenav} from '@angular/material/sidenav';
 import {Breakpoint} from '@shared/services/breakpoint/breakpoint.enum';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 
@@ -7,19 +8,33 @@ import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service'
   templateUrl: './interface.component.html',
   styleUrls: ['./interface.component.scss']
 })
-export class InterfaceComponent {
+export class InterfaceComponent implements OnInit {
+  @ViewChild('sidenav') public sidenav: MatSidenav;
+
   public readonly collapsedWidth = 82;
   public readonly expandedWidth = 280;
   public collapsed = true;
+  public isMobile: boolean;
 
-  public sidebarMode: 'over' | 'side';
+  public sidenavMode: 'over' | 'side';
+  public sidenavOpened: boolean;
 
   public constructor(private readonly breakpointService: BreakpointService) {}
 
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
-      this.sidebarMode = breakpoint === Breakpoint.XL ? 'side' : 'over';
+      this.sidenavMode = breakpoint === Breakpoint.XL ? 'side' : 'over';
+
+      if (this.isBreakpointMobile(breakpoint) && !this.isMobile) {
+        this.sidenavOpened = false;
+      } else if (!this.isBreakpointMobile(breakpoint) && this.isMobile) {
+        this.sidenavOpened = true;
+      }
+
+      this.isMobile = this.isBreakpointMobile(breakpoint);
     });
+
+    this.sidenavOpened = !this.isBreakpointMobile(this.breakpointService.currentBreakpoint);
   }
 
   public onActivate(): void {
@@ -31,6 +46,20 @@ export class InterfaceComponent {
   }
 
   public getLeftMargin(): string {
-    return this.collapsed && this.sidebarMode === 'side' ? `${this.collapsedWidth}px` : `${this.expandedWidth}px`;
+    return this.collapsed && this.sidenavMode === 'side' ? `${this.collapsedWidth}px` : `${this.expandedWidth}px`;
+  }
+
+  public isBreakpointMobile(breakpoint: Breakpoint): boolean {
+    return breakpoint === Breakpoint.XS || breakpoint === Breakpoint.SM;
+  }
+
+  public onSidenavToggle(): void {
+    if (this.sidenavOpened) {
+      this.sidenav.close();
+      this.sidenavOpened = false;
+    } else {
+      this.sidenav.open();
+      this.sidenavOpened = true;
+    }
   }
 }

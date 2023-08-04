@@ -39,10 +39,6 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
     return document.getElementsByClassName('mat-drawer-opened').length !== 0;
   }
 
-  public getHamburgerIcon(): string {
-    return this.isSidenavOpen() ? 'close' : 'hamburger';
-  }
-
   private onWindowScroll(): void {
     const scrollTop = document.getElementsByClassName('mat-drawer-content')[0].scrollTop;
     this.opacity = scrollTop / 80 < 1 ? scrollTop / 80 : 1;

@@ -1,6 +1,6 @@
 <div class="settings flex-column full-height">
   <h2 class="display-sm text-semibold" classMd="display-xs">Settings</h2>
-  <mat-form-field *ngIf="canShowMobileSelector" [formGroup]="tabForm">
+  <mat-form-field *ngIf="isMobile" [formGroup]="tabForm">
     <mat-select formControlName="tab" placeholder="Select your role" (selectionChange)="onTabChange($event)">
       <mat-option *ngFor="let settings of settingsTypes" [value]="settings">
         {{ getSettingsTypeTranslation(settings) }}

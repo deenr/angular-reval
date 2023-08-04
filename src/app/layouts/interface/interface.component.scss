@@ -13,13 +13,15 @@
       overflow: visible;
     }
 
-    .desktop-sidebar {
+    @include breakpoint-sm() {
+      width: 100%;
+      position: absolute;
+      top: 65px;
+    }
+
+    .sidebar {
       position: relative;
       display: flex;
-
-      @include breakpoint-sm() {
-        display: none;
-      }
 
       &::before {
         content: '';
@@ -27,6 +29,10 @@
         width: 100vw;
         height: 12px;
         background-color: $color-primary-700;
+
+        @include breakpoint-sm() {
+          display: none;
+        }
       }
 
       &::after {
@@ -39,6 +45,10 @@
         mask-image: url('../../../assets/svg/top-left-circle-corner.svg');
         mask-size: contain;
         background-color: $color-primary-700;
+
+        @include breakpoint-sm() {
+          display: none;
+        }
       }
     }
   }

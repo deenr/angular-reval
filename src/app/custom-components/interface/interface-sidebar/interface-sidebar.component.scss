@@ -9,6 +9,12 @@
     gap: 24px;
     align-items: center;
 
+    @include breakpoint-sm() {
+      width: 100% !important;
+      padding: 24px 0;
+      background-color: $color-white;
+    }
+
     &__logo {
       gap: 8px;
       align-items: center;
@@ -33,10 +39,18 @@
           -webkit-backdrop-filter: blur(5px);
         }
       }
+
+      @include breakpoint-sm() {
+        display: none;
+      }
     }
 
     &__navigation {
       padding: 0 18px 0 16px;
+
+      @include breakpoint-sm() {
+        padding: 0 8px;
+      }
 
       .navigation {
         &__top {
@@ -45,6 +59,10 @@
 
         &__items {
           gap: 8px;
+
+          @include breakpoint-sm() {
+            gap: 4px;
+          }
         }
       }
 
@@ -52,6 +70,10 @@
         padding: 12px;
         border-radius: 6px;
         gap: 12px;
+
+        @include breakpoint-sm() {
+          padding: 8px 12px;
+        }
 
         & > div {
           gap: 12px;
@@ -63,23 +85,44 @@
           min-width: 24px;
           min-height: 24px;
           color: $color-primary-300;
+
+          @include breakpoint-sm() {
+            color: $color-grey-500;
+          }
         }
 
         .text {
           color: $color-primary-100;
+
+          @include breakpoint-sm() {
+            color: $color-grey-700;
+          }
         }
 
         &:hover {
           cursor: pointer;
           background-color: $color-primary-600;
+
+          @include breakpoint-sm() {
+            cursor: unset;
+            background-color: unset;
+          }
         }
 
         &.active {
           background-color: $color-primary-600;
 
+          @include breakpoint-sm() {
+            background-color: $color-grey-100;
+          }
+
           .icon,
           .text {
             color: $color-white;
+
+            @include breakpoint-sm() {
+              color: $color-grey-900;
+            }
           }
         }
 
@@ -90,24 +133,42 @@
             display: none;
           }
         }
+
+        &.logout {
+          @include breakpoint-sm() {
+            display: none;
+          }
+        }
       }
 
       .divider {
         margin: 24px 0;
         border-top-color: $color-primary-600 !important;
+
+        @include breakpoint-sm() {
+          border-top-color: $color-grey-200 !important;
+        }
+      }
+
+      .footer-divider {
+        margin-top: 20px;
       }
 
       .profile-item {
         position: relative;
-        padding: 0 32px 0px 8px;
-        margin-top: 24px;
+        padding: 24px 32px 0px 8px;
 
         @include breakpoint-md() {
           display: none;
         }
 
-        &.collapsed {
+        @include breakpoint-sm() {
+          display: flex;
+        }
+
+        &.compact {
           padding: 0;
+          margin-top: 24px;
 
           .profile {
             justify-content: center;
@@ -125,6 +186,10 @@
             background-color: $color-primary-500;
             border-radius: 50%;
 
+            @include breakpoint-sm() {
+              background-color: $color-grey-200;
+            }
+
             &::after {
               content: '';
               position: absolute;
@@ -133,15 +198,23 @@
               top: 49%;
               left: 50%;
               transform: translate(-50%, -50%);
-              mask-image: url('../../../assets/svg/user.svg');
+              mask-image: url('../../../../assets/svg/user.svg');
               mask-repeat: no-repeat;
               mask-position: 50% 50%;
               background-color: $color-primary-300;
+
+              @include breakpoint-sm() {
+                background-color: $color-grey-700;
+              }
             }
           }
 
           &__name {
             color: $color-white;
+
+            @include breakpoint-sm() {
+              color: $color-grey-700;
+            }
           }
 
           &__email {
@@ -150,6 +223,11 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            @include breakpoint-sm() {
+              max-width: unset;
+              color: $color-grey-600;
+            }
           }
 
           &__signout {
@@ -161,6 +239,10 @@
               cursor: pointer;
               &.icon {
                 color: $color-white;
+
+                @include breakpoint-sm() {
+                  color: unset;
+                }
               }
             }
 
@@ -171,6 +253,10 @@
               min-height: 36px;
               padding: 8px;
               color: $color-primary-300;
+
+              @include breakpoint-sm() {
+                color: $color-grey-500;
+              }
             }
           }
         }
