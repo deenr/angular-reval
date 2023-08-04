@@ -1,6 +1,6 @@
 <div class="login-page full-width full-height flex-row">
   <section class="login-section flex-column full-height">
-    <form [formGroup]="loginForm" class="login flex-column full-height">
+    <form [formGroup]="loginForm" class="login flex-column full-height" (ngSubmit)="login()">
       <div class="login__logo flex-row cursor-pointer" routerLink="/">
         <mat-icon svgIcon="logo-color"></mat-icon>
         <h3>Sphience</h3>
@@ -25,7 +25,7 @@
         <a href="/">Forgot password</a>
       </div>
       <div class="login__actions flex-column">
-        <app-progress-button type="button" [loading]="loadingLogin" (progressClick)="login()">Sign in</app-progress-button>
+        <app-progress-button type="submit" [loading]="loadingLogin">Sign in</app-progress-button>
         <button mat-stroked-button type="button" (click)="googleLogin()"><mat-icon svgIcon="google-color" class="google-icon"></mat-icon> Sign in with Google</button>
       </div>
       <div class="login__no-account">
