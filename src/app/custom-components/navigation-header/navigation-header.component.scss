@@ -95,19 +95,20 @@
       .hamburger-icon > * {
         transition: all 0.3s ease;
         transform-origin: center;
+        transform-style: preserve-3d;
       }
 
       &.opened {
-        #top-line {
-          transform: translate(3.5px, -3.5px) rotate(45deg);
+        #bottom-line {
+          transform: translate(4.5px, -4px) rotate(45deg);
         }
 
         #middle-line {
           opacity: 0;
         }
 
-        #bottom-line {
-          transform: translate(3.5px, 3.5px) rotate(-45deg);
+        #top-line {
+          transform: translate(4.5px, 4px) rotate(-45deg);
         }
       }
     }

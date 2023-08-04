@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
@@ -9,6 +9,7 @@ import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-lef
   styleUrls: ['./navigation-header.component.scss']
 })
 export class NavigationHeaderComponent implements OnInit, OnDestroy {
+  @Input() public sidenavOpened: boolean;
   @Output() public sidenavToggle = new EventEmitter();
 
   public opacity = 0;
@@ -33,10 +34,6 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
         description: 'Our team is diligently working towards making our incredible dashboard available to you.'
       }
     });
-  }
-
-  public isSidenavOpen(): boolean {
-    return document.getElementsByClassName('mat-drawer-opened').length !== 0;
   }
 
   private onWindowScroll(): void {

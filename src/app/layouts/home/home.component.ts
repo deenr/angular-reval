@@ -9,16 +9,18 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent {
   @ViewChild('sidenav') public sidenav: MatSidenav;
+  public sidenavOpened = false;
 
-  public onSidenavToggle(openSidenav: boolean): void {
-    openSidenav ? this.sidenav.toggle() : this.sidenav.close();
+  public onSidenavToggle(): void {
+    this.sidenavOpened ? this.toggleSidenav(false) : this.toggleSidenav(true);
+  }
+
+  public toggleSidenav(sidenavOpened: boolean): void {
+    this.sidenavOpened = sidenavOpened;
+    this.sidenavOpened ? this.sidenav.open() : this.sidenav.close();
   }
 
   public onActivate(): void {
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
-  }
-
-  public isSidenavOpen(): boolean {
-    return document.getElementsByClassName('mat-drawer-opened').length !== 0;
   }
 }

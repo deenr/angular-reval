@@ -1,4 +1,4 @@
-<nav class="nav flex-row full-width" [class.opened]="isSidenavOpen()">
+<nav class="nav flex-row full-width" [class.opened]="sidenavOpened">
   <div class="nav__background full-width full-height" [ngStyle]="{opacity: opacity}"></div>
   <div class="nav__logo flex-row" routerLink="/">
     <mat-icon svgIcon="logo-color"></mat-icon>
@@ -13,11 +13,11 @@
     <button mat-button routerLink="/login">Log in</button>
     <button mat-flat-button color="primary" routerLink="/register">Sign up</button>
   </div>
-  <div class="nav__hamburger cursor-pointer" [class.opened]="isSidenavOpen()">
+  <div class="nav__hamburger cursor-pointer" [class.opened]="sidenavOpened">
     <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" (click)="sidenavToggle.emit()">
-      <path id="top-line" class="line" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="isSidenavOpen() ? 'M3 6h17' : 'M3 6h18'" />
+      <path id="top-line" class="line" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="sidenavOpened ? 'M3 6h17' : 'M3 6h18'" />
       <path id="middle-line" class="line" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18" />
-      <path id="bottom-line" class="line" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="isSidenavOpen() ? 'M3 18h17' : 'M3 18h18'" />
+      <path id="bottom-line" class="line" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="sidenavOpened ? 'M3 18h17' : 'M3 18h18'" />
     </svg>
   </div>
 </nav>
