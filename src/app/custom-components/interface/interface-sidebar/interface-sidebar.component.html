@@ -9,13 +9,13 @@
 
   <div class="sidebar__navigation flex-column full-height full-width">
     <div class="navigation__top navigation__items flex-column">
-      <div class="navigation-item flex-row" *ngFor="let item of topNavigationItems" [class.active]="isNavigationItemActive(item.id)" [routerLink]="item.routerLink">
+      <div class="navigation-item flex-row" *ngFor="let item of topNavigationItems" [class.active]="isNavigationItemActive(item.id)" [routerLink]="item.routerLink" (click)="onNavigationChange()">
         <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
         <p class="text text-md text-semibold" *ngIf="!isDesktopSidebarCollapsed()">{{ item.name }}</p>
       </div>
     </div>
     <div class="navigation__items flex-column">
-      <div class="navigation-item flex-row" *ngFor="let item of bottomNavigationItems" [class.active]="isNavigationItemActive(item.id)" [routerLink]="item.routerLink">
+      <div class="navigation-item flex-row" *ngFor="let item of bottomNavigationItems" [class.active]="isNavigationItemActive(item.id)" [routerLink]="item.routerLink" (click)="onNavigationChange()">
         <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
         <p class="text text-md text-semibold" *ngIf="!isDesktopSidebarCollapsed()">{{ item.name }}</p>
       </div>

@@ -4,7 +4,7 @@
       class="sidebar full-height"
       [collapsedWidth]="collapsedWidth"
       [expandedWidth]="expandedWidth"
-      (sidenavClose)="sidenav.close()"
+      (sidenavClose)="onSidenavToggle()"
       (collapsedChange)="collapsedChange($event)"
     ></app-interface-sidebar>
   </mat-sidenav>

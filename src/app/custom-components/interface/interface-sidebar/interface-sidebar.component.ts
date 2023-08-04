@@ -16,6 +16,7 @@ export class InterfaceSidebarComponent implements OnInit {
   @Input() public collapsedWidth = 82;
   @Input() public expandedWidth = 280;
   @Output() public collapsedChange = new EventEmitter<boolean>();
+  @Output() public sidenavClose = new EventEmitter<void>();
   public collapsed = true;
   public userName: string;
   public userEmail: string;
@@ -103,6 +104,12 @@ export class InterfaceSidebarComponent implements OnInit {
 
   public isDesktopSidebarCollapsed(): boolean {
     return !this.isMobile && this.collapsed;
+  }
+
+  public onNavigationChange(): void {
+    if (this.isMobile) {
+      this.sidenavClose.emit();
+    }
   }
 
   private minimizeSidebar(): void {
