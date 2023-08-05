@@ -74,8 +74,8 @@ export class LoginComponent implements OnInit {
       data: {
         type: DialogType.WARNING,
         icon: 'lock',
-        title: 'Dashboard is not available yet',
-        description: 'Our team is diligently working towards making our incredible dashboard available to you.'
+        title: 'Log in with Google not available',
+        description: 'Logging in with Google will soon be available, making sign-in even more convenient for you.'
       }
     });
   }

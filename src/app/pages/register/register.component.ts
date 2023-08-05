@@ -145,14 +145,14 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  public openDashboard(): void {
+  public googleRegister(): void {
     this.dialog.open(StackedLeftDialogComponent, {
       width: '400px',
       data: {
         type: DialogType.WARNING,
         icon: 'lock',
-        title: 'Dashboard is not available yet',
-        description: 'Our team is diligently working towards making our incredible dashboard available to you.'
+        title: 'Log in with Google not available',
+        description: 'Logging in with Google will soon be available, making sign-in even more convenient for you.'
       }
     });
   }
