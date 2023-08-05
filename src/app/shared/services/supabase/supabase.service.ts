@@ -102,6 +102,18 @@ export class SupabaseService {
     return this.supabase.auth.signUp({email, password});
   }
 
+  public checkDuplicateAccount(email: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.supabase
+        .from('users')
+        .select()
+        .eq('email', email)
+        .then(({data}) => {
+          resolve(data.length > 0);
+        });
+    });
+  }
+
   public signOut(): Promise<{error: AuthError}> {
     localStorage.removeItem('user');
     return this.supabase.auth.signOut();

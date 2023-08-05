@@ -116,9 +116,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public goToPassword(): void {
-    // this.openDashboard();
     if (this.emailForm.valid) {
-      this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+      this.supabaseService.checkDuplicateAccount(this.emailForm.value.email).then((hasDuplicateAccount: boolean) => {
+        hasDuplicateAccount ? this.emailForm.controls.email.setErrors({duplicateEmail: true}) : this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+      });
     }
   }
 

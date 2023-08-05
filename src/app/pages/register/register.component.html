@@ -15,6 +15,7 @@
         <div class="flex-column form__email">
           <mat-form-field>
             <input matInput formControlName="email" type="text" placeholder="Enter your email" />
+            <mat-error *hasError="'email'; code: 'duplicateEmail'">Email already exists</mat-error>
           </mat-form-field>
           <button mat-flat-button color="primary" (click)="goToPassword()">Continue</button>
         </div>

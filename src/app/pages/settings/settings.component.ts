@@ -22,10 +22,10 @@ export class SettingsComponent implements OnInit {
 
   public selectedTab: number;
   public tabs = [
-    {id: SettingsType.DETAILS, name: 'My details'},
-    {id: SettingsType.PROFILE, name: 'Profile'},
-    {id: SettingsType.PASSWORD, name: 'Password'}
-  ];
+    {id: SettingsType.DETAILS, name: 'My details', disabled: false},
+    {id: SettingsType.PROFILE, name: 'Profile', disabled: true},
+    {id: SettingsType.PASSWORD, name: 'Password', disabled: true}
+  ] as SettingsTab[];
   public isMobile: boolean;
 
   private settingsTypesTranslation = new Map<SettingsType, string>([
@@ -57,4 +57,14 @@ export class SettingsComponent implements OnInit {
   public getSettingsTypeTranslation(settingsType: SettingsType): string {
     return this.settingsTypesTranslation.get(settingsType);
   }
+
+  public isTabDisabled(settingsType: SettingsType): boolean {
+    return this.tabs.find((tab: SettingsTab) => tab.id === settingsType).disabled;
+  }
+}
+
+interface SettingsTab {
+  id: SettingsType;
+  name: string;
+  disabled: boolean;
 }
