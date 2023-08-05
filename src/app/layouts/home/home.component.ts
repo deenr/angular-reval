@@ -12,12 +12,13 @@ export class HomeComponent {
   public sidenavOpened = false;
 
   public onSidenavToggle(): void {
-    this.sidenavOpened ? this.toggleSidenav(false) : this.toggleSidenav(true);
-  }
-
-  public toggleSidenav(sidenavOpened: boolean): void {
-    this.sidenavOpened = sidenavOpened;
-    this.sidenavOpened ? this.sidenav.open() : this.sidenav.close();
+    if (this.sidenavOpened) {
+      this.sidenav.close();
+      this.sidenavOpened = false;
+    } else {
+      this.sidenav.open();
+      this.sidenavOpened = true;
+    }
   }
 
   public onActivate(): void {

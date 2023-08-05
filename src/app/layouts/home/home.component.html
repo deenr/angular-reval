@@ -1,6 +1,6 @@
 <mat-sidenav-container fullscreen cdkscrollable (backdropClick)="onSidenavToggle()">
-  <mat-sidenav class="home" position="end" #sidenav role="navigation">
-    <app-navigation-sidebar (sidenavClose)="toggleSidenav(false)"></app-navigation-sidebar>
+  <mat-sidenav class="home" position="end" #sidenav role="navigation" [opened]="sidenavOpened">
+    <app-navigation-sidebar (sidenavClose)="onSidenavToggle()"></app-navigation-sidebar>
   </mat-sidenav>
   <mat-sidenav-content class="content" [class.sidebar-open]="sidenavOpened">
     <main>
