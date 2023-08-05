@@ -17,7 +17,7 @@ import {
   VerifyEmailOtpParams,
   createClient
 } from '@supabase/supabase-js';
-import {Observable, Subject, forkJoin} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, forkJoin} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {HttpUserService} from '../user/http-user.service';
 
@@ -25,7 +25,8 @@ import {HttpUserService} from '../user/http-user.service';
   providedIn: 'root'
 })
 export class SupabaseService {
-  private _currentSession: Subject<boolean | AuthSession> = new Subject();
+  private _currentSession: BehaviorSubject<AuthSession> = new BehaviorSubject(null);
+  public user: User | null = null;
 
   private supabase: SupabaseClient;
 
@@ -33,11 +34,11 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
     this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
-      this._currentSession.next(value.data?.session ? value.data.session : false);
+      this._currentSession.next(value.data?.session ? value.data.session : null);
     });
 
     this.supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: AuthSession) => {
-      this._currentSession.next(event === 'SIGNED_IN' ? session : false);
+      this._currentSession.next(event === 'SIGNED_IN' ? session : null);
     });
   }
 
@@ -88,7 +89,6 @@ export class SupabaseService {
       } catch (error) {
         console.error('Transaction failed:', error);
         await this.supabase.rpc('rollback');
-        console.log('Transaction rolled back');
         reject(error);
       }
     });
@@ -117,7 +117,7 @@ export class SupabaseService {
     return this.supabase.auth.resend(params);
   }
 
-  public getCurrentSession(): Observable<AuthSession | boolean> {
+  public getCurrentSession(): Observable<AuthSession> {
     return this._currentSession.asObservable();
   }
 }

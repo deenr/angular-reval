@@ -16,7 +16,7 @@
     @include breakpoint-sm() {
       width: 100%;
       position: absolute;
-      top: 65px;
+      top: 57px;
     }
 
     .sidebar {
@@ -72,7 +72,7 @@
 
     @include breakpoint-sm() {
       margin-top: 0;
-      padding: 32px 0px 48px 0px;
+      padding: 24px 0px;
     }
 
     &::after {
