@@ -60,7 +60,8 @@ import {InterfaceComponent} from './layouts/interface//interface.component';
 import {InterfaceSidebarComponent} from './custom-components/interface/interface-sidebar/interface-sidebar.component';
 import {SettingsComponent} from './pages/settings/settings.component';
 import {DetailsComponent} from '@pages/settings/details/details.component';
-import { InterfaceHeaderComponent } from './custom-components/interface/interface-header/interface-header.component';
+import {InterfaceHeaderComponent} from './custom-components/interface/interface-header/interface-header.component';
+import {TabsComponent} from './custom-components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { InterfaceHeaderComponent } from './custom-components/interface/interfac
     InterfaceComponent,
     InterfaceSidebarComponent,
     SettingsComponent,
-    InterfaceHeaderComponent
+    InterfaceHeaderComponent,
+    TabsComponent
   ],
   imports: [
     CommonModule,
