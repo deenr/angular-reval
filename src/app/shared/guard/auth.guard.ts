@@ -7,7 +7,7 @@ import {UserRole} from '@shared/enums/user/user-role.enum';
 import {RoleService} from '@shared/services/role/role.service';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
 import {AuthSession} from '@supabase/supabase-js';
-import {map, catchError, of} from 'rxjs';
+import {map, catchError, of, filter, tap, skip, skipWhile} from 'rxjs';
 
 export const canActivateInterface: CanActivateFn = () => {
   const supabaseService = inject(SupabaseService);
@@ -16,9 +16,9 @@ export const canActivateInterface: CanActivateFn = () => {
   const dialog = inject(MatDialog);
 
   return supabaseService.getCurrentSession().pipe(
-    map((session: AuthSession) => {
-      console.log(session);
-      if (session === null || session === undefined) {
+    skipWhile((session: AuthSession | boolean) => session === null || session === undefined),
+    map((session: AuthSession | boolean) => {
+      if (session === null || session === undefined || !session) {
         router.navigate(['/login']);
         return false;
       } else if (roleService.getCurrentRole() !== UserRole.ADMIN) {

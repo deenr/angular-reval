@@ -25,8 +25,7 @@ import {HttpUserService} from '../user/http-user.service';
   providedIn: 'root'
 })
 export class SupabaseService {
-  private _currentSession: BehaviorSubject<AuthSession> = new BehaviorSubject(null);
-  public user: User | null = null;
+  private _currentSession: BehaviorSubject<AuthSession | boolean> = new BehaviorSubject(null);
 
   private supabase: SupabaseClient;
 
@@ -34,11 +33,11 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
     this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
-      this._currentSession.next(value.data?.session ? value.data.session : null);
+      this._currentSession.next(value.data?.session ? value.data.session : false);
     });
 
     this.supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: AuthSession) => {
-      this._currentSession.next(event === 'SIGNED_IN' ? session : null);
+      this._currentSession.next(event === 'SIGNED_IN' ? session : false);
     });
   }
 
@@ -129,7 +128,7 @@ export class SupabaseService {
     return this.supabase.auth.resend(params);
   }
 
-  public getCurrentSession(): Observable<AuthSession> {
+  public getCurrentSession(): Observable<AuthSession | boolean> {
     return this._currentSession.asObservable();
   }
 }
