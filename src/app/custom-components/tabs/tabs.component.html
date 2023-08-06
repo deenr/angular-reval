@@ -1,0 +1,8 @@
+<div *ngIf="!isMobile" class="tabs flex-row" [class.vertical]="vertical">
+  <p *ngFor="let tab of tabs" class="tab text-sm text-semibold" [class.vertical]="vertical" [class.active]="tab.active" [class.disabled]="tab.disabled" (click)="setTabActive(tab)">{{ tab.name }}</p>
+</div>
+<mat-form-field *ngIf="isMobile" class="mobile-tab-selector" [formGroup]="tabForm">
+  <mat-select formControlName="tab">
+    <mat-option *ngFor="let tab of tabs" [value]="tab" [disabled]="tab.disabled"> {{ tab.name }} </mat-option>
+  </mat-select>
+</mat-form-field>
