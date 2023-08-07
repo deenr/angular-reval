@@ -3,45 +3,36 @@
 :host {
   .settings {
     position: relative;
-    padding: 0 32px;
-    gap: 30px;
-    overflow: hidden;
+    overflow: scroll;
+    padding: 32px 0;
 
-    @include breakpoint-sm() {
-      padding: 0 16px;
-    }
-
-    .mat-tab-group {
-      overflow: hidden;
-      flex: 1 1 auto;
-    }
-
-    .mobile-tab-selector {
-      display: none;
+    h2 {
+      padding: 0px 32px;
 
       @include breakpoint-sm() {
-        display: block;
+        padding: 0px 8px;
       }
     }
-  }
 
-  ::ng-deep .mat-mdc-tab-header {
-    @include breakpoint-sm() {
-      display: none;
+    &__tabs {
+      padding: 24px 32px 32px 32px;
+
+      @include breakpoint-sm() {
+        padding: 16px 8px 24px 8px;
+      }
     }
-  }
 
-  ::ng-deep .mat-mdc-tab-body-wrapper {
-    height: 100%;
-    margin: 0 -32px;
+    &__footer {
+      position: sticky;
+      bottom: 0;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 20px;
+      background-color: $color-white;
 
-    .mat-mdc-tab-body {
-      padding: 0 32px;
-
-      .mat-mdc-tab-body-content {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
+      .actions {
+        gap: 12px;
+        justify-content: end;
       }
     }
   }

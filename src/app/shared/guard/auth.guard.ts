@@ -7,7 +7,7 @@ import {UserRole} from '@shared/enums/user/user-role.enum';
 import {RoleService} from '@shared/services/role/role.service';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
 import {AuthSession} from '@supabase/supabase-js';
-import {map, catchError, of, filter, tap, skip, skipWhile} from 'rxjs';
+import {map, catchError, of, skipWhile} from 'rxjs';
 
 export const canActivateInterface: CanActivateFn = () => {
   const supabaseService = inject(SupabaseService);

@@ -1,6 +1,6 @@
 import {SphienceUser} from '@shared/interfaces/user/sphience-user';
 import {SupabaseService} from '../supabase/supabase.service';
-import {Observable, from} from 'rxjs';
+import {Observable, from, of} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {SupabaseClient, createClient} from '@supabase/supabase-js';
@@ -25,6 +25,31 @@ export class HttpUserService {
         .single()
         .then(({data}) => data as SphienceUser)
     );
+  }
+
+  public updateUserProfile(user: SphienceUser): Observable<void> {
+    return new Observable<void>((observer) => {
+      this.supabase
+        .from('users')
+        .update({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phoneNumber: user.phoneNumber,
+          faculty: user.faculty,
+          program: user.program,
+          universityId: user.universityId,
+          yearOfGraduation: user.yearOfGraduation
+        })
+        .eq('id', user.id)
+        .then((response) => {
+          if (response.error) {
+            observer.error(response.error);
+          } else {
+            observer.next(); // Emit a value (void) to indicate success
+            observer.complete(); // Complete the observable
+          }
+        });
+    });
   }
 
   public getUserRole(userId: string): Observable<UserRole> {

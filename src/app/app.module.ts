@@ -62,6 +62,7 @@ import {SettingsComponent} from './pages/settings/settings.component';
 import {DetailsComponent} from '@pages/settings/details/details.component';
 import {InterfaceHeaderComponent} from './custom-components/interface/interface-header/interface-header.component';
 import {TabsComponent} from './custom-components/tabs/tabs.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import {TabsComponent} from './custom-components/tabs/tabs.component';
     MatDialogModule,
     LayoutModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [
     {

@@ -1,17 +1,6 @@
 <div class="settings flex-column full-height">
-  <h2 class="display-sm text-semibold" classMd="display-xs">Settings</h2>
-  <mat-form-field *ngIf="isMobile" [formGroup]="tabForm">
-    <mat-select formControlName="tab" placeholder="Select your role" (selectionChange)="onTabChange($event)">
-      <mat-option *ngFor="let settings of settingsTypes" [value]="settings">
-        {{ getSettingsTypeTranslation(settings) }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-tab-group class="mat-tab-group" [(selectedIndex)]="selectedTab">
-    <mat-tab label="My details" [id]="settingsType.DETAILS">
-      <app-details></app-details>
-    </mat-tab>
-    <mat-tab label="Profile" [id]="settingsType.PROFILE" disabled>Profile</mat-tab>
-    <mat-tab label="Password" [id]="settingsType.PASSWORD" disabled>Password</mat-tab>
-  </mat-tab-group>
+  <h2 class="display-sm text-semibold padding" classMd="display-xs">Settings</h2>
+  <app-tabs class="settings__tabs padding" [tabs]="tabs"></app-tabs>
+
+  <app-details></app-details>
 </div>

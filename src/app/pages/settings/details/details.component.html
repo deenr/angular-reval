@@ -1,8 +1,17 @@
 <div>
   <mat-card class="details-card full-height" [formGroup]="desktopDetailsForm">
-    <mat-card-header class="flex-column details-card__header">
-      <mat-card-title>Personal info</mat-card-title>
-      <mat-card-subtitle>Update personal details and contact information here.</mat-card-subtitle>
+    <mat-card-header class="flex-column details-card__header personal-info">
+      <div class="flex-row">
+        <div class="full-width">
+          <mat-card-title>Personal details</mat-card-title>
+          <mat-card-subtitle>Update personal and university information here.</mat-card-subtitle>
+        </div>
+
+        <div class="actions flex-row">
+          <button mat-stroked-button class="md">Cancel</button>
+          <app-progress-button size="md" [loading]="savingDetails" (progressClick)="saveDetails()">Save</app-progress-button>
+        </div>
+      </div>
       <mat-divider></mat-divider>
     </mat-card-header>
     <mat-card-content class="flex-column details-card__content">
@@ -35,13 +44,7 @@
           </mat-form-field>
         </div>
       </div>
-    </mat-card-content>
-    <mat-card-header class="flex-column details-card__header university-header">
-      <mat-card-title>University info</mat-card-title>
-      <mat-card-subtitle>Update your university details here.</mat-card-subtitle>
       <mat-divider></mat-divider>
-    </mat-card-header>
-    <mat-card-content class="details-card__content">
       <div class="flex-row content-field">
         <p class="text-sm text-semibold">Academic role</p>
         <div class="form-fields full-width">
@@ -94,11 +97,4 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <div class="details__footer">
-    <mat-divider class="full-width"></mat-divider>
-    <div class="actions flex-row full-width">
-      <button mat-stroked-button class="md">Cancel</button>
-      <app-progress-button size="md" [loading]="savingDetails" (progressClick)="saveDetails()">Save</app-progress-button>
-    </div>
-  </div>
 </div>

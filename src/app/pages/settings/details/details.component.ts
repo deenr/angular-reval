@@ -31,21 +31,21 @@ export class DetailsComponent implements OnInit {
     lastName: FormControl<string>;
     phoneNumber: FormControl<string>;
     email: FormControl<string>;
+    role: FormControl<UserRole>;
     faculty: FormControl<Faculty>;
     program: FormControl<Program>;
     universityId: FormControl<string>;
     yearOfGraduation: FormControl<string>;
-    role: FormControl<UserRole>;
   }> = new FormGroup({
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
     phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')]),
     email: new FormControl({value: null, disabled: true}),
+    role: new FormControl(null, Validators.required),
     faculty: new FormControl(null),
     program: new FormControl({value: null, disabled: true}),
     universityId: new FormControl(null, Validators.required),
-    yearOfGraduation: new FormControl(null),
-    role: new FormControl(null, Validators.required)
+    yearOfGraduation: new FormControl(null)
   });
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
@@ -163,8 +163,10 @@ export class DetailsComponent implements OnInit {
   public onFacultyChange(selectChange: MatSelectChange): void {
     const faculty = selectChange.value as Faculty;
     if (Object.values(Faculty).includes(faculty)) {
+      this.desktopDetailsForm.controls.program.setValue(null);
       this.desktopDetailsForm.controls.program.enable();
     } else {
+      console.log('hi');
       this.desktopDetailsForm.controls.program.disable();
     }
   }
@@ -175,36 +177,51 @@ export class DetailsComponent implements OnInit {
     if (this.desktopDetailsForm.valid) {
       this.savingDetails = true;
 
-      this.supabaseService
-        .setUserInformation({
-          id: this.route.snapshot.paramMap.get('id'),
-          firstName: this.desktopDetailsForm.value.firstName,
-          lastName: this.desktopDetailsForm.value.lastName,
-          phoneNumber: this.desktopDetailsForm.value.phoneNumber,
-          email: this.desktopDetailsForm.value.email,
-          faculty: this.desktopDetailsForm.value.faculty,
-          program: this.desktopDetailsForm.value.program,
-          universityId: this.desktopDetailsForm.value.universityId,
-          yearOfGraduation: this.desktopDetailsForm.value.yearOfGraduation,
-          role: this.desktopDetailsForm.value.role
-        } as SphienceUser)
-        .then(() => {})
-        .catch(() => {});
+      if (this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
+        this.supabaseService
+          .setUserInformation(this.getUserToSave(this.route.snapshot.paramMap.get('id')))
+          .then(() => {
+            this.savingDetails = false;
+          })
+          .catch(() => {});
+      } else {
+        const currentUser = JSON.parse(localStorage.getItem('user')) as {id: string};
+        this.httpUserService.updateUserProfile(this.getUserToSave(currentUser.id)).subscribe(() => {
+          this.savingDetails = false;
+        });
+      }
     }
   }
 
+  private getUserToSave(id: string): SphienceUser {
+    return {
+      id,
+      firstName: this.desktopDetailsForm.value.firstName,
+      lastName: this.desktopDetailsForm.value.lastName,
+      phoneNumber: this.desktopDetailsForm.value.phoneNumber,
+      email: this.desktopDetailsForm.value.email,
+      faculty: this.desktopDetailsForm.value.faculty,
+      program: this.desktopDetailsForm.value.program,
+      universityId: this.desktopDetailsForm.value.universityId,
+      yearOfGraduation: this.desktopDetailsForm.value.yearOfGraduation,
+      role: this.desktopDetailsForm.value.role
+    } as SphienceUser;
+  }
+
   private setSettingsDetailsForm(user: SphienceUser): void {
-    this.desktopDetailsForm.patchValue({
+    this.desktopDetailsForm.setValue({
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
       email: user.email,
+      role: this.roleService.getCurrentRole(),
       faculty: user.faculty,
       program: user.program,
       universityId: user.universityId,
-      yearOfGraduation: user.yearOfGraduation,
-      role: this.roleService.getCurrentRole()
+      yearOfGraduation: user.yearOfGraduation
     });
+
+    this.desktopDetailsForm.controls.role.setValue(this.roleService.getCurrentRole());
 
     this.desktopDetailsForm.controls.email.disable();
     this.desktopDetailsForm.controls.role.disable();

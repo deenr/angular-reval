@@ -3,13 +3,36 @@
 :host {
   .details-card {
     overflow: scroll;
-    padding-bottom: 24px;
+    padding: 0px 32px;
+
+    @include breakpoint-sm() {
+      padding: 0px 8px;
+    }
 
     &__header {
       gap: 24px;
 
       &.university-header {
         margin-top: 20px;
+      }
+
+      &.personal-info {
+        & > div {
+          gap: 4px;
+
+          @include breakpoint-sm() {
+            flex-direction: column;
+            gap: 16px;
+          }
+        }
+
+        .actions {
+          gap: 12px;
+        }
+
+        ::ng-deep .mat-mdc-card-header-text {
+          display: none !important;
+        }
       }
     }
 
@@ -35,17 +58,6 @@
           }
         }
       }
-    }
-  }
-
-  .details__footer {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px;
-
-    .actions {
-      gap: 12px;
-      justify-content: end;
     }
   }
 }
