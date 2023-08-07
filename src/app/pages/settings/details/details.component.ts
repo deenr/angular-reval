@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatSelectChange} from '@angular/material/select';
 import {ActivatedRoute} from '@angular/router';
@@ -26,6 +26,8 @@ import {HttpUserService} from '@shared/services/user/http-user.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
+  @Input() public isMobile: boolean;
+
   public desktopDetailsForm: FormGroup<{
     firstName: FormControl<string>;
     lastName: FormControl<string>;
