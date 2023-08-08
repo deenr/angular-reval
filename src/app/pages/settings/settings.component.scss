@@ -3,8 +3,12 @@
 :host {
   .settings {
     position: relative;
-    overflow: scroll;
+    overflow: hidden;
     padding: 32px 0;
+
+    @include breakpoint-sm() {
+      overflow: scroll;
+    }
 
     h2 {
       padding: 0px 32px;
@@ -15,24 +19,19 @@
     }
 
     &__tabs {
-      padding: 24px 32px 32px 32px;
+      padding: 24px 32px 0 32px;
 
       @include breakpoint-sm() {
-        padding: 16px 8px 24px 8px;
+        padding: 16px 8px 0 8px;
       }
     }
 
-    &__footer {
-      position: sticky;
-      bottom: 0;
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 20px;
-      background-color: $color-white;
+    &__details {
+      display: flex;
+      overflow: hidden;
 
-      .actions {
-        gap: 12px;
-        justify-content: end;
+      @include breakpoint-sm() {
+        all: unset;
       }
     }
   }
