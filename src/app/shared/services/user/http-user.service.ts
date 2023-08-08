@@ -1,4 +1,4 @@
-import {SphienceUser} from '@shared/interfaces/user/sphience-user';
+import {SphienceUser} from '@shared/models/user/sphience-user';
 import {SupabaseService} from '../supabase/supabase.service';
 import {Observable, from, of} from 'rxjs';
 import {Injectable} from '@angular/core';
@@ -23,7 +23,7 @@ export class HttpUserService {
         .select('*')
         .eq('id', id)
         .single()
-        .then(({data}) => data as SphienceUser)
+        .then(({data}) => SphienceUser.fromJSON(data))
     );
   }
 

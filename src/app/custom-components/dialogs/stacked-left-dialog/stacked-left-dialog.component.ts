@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../dialog-type.enum';
 import {Router} from '@angular/router';
+import {DialogCloseType} from '../dialog-close-type.enum';
 
 @Component({
   selector: 'app-stacked-left-dialog',
@@ -15,6 +16,8 @@ export class StackedLeftDialogComponent {
   public description: string;
   public cancelRoute: string;
   public confirmRoute: string;
+  public cancelTitle: string;
+  public confirmTitle: string;
 
   public constructor(
     public dialogRef: MatDialogRef<StackedLeftDialogComponent>,
@@ -26,6 +29,8 @@ export class StackedLeftDialogComponent {
       description: string;
       cancelRoute: string;
       confirmRoute: string;
+      cancelTitle: string;
+      confirmTitle: string;
     },
     private readonly router: Router
   ) {
@@ -35,20 +40,22 @@ export class StackedLeftDialogComponent {
     this.description = data.description;
     this.cancelRoute = data.cancelRoute;
     this.confirmRoute = data.confirmRoute;
+    this.cancelTitle = data.cancelTitle ?? 'Cancel';
+    this.confirmTitle = data.confirmTitle ?? 'Confirm';
   }
 
   public cancel(): void {
     if (this.cancelRoute) {
       this.router.navigateByUrl(this.cancelRoute);
     }
-    this.dialogRef.close();
+    this.dialogRef.close(DialogCloseType.CANCEL);
   }
 
   public confirm(): void {
     if (this.confirmRoute) {
       this.router.navigateByUrl(this.confirmRoute);
     }
-    this.dialogRef.close();
+    this.dialogRef.close(DialogCloseType.CONFIRM);
   }
 
   public getConfirmButtonClass(): string {

@@ -63,6 +63,7 @@ import {DetailsComponent} from '@pages/settings/details/details.component';
 import {InterfaceHeaderComponent} from './custom-components/interface/interface-header/interface-header.component';
 import {TabsComponent} from './custom-components/tabs/tabs.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {PasswordComponent} from './pages/settings/password/password.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     InterfaceSidebarComponent,
     SettingsComponent,
     InterfaceHeaderComponent,
-    TabsComponent
+    TabsComponent,
+    PasswordComponent
   ],
   imports: [
     CommonModule,

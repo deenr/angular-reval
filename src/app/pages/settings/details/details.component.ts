@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatSelectChange} from '@angular/material/select';
 import {ActivatedRoute} from '@angular/router';
@@ -15,7 +15,7 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {SphienceUser} from '@shared/interfaces/user/sphience-user';
+import {SphienceUser} from '@shared/models/user/sphience-user';
 import {RoleService} from '@shared/services/role/role.service';
 import {SupabaseService} from '@shared/services/supabase/supabase.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
@@ -25,10 +25,9 @@ import {HttpUserService} from '@shared/services/user/http-user.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   @Input() public isMobile: boolean;
-
-  public desktopDetailsForm: FormGroup<{
+  @Input() public detailsForm: FormGroup<{
     firstName: FormControl<string>;
     lastName: FormControl<string>;
     phoneNumber: FormControl<string>;
@@ -38,17 +37,9 @@ export class DetailsComponent implements OnInit {
     program: FormControl<Program>;
     universityId: FormControl<string>;
     yearOfGraduation: FormControl<string>;
-  }> = new FormGroup({
-    firstName: new FormControl(null, Validators.required),
-    lastName: new FormControl(null, Validators.required),
-    phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')]),
-    email: new FormControl({value: null, disabled: true}),
-    role: new FormControl(null, Validators.required),
-    faculty: new FormControl(null),
-    program: new FormControl({value: null, disabled: true}),
-    universityId: new FormControl(null, Validators.required),
-    yearOfGraduation: new FormControl(null)
-  });
+  }>;
+  @Input() public loadingUser: boolean;
+  @Output() public userUpdated = new EventEmitter<SphienceUser>();
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
 
@@ -56,7 +47,6 @@ export class DetailsComponent implements OnInit {
 
   public skeletonType = SkeletonType;
   public savingDetails = false;
-  public loadingUser = true;
 
   private facultiesTranslation = new Map<Faculty, string>([
     [Faculty.ARCHITECTURE_AND_ARTS, 'Architecture and Arts'],
@@ -105,24 +95,11 @@ export class DetailsComponent implements OnInit {
   ]);
 
   public constructor(
-    private readonly route: ActivatedRoute,
     private readonly supabaseService: SupabaseService,
+    private readonly route: ActivatedRoute,
     private readonly roleService: RoleService,
     private readonly httpUserService: HttpUserService
   ) {}
-
-  public ngOnInit(): void {
-    const localUserIdAndEmail = JSON.parse(localStorage.getItem('user')) as {id: string; email: string};
-    if (this.route.snapshot.paramMap.get('id') && this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
-      this.desktopDetailsForm.controls.email.setValue(localUserIdAndEmail.email);
-      this.loadingUser = false;
-    } else {
-      this.httpUserService.getUserDetailsById(localUserIdAndEmail.id).subscribe((user: SphienceUser) => {
-        this.setSettingsDetailsForm(user);
-        this.loadingUser = false;
-      });
-    }
-  }
 
   public getRoleTranslation(UserRole: UserRole): string {
     return this.rolesTranslation.get(UserRole);
@@ -133,7 +110,7 @@ export class DetailsComponent implements OnInit {
   }
 
   public getPrograms(): Program[] {
-    switch (this.desktopDetailsForm.value.faculty) {
+    switch (this.detailsForm.value.faculty) {
       case Faculty.ARCHITECTURE_AND_ARTS:
         return Object.keys(ArchitectureAndArtsProgram).map((program: string) => program as ArchitectureAndArtsProgram);
       case Faculty.BUSINESS_ECONOMICS:
@@ -165,71 +142,51 @@ export class DetailsComponent implements OnInit {
   public onFacultyChange(selectChange: MatSelectChange): void {
     const faculty = selectChange.value as Faculty;
     if (Object.values(Faculty).includes(faculty)) {
-      this.desktopDetailsForm.controls.program.setValue(null);
-      this.desktopDetailsForm.controls.program.enable();
+      this.detailsForm.controls.program.setValue(null);
+      this.detailsForm.controls.program.enable();
     } else {
       console.log('hi');
-      this.desktopDetailsForm.controls.program.disable();
+      this.detailsForm.controls.program.disable();
     }
   }
 
   public saveDetails(): void {
-    this.desktopDetailsForm.markAllAsTouched();
+    this.detailsForm.markAllAsTouched();
 
-    if (this.desktopDetailsForm.valid) {
+    if (this.detailsForm.valid) {
       this.savingDetails = true;
-
       if (this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
+        const userToSave = this.getUserToSave(this.route.snapshot.paramMap.get('id'));
         this.supabaseService
-          .setUserInformation(this.getUserToSave(this.route.snapshot.paramMap.get('id')))
+          .setUserInformation(userToSave)
           .then(() => {
             this.savingDetails = false;
+            this.userUpdated.emit(userToSave);
           })
           .catch(() => {});
       } else {
         const currentUser = JSON.parse(localStorage.getItem('user')) as {id: string};
-        this.httpUserService.updateUserProfile(this.getUserToSave(currentUser.id)).subscribe(() => {
+        const userToSave = this.getUserToSave(currentUser.id);
+        this.httpUserService.updateUserProfile(userToSave).subscribe(() => {
           this.savingDetails = false;
+          this.userUpdated.emit(userToSave);
         });
       }
     }
   }
 
   private getUserToSave(id: string): SphienceUser {
-    return {
+    return new SphienceUser(
       id,
-      firstName: this.desktopDetailsForm.value.firstName,
-      lastName: this.desktopDetailsForm.value.lastName,
-      phoneNumber: this.desktopDetailsForm.value.phoneNumber,
-      email: this.desktopDetailsForm.value.email,
-      faculty: this.desktopDetailsForm.value.faculty,
-      program: this.desktopDetailsForm.value.program,
-      universityId: this.desktopDetailsForm.value.universityId,
-      yearOfGraduation: this.desktopDetailsForm.value.yearOfGraduation,
-      role: this.desktopDetailsForm.value.role
-    } as SphienceUser;
-  }
-
-  private setSettingsDetailsForm(user: SphienceUser): void {
-    this.desktopDetailsForm.setValue({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phoneNumber: user.phoneNumber,
-      email: user.email,
-      role: this.roleService.getCurrentRole(),
-      faculty: user.faculty,
-      program: user.program,
-      universityId: user.universityId,
-      yearOfGraduation: user.yearOfGraduation
-    });
-
-    this.desktopDetailsForm.controls.role.setValue(this.roleService.getCurrentRole());
-
-    this.desktopDetailsForm.controls.email.disable();
-    this.desktopDetailsForm.controls.role.disable();
-    if (user.faculty) {
-      this.desktopDetailsForm.controls.program.enable();
-    }
-    this.desktopDetailsForm.controls.universityId.disable();
+      this.detailsForm.value.firstName,
+      this.detailsForm.value.lastName,
+      this.detailsForm.value.phoneNumber,
+      this.detailsForm.value.email,
+      this.detailsForm.value.faculty,
+      this.detailsForm.value.program,
+      this.detailsForm.value.universityId,
+      this.detailsForm.value.yearOfGraduation,
+      this.detailsForm.value.role
+    );
   }
 }

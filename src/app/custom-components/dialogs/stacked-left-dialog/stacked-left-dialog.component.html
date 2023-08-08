@@ -7,6 +7,6 @@
   <p class="text-sm text-regular">{{ description }}</p>
 </div>
 <div class="actions flex-row">
-  <button mat-stroked-button class="full-width" (click)="cancel()">Cancel</button>
-  <button mat-flat-button class="full-width" [color]="getConfirmButtonClass()" (click)="confirm()">Confirm</button>
+  <button mat-stroked-button class="full-width" (click)="cancel()">{{ cancelTitle }}</button>
+  <button mat-flat-button class="full-width" [color]="getConfirmButtonClass()" (click)="confirm()">{{ confirmTitle }}</button>
 </div>
