@@ -41,11 +41,11 @@
       margin-top: 204px;
       align-items: center;
 
-      @include breakpoint-md() {
+      @include breakpoint-lg() {
         margin-top: 160px;
       }
 
-      @include breakpoint-sm() {
+      @include breakpoint-md() {
         margin-top: 80px;
       }
 
@@ -96,12 +96,20 @@
     }
 
     &__illustration {
-      height: 480px;
+      aspect-ratio: 2.5;
       border-radius: 8px;
       // background-color: $color-primary-600;
       background-image: url('../../../assets/image/person-in-lab.webp');
       background-position: 50% 80%;
       background-size: cover;
+
+      @include breakpoint-lg() {
+        aspect-ratio: 2;
+      }
+
+      @include breakpoint-md() {
+        aspect-ratio: 1.5;
+      }
     }
   }
 
