@@ -29,9 +29,11 @@
         <div class="flex-column form__password">
           <mat-form-field>
             <input matInput formControlName="password" type="password" placeholder="Choose a password" />
+            <mat-error *hasError="'password'; code: 'minlength'">Choose a more secure password, longer than 8 characters.</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+            <mat-error *hasError="'confirmPassword'; code: 'noMatch'">Password does not match. Enter password again.</mat-error>
           </mat-form-field>
         </div>
         <app-progress-button type="confirm" [loading]="loadingSignUp" (progressClick)="goToEmailVerification()">Continue</app-progress-button>

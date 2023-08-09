@@ -9,6 +9,7 @@ import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-lef
 import {AuthService} from '@shared/services/auth/auth.service';
 import {finalize, interval, scan, take} from 'rxjs';
 import {Router} from '@angular/router';
+import {PasswordMatchValidator} from '@helper/validator/password-match-validator';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
     confirmPassword: FormControl<string>;
   }> = new FormGroup({
     password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-    confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)])
+    confirmPassword: new FormControl(null, [Validators.required])
   });
 
   public verificationCodeForm: FormGroup<{
@@ -83,6 +84,16 @@ export class RegisterComponent implements OnInit {
       this.emailForm.controls.email.setValue(getStartedEmail);
       this.goToPassword();
     }
+
+    this.passwordForm.controls.password.valueChanges.subscribe((password: string) => {
+      if (password.length >= 8) {
+        this.passwordForm.controls.confirmPassword.setValidators([Validators.required, PasswordMatchValidator.createValidator(this.passwordForm.controls.password)]);
+      } else {
+        this.passwordForm.controls.confirmPassword.setValidators(Validators.required);
+      }
+
+      this.passwordForm.controls.confirmPassword.updateValueAndValidity({emitEvent: false});
+    });
   }
 
   public getTitle(): string {
