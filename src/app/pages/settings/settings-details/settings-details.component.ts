@@ -21,11 +21,11 @@ import {AuthService} from '@shared/services/auth/auth.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  selector: 'app-settings-details',
+  templateUrl: './settings-details.component.html',
+  styleUrls: ['./settings-details.component.scss']
 })
-export class DetailsComponent {
+export class SettingsDetailsComponent {
   @Input() public isMobile: boolean;
   @Input() public detailsForm: FormGroup<{
     firstName: FormControl<string>;

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tab} from './tab.interface';
-import {SettingsType} from '@pages/settings/settings-type.enum';
+import {SettingsTab} from '@pages/settings/settings-tab.enum';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 import {FormGroup, FormControl} from '@angular/forms';
 import {MatSelectChange} from '@angular/material/select';

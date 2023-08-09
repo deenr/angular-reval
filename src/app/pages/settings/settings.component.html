@@ -1,7 +1,12 @@
 <div class="settings flex-column full-height">
-  <h2 class="display-sm text-semibold padding" classMd="display-xs">Settings</h2>
-  <app-tabs class="settings__tabs padding" [tabs]="tabs" [needsConfirmation]="hasUnsavedChanges()" (tabChange)="onTabChange()"></app-tabs>
+  <app-header title="Settings" [tabs]="tabs" [needsConfirmation]="hasUnsavedChanges()" (tabChange)="onTabChange()"></app-header>
 
-  <app-details *ngIf="isTabActive(settingsType.DETAILS)" class="full-height settings__field" [detailsForm]="detailsForm" (userUpdated)="onUserUpdate($event)" [isMobile]="isMobile"></app-details>
-  <app-password *ngIf="isTabActive(settingsType.PASSWORD)" class="full-height settings__field" [passwordForm]="passwordForm" [isMobile]="isMobile"></app-password>
+  <app-settings-details
+    *ngIf="isTabActive(settingsTab.DETAILS)"
+    class="full-height settings__field"
+    [detailsForm]="detailsForm"
+    (userUpdated)="onUserUpdate($event)"
+    [isMobile]="isMobile"
+  ></app-settings-details>
+  <app-settings-password *ngIf="isTabActive(settingsTab.PASSWORD)" class="full-height settings__field" [passwordForm]="passwordForm" [isMobile]="isMobile"></app-settings-password>
 </div>

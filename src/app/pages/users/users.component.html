@@ -1,0 +1,5 @@
+<div class="users">
+  <app-header title="Users" [tabs]="tabs"></app-header>
+
+  <app-users-overview *ngIf="isTabActive(usersTab.OVERVIEW)"></app-users-overview>
+</div>

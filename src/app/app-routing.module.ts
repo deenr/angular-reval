@@ -17,6 +17,7 @@ import {HomeComponent} from '@layouts/home/home.component';
 import {InterfaceComponent} from '@layouts/interface/interface.component';
 import {SettingsComponent} from '@pages/settings/settings.component';
 import {canActivateInterface} from '@shared/guard/auth.guard';
+import {UsersComponent} from '@pages/users/users.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
     canActivate: [canActivateInterface],
     children: [
       {path: 'settings', component: SettingsComponent},
-      {path: 'settings/:id', component: SettingsComponent}
+      {path: 'settings/:id', component: SettingsComponent},
+      {path: 'users', component: UsersComponent}
     ]
   },
   {path: '**', redirectTo: ''}

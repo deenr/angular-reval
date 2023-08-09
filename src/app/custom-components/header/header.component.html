@@ -1,0 +1,4 @@
+<header class="header flex-column full-height">
+  <h2 class="display-sm text-semibold padding" classMd="display-xs">{{ title }}</h2>
+  <app-tabs class="header__tabs padding" [tabs]="tabs" [needsConfirmation]="needsConfirmation" (tabChange)="tabChange.emit($event)"></app-tabs>
+</header>

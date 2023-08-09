@@ -1,4 +1,4 @@
-export enum SettingsType {
+export enum SettingsTab {
   DETAILS = 'DETAILS',
   PROFILE = 'PROFILE',
   PASSWORD = 'PASSWORD'

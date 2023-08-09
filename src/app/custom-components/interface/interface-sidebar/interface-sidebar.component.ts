@@ -26,7 +26,7 @@ export class InterfaceSidebarComponent implements OnInit {
     {id: 'dashboard', name: 'Dashboard', icon: 'chart', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'equipments', name: 'Equipment', icon: 'microscope', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'documents', name: 'Documents', icon: 'file', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'users', name: 'Users', icon: 'users', permissions: [UserRole.ADMIN]},
+    {id: 'users', name: 'Users', icon: 'users', routerLink: '/app/users', permissions: [UserRole.ADMIN]},
     {id: 'news', name: 'News', icon: 'newspaper', permissions: [UserRole.ADMIN]}
   ] as NavigationItem[];
 

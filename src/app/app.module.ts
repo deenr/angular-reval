@@ -59,11 +59,15 @@ import {HasErrorDirective} from './shared/directives/has-error/has-error.directi
 import {InterfaceComponent} from './layouts/interface//interface.component';
 import {InterfaceSidebarComponent} from './custom-components/interface/interface-sidebar/interface-sidebar.component';
 import {SettingsComponent} from './pages/settings/settings.component';
-import {DetailsComponent} from '@pages/settings/details/details.component';
+import {SettingsDetailsComponent} from '@pages/settings/settings-details/settings-details.component';
 import {InterfaceHeaderComponent} from './custom-components/interface/interface-header/interface-header.component';
 import {TabsComponent} from './custom-components/tabs/tabs.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {PasswordComponent} from './pages/settings/password/password.component';
+import {PasswordComponent} from './pages/settings/settings-password/settings-password.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {UsersComponent} from './pages/users/users.component';
+import {HeaderComponent} from './custom-components/header/header.component';
+import {UsersOverviewComponent} from './pages/users/users-overview/users-overview.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +102,7 @@ import {PasswordComponent} from './pages/settings/password/password.component';
     AuthenticationComponent,
     HomeComponent,
     StackedLeftDialogComponent,
-    DetailsComponent,
+    SettingsDetailsComponent,
     PaginatorComponent,
     VerificationCodeInputComponent,
     HasErrorDirective,
@@ -107,7 +111,10 @@ import {PasswordComponent} from './pages/settings/password/password.component';
     SettingsComponent,
     InterfaceHeaderComponent,
     TabsComponent,
-    PasswordComponent
+    PasswordComponent,
+    UsersComponent,
+    HeaderComponent,
+    UsersOverviewComponent
   ],
   imports: [
     CommonModule,
@@ -135,7 +142,8 @@ import {PasswordComponent} from './pages/settings/password/password.component';
     LayoutModule,
     MatTabsModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule
   ],
   providers: [
     {

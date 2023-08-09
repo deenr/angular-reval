@@ -7,9 +7,9 @@ import {AuthService} from '@shared/services/auth/auth.service';
 import {combineLatest, startWith} from 'rxjs';
 
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss']
+  selector: 'app-settings-password',
+  templateUrl: './settings-password.component.html',
+  styleUrls: ['./settings-password.component.scss']
 })
 export class PasswordComponent implements OnInit {
   @Input() public isMobile: boolean;

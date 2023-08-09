@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SettingsType} from './settings-type.enum';
+import {SettingsTab} from './settings-tab.enum';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {MatSelectChange} from '@angular/material/select';
@@ -22,11 +22,11 @@ import {HttpUserService} from '@shared/services/user/http-user.service';
 })
 export class SettingsComponent implements OnInit {
   public tabs = [
-    {id: SettingsType.DETAILS, name: 'My details', disabled: false, active: true},
-    {id: SettingsType.PASSWORD, name: 'Password', disabled: false, active: false}
+    {id: SettingsTab.DETAILS, name: 'My details', disabled: false, active: true},
+    {id: SettingsTab.PASSWORD, name: 'Password', disabled: false, active: false}
   ] as Tab[];
 
-  public settingsType = SettingsType;
+  public settingsTab = SettingsTab;
   public isMobile: boolean;
   public loadingUser: boolean;
 
@@ -87,8 +87,8 @@ export class SettingsComponent implements OnInit {
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => (this.isMobile = breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS));
   }
 
-  public isTabActive(settingsType: SettingsType): boolean {
-    return this.tabs.find((tab: Tab) => tab.id === settingsType).active;
+  public isTabActive(settingsTab: SettingsTab): boolean {
+    return this.getActiveTab().id === settingsTab;
   }
 
   public hasUnsavedChanges(): boolean {
@@ -101,7 +101,7 @@ export class SettingsComponent implements OnInit {
 
   private hasUnsavedDetailsChanges(): boolean {
     return (
-      this.getActiveTab().id === SettingsType.DETAILS &&
+      this.getActiveTab().id === SettingsTab.DETAILS &&
       this.initialUser &&
       this.detailsForm &&
       this.roleService.getCurrentRole() !== UserRole.INCOMPLETE_PROFILE &&
@@ -119,7 +119,7 @@ export class SettingsComponent implements OnInit {
   }
 
   private hasUnsavedPasswordChanges(): boolean {
-    return this.getActiveTab().id === SettingsType.PASSWORD && this.passwordForm.dirty;
+    return this.getActiveTab().id === SettingsTab.PASSWORD && this.passwordForm.dirty;
   }
 
   public onTabChange(): void {

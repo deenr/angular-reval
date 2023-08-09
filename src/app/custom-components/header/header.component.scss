@@ -1,0 +1,21 @@
+@import 'variables';
+
+:host {
+  .header {
+    h2 {
+      padding: 0px 32px;
+
+      @include breakpoint-sm() {
+        padding: 0px 8px;
+      }
+    }
+
+    &__tabs {
+      padding: 24px 32px 0 32px;
+
+      @include breakpoint-sm() {
+        padding: 16px 8px 0 8px;
+      }
+    }
+  }
+}
