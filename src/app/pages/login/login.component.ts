@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {AuthError, AuthTokenResponse, OAuthResponse} from '@supabase/supabase-js';
 import {combineLatest} from 'rxjs';
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   });
   public loadingLogin = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService, private readonly router: Router) {}
+  public constructor(private readonly dialog: MatDialog, private readonly authService: AuthService, private readonly router: Router) {}
 
   public ngOnInit(): void {
     combineLatest([this.loginForm.controls.email.valueChanges, this.loginForm.controls.password.valueChanges]).subscribe(() => {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.loginForm.valid) {
       this.loadingLogin = true;
-      this.supabaseService
+      this.authService
         .signIn(this.loginForm.value.email, this.loginForm.value.password)
         .then(([user, error]: [{id: string; role: UserRole}, AuthError]) => {
           if (user) {
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
   public googleLogin(): void {
     this.openDashboard();
-    // this.supabaseService.googleSignIn();
+    // this.authService.googleSignIn();
   }
 
   private openDashboard(): void {

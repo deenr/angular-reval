@@ -15,9 +15,9 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {SphienceUser} from '@shared/models/user/sphience-user';
+import {User} from '@shared/models/user/user';
 import {RoleService} from '@shared/services/role/role.service';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class DetailsComponent {
     yearOfGraduation: FormControl<string>;
   }>;
   @Input() public loadingUser: boolean;
-  @Output() public userUpdated = new EventEmitter<SphienceUser>();
+  @Output() public userUpdated = new EventEmitter<User>();
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
 
@@ -94,12 +94,7 @@ export class DetailsComponent {
     [UserRole.PROFESSOR, 'Professor']
   ]);
 
-  public constructor(
-    private readonly supabaseService: SupabaseService,
-    private readonly route: ActivatedRoute,
-    private readonly roleService: RoleService,
-    private readonly httpUserService: HttpUserService
-  ) {}
+  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute, private readonly roleService: RoleService, private readonly httpUserService: HttpUserService) {}
 
   public getRoleTranslation(UserRole: UserRole): string {
     return this.rolesTranslation.get(UserRole);
@@ -157,7 +152,7 @@ export class DetailsComponent {
       this.savingDetails = true;
       if (this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
         const userToSave = this.getUserToSave(this.route.snapshot.paramMap.get('id'));
-        this.supabaseService
+        this.authService
           .setUserInformation(userToSave)
           .then(() => {
             this.savingDetails = false;
@@ -175,8 +170,8 @@ export class DetailsComponent {
     }
   }
 
-  private getUserToSave(id: string): SphienceUser {
-    return new SphienceUser(
+  private getUserToSave(id: string): User {
+    return new User(
       id,
       this.detailsForm.value.firstName,
       this.detailsForm.value.lastName,

@@ -6,7 +6,7 @@ import {matchValidator} from '@shared/helper/validator/match-validator';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {finalize, interval, scan, take} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
   public loadingVerification = false;
   public emailVerified = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly supabaseService: SupabaseService, private readonly router: Router) {}
+  public constructor(private readonly dialog: MatDialog, private readonly authService: AuthService, private readonly router: Router) {}
 
   public ngOnInit(): void {
     this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
 
   public goToPassword(): void {
     if (this.emailForm.valid) {
-      this.supabaseService.checkDuplicateAccount(this.emailForm.value.email).then((hasDuplicateAccount: boolean) => {
+      this.authService.checkDuplicateAccount(this.emailForm.value.email).then((hasDuplicateAccount: boolean) => {
         hasDuplicateAccount ? this.emailForm.controls.email.setErrors({duplicateEmail: true}) : this.setCurrentProgressStep(RegistrationStep.PASSWORD);
       });
     }
@@ -127,7 +127,7 @@ export class RegisterComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.loadingSignUp = true;
 
-      this.supabaseService.signUp(this.emailForm.value.email, this.passwordForm.value.password).then(() => {
+      this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password).then(() => {
         this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
         this.setResendCountdown();
         this.loadingSignUp = false;
@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit {
   public resendVerification(): void {
     if (this.canResendVerification) {
       this.setResendCountdown();
-      this.supabaseService.resendEmailVerification(this.emailForm.value.email);
+      this.authService.resendEmailVerification(this.emailForm.value.email);
     }
   }
 
@@ -177,7 +177,7 @@ export class RegisterComponent implements OnInit {
       if (this.verificationCodeForm.valid) {
         this.loadingVerification = true;
 
-        this.supabaseService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({data, error}) => {
+        this.authService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({data, error}) => {
           if (error) {
             this.dialog.open(StackedLeftDialogComponent, {
               width: '450px',

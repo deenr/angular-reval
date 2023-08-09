@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {AuthResponse} from '@supabase/supabase-js';
 
 @Component({
@@ -14,7 +14,7 @@ import {AuthResponse} from '@supabase/supabase-js';
 export class EmailVerificationComponent implements OnInit {
   public isEmailVerified = false;
 
-  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly supabaseService: SupabaseService, private readonly dialog: MatDialog) {}
+  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly authService: AuthService, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.checkForVerifyingEmail();
@@ -47,7 +47,7 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private verifyEmail(token: string, email: string): void {
-    this.supabaseService.verifyEmail(token, email).then(({data, error}: AuthResponse) => {
+    this.authService.verifyEmail(token, email).then(({data, error}: AuthResponse) => {
       if (error) {
         this.dialog.open(StackedLeftDialogComponent, {
           width: '450px',

@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {PasswordMatchValidator} from '@helper/validator/password-match-validator';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
-import {ChangePasswordResponse} from '@shared/services/supabase/change-password-response.enum';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {ChangePasswordResponse} from '@shared/services/auth/change-password-response.enum';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {combineLatest, startWith} from 'rxjs';
 
 @Component({
@@ -22,7 +22,7 @@ export class PasswordComponent implements OnInit {
 
   public skeletonType = SkeletonType;
 
-  public constructor(private readonly supabaseService: SupabaseService) {}
+  public constructor(private readonly authService: AuthService) {}
 
   public ngOnInit(): void {
     combineLatest([this.passwordForm.controls.currentPassword.valueChanges.pipe(startWith(null)), this.passwordForm.controls.newPassword.valueChanges.pipe(startWith(null))]).subscribe(
@@ -48,7 +48,7 @@ export class PasswordComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.savingPassword = true;
 
-      this.supabaseService
+      this.authService
         .updateUserPassword(this.passwordForm.value.currentPassword, this.passwordForm.value.newPassword)
         .then((response: ChangePasswordResponse) => {
           this.passwordForm.reset();

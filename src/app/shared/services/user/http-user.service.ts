@@ -1,5 +1,5 @@
-import {SphienceUser} from '@shared/models/user/sphience-user';
-import {SupabaseService} from '../supabase/supabase.service';
+import {User} from '@shared/models/user/user';
+import {AuthService} from '../auth/auth.service';
 import {Observable, from, of} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
@@ -16,18 +16,18 @@ export class HttpUserService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
-  public getUserDetailsById(id: string): Observable<SphienceUser> {
+  public getUserDetailsById(id: string): Observable<User> {
     return from(
       this.supabase
         .from('users')
         .select('*')
         .eq('id', id)
         .single()
-        .then(({data}) => SphienceUser.fromJSON(data))
+        .then(({data}) => User.fromJSON(data))
     );
   }
 
-  public updateUserProfile(user: SphienceUser): Observable<void> {
+  public updateUserProfile(user: User): Observable<void> {
     return new Observable<void>((observer) => {
       this.supabase
         .from('users')

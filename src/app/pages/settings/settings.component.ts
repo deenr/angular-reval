@@ -10,7 +10,7 @@ import {Tab} from '@custom-components/tabs/tab.interface';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {SphienceUser} from '@shared/models/user/sphience-user';
+import {User} from '@shared/models/user/user';
 import {ActivatedRoute} from '@angular/router';
 import {RoleService} from '@shared/services/role/role.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
@@ -62,7 +62,7 @@ export class SettingsComponent implements OnInit {
     confirmNewPassword: new FormControl(null, Validators.required)
   });
 
-  private initialUser: SphienceUser;
+  private initialUser: User;
 
   public constructor(
     private readonly breakpointService: BreakpointService,
@@ -77,7 +77,7 @@ export class SettingsComponent implements OnInit {
       this.detailsForm.controls.email.setValue(localUserIdAndEmail.email);
       this.loadingUser = false;
     } else {
-      this.httpUserService.getUserDetailsById(localUserIdAndEmail.id).subscribe((user: SphienceUser) => {
+      this.httpUserService.getUserDetailsById(localUserIdAndEmail.id).subscribe((user: User) => {
         this.initialUser = user;
         this.setSettingsDetailsForm(this.initialUser);
         this.loadingUser = false;
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
     return this.hasUnsavedDetailsChanges() || this.hasUnsavedPasswordChanges();
   }
 
-  public onUserUpdate(user: SphienceUser): void {
+  public onUserUpdate(user: User): void {
     this.initialUser = user;
   }
 
@@ -127,7 +127,7 @@ export class SettingsComponent implements OnInit {
     this.passwordForm.reset();
   }
 
-  private setSettingsDetailsForm(user: SphienceUser): void {
+  private setSettingsDetailsForm(user: User): void {
     this.detailsForm.setValue({
       firstName: user.firstName,
       lastName: user.lastName,

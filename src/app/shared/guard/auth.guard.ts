@@ -5,17 +5,17 @@ import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {RoleService} from '@shared/services/role/role.service';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 import {AuthSession} from '@supabase/supabase-js';
 import {map, catchError, of, skipWhile} from 'rxjs';
 
 export const canActivateInterface: CanActivateFn = () => {
-  const supabaseService = inject(SupabaseService);
+  const authService = inject(AuthService);
   const router = inject(Router);
   const roleService = inject(RoleService);
   const dialog = inject(MatDialog);
 
-  return supabaseService.getCurrentSession().pipe(
+  return authService.getCurrentSession().pipe(
     skipWhile((session: AuthSession | boolean) => session === null || session === undefined),
     map((session: AuthSession | boolean) => {
       if (session === null || session === undefined || !session) {
@@ -32,7 +32,7 @@ export const canActivateInterface: CanActivateFn = () => {
           }
         });
 
-        supabaseService.signOut();
+        authService.signOut();
         router.navigate(['/']);
         return false;
       }

@@ -5,7 +5,7 @@ import {UserRole} from '@shared/enums/user/user-role.enum';
 import {RoleService} from '@shared/services/role/role.service';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 import {Breakpoint} from '@shared/services/breakpoint/breakpoint.enum';
-import {SupabaseService} from '@shared/services/supabase/supabase.service';
+import {AuthService} from '@shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-interface-sidebar',
@@ -49,12 +49,7 @@ export class InterfaceSidebarComponent implements OnInit {
 
   private role: UserRole;
 
-  public constructor(
-    private readonly router: Router,
-    private readonly roleService: RoleService,
-    private readonly breakpointService: BreakpointService,
-    private readonly supabaseService: SupabaseService
-  ) {}
+  public constructor(private readonly router: Router, private readonly roleService: RoleService, private readonly breakpointService: BreakpointService, private readonly authService: AuthService) {}
 
   public ngOnInit(): void {
     this.role = this.roleService.getCurrentRole();
@@ -89,7 +84,7 @@ export class InterfaceSidebarComponent implements OnInit {
   }
 
   public signOut(): void {
-    this.supabaseService.signOut().then(() => {
+    this.authService.signOut().then(() => {
       this.router.navigate(['/login']);
     });
   }
