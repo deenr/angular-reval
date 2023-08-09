@@ -1,4 +1,4 @@
-<button mat-flat-button [type]="type" [class]="getClassList()" [class.loading]="loading" color="primary" type="button" (click)="onClick($event)">
+<button #button mat-flat-button [type]="type" [class]="getClassList()" [class.loading]="loading" [ngStyle]="{width: width}" color="primary" type="button" (click)="onClick($event)">
   <ng-container *ngIf="!loading; else loadingIcon">
     <ng-content></ng-content>
   </ng-container>

@@ -9,6 +9,7 @@ import {
   AuthSession,
   AuthTokenResponse,
   OAuthResponse,
+  PostgrestSingleResponse,
   ResendParams,
   Session,
   Subscription,
@@ -20,6 +21,7 @@ import {
 import {BehaviorSubject, Observable, Subject, forkJoin} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {HttpUserService} from '../user/http-user.service';
+import {ChangePasswordResponse} from './change-password-response.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +92,17 @@ export class SupabaseService {
         await this.supabase.rpc('rollback');
         reject(error);
       }
+    });
+  }
+
+  public updateUserPassword(currentPassword: string, newPassword: string): Promise<ChangePasswordResponse> {
+    return new Promise<ChangePasswordResponse>((resolve, reject) => {
+      this.supabase
+        .rpc('change_user_password', {
+          current_plain_password: currentPassword,
+          new_plain_password: newPassword
+        })
+        .then((value: PostgrestSingleResponse<any>) => (value.error ? reject(value.error.message as ChangePasswordResponse) : resolve(value.data?.data as ChangePasswordResponse)));
     });
   }
 
