@@ -27,7 +27,7 @@ export class PasswordComponent implements OnInit {
   public ngOnInit(): void {
     combineLatest([this.passwordForm.controls.currentPassword.valueChanges.pipe(startWith(null)), this.passwordForm.controls.newPassword.valueChanges.pipe(startWith(null))]).subscribe(
       ([currentPassword, newPassword]: [string, string]) => {
-        if (currentPassword && newPassword && newPassword.length > 8) {
+        if (currentPassword && newPassword && newPassword.length >= 8) {
           this.passwordForm.controls.confirmNewPassword.setValidators([Validators.required, PasswordMatchValidator.createValidator(this.passwordForm.controls.newPassword)]);
         } else if (currentPassword) {
           this.passwordForm.controls.newPassword.setValidators([Validators.required, Validators.minLength(8)]);

@@ -9,6 +9,7 @@ import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {DialogCloseType} from '@custom-components/dialogs/dialog-close-type.enum';
 import {TabConfirmationType} from './tab-confirmation-type.enum';
+import {map, pairwise, startWith, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
@@ -21,11 +22,7 @@ export class TabsComponent implements OnInit {
   @Input() public needsConfirmation = false;
   @Output() public tabChange = new EventEmitter<Tab>();
 
-  public tabForm: FormGroup<{
-    tab: FormControl<Tab>;
-  }> = new FormGroup({
-    tab: new FormControl(null)
-  });
+  public tabControl: FormControl<Tab> = new FormControl(null);
 
   public isMobile: boolean;
 
@@ -36,12 +33,16 @@ export class TabsComponent implements OnInit {
       this.isMobile = this.breakpointService.isMobile;
     });
 
-    this.tabForm.controls.tab.setValue(this.tabs[0]);
+    this.tabControl.setValue(this.tabs[0]);
+
+    this.tabControl.valueChanges.pipe(startWith(this.tabControl.value), pairwise()).subscribe(([previousTab, currentTab]) => {
+      this.tabControl.setValue(previousTab, {emitEvent: false});
+      this.onTabClick(currentTab, previousTab);
+    });
   }
 
-  public onTabClick(tabChange: Tab | MatSelectChange): void {
-    const newActiveTab = tabChange instanceof MatSelectChange ? (tabChange.value as Tab) : tabChange;
-    this.needsConfirmation ? this.openConfirmationDialog(newActiveTab) : this.setTabActive(newActiveTab);
+  public onTabClick(newActiveTab: Tab, previousTab: Tab = null): void {
+    this.needsConfirmation ? this.openConfirmationDialog(newActiveTab, previousTab) : this.setTabActive(newActiveTab);
   }
 
   private setTabActive(newActiveTab: Tab): void {
@@ -53,10 +54,12 @@ export class TabsComponent implements OnInit {
       tab.active = tab.id === newActiveTab.id;
       return tab;
     });
+
+    this.tabControl.setValue(newActiveTab, {emitEvent: false});
     this.tabChange.emit(newActiveTab);
   }
 
-  private openConfirmationDialog(newActiveTab: Tab): void {
+  private openConfirmationDialog(newTab: Tab, previousTab: Tab = null): void {
     const dialogRef = this.dialog.open(StackedLeftDialogComponent, {
       width: '400px',
       data: {
@@ -71,7 +74,9 @@ export class TabsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((closeType: DialogCloseType) => {
       if (closeType === DialogCloseType.CONFIRM) {
-        this.setTabActive(newActiveTab);
+        this.setTabActive(newTab);
+      } else if (this.isMobile && closeType === DialogCloseType.CANCEL) {
+        this.setTabActive(previousTab);
       }
     });
   }
