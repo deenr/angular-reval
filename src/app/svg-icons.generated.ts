@@ -288,6 +288,14 @@ export const SVG_ICONS = [
     "path": "./assets/svg/top-left-circle-corner.svg"
   },
   {
+    "name": "trend-down",
+    "path": "./assets/svg/trend-down.svg"
+  },
+  {
+    "name": "trend-up",
+    "path": "./assets/svg/trend-up.svg"
+  },
+  {
     "name": "truck-loading",
     "path": "./assets/svg/truck-loading.svg"
   },

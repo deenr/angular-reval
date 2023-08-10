@@ -118,8 +118,9 @@
       z-index: 0;
       top: 0;
       left: 0;
-      background-color: rgba($color-white, 0.7);
-      box-shadow: 0 16px 32px 12px $color-grey-100;
+      background-color: rgba($color-white, 0.8);
+      border-bottom: 1px solid rgba($color-white, 0.7);
+      box-shadow: 0 16px 32px 12px rgba($color-grey-900, 0.05);
       -webkit-backdrop-filter: saturate(150%) blur(24px);
       backdrop-filter: saturate(150%) blur(24px);
     }

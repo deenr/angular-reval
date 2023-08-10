@@ -14,7 +14,7 @@
       width: 100%;
       border-radius: 8px;
       border: 1px solid $color-grey-300;
-      box-shadow: 0px 1px 2px 0px $color-grey-100;
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
       padding: 2px 8px;
       margin: 1px;
       justify-content: space-around;
@@ -38,14 +38,14 @@
         margin: 0px;
         outline: none;
         border: 2px solid $color-error-300;
-        box-shadow: 0px 0px 0px 4px $color-error-100, 0px 1px 2px 0px $color-grey-100;
+        box-shadow: 0px 0px 0px 4px $color-error-100, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
       }
 
       &:focus-within:not(.invalid) {
         margin: 0px;
         outline: none;
         border: 2px solid $color-primary-300;
-        box-shadow: 0px 0px 0px 4px $color-primary-100, 0px 1px 2px 0px $color-grey-100;
+        box-shadow: 0px 0px 0px 4px $color-primary-100, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
       }
     }
   }
@@ -56,7 +56,7 @@
     padding: 10px 8px;
     border-radius: 8px;
     border: 1px solid $color-grey-300;
-    box-shadow: 0px 1px 2px 0px $color-grey-100;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
     pointer-events: none;
 
     color: $color-primary-600;
@@ -114,7 +114,7 @@
 
     &:focus.invalid {
       border: 2px solid $color-error-300;
-      box-shadow: 0px 0px 0px 4px $color-error-100, 0px 1px 2px 0px $color-grey-100;
+      box-shadow: 0px 0px 0px 4px $color-error-100, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
       @include breakpoint-sm() {
         border: none;
@@ -124,7 +124,7 @@
 
     &:focus:not(.invalid) {
       border: 2px solid $color-primary-300;
-      box-shadow: 0px 0px 0px 4px $color-primary-100, 0px 1px 2px 0px $color-grey-100;
+      box-shadow: 0px 0px 0px 4px $color-primary-100, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
       @include breakpoint-sm() {
         border: none;
