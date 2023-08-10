@@ -1,12 +1,12 @@
-<div class="header flex-row">
+<header class="header flex-row">
   <mat-icon class="header__icon" [class]="getIconClass()" [svgIcon]="icon"></mat-icon>
   <mat-icon class="header__close cursor-pointer" svgIcon="close" (click)="cancel()"></mat-icon>
-</div>
-<div class="content">
+</header>
+<section class="content">
   <h2 class="text-lg text-semibold">{{ title }}</h2>
   <p class="text-sm text-regular">{{ description }}</p>
-</div>
-<div class="actions flex-row">
+</section>
+<footer class="actions flex-row">
   <button mat-stroked-button class="full-width" (click)="cancel()">{{ cancelTitle }}</button>
   <button mat-flat-button class="full-width" [color]="getConfirmButtonClass()" (click)="confirm()">{{ confirmTitle }}</button>
-</div>
+</footer>

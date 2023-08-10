@@ -1,10 +1,10 @@
-<div class="contact">
-  <section class="contact__form flex-column">
-    <div class="form__heading">
+<section class="contact">
+  <div class="contact__form flex-column">
+    <header class="form__heading">
       <p class="text-md text-semibold subheading" classMd="text-sm">Contact us</p>
       <h3 class="display-lg text-semibold heading" classMd="display-md">Get in touch</h3>
       <p class="text-xl text-regular supporting-text" classMd="text-lg">Our team would love to hear from you.</p>
-    </div>
+    </header>
     <div class="form__inputs flex-column">
       <div class="flex-row form-row">
         <mat-form-field>
@@ -31,16 +31,15 @@
       <mat-checkbox>You agree to our friendly <u class="text-link" routerLink="/privacy">privacy policy</u>.</mat-checkbox>
       <button mat-flat-button color="primary">Send message</button>
     </div>
-  </section>
+  </div>
   <section class="contact__location flex-row">
-    <div class="location__heading">
+    <header class="location__heading">
       <p class="text-md text-semibold subheading" classMd="text-sm">Our locations</p>
       <h3 class="display-md text-semibold heading" classMd="display-sm">Visit our office</h3>
       <p class="text-xl text-regular supporting-text" classMd="text-lg">Come visit our team at one of our offices.</p>
-    </div>
+    </header>
     <div class="location__info flex-column">
       <div *ngFor="let location of locations" class="location flex-row">
-        <!-- <mat-icon svgIcon="location"></mat-icon> -->
         <div class="address flex-column">
           <h4 class="text-xl text-semibold" classMd="text-lg">{{ location.name }}</h4>
           <p class="text-md text-regular">{{ location.street }}<br />{{ location.postalCode }} {{ location.city }}</p>
@@ -49,4 +48,4 @@
     </div>
   </section>
   <div class="contact__image"></div>
-</div>
+</section>

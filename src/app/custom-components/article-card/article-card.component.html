@@ -1,11 +1,11 @@
-<div class="article">
+<article class="article">
   <img class="article__image" [src]="getImageSource()" [alt]="image" *skeleton="loadingArticle; type: skeletonType.ARTICLE_IMAGE" />
   <div class="article__content">
     <p class="text-sm text-semibold subheading" *skeleton="loadingArticle; type: skeletonType.TEXT_SM">{{ subHeading }}</p>
-    <div class="flex-row content__heading" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS; marginTop: '8px'">
+    <header class="flex-row content__heading" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS; marginTop: '8px'">
       <h3 class="display-xs text-semibold" classMd="text-xl">{{ heading }}</h3>
       <mat-icon svgIcon="arrow-up-right"></mat-icon>
-    </div>
+    </header>
     <p class="text-md text-regular supporting-text" *skeleton="loadingArticle; type: skeletonType.TEXT_MD; marginTop: '8px'">{{ supportingText }}</p>
     <div class="content__author flex-row">
       <mat-icon svgIcon="user" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_IMAGE"></mat-icon>
@@ -15,4 +15,4 @@
       </div>
     </div>
   </div>
-</div>
+</article>

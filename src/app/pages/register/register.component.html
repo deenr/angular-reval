@@ -4,13 +4,13 @@
       <mat-icon svgIcon="logo-color"></mat-icon>
       <h3>Sphience</h3>
     </div>
-    <div class="register__header flex-column">
+    <header class="register__header flex-column">
       <h2 class="display-md text-semibold" classMd="display-xs">{{ getTitle() }}</h2>
       <p *ngIf="getSubtitle()" class="text-md text-regular">
         {{ getSubtitle() }}
       </p>
-    </div>
-    <div class="register__form full-height">
+    </header>
+    <article class="register__form full-height">
       <form *ngIf="canShowStep(registrationStep.EMAIL)" [formGroup]="emailForm" class="flex-column form__step-one">
         <div class="flex-column form__email">
           <mat-form-field>
@@ -52,7 +52,7 @@
         </div>
         <p class="text-sm text-semibold flex-row cursor-pointer" routerLink="/login"><mat-icon svgIcon="arrow-left"></mat-icon>Back to log in</p>
       </div>
-    </div>
+    </article>
   </div>
   <app-progress-steps class="register__process" [steps]="steps"></app-progress-steps>
 </section>

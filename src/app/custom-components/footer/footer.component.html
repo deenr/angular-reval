@@ -1,13 +1,13 @@
 <footer class="footer">
   <div class="footer__content flex-row">
-    <div class="content__logo-and-text">
+    <div class="footer__logo-and-text">
       <div class="logo flex-row cursor-pointer" [routerLink]="['/']">
         <mat-icon svgIcon="logo-color"></mat-icon>
         <h3>Sphience</h3>
       </div>
       <p class="text-md text-regular support-text">Experience a new era of research collaboration.</p>
     </div>
-    <div class="content__links flex-row">
+    <div class="footer__links flex-row">
       <div class="flex-column link-column" *ngFor="let item of footerLinks">
         <h5 class="heading text-sm text-semibold">{{ item.header }}</h5>
         <ul class="flex-column links">

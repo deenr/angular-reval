@@ -1,12 +1,12 @@
 <section class="verify-section flex-column full-height">
   <div class="full-height">
-    <div class="verify__logo flex-column">
+    <div class="verify-section__logo flex-column">
       <mat-icon [svgIcon]="getHeaderIcon()" class="featured-icon"></mat-icon>
     </div>
-    <div class="verify__header flex-column">
+    <div class="verify-section__header flex-column">
       <h2 class="display-sm text-semibold full-width">{{ getHeaderTitle() }}</h2>
       <p class="text-md text-regular full-width">{{ getHeaderDescription() }}</p>
     </div>
-    <app-progress-button class="flex-column verify__button" [loading]="!isEmailVerified" (progressClick)="continueToLogin()">Back to login</app-progress-button>
+    <app-progress-button class="flex-column verify-section__button" [loading]="!isEmailVerified" (progressClick)="continueToLogin()">Back to login</app-progress-button>
   </div>
 </section>

@@ -35,9 +35,9 @@ import {BreakpointDirective} from './shared/directives/breakpoint/breakpoint.dir
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PrivacyPolicyComponent} from './pages/privacy-policy/privacy-policy.component';
 import {MAT_TABS_CONFIG, MatTabsModule} from '@angular/material/tabs';
-import {NavigationHeaderComponent} from './custom-components/navigation-header/navigation-header.component';
+import {NavigationHeaderComponent} from './custom-components/navigation/navigation-header/navigation-header.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {NavigationSidebarComponent} from './custom-components/navigation-header/navigation-sidebar/navigation-sidebar.component';
+import {NavigationSidebarComponent} from './custom-components/navigation/navigation-sidebar/navigation-sidebar.component';
 import {FooterComponent} from './custom-components/footer/footer.component';
 import {ContactComponent} from './pages/contact/contact.component';
 import {AboutUsComponent} from './pages/about-us/about-us.component';
@@ -48,7 +48,7 @@ import {ArticleCardComponent} from './custom-components/article-card/article-car
 import {ArticleComponent} from './pages/news/article/article.component';
 import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service.component';
 import {MatMenuModule} from '@angular/material/menu';
-import {NavigationItemComponent} from './custom-components/navigation-header/navigation-item/navigation-item.component';
+import {NavigationItemComponent} from './custom-components/navigation/navigation-item/navigation-item.component';
 import {AuthenticationComponent} from './layouts/authentication/authentication.component';
 import {HomeComponent} from './layouts/home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';

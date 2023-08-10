@@ -1,4 +1,4 @@
-<div class="full-height sidebar flex-column" [ngStyle]="{width: getSidebarWidth()}">
+<aside class="full-height sidebar flex-column" [ngStyle]="{width: getSidebarWidth()}">
   <div class="sidebar__logo flex-row">
     <div class="logomark">
       <mat-icon class="full-width full-height" svgIcon="logo-illustration"></mat-icon>
@@ -7,7 +7,7 @@
     <h3 *ngIf="!isDesktopSidebarCollapsed()">Sphience</h3>
   </div>
 
-  <div class="sidebar__navigation flex-column full-height full-width">
+  <nav class="sidebar__navigation flex-column full-height full-width">
     <div class="navigation__top navigation__items flex-column">
       <div class="navigation-item flex-row" *ngFor="let item of topNavigationItems" [class.active]="isNavigationItemActive(item.id)" [routerLink]="item.routerLink" (click)="onNavigationChange()">
         <mat-icon class="icon" [svgIcon]="item.icon"></mat-icon>
@@ -39,5 +39,5 @@
         <mat-icon class="profile__signout icon" svgIcon="sign-out" *ngIf="!isDesktopSidebarCollapsed()" (click)="signOut()"></mat-icon>
       </div>
     </div>
-  </div>
-</div>
+  </nav>
+</aside>

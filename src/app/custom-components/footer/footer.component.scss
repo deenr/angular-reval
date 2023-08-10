@@ -16,7 +16,7 @@
         gap: 48px;
       }
 
-      .content__logo-and-text {
+      .footer__logo-and-text {
         margin-right: auto;
 
         .logo {
@@ -35,7 +35,7 @@
         }
       }
 
-      .content__links {
+      .footer__links {
         gap: 32px;
 
         @include breakpoint-sm() {

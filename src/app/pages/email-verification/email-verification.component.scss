@@ -9,50 +9,50 @@
     @include breakpoint-sm() {
       padding: 48px 16px;
     }
-  }
 
-  .verify__logo {
-    position: relative;
-    gap: 8px;
-    align-items: center;
+    &__logo {
+      position: relative;
+      gap: 8px;
+      align-items: center;
 
-    mat-icon {
-      width: 56px !important;
-      height: 56px !important;
-      padding: 12px;
+      mat-icon {
+        width: 56px !important;
+        height: 56px !important;
+        padding: 12px;
+      }
+
+      &::before {
+        width: 768px;
+        height: 768px;
+        position: absolute;
+        z-index: -1;
+        top: 28px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        mask-image: url('../../../assets/svg/illustration/grid-desktop.svg');
+        background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
+        content: '';
+      }
     }
 
-    &::before {
-      width: 768px;
-      height: 768px;
-      position: absolute;
-      z-index: -1;
-      top: 28px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      mask-image: url('../../../assets/svg/illustration/grid-desktop.svg');
-      background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
-      content: '';
-    }
-  }
+    &__header {
+      width: 360px;
+      margin-top: 24px;
+      align-items: start;
+      gap: 12px;
 
-  .verify__header {
-    width: 360px;
-    margin-top: 24px;
-    align-items: start;
-    gap: 12px;
+      h2 {
+        color: $color-grey-900;
+      }
 
-    h2 {
-      color: $color-grey-900;
+      p {
+        color: $color-grey-600;
+      }
     }
 
-    p {
-      color: $color-grey-600;
+    &__button {
+      margin-top: 32px;
+      width: 360px;
     }
-  }
-
-  .verify__button {
-    margin-top: 32px;
-    width: 360px;
   }
 }

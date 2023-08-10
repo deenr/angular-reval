@@ -3,10 +3,10 @@
     <app-navigation-sidebar (sidenavClose)="onSidenavToggle()"></app-navigation-sidebar>
   </mat-sidenav>
   <mat-sidenav-content class="content" [class.sidebar-open]="sidenavOpened">
+    <app-navigation-header [sidenavOpened]="sidenavOpened" (sidenavToggle)="onSidenavToggle()"></app-navigation-header>
     <main>
-      <app-navigation-header [sidenavOpened]="sidenavOpened" (sidenavToggle)="onSidenavToggle()"></app-navigation-header>
       <router-outlet (activate)="onActivate()"></router-outlet>
-      <app-footer></app-footer>
     </main>
+    <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
