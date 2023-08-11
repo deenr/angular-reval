@@ -100,6 +100,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/document.svg"
   },
   {
+    "name": "dots-vertical",
+    "path": "./assets/svg/dots-vertical.svg"
+  },
+  {
     "name": "email",
     "path": "./assets/svg/email.svg"
   },

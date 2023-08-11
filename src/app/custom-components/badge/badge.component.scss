@@ -1,0 +1,144 @@
+@import 'variables';
+
+:host {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 16px;
+    mix-blend-mode: multiply;
+
+    &.dot {
+      &.sm {
+        gap: 4px;
+        padding: 2px 8px 2px 6px;
+      }
+
+      &.md,
+      &.lg {
+        gap: 6px;
+      }
+
+      &.md {
+        padding: 2px 10px 2px 8px;
+      }
+
+      &.lg {
+        padding: 4px 12px 4px 10px;
+      }
+
+      div {
+        width: 6px;
+        height: 6px;
+        margin: 1px;
+        border-radius: 50%;
+        background-color: $color-grey-500;
+      }
+    }
+
+    &.leading-icon {
+      &.sm {
+        padding: 2px 8px 2px 6px;
+      }
+
+      &.md {
+        padding: 2px 10px 2px 8px;
+      }
+
+      &.lg {
+        padding: 4px 12px 4px 10px;
+      }
+
+      mat-icon {
+        scale: 1.5;
+      }
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .icon {
+      height: 12px;
+      width: 12px;
+      font-size: 12px;
+    }
+
+    &.sm {
+      padding: 2px 8px 2px 6px;
+    }
+
+    &.md {
+      padding: 2px 10px 2px 8px;
+    }
+
+    &.lg {
+      padding: 4px 12px 4px 10px;
+    }
+
+    &.gray {
+      box-shadow: 0px 0px 0px 1px $color-grey-200 inset;
+      background: $color-grey-50;
+
+      p {
+        color: $color-grey-700;
+      }
+
+      .icon {
+        color: $color-grey-500;
+      }
+    }
+
+    &.primary {
+      box-shadow: 0px 0px 0px 1px $color-primary-200 inset;
+      background: $color-primary-50;
+
+      p {
+        color: $color-primary-700;
+      }
+
+      .icon {
+        color: $color-primary-500;
+      }
+    }
+
+    &.error {
+      box-shadow: 0px 0px 0px 1px $color-error-200 inset;
+      background: $color-error-50;
+
+      p {
+        color: $color-error-700;
+      }
+
+      .icon {
+        color: $color-error-500;
+      }
+    }
+
+    &.warning {
+      box-shadow: 0px 0px 0px 1px $color-warning-200 inset;
+      background: $color-warning-50;
+
+      p {
+        color: $color-warning-700;
+      }
+
+      .icon {
+        color: $color-warning-500;
+      }
+    }
+
+    &.success {
+      box-shadow: 0px 0px 0px 1px $color-success-200 inset;
+      background: $color-success-50;
+
+      p {
+        color: $color-success-700;
+      }
+
+      .icon {
+        color: $color-success-500;
+      }
+    }
+  }
+}

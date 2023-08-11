@@ -68,6 +68,9 @@ import {MatChipsModule} from '@angular/material/chips';
 import {UsersComponent} from './pages/users/users.component';
 import {HeaderComponent} from './custom-components/header/header.component';
 import {UsersOverviewComponent} from './pages/users/users-overview/users-overview.component';
+import {MetricsCardComponent} from './custom-components/metrics-card/metrics-card.component';
+import {BadgeComponent} from './custom-components/badge/badge.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -114,7 +117,9 @@ import {UsersOverviewComponent} from './pages/users/users-overview/users-overvie
     PasswordComponent,
     UsersComponent,
     HeaderComponent,
-    UsersOverviewComponent
+    UsersOverviewComponent,
+    MetricsCardComponent,
+    BadgeComponent
   ],
   imports: [
     CommonModule,
@@ -143,7 +148,8 @@ import {UsersOverviewComponent} from './pages/users/users-overview/users-overvie
     MatTabsModule,
     MatCardModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    DragDropModule
   ],
   providers: [
     {

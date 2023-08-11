@@ -14,26 +14,12 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
 
   public opacity = 0;
 
-  public constructor(private readonly dialog: MatDialog) {}
-
   public ngOnInit() {
     document.getElementsByClassName('mat-drawer-content')[0].addEventListener('scroll', this.onWindowScroll.bind(this));
   }
 
   public ngOnDestroy() {
     document.getElementsByClassName('mat-drawer-content')[0].removeEventListener('scroll', this.onWindowScroll.bind(this));
-  }
-
-  public openDashboard(): void {
-    this.dialog.open(StackedLeftDialogComponent, {
-      width: '400px',
-      data: {
-        type: DialogType.WARNING,
-        icon: 'lock',
-        title: 'Dashboard is not available yet',
-        description: 'Our team is diligently working towards making our incredible dashboard available to you.'
-      }
-    });
   }
 
   private onWindowScroll(): void {

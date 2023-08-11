@@ -1,0 +1,31 @@
+@import 'variables';
+
+:host {
+  .overview {
+    padding: 24px 32px;
+
+    @include breakpoint-sm() {
+      padding: 24px 8px;
+    }
+
+    &__metrics {
+      gap: 24px;
+
+      @include breakpoint-sm() {
+        flex-direction: column;
+      }
+
+      .metric-card {
+        flex: 1;
+      }
+
+      &.cdk-drop-list-dragging .metric-card:not(.cdk-drag-placeholder) {
+        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+      }
+    }
+  }
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
