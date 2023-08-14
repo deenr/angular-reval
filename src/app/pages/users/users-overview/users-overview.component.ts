@@ -31,15 +31,16 @@ export class UsersOverviewComponent {
   ];
 
   public isMobile: boolean;
+  public isTablet: boolean;
 
   public constructor(private readonly breakpointService: BreakpointService) {
     this.breakpointService.observe().subscribe(() => {
       this.isMobile = this.breakpointService.isMobile;
+      this.isTablet = this.breakpointService.isTablet;
     });
   }
 
-  public onMetricCardDrop(event: CdkDragDrop<string[]>) {
-    console.log(event);
-    moveItemInArray(this.userMetrics, event.previousIndex, event.currentIndex);
+  public getMetricOverviewHeight(): string {
+    return this.isMobile || this.isTablet ? '100%' : `${(document.getElementsByTagName('app-metrics-card')[0] as HTMLElement)?.offsetHeight}px`;
   }
 }

@@ -71,6 +71,7 @@ import {UsersOverviewComponent} from './pages/users/users-overview/users-overvie
 import {MetricsCardComponent} from './custom-components/metrics-card/metrics-card.component';
 import {BadgeComponent} from './custom-components/badge/badge.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {DragScrollDirective} from './shared/directives/drag-scroll/drag-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HeaderComponent,
     UsersOverviewComponent,
     MetricsCardComponent,
-    BadgeComponent
+    BadgeComponent,
+    DragScrollDirective
   ],
   imports: [
     CommonModule,

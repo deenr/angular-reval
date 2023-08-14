@@ -1,10 +1,10 @@
 <section class="card flex-column shadow-xs">
   <h3 class="text-sm text-medium">{{ title }}</h3>
   <div class="card__metrics flex-row">
-    <p class="display-md text-semibold" classSm="display-sm">{{ metric }}</p>
+    <p class="display-md text-semibold" classMd="display-sm">{{ metric }}</p>
     <app-badge class="badge" [color]="negative ? badgeColor.ERROR : badgeColor.SUCCESS" [type]="badgeType.LEADING_ICON" [icon]="negative ? 'arrow-down' : 'arrow-up'">{{ badgeTitle }}</app-badge>
   </div>
-  <div class="drag">
-    <ng-content></ng-content>
-  </div>
+  <!-- <div class="dropdown cursor-pointer">
+    <mat-icon svgIcon="dots-vertical"></mat-icon>
+  </div> -->
 </section>

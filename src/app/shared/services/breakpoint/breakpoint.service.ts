@@ -9,6 +9,7 @@ import {Breakpoint} from './breakpoint.enum';
 export class BreakpointService {
   public currentBreakpoint: Breakpoint;
   public isMobile: boolean;
+  public isTablet: boolean;
 
   private customBreakpoints = {
     XS: '(max-width: 375px)',
@@ -36,6 +37,7 @@ export class BreakpointService {
           if (breakpointState.breakpoints[query]) {
             this.currentBreakpoint = this.customBreakpointsMap.get(query);
             this.isMobile = this.currentBreakpoint === Breakpoint.SM || this.currentBreakpoint === Breakpoint.XS;
+            this.isTablet = this.currentBreakpoint === Breakpoint.MD;
             return this.customBreakpointsMap.get(query);
           }
         }

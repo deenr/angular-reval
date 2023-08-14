@@ -1,10 +1,6 @@
 <div class="overview full-width">
-  <div cdkDropList [cdkDropListOrientation]="isMobile ? 'vertical' : 'horizontal'" class="overview__metrics flex-row" (cdkDropListDropped)="onMetricCardDrop($event)">
-    <ng-container *ngFor="let metric of userMetrics">
-      <app-metrics-card class="metric-card" [title]="metric.title" [metric]="metric.amount" [badgeTitle]="metric.differenceInPercentage" [negative]="!metric.positive" cdkDrag>
-        <mat-icon svgIcon="dots-vertical" cdkDragHandle></mat-icon>
-      </app-metrics-card>
-      <div class="metric-preview" *cdkDragPlaceholder></div
-    ></ng-container>
+  <div class="overview__metrics flex-row" [ngStyle]="{height: getMetricOverviewHeight()}">
+    <app-metrics-card *ngFor="let metric of userMetrics" class="metric-card" [title]="metric.title" [metric]="metric.amount" [badgeTitle]="metric.differenceInPercentage" [negative]="!metric.positive">
+    </app-metrics-card>
   </div>
 </div>
