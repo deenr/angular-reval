@@ -1,0 +1,20 @@
+@import 'variables';
+
+:host {
+  .avatar {
+    gap: 12px;
+
+    &__picture {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      min-height: 40px;
+      background-color: $color-primary-500;
+      border-radius: 50%;
+    }
+
+    &__details {
+    }
+  }
+}

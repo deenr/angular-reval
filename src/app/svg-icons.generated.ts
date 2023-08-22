@@ -84,6 +84,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/close.svg"
   },
   {
+    "name": "cloud-download",
+    "path": "./assets/svg/cloud-download.svg"
+  },
+  {
     "name": "details",
     "path": "./assets/svg/details.svg"
   },
@@ -106,6 +110,10 @@ export const SVG_ICONS = [
   {
     "name": "dots-vertical",
     "path": "./assets/svg/dots-vertical.svg"
+  },
+  {
+    "name": "download",
+    "path": "./assets/svg/download.svg"
   },
   {
     "name": "email",

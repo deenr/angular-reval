@@ -3,6 +3,7 @@
 :host {
   .overview {
     padding: 24px 32px;
+    gap: 32px;
 
     @include breakpoint-sm() {
       padding: 24px 8px;
@@ -15,15 +16,31 @@
 
       @include breakpoint-md() {
         flex-direction: column;
+        flex-wrap: unset;
+        overflow: unset;
       }
 
       .metric-card {
-        flex: 1 0 250px;
+        flex: 1 0 320px;
 
         @include breakpoint-md() {
           flex: 1;
         }
       }
     }
+
+    &__table {
+      overflow: hidden;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-column-user {
+    min-width: 300px !important;
+  }
+
+  .mat-column-role {
+    width: fit-content !important;
   }
 }

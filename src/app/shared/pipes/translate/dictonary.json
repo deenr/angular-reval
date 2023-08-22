@@ -1,0 +1,11 @@
+{
+  "ENUM": {
+    "USER_ROLE": {
+      "STUDENT": "Student",
+      "PHD": "PhD",
+      "PROFESSOR": "Professor",
+      "ADMIN": "Admin",
+      "INCOMPLETE_PROFILE": "Incomplete profile"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<table class="table flex-column full-height shadow-xs">
+  <header class="table__header flex-row">
+    <div class="header__title-and-description flex-column">
+      <div class="header__title flex-row">
+        <h3 class="text-lg text-semibold">User Snapshot</h3>
+        <app-badge [size]="badgeSize.SM"> {{ 100 }} users </app-badge>
+      </div>
+      <p class="text-sm text-regular">A concise presentation of essential user details</p>
+    </div>
+    <button mat-stroked-button class="download md">
+      <mat-icon svgIcon="cloud-download"></mat-icon>
+      Download CSV
+    </button>
+  </header>
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.id">
+      {{ column.id }}
+      <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortId ? column.sortId : column.id" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
+
+      <mat-cell *matCellDef="let row">
+        <ng-container [ngSwitch]="column.type">
+          <ng-container *ngSwitchCase="tableDataType.TEXT">
+            {{ row[column.id] }}
+          </ng-container>
+          <ng-container *ngSwitchCase="tableDataType.BADGE">
+            <app-badge [color]="getBadgeColor(column.id, row[column.id])" [size]="getBadgeSize(column.id)">{{ getBadgeTranslationKey(column.id, row[column.id]) | translate }}</app-badge>
+          </ng-container>
+          <ng-container *ngSwitchCase="tableDataType.AVATAR">
+            <app-table-avatar [name]="row[column.avatarNameKey]" [email]="row[column.avatarEmailKey]"></app-table-avatar>
+          </ng-container>
+          <ng-container *ngSwitchCase="tableDataType.DATE">
+            {{ row[column.id] | date }}
+          </ng-container>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
+  </mat-table>
+
+  <mat-paginator class="table__paginator" [pageSizeOptions]="[10]"></mat-paginator>
+</table>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component} from '@angular/core';
 import {UsersMetric} from '../users-metric.interface';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
@@ -40,7 +40,7 @@ export class UsersOverviewComponent {
     });
   }
 
-  public getMetricOverviewHeight(): string {
-    return this.isMobile || this.isTablet ? '100%' : `${(document.getElementsByTagName('app-metrics-card')[0] as HTMLElement)?.offsetHeight}px`;
+  public getMetricOverviewFlexProperties(): string {
+    return this.isMobile || this.isTablet ? `1` : `0 0 ${(document.getElementsByTagName('app-metrics-card')[0] as HTMLElement)?.offsetHeight}px`;
   }
 }

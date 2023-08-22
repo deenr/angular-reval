@@ -72,6 +72,13 @@ import {MetricsCardComponent} from './custom-components/metrics-card/metrics-car
 import {BadgeComponent} from './custom-components/badge/badge.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {DragScrollDirective} from './shared/directives/drag-scroll/drag-scroll.directive';
+import {TableComponent} from './custom-components/table/table.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {TranslatePipe} from '@shared/pipes/translate/translate.pipe';
+import {TableAvatarComponent} from '@custom-components/table/table-avatar/table-avatar.component';
+import {FilterComponent} from '@custom-components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +128,11 @@ import {DragScrollDirective} from './shared/directives/drag-scroll/drag-scroll.d
     UsersOverviewComponent,
     MetricsCardComponent,
     BadgeComponent,
-    DragScrollDirective
+    DragScrollDirective,
+    TableComponent,
+    FilterComponent,
+    TableAvatarComponent,
+    TranslatePipe
   ],
   imports: [
     CommonModule,
@@ -151,7 +162,10 @@ import {DragScrollDirective} from './shared/directives/drag-scroll/drag-scroll.d
     MatCardModule,
     MatToolbarModule,
     MatChipsModule,
-    DragDropModule
+    DragDropModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
     {

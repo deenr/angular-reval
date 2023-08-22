@@ -1,10 +1,54 @@
 <section class="card flex-column shadow-xs">
-  <h3 class="text-sm text-medium">{{ title }}</h3>
-  <div class="card__metrics flex-row">
-    <p class="display-md text-semibold" classMd="display-sm">{{ metric }}</p>
-    <app-badge class="badge" [color]="negative ? badgeColor.ERROR : badgeColor.SUCCESS" [type]="badgeType.LEADING_ICON" [icon]="negative ? 'arrow-down' : 'arrow-up'">{{ badgeTitle }}</app-badge>
+  <div class="card__stats flex-column">
+    <h3 class="text-sm text-medium">{{ title }}</h3>
+    <div class="card__metrics flex-row">
+      <p class="display-md text-semibold" classMd="display-sm">{{ metric }}</p>
+
+      <ng-template #comparisonWithoutBadge>
+        <span class="metric-comparison flex-row" [class.show-chart]="showChart">
+          <mat-icon class="icon" [class.negative]="negative" [svgIcon]="negative ? 'trend-down' : 'trend-up'"></mat-icon>
+          <p class="comparison text-sm text-medium" [class.negative]="negative">{{ comparisonValue }}</p>
+          <p *ngIf="canChangeTimeFrame" class="text-sm text-medium">vs {{ getTimeFrameTranslation(timeFrameControl.value).toLowerCase() }}</p>
+        </span>
+      </ng-template>
+
+      <app-badge
+        *ngIf="showBadge; else comparisonWithoutBadge"
+        class="metric-badge"
+        [color]="negative ? badgeColor.ERROR : badgeColor.SUCCESS"
+        [type]="badgeType.LEADING_ICON"
+        [icon]="negative ? 'arrow-down' : 'arrow-up'"
+      >
+        {{ comparisonValue }}
+      </app-badge>
+    </div>
   </div>
-  <!-- <div class="dropdown cursor-pointer">
+
+  <div *ngIf="showChart" class="card__chart full-width" [class.show-chart-animation]="animateChart">
+    <svg [attr.width]="width" [attr.height]="height" xmlns="http://www.w3.org/2000/svg" fill="none" [attr.transform]="negative ? 'scale(1 1)' : 'scale(-1 1)'">
+      <path fill-rule="evenodd" clip-rule="evenodd" [attr.d]="generatePathForBackground(width, height)" [attr.fill]="getChartBackground()" />
+      <path [attr.d]="generatePathForStroke(width, height)" [attr.stroke]="negative ? '#F04438' : '#17B26A'" stroke-width="2" stroke-linecap="round"></path>
+      <defs>
+        <linearGradient id="positive-background" x1="51" y1="1" x2="51" [attr.y2]="height / 1.3" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#17B26A" stop-opacity="0.2" />
+          <stop offset="1" stop-color="#17B26A" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <defs>
+        <linearGradient id="negative-background" x1="51" y1="1" x2="51" [attr.y2]="height / 1.3" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#F04438" stop-opacity="0.2" />
+          <stop offset="1" stop-color="#F04438" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div *ngIf="canChangeTimeFrame" class="dropdown cursor-pointer" [matMenuTriggerFor]="options">
     <mat-icon svgIcon="dots-vertical"></mat-icon>
-  </div> -->
+  </div>
 </section>
+
+<mat-menu #options="matMenu">
+  <mat-radio-group class="flex-column radio-group" [formControl]="timeFrameControl" (change)="toggleAnimation()">
+    <mat-radio-button *ngFor="let timeFrame of timeFrames" class="text-sm text-medium small" [value]="timeFrame">{{ getTimeFrameTranslation(timeFrame) }}</mat-radio-button>
+  </mat-radio-group>
+</mat-menu>

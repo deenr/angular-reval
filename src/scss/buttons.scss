@@ -1,5 +1,6 @@
 @import './colors.scss';
 @import './typography.scss';
+@import './breakpoints.scss';
 
 .mat-mdc-button-base {
   height: 42px !important;
@@ -63,9 +64,17 @@
   &.mdc-button--unelevated {
     transition: box-shadow 100ms cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
+
+  .mat-icon {
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 20px;
+  }
 }
 
-.mat-mdc-outlined-button {
+.mat-mdc-outlined-button,
+.mat-mdc-paginator-navigation-previous,
+.mat-mdc-paginator-navigation-next {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
   .mat-mdc-button-persistent-ripple {

@@ -1,0 +1,34 @@
+@import 'variables';
+
+:host {
+  .table {
+    border-radius: 12px;
+    border: 1px solid $color-grey-200;
+    background: $color-white;
+    overflow: hidden;
+
+    &__header {
+      border-bottom: 1px solid $color-grey-200;
+      padding: 20px 24px;
+      justify-content: space-between;
+
+      .header__title-and-description {
+        gap: 4px;
+
+        .header__title {
+          align-items: center;
+          gap: 8px;
+
+          .download {
+            margin-left: auto;
+          }
+        }
+      }
+    }
+
+    &__paginator {
+      padding: 12px 24px 16px 24px;
+      border-top: 1px solid $color-grey-200;
+    }
+  }
+}

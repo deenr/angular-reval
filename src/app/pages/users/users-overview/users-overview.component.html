@@ -1,6 +1,15 @@
-<div class="overview full-width">
-  <div class="overview__metrics flex-row" [ngStyle]="{height: getMetricOverviewHeight()}">
-    <app-metrics-card *ngFor="let metric of userMetrics" class="metric-card" [title]="metric.title" [metric]="metric.amount" [badgeTitle]="metric.differenceInPercentage" [negative]="!metric.positive">
+<div class="overview full-width full-height flex-column">
+  <div class="overview__metrics flex-row" [ngStyle]="{flex: getMetricOverviewFlexProperties()}">
+    <app-metrics-card
+      *ngFor="let metric of userMetrics"
+      class="metric-card"
+      [title]="metric.title"
+      [metric]="metric.amount"
+      [comparisonValue]="metric.differenceInPercentage"
+      [negative]="!metric.positive"
+    >
     </app-metrics-card>
   </div>
+
+  <app-table class="overview__table"></app-table>
 </div>
