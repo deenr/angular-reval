@@ -10,6 +10,10 @@
     top: 0;
     min-height: unset !important;
     height: unset !important;
+
+    .mat-mdc-header-cell .mat-sort-header-container .mat-sort-header-content {
+      text-wrap: nowrap;
+    }
   }
 
   .mdc-data-table__header-row {

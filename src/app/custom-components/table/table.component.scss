@@ -7,10 +7,21 @@
     background: $color-white;
     overflow: hidden;
 
+    @include breakpoint-sm() {
+      border-radius: none;
+      border: none;
+    }
+
     &__header {
       border-bottom: 1px solid $color-grey-200;
       padding: 20px 24px;
       justify-content: space-between;
+      gap: 16px;
+
+      @include breakpoint-sm() {
+        padding: 20px 24px 24px 24px;
+        flex-direction: column;
+      }
 
       .header__title-and-description {
         gap: 4px;
@@ -18,17 +29,22 @@
         .header__title {
           align-items: center;
           gap: 8px;
-
-          .download {
-            margin-left: auto;
-          }
         }
+      }
+
+      .download {
+        width: fit-content;
       }
     }
 
     &__paginator {
       padding: 12px 24px 16px 24px;
       border-top: 1px solid $color-grey-200;
+
+      @include breakpoint-sm() {
+        padding: 16px 0 5px 0;
+        margin: 0 16px;
+      }
     }
   }
 }

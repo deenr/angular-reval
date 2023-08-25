@@ -13,23 +13,25 @@
     </button>
   </header>
   <mat-table [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column.id">
-      {{ column.id }}
-      <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortId ? column.sortId : column.id" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
+      {{ column.field }}
+      <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortId ? column.sortId : column.field" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
 
       <mat-cell *matCellDef="let row">
         <ng-container [ngSwitch]="column.type">
           <ng-container *ngSwitchCase="tableDataType.TEXT">
-            {{ row[column.id] }}
+            {{ row[column.field] }}
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.BADGE">
-            <app-badge [color]="getBadgeColor(column.id, row[column.id])" [size]="getBadgeSize(column.id)">{{ getBadgeTranslationKey(column.id, row[column.id]) | translate }}</app-badge>
+            <app-badge [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
+              {{ getBadgeTranslationKey(column.field, row[column.field]) | translate }}
+            </app-badge>
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.AVATAR">
             <app-table-avatar [name]="row[column.avatarNameKey]" [email]="row[column.avatarEmailKey]"></app-table-avatar>
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.DATE">
-            {{ row[column.id] | date }}
+            {{ row[column.field] | date }}
           </ng-container>
         </ng-container>
       </mat-cell>

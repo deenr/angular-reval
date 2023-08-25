@@ -4,7 +4,7 @@
   .settings {
     position: relative;
     overflow: hidden;
-    padding-top: 32px;
+    padding: 32px 0 24px 0;
 
     @include breakpoint-sm() {
       overflow: scroll;
