@@ -3,17 +3,17 @@
 :host {
   .details-card {
     overflow: scroll;
-    padding: 24px 32px;
+    padding: 32px 32px 24px 32px;
 
     @include breakpoint-sm() {
-      padding: 24px 16px;
+      padding: 32px 16px 24px 16px;
     }
 
     &__header {
       gap: 24px;
 
       &.university-header {
-        margin-top: 20px;
+        margin-top: 32px;
       }
     }
 
