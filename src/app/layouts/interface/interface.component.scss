@@ -13,7 +13,7 @@
       overflow: visible;
     }
 
-    @include breakpoint-sm() {
+    @include breakpoint-md() {
       width: 100%;
       position: absolute;
       top: 57px;
@@ -30,7 +30,7 @@
         height: 12px;
         background-color: $color-primary-700;
 
-        @include breakpoint-sm() {
+        @include breakpoint-md() {
           display: none;
         }
       }
@@ -46,7 +46,7 @@
         mask-size: contain;
         background-color: $color-primary-700;
 
-        @include breakpoint-sm() {
+        @include breakpoint-md() {
           display: none;
         }
       }
@@ -60,7 +60,7 @@
     transition: margin-left 200ms ease;
     margin-left: 82px;
 
-    @include breakpoint-sm() {
+    @include breakpoint-md() {
       margin-left: 0px;
     }
   }
@@ -69,7 +69,7 @@
     overflow: hidden;
     margin-top: 12px;
 
-    @include breakpoint-sm() {
+    @include breakpoint-md() {
       margin-top: 0;
     }
 

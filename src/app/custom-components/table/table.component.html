@@ -1,18 +1,7 @@
 <table class="table flex-column full-height shadow-xs">
-  <header class="table__header flex-row">
-    <div class="header__title-and-description flex-column">
-      <div class="header__title flex-row">
-        <h3 class="text-lg text-semibold">User Snapshot</h3>
-        <app-badge [size]="badgeSize.SM"> {{ 100 }} users </app-badge>
-      </div>
-      <p class="text-sm text-regular">A concise presentation of essential user details</p>
-    </div>
-    <button mat-stroked-button class="download md">
-      <mat-icon svgIcon="cloud-download"></mat-icon>
-      Download CSV
-    </button>
-  </header>
-  <mat-table [dataSource]="dataSource" matSort>
+  <app-filter class="table__filter"></app-filter>
+
+  <mat-table class="full-height" [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
       {{ column.field }}
       <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortId ? column.sortId : column.field" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
@@ -20,18 +9,18 @@
       <mat-cell *matCellDef="let row">
         <ng-container [ngSwitch]="column.type">
           <ng-container *ngSwitchCase="tableDataType.TEXT">
-            {{ row[column.field] }}
+            <span *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] }}</span>
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.BADGE">
-            <app-badge [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
+            <app-badge *skeleton="loadingData; type: skeletonType.BADGE_SM" [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
               {{ getBadgeTranslationKey(column.field, row[column.field]) | translate }}
             </app-badge>
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.AVATAR">
-            <app-table-avatar [name]="row[column.avatarNameKey]" [email]="row[column.avatarEmailKey]"></app-table-avatar>
+            <app-table-avatar *skeleton="loadingData; type: skeletonType.TABLE_AVATAR" [name]="row[column.avatarNameKey]" [email]="row[column.avatarEmailKey]"></app-table-avatar>
           </ng-container>
           <ng-container *ngSwitchCase="tableDataType.DATE">
-            {{ row[column.field] | date }}
+            <span *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] | date }}</span>
           </ng-container>
         </ng-container>
       </mat-cell>

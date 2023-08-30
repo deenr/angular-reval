@@ -3,7 +3,7 @@
     <p class="text-md text-semibold published" classMd="text-sm" *skeleton="loadingArticle; type: skeletonType.TEXT_MD">Published {{ getDate(article?.published) }}</p>
     <h2 class="display-lg text-semibold title" classMd="display-md" *skeleton="loadingArticle; type: skeletonType.DISPLAY_LG; marginTop: '12px'">{{ article?.title }}</h2>
     <p class="text-xl text-regular subtitle" classMd="text-lg" *skeleton="loadingArticle; type: skeletonType.TEXT_XL; marginTop: '24px'">{{ article?.subtitle }}</p>
-    <div class="flex-row categories" *skeleton="loadingArticle; type: skeletonType.CHIP; marginTop: '40px'; amount: 2">
+    <div class="flex-row categories" *skeleton="loadingArticle; type: skeletonType.BADGE_LG; marginTop: '40px'; amount: 2">
       <p *ngFor="let category of article?.categories" class="text-sm text-medium">{{ getCategoryTranslation(category) }}</p>
     </div>
   </div>

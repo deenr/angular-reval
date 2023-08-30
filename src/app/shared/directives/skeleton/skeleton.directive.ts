@@ -71,7 +71,29 @@ export class SkeletonDirective {
               height: this.height ?? '100%'
             });
             break;
-          case SkeletonType.CHIP:
+          case SkeletonType.BADGE_SM:
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.width = '100%';
+            this.wrapperDiv.style.display = 'flex';
+            this.wrapperDiv.style.flexDirection = 'row';
+            this.wrapperDiv.style.justifyContent = 'start';
+            this.wrapperDiv.style.gap = '8px';
+            this.wrapperDiv.style.marginTop = this.marginTop;
+
+            [...Array(this.amount ?? 1).keys()].forEach(() => {
+              const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
+              Object.assign(chipRef.instance, {
+                borderRadius: '22px',
+                width: '120px',
+                height: '22px'
+              });
+              this.wrapperDiv.appendChild(chipRef.location.nativeElement);
+            });
+
+            const smallBadgeElements = this.elementRef.nativeElement.parentElement;
+            smallBadgeElements.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            break;
+          case SkeletonType.BADGE_MD:
             this.wrapperDiv = document.createElement('div');
             this.wrapperDiv.style.width = '100%';
             this.wrapperDiv.style.display = 'flex';
@@ -83,15 +105,37 @@ export class SkeletonDirective {
             [...Array(this.amount ?? 1).keys()].forEach(() => {
               const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
               Object.assign(chipRef.instance, {
-                borderRadius: '27px',
-                width: '120px',
-                height: this.height ?? '27px'
+                borderRadius: '24px',
+                width: this.width ?? '120px',
+                height: '24px'
               });
               this.wrapperDiv.appendChild(chipRef.location.nativeElement);
             });
 
-            const chipsElement = this.elementRef.nativeElement.parentElement;
-            chipsElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            const mediumBadgeElements = this.elementRef.nativeElement.parentElement;
+            mediumBadgeElements.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            break;
+          case SkeletonType.BADGE_LG:
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.width = '100%';
+            this.wrapperDiv.style.display = 'flex';
+            this.wrapperDiv.style.flexDirection = 'row';
+            this.wrapperDiv.style.justifyContent = 'center';
+            this.wrapperDiv.style.gap = '8px';
+            this.wrapperDiv.style.marginTop = this.marginTop;
+
+            [...Array(this.amount ?? 1).keys()].forEach(() => {
+              const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
+              Object.assign(chipRef.instance, {
+                borderRadius: '28px',
+                width: '120px',
+                height: '28px'
+              });
+              this.wrapperDiv.appendChild(chipRef.location.nativeElement);
+            });
+
+            const largeBadgeElements = this.elementRef.nativeElement.parentElement;
+            largeBadgeElements.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
             break;
           case SkeletonType.ARTICLE_IMAGE:
             this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
@@ -212,6 +256,45 @@ export class SkeletonDirective {
 
             const paragraphLgElement = this.elementRef.nativeElement.parentElement;
             paragraphLgElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
+            break;
+          case SkeletonType.TABLE_AVATAR:
+            this.wrapperDiv = document.createElement('div');
+            this.wrapperDiv.style.display = 'grid';
+            this.wrapperDiv.style.gridTemplateColumns = '40px 1fr';
+            this.wrapperDiv.style.gridTemplateRows = '20px 16px';
+            this.wrapperDiv.style.gap = '4px 12px';
+            this.wrapperDiv.style.gridTemplateAreas = '"avatar name""avatar email"';
+
+            const avatarElement = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(avatarElement.instance, {
+              borderRadius: '40px',
+              width: '40px',
+              height: '40px',
+              gridArea: 'avatar'
+            });
+            this.wrapperDiv.appendChild(avatarElement.location.nativeElement);
+
+            const nameElement = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(nameElement.instance, {
+              borderRadius: '40px',
+              width: '80px',
+              gridArea: 'name'
+            });
+            this.wrapperDiv.appendChild(nameElement.location.nativeElement);
+
+            const emailElement = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(emailElement.instance, {
+              borderRadius: '40px',
+              width: '140px',
+              height: '16px',
+              gridArea: 'email'
+            });
+            this.wrapperDiv.appendChild(emailElement.location.nativeElement);
+
+            this.wrapperDiv.appendChild(avatarElement.location.nativeElement);
+
+            const tableAvatarElement = this.elementRef.nativeElement.parentElement;
+            tableAvatarElement.insertBefore(this.wrapperDiv, this.elementRef.nativeElement.nextSibling);
             break;
           // case SkeletonType.ARTICLE:
           //   this.wrapperDiv = document.createElement('div');

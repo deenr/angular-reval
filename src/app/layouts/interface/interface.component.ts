@@ -15,6 +15,7 @@ export class InterfaceComponent implements OnInit {
   public readonly expandedWidth = 280;
   public collapsed = true;
   public isMobile: boolean;
+  public isTablet: boolean;
 
   public sidenavMode: 'over' | 'side';
   public sidenavOpened: boolean;
@@ -25,16 +26,17 @@ export class InterfaceComponent implements OnInit {
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
       this.sidenavMode = breakpoint === Breakpoint.XL ? 'side' : 'over';
 
-      if (this.isBreakpointMobile(breakpoint) && !this.isMobile) {
+      if ((this.breakpointService.isMobile && !this.isMobile) || (this.breakpointService.isTablet && !this.isTablet)) {
         this.sidenavOpened = false;
-      } else if (!this.isBreakpointMobile(breakpoint) && this.isMobile) {
+      } else if ((!this.breakpointService.isMobile && this.isMobile) || (!this.breakpointService.isTablet && this.isTablet)) {
         this.sidenavOpened = true;
       }
 
-      this.isMobile = this.isBreakpointMobile(breakpoint);
+      this.isMobile = this.breakpointService.isMobile;
+      this.isTablet = this.breakpointService.isTablet;
     });
 
-    this.sidenavOpened = !this.isBreakpointMobile(this.breakpointService.currentBreakpoint);
+    this.sidenavOpened = !this.isBreakpointMobileOrTablet(this.breakpointService.currentBreakpoint);
   }
 
   public onActivate(): void {
@@ -49,8 +51,8 @@ export class InterfaceComponent implements OnInit {
     return this.collapsed && this.sidenavMode === 'side' ? `${this.collapsedWidth}px` : `${this.expandedWidth}px`;
   }
 
-  public isBreakpointMobile(breakpoint: Breakpoint): boolean {
-    return breakpoint === Breakpoint.XS || breakpoint === Breakpoint.SM;
+  public isBreakpointMobileOrTablet(breakpoint: Breakpoint): boolean {
+    return breakpoint === Breakpoint.XS || breakpoint === Breakpoint.SM || breakpoint === Breakpoint.MD;
   }
 
   public onSidenavToggle(): void {
