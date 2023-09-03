@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {BadgeColor} from './badge-color.enum';
 import {BadgeSize} from './badge-size.enum';
 import {BadgeType} from './badge-type.enum';
+import {Color} from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-badge',
@@ -9,7 +9,7 @@ import {BadgeType} from './badge-type.enum';
   styleUrls: ['./badge.component.scss']
 })
 export class BadgeComponent {
-  @Input() public color = BadgeColor.GRAY;
+  @Input() public color = Color.GREY;
   @Input() public size = BadgeSize.MD;
   @Input() public type = BadgeType.NONE;
   @Input() public icon: string;
@@ -17,6 +17,6 @@ export class BadgeComponent {
   public badgeType = BadgeType;
 
   public getBadgeClasses(): string {
-    return `badge ${this.color.toLowerCase()} ${this.size.toLowerCase()} ${this.type !== BadgeType.NONE ? this.type.toLowerCase().replace('_', '-') : ''}`;
+    return `badge ${this.color.toLowerCase().toLowerCase().replace('_', '-')} ${this.size.toLowerCase()} ${this.type !== BadgeType.NONE ? this.type.toLowerCase().replace('_', '-') : ''}`;
   }
 }

@@ -4,19 +4,65 @@
   .users {
     position: relative;
     overflow: hidden;
-    padding-top: 32px;
+    padding: 32px 0;
+    gap: 32px;
 
-    @include breakpoint-sm() {
+    @include breakpoint-md() {
       overflow: scroll;
     }
 
-    &__field {
-      display: flex;
-      overflow: hidden;
+    &__header {
+      padding: 0px 32px;
+      gap: 16px;
+      justify-content: space-between;
 
       @include breakpoint-sm() {
-        all: unset;
+        padding: 0px 16px;
+      }
+
+      .header__title-and-description {
+        gap: 4px;
+      }
+
+      .header__actions {
+        gap: 12px;
       }
     }
+
+    &__filter {
+      padding: 0 32px;
+
+      @include breakpoint-sm() {
+        padding: 0 16px;
+      }
+    }
+
+    &__table {
+      overflow: hidden;
+      padding: 0 32px;
+
+      @include breakpoint-sm() {
+        padding: 0;
+        overflow: unset;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-column-user {
+    min-width: 300px !important;
+  }
+
+  .mat-column-role {
+    min-width: 194px !important;
+  }
+
+  .mat-column-universityId {
+    min-width: 139px !important;
+  }
+
+  .mat-column-joined {
+    min-width: 164px !important;
   }
 }

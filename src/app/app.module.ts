@@ -67,7 +67,6 @@ import {PasswordComponent} from './pages/settings/settings-password/settings-pas
 import {MatChipsModule} from '@angular/material/chips';
 import {UsersComponent} from './pages/users/users.component';
 import {HeaderComponent} from './custom-components/header/header.component';
-import {UsersOverviewComponent} from './pages/users/users-overview/users-overview.component';
 import {MetricsCardComponent} from './custom-components/metrics-card/metrics-card.component';
 import {BadgeComponent} from './custom-components/badge/badge.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -125,7 +124,6 @@ import {FilterComponent} from '@custom-components/filter/filter.component';
     PasswordComponent,
     UsersComponent,
     HeaderComponent,
-    UsersOverviewComponent,
     MetricsCardComponent,
     BadgeComponent,
     DragScrollDirective,

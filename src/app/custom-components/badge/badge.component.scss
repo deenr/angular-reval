@@ -76,7 +76,8 @@
       padding: 4px 12px 4px 12px;
     }
 
-    &.gray {
+    // Grey
+    &.grey {
       box-shadow: 0px 0px 0px 1px $color-grey-200 inset;
       background: $color-grey-50;
 
@@ -89,6 +90,7 @@
       }
     }
 
+    // Primary
     &.primary {
       box-shadow: 0px 0px 0px 1px $color-primary-200 inset;
       background: $color-primary-50;
@@ -102,19 +104,7 @@
       }
     }
 
-    &.error {
-      box-shadow: 0px 0px 0px 1px $color-error-200 inset;
-      background: $color-error-50;
-
-      p {
-        color: $color-error-700;
-      }
-
-      .icon {
-        color: $color-error-500;
-      }
-    }
-
+    // Warning
     &.warning {
       box-shadow: 0px 0px 0px 1px $color-warning-200 inset;
       background: $color-warning-50;
@@ -128,6 +118,21 @@
       }
     }
 
+    // Error
+    &.error {
+      box-shadow: 0px 0px 0px 1px $color-error-200 inset;
+      background: $color-error-50;
+
+      p {
+        color: $color-error-700;
+      }
+
+      .icon {
+        color: $color-error-500;
+      }
+    }
+
+    // Success
     &.success {
       box-shadow: 0px 0px 0px 1px $color-success-200 inset;
       background: $color-success-50;
@@ -138,6 +143,342 @@
 
       .icon {
         color: $color-success-500;
+      }
+    }
+
+    // Gray Blue
+    &.gray-blue {
+      box-shadow: 0px 0px 0px 1px $color-grey-blue-200 inset;
+      background: $color-grey-blue-50;
+
+      p {
+        color: $color-grey-blue-700;
+      }
+
+      .icon {
+        color: $color-grey-blue-500;
+      }
+    }
+
+    // Gray Cool
+    &.gray-cool {
+      box-shadow: 0px 0px 0px 1px $color-grey-cool-200 inset;
+      background: $color-grey-cool-50;
+
+      p {
+        color: $color-grey-cool-700;
+      }
+
+      .icon {
+        color: $color-grey-cool-500;
+      }
+    }
+
+    // Gray Modern
+    &.gray-modern {
+      box-shadow: 0px 0px 0px 1px $color-grey-modern-200 inset;
+      background: $color-grey-modern-50;
+
+      p {
+        color: $color-grey-modern-700;
+      }
+
+      .icon {
+        color: $color-grey-modern-500;
+      }
+    }
+
+    // Gray Neutral
+    &.gray-neutral {
+      box-shadow: 0px 0px 0px 1px $color-grey-neutral-200 inset;
+      background: $color-grey-neutral-50;
+
+      p {
+        color: $color-grey-neutral-700;
+      }
+
+      .icon {
+        color: $color-grey-neutral-500;
+      }
+    }
+
+    // Gray Iron
+    &.gray-iron {
+      box-shadow: 0px 0px 0px 1px $color-grey-iron-200 inset;
+      background: $color-grey-iron-50;
+
+      p {
+        color: $color-grey-iron-700;
+      }
+
+      .icon {
+        color: $color-grey-iron-500;
+      }
+    }
+
+    // Gray True
+    &.gray-true {
+      box-shadow: 0px 0px 0px 1px $color-grey-true-200 inset;
+      background: $color-grey-true-50;
+
+      p {
+        color: $color-grey-true-700;
+      }
+
+      .icon {
+        color: $color-grey-true-500;
+      }
+    }
+
+    // Gray Warm
+    &.gray-warm {
+      box-shadow: 0px 0px 0px 1px $color-grey-warm-200 inset;
+      background: $color-grey-warm-50;
+
+      p {
+        color: $color-grey-warm-700;
+      }
+
+      .icon {
+        color: $color-grey-warm-500;
+      }
+    }
+
+    // Moss
+    &.moss {
+      box-shadow: 0px 0px 0px 1px $color-moss-200 inset;
+      background: $color-moss-50;
+
+      p {
+        color: $color-moss-700;
+      }
+
+      .icon {
+        color: $color-moss-500;
+      }
+    }
+
+    // Green Light
+    &.green-light {
+      box-shadow: 0px 0px 0px 1px $color-green-light-200 inset;
+      background: $color-green-light-50;
+
+      p {
+        color: $color-green-light-700;
+      }
+
+      .icon {
+        color: $color-green-light-500;
+      }
+    }
+
+    // Green
+    &.green {
+      box-shadow: 0px 0px 0px 1px $color-green-200 inset;
+      background: $color-green-50;
+
+      p {
+        color: $color-green-700;
+      }
+
+      .icon {
+        color: $color-green-500;
+      }
+    }
+
+    // Teal
+    &.teal {
+      box-shadow: 0px 0px 0px 1px $color-teal-200 inset;
+      background: $color-teal-50;
+
+      p {
+        color: $color-teal-700;
+      }
+
+      .icon {
+        color: $color-teal-500;
+      }
+    }
+
+    // Cyan
+    &.cyan {
+      box-shadow: 0px 0px 0px 1px $color-cyan-200 inset;
+      background: $color-cyan-50;
+
+      p {
+        color: $color-cyan-700;
+      }
+
+      .icon {
+        color: $color-cyan-500;
+      }
+    }
+
+    // Blue Light
+    &.blue-light {
+      box-shadow: 0px 0px 0px 1px $color-blue-light-200 inset;
+      background: $color-blue-light-50;
+
+      p {
+        color: $color-blue-light-700;
+      }
+
+      .icon {
+        color: $color-blue-light-500;
+      }
+    }
+
+    // Blue
+    &.blue {
+      box-shadow: 0px 0px 0px 1px $color-blue-200 inset;
+      background: $color-blue-50;
+
+      p {
+        color: $color-blue-700;
+      }
+
+      .icon {
+        color: $color-blue-500;
+      }
+    }
+
+    // Blue Dark
+    &.blue-dark {
+      box-shadow: 0px 0px 0px 1px $color-blue-dark-200 inset;
+      background: $color-blue-dark-50;
+
+      p {
+        color: $color-blue-dark-700;
+      }
+
+      .icon {
+        color: $color-blue-dark-500;
+      }
+    }
+
+    // Indigo
+    &.indigo {
+      box-shadow: 0px 0px 0px 1px $color-indigo-200 inset;
+      background: $color-indigo-50;
+
+      p {
+        color: $color-indigo-700;
+      }
+
+      .icon {
+        color: $color-indigo-500;
+      }
+    }
+
+    // Violet
+    &.violet {
+      box-shadow: 0px 0px 0px 1px $color-violet-200 inset;
+      background: $color-violet-50;
+
+      p {
+        color: $color-violet-700;
+      }
+
+      .icon {
+        color: $color-violet-500;
+      }
+    }
+
+    // Purple
+    &.purple {
+      box-shadow: 0px 0px 0px 1px $color-purple-200 inset;
+      background: $color-purple-50;
+
+      p {
+        color: $color-purple-700;
+      }
+
+      .icon {
+        color: $color-purple-500;
+      }
+    }
+
+    // Fuchsia
+    &.fuchsia {
+      box-shadow: 0px 0px 0px 1px $color-fuchsia-200 inset;
+      background: $color-fuchsia-50;
+
+      p {
+        color: $color-fuchsia-700;
+      }
+
+      .icon {
+        color: $color-fuchsia-500;
+      }
+    }
+
+    // Pink
+    &.pink {
+      box-shadow: 0px 0px 0px 1px $color-pink-200 inset;
+      background: $color-pink-50;
+
+      p {
+        color: $color-pink-700;
+      }
+
+      .icon {
+        color: $color-pink-500;
+      }
+    }
+
+    // Rosé
+    &.rose {
+      box-shadow: 0px 0px 0px 1px $color-rose-200 inset;
+      background: $color-rose-50;
+
+      p {
+        color: $color-rose-700;
+      }
+
+      .icon {
+        color: $color-rose-500;
+      }
+    }
+
+    // Dark Orange
+    &.dark-orange {
+      box-shadow: 0px 0px 0px 1px $color-dark-orange-200 inset;
+      background: $color-dark-orange-50;
+
+      p {
+        color: $color-dark-orange-700;
+      }
+
+      .icon {
+        color: $color-dark-orange-500;
+      }
+    }
+
+    // Orange
+    &.orange {
+      box-shadow: 0px 0px 0px 1px $color-orange-200 inset;
+      background: $color-orange-50;
+
+      p {
+        color: $color-orange-700;
+      }
+
+      .icon {
+        color: $color-orange-500;
+      }
+    }
+
+    // Yellow
+    &.yellow {
+      box-shadow: 0px 0px 0px 1px $color-yellow-200 inset;
+      background: $color-yellow-50;
+
+      p {
+        color: $color-yellow-700;
+      }
+
+      .icon {
+        color: $color-yellow-500;
       }
     }
   }

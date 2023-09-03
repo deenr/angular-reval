@@ -50,7 +50,8 @@ const routes: Routes = [
     children: [
       {path: 'settings', component: SettingsComponent},
       {path: 'settings/:id', component: SettingsComponent},
-      {path: 'users', component: UsersComponent}
+      {path: 'users', component: UsersComponent},
+      {path: 'users/:id', component: UsersComponent}
     ]
   },
   {path: '**', redirectTo: ''}

@@ -132,6 +132,18 @@ export const SVG_ICONS = [
     "path": "./assets/svg/files.svg"
   },
   {
+    "name": "filter-lines",
+    "path": "./assets/svg/filter-lines.svg"
+  },
+  {
+    "name": "filter-off",
+    "path": "./assets/svg/filter-off.svg"
+  },
+  {
+    "name": "filter",
+    "path": "./assets/svg/filter.svg"
+  },
+  {
     "name": "hamburger",
     "path": "./assets/svg/hamburger.svg"
   },
@@ -272,6 +284,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/newspaper.svg"
   },
   {
+    "name": "pencil",
+    "path": "./assets/svg/pencil.svg"
+  },
+  {
     "name": "phone-volume",
     "path": "./assets/svg/phone-volume.svg"
   },
@@ -302,6 +318,10 @@ export const SVG_ICONS = [
   {
     "name": "top-left-circle-corner",
     "path": "./assets/svg/top-left-circle-corner.svg"
+  },
+  {
+    "name": "trash",
+    "path": "./assets/svg/trash.svg"
   },
   {
     "name": "trend-down",

@@ -1,8 +1,13 @@
 @import './colors.scss';
 @import './typography.scss';
+@import './breakpoints.scss';
 
 .mat-mdc-table {
   overflow: auto;
+
+  @include breakpoint-md() {
+    border-top: 1px solid $color-grey-200 !important;
+  }
 
   .mat-mdc-header-row {
     position: sticky;
@@ -46,8 +51,10 @@
       white-space: nowrap;
     }
 
-    &:last-of-type .mdc-data-table__cell {
-      border-bottom: none !important;
+    @include breakpoint-md() {
+      &:last-of-type .mdc-data-table__cell {
+        border-bottom: none !important;
+      }
     }
   }
 

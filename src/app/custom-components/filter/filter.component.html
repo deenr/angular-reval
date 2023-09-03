@@ -1,6 +1,13 @@
-<div class="table__filter flex-row">
-  <mat-form-field>
-    <mat-label class="text-sm text-medium">Search for user</mat-label>
+<div class="filter flex-row">
+  <mat-form-field class="filter__search full-width">
+    <!-- <mat-label class="text-sm text-medium">Search for user</mat-label> -->
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" />
   </mat-form-field>
+  <button mat-stroked-button class="filter__open-button md">
+    <mat-icon svgIcon="filter"></mat-icon>
+    Filters
+  </button>
+  <button mat-stroked-button class="filter__open-button--mobile md mat-button-icon">
+    <mat-icon svgIcon="filter-lines"></mat-icon>
+  </button>
 </div>

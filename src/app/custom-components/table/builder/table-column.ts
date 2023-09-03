@@ -1,6 +1,6 @@
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {TableDataType} from '../table-data-type.enum';
-import {BadgeColor} from '@custom-components/badge/badge-color.enum';
+import {Color} from '@shared/enums/general/colors.enum';
 
 export class TableColumn {
   constructor(
@@ -14,7 +14,9 @@ export class TableColumn {
     public badgeProperties?: {
       translationKey: string;
       size: BadgeSize;
-      colors: Map<any, BadgeColor>;
-    }
+      colors: Map<any, Color>;
+    },
+    public onDelete?: (id: string) => void,
+    public editRoute?: string
   ) {}
 }

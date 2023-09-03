@@ -1,0 +1,35 @@
+@import 'variables';
+
+:host {
+  .filter {
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    align-items: center;
+    background-color: $color-grey-50;
+
+    @include breakpoint-sm() {
+      padding: 0;
+      background-color: transparent;
+    }
+
+    &__search {
+      max-width: 400px;
+      margin-right: auto;
+    }
+
+    &__open-button {
+      @include breakpoint-sm() {
+        display: none;
+      }
+    }
+
+    &__open-button--mobile {
+      display: none;
+
+      @include breakpoint-sm() {
+        display: flex;
+      }
+    }
+  }
+}

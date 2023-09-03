@@ -4,9 +4,10 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {TableDataType} from './table-data-type.enum';
-import {BadgeColor} from '@custom-components/badge/badge-color.enum';
 import {TableColumn} from './builder/table-column';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
+import {Router} from '@angular/router';
+import {Color} from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-table',
@@ -28,6 +29,8 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public tableDataType = TableDataType;
   public badgeSize = BadgeSize;
   public skeletonType = SkeletonType;
+
+  public constructor(private readonly router: Router) {}
 
   public ngOnInit(): void {
     this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
@@ -58,7 +61,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
     return this.columns.find((column: TableColumn) => column.field === field).badgeProperties.size;
   }
 
-  public getBadgeColor(field: string, value: any): BadgeColor {
+  public getBadgeColor(field: string, value: any): Color {
     return this.columns.find((column: TableColumn) => column.field === field).badgeProperties.colors.get(value);
   }
 
@@ -68,6 +71,26 @@ export class TableComponent<T> implements OnInit, OnChanges {
     }
     const amountPages = Math.ceil(length / pageSize);
     return `Page ${page + 1} of ${amountPages}`;
+  }
+
+  public delete(id: string): void {
+    this.columns.find((column: TableColumn) => column.type === TableDataType.DELETE).onDelete(id);
+  }
+
+  public edit(id: string): void {
+    this.router.navigateByUrl(this.columns.find((column: TableColumn) => column.type === TableDataType.EDIT).editRoute.replace(':id', `${id}`));
+  }
+
+  public searchFilter(filterValue: string): void {
+    this.applyFilter('name', filterValue);
+  }
+
+  private applyFilter(columnName: string, filterValue: string): void {
+    // Create a custom filter function for the specified column
+    this.dataSource.filterPredicate = (data, filter) => (data as any)[columnName].toString().toLowerCase().includes(filterValue.toLowerCase());
+
+    // Set the filter
+    this.dataSource.filter = filterValue;
   }
 
   private getDataForSkeleton(): T[] {

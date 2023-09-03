@@ -48,6 +48,16 @@
     line-height: 150% !important;
   }
 
+  &.mat-button-icon {
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 10px !important;
+
+    .mat-icon {
+      margin: 0 !important;
+    }
+  }
+
   .mat-icon {
     position: relative;
     z-index: 1;

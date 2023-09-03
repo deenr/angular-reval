@@ -1,9 +1,9 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {BadgeColor} from '@custom-components/badge/badge-color.enum';
 import {BadgeType} from '@custom-components/badge/badge-type.enum';
 import {MetricTimeFrame} from './metric-time-frame.enum';
 import {FormControl} from '@angular/forms';
 import {Subject, distinctUntilChanged} from 'rxjs';
+import {Color} from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-metrics-card',
@@ -23,7 +23,7 @@ export class MetricsCardComponent implements OnInit {
   public timeFrameControl = new FormControl(MetricTimeFrame.LAST_DAY);
 
   public badgeType = BadgeType;
-  public badgeColor = BadgeColor;
+  public badgeColor = Color;
 
   public width = 200;
   public height = 70;

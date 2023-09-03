@@ -1,8 +1,8 @@
-import {BadgeColor} from '@custom-components/badge/badge-color.enum';
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {TableDataType} from '../table-data-type.enum';
 import {BadgeBuilder} from './badge-builder';
 import {TableColumn} from './table-column';
+import {Color} from '@shared/enums/general/colors.enum';
 
 export class ColumnBuilder {
   private field: string = '';
@@ -15,8 +15,10 @@ export class ColumnBuilder {
   public badgeProperties?: {
     translationKey: string;
     size: BadgeSize;
-    colors: Map<any, BadgeColor>;
+    colors: Map<any, Color>;
   };
+  private onDelete?: (id: string) => void;
+  private editRoute?: string;
 
   public setField(field: string): ColumnBuilder {
     this.field = field;
@@ -63,6 +65,23 @@ export class ColumnBuilder {
     return this;
   }
 
+  public setDelete(onDelete: (id: string) => void): ColumnBuilder {
+    this.field = 'delete';
+    this.type = TableDataType.DELETE;
+
+    this.onDelete = onDelete;
+
+    return this;
+  }
+
+  public setEdit(route: string): ColumnBuilder {
+    this.field = 'edit';
+    this.type = TableDataType.EDIT;
+    this.editRoute = route;
+
+    return this;
+  }
+
   public build(): TableColumn {
     if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !this.sortId)) {
       throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortId properties.');
@@ -70,6 +89,6 @@ export class ColumnBuilder {
       throw new Error('Badge columns require badgeProperties');
     }
 
-    return new TableColumn(this.field, this.name, this.type, this.sort, this.avatarNameKey, this.avatarEmailKey, this.sortId, this.badgeProperties);
+    return new TableColumn(this.field, this.name, this.type, this.sort ?? false, this.avatarNameKey, this.avatarEmailKey, this.sortId, this.badgeProperties, this.onDelete, this.editRoute);
   }
 }

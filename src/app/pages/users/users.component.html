@@ -1,5 +1,16 @@
 <div class="users flex-column full-height">
-  <app-header title="Users" [tabs]="tabs"></app-header>
+  <header class="flex-row users__header">
+    <div class="header__title-and-description flex-column">
+      <h2 class="display-sm text-semibold" classMd="display-xs">Users</h2>
+      <p class="text-md text-regular">View users' data and information</p>
+    </div>
+    <div class="header__actions flex-row">
+      <button mat-stroked-button class="md">
+        <mat-icon svgIcon="cloud-download"></mat-icon>
+        Download CSV
+      </button>
+    </div>
+  </header>
 
-  <app-users-overview *ngIf="isTabActive(usersTab.OVERVIEW)" class="full-height users__field"></app-users-overview>
+  <app-table class="users__table" [data]="tableData" [columns]="tableColumns"></app-table>
 </div>

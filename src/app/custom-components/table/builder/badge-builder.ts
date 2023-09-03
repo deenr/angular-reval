@@ -1,6 +1,6 @@
-import {BadgeColor} from '@custom-components/badge/badge-color.enum';
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {ColumnBuilder} from './column-builder';
+import {Color} from '@shared/enums/general/colors.enum';
 
 export class BadgeBuilder {
   constructor(private columnBuilder: ColumnBuilder) {
@@ -21,7 +21,7 @@ export class BadgeBuilder {
     return this;
   }
 
-  public setColors(colors: Map<any, BadgeColor>): BadgeBuilder {
+  public setColors(colors: Map<any, Color>): BadgeBuilder {
     this.columnBuilder.badgeProperties.colors = colors;
     return this;
   }
