@@ -86,10 +86,8 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   private applyFilter(columnName: string, filterValue: string): void {
-    // Create a custom filter function for the specified column
     this.dataSource.filterPredicate = (data, filter) => (data as any)[columnName].toString().toLowerCase().includes(filterValue.toLowerCase());
 
-    // Set the filter
     this.dataSource.filter = filterValue;
   }
 

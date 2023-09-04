@@ -1,8 +1,8 @@
 <div class="table flex-column full-height">
   <app-filter class="table__filter" (onSearchFilter)="searchFilter($event)"></app-filter>
 
-  <table class="table__element flex-column full-height shadow-xs">
-    <mat-table class="full-height" [dataSource]="dataSource" matSort>
+  <div class="table__element flex-column full-height shadow-xs">
+    <mat-table class="full-height" [dataSource]="dataSource" matSort classSm="shadow-xs">
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
         {{ column.field }}
         <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortId ? column.sortId : column.field" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
@@ -38,5 +38,5 @@
     </mat-table>
 
     <mat-paginator class="table__paginator" [pageSizeOptions]="[10]"></mat-paginator>
-  </table>
+  </div>
 </div>
