@@ -9,6 +9,7 @@
     background-color: $color-grey-50;
 
     @include breakpoint-sm() {
+      flex-direction: column;
       padding: 0;
       background-color: transparent;
     }
@@ -16,19 +17,24 @@
     &__search {
       max-width: 400px;
       margin-right: auto;
+
+      @include breakpoint-sm() {
+        max-width: unset;
+      }
     }
 
-    &__open-button {
+    &__clear {
+      margin-left: auto;
+      margin-bottom: 0;
+
       @include breakpoint-sm() {
         display: none;
       }
     }
 
-    &__open-button--mobile {
-      display: none;
-
+    &__button {
       @include breakpoint-sm() {
-        display: flex;
+        width: 100%;
       }
     }
   }

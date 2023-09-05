@@ -1,7 +1,7 @@
-<div class="table flex-column full-height">
-  <app-filter class="table__filter" (onSearchFilter)="searchFilter($event)"></app-filter>
+<div class="table flex-column full-height shadow-xs">
+  <app-filter class="table__filter" [filters]="filters" (onSearchFilter)="searchFilter($event)"></app-filter>
 
-  <div class="table__element flex-column full-height shadow-xs">
+  <div class="table__element flex-column full-height">
     <mat-table class="full-height" [dataSource]="dataSource" matSort classSm="shadow-xs">
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
         {{ column.field }}

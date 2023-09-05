@@ -8,6 +8,7 @@ import {TableColumn} from './builder/table-column';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {Router} from '@angular/router';
 import {Color} from '@shared/enums/general/colors.enum';
+import {FilterProperties} from './builder/filter-builder';
 
 @Component({
   selector: 'app-table',
@@ -23,6 +24,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   @Input() public columns: TableColumn[];
 
   public displayedColumns: string[];
+  public filters: FilterProperties[];
   public dataSource: MatTableDataSource<T>;
   public loadingData = true;
 
@@ -33,7 +35,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public constructor(private readonly router: Router) {}
 
   public ngOnInit(): void {
-    this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
+    this.setColumns();
     this.setDataSource();
   }
 
@@ -43,7 +45,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
     }
 
     if (changes['columns'] && !changes['columns'].firstChange) {
-      this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
+      this.setColumns();
     }
   }
 
@@ -82,11 +84,11 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   public searchFilter(filterValue: string): void {
-    this.applyFilter('name', filterValue);
+    this.applyFilter(filterValue);
   }
 
-  private applyFilter(columnName: string, filterValue: string): void {
-    this.dataSource.filterPredicate = (data, filter) => (data as any)[columnName].toString().toLowerCase().includes(filterValue.toLowerCase());
+  private applyFilter(filterValue: string): void {
+    this.dataSource.filterPredicate = (data, filter) => (data as any)['name'].toString().toLowerCase().includes(filterValue.toLowerCase());
 
     this.dataSource.filter = filterValue;
   }
@@ -106,6 +108,12 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  private setColumns(): void {
+    this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
+
+    this.filters = this.columns.filter((value: TableColumn) => value.filterProperties).map((value: TableColumn) => value.filterProperties);
   }
 }
 

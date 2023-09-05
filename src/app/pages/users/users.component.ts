@@ -8,6 +8,7 @@ import {TableColumn} from '@custom-components/table/builder/table-column';
 import {TableDataType} from '@custom-components/table/table-data-type.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {Color} from '@shared/enums/general/colors.enum';
+import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter-builder';
 
 @Component({
   selector: 'app-users',
@@ -28,7 +29,18 @@ export class UsersComponent implements OnInit {
 
   public ngOnInit(): void {
     this.tableColumns = [
-      new ColumnBuilder().setField('user').setHeaderName('User').setDataType(TableDataType.AVATAR).canSort(true).setAvatarNameKey('name').setAvatarEmailKey('email').setSortId('name').build(),
+      new ColumnBuilder()
+        .setField('user')
+        .setHeaderName('User')
+        .setDataType(TableDataType.AVATAR)
+        .canSort(true)
+        .setAvatarNameKey('name')
+        .setAvatarEmailKey('email')
+        .setSortId('name')
+        .setFilter((filterBuilder: FilterBuilder) => {
+          filterBuilder.setType(FilterType.TEXT).build();
+        })
+        .build(),
       new ColumnBuilder()
         .setField('role')
         .setHeaderName('Role')
@@ -47,6 +59,9 @@ export class UsersComponent implements OnInit {
                 [UserRole.ADMIN, Color.ORANGE]
               ])
             );
+        })
+        .setFilter((filterBuilder: FilterBuilder) => {
+          filterBuilder.setType(FilterType.ENUM).setEnumValues([UserRole.STUDENT, UserRole.PHD, UserRole.PROFESSOR, UserRole.INCOMPLETE_PROFILE, UserRole.ADMIN]).build();
         })
         .build(),
       new ColumnBuilder().setField('universityId').setHeaderName('University ID').setDataType(TableDataType.TEXT).canSort(true).build(),

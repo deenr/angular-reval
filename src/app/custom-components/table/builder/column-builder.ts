@@ -1,10 +1,13 @@
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {TableDataType} from '../table-data-type.enum';
-import {BadgeBuilder} from './badge-builder';
+import {BadgeBuilder, BadgeProperties} from './badge-builder';
 import {TableColumn} from './table-column';
 import {Color} from '@shared/enums/general/colors.enum';
+import {FilterBuilder, FilterProperties, FilterType} from './filter-builder';
 
 export class ColumnBuilder {
+  public badgeProperties?: BadgeProperties;
+  public filterProperties?: FilterProperties;
   private field: string = '';
   private name: string = '';
   private type: TableDataType = TableDataType.TEXT;
@@ -12,11 +15,6 @@ export class ColumnBuilder {
   private avatarNameKey?: string;
   private avatarEmailKey?: string;
   private sortId?: string;
-  public badgeProperties?: {
-    translationKey: string;
-    size: BadgeSize;
-    colors: Map<any, Color>;
-  };
   private onDelete?: (id: string) => void;
   private editRoute?: string;
 
@@ -82,6 +80,14 @@ export class ColumnBuilder {
     return this;
   }
 
+  public setFilter(configureFilter: (filterBuilder: FilterBuilder) => void): ColumnBuilder {
+    const filterBuilder = new FilterBuilder(this);
+    configureFilter(filterBuilder);
+    this.filterProperties.field = this.field;
+
+    return this;
+  }
+
   public build(): TableColumn {
     if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !this.sortId)) {
       throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortId properties.');
@@ -89,6 +95,18 @@ export class ColumnBuilder {
       throw new Error('Badge columns require badgeProperties');
     }
 
-    return new TableColumn(this.field, this.name, this.type, this.sort ?? false, this.avatarNameKey, this.avatarEmailKey, this.sortId, this.badgeProperties, this.onDelete, this.editRoute);
+    return new TableColumn(
+      this.field,
+      this.name,
+      this.type,
+      this.sort ?? false,
+      this.avatarNameKey,
+      this.avatarEmailKey,
+      this.sortId,
+      this.badgeProperties,
+      this.onDelete,
+      this.editRoute,
+      this.filterProperties
+    );
   }
 }
