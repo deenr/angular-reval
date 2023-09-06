@@ -8,7 +8,7 @@ import {TableColumn} from './builder/table-column';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {Router} from '@angular/router';
 import {Color} from '@shared/enums/general/colors.enum';
-import {FilterProperties} from './builder/filter-builder';
+import {FilterProperty, FilterType} from './builder/filter-builder';
 
 @Component({
   selector: 'app-table',
@@ -24,7 +24,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   @Input() public columns: TableColumn[];
 
   public displayedColumns: string[];
-  public filters: FilterProperties[];
+  public filters: FilterProperty[];
   public dataSource: MatTableDataSource<T>;
   public loadingData = true;
 
@@ -35,8 +35,8 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public constructor(private readonly router: Router) {}
 
   public ngOnInit(): void {
-    this.setColumns();
     this.setDataSource();
+    this.setColumns();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -55,7 +55,8 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   public getBadgeTranslationKey(field: string, value: any): string {
-    const translationKey = this.columns.find((column: TableColumn) => column.field === field).badgeProperties.translationKey;
+    const translationKey = this.columns.find((column: TableColumn) => column.field === field).translationKey;
+
     return `${translationKey}.${value}`;
   }
 
@@ -83,14 +84,8 @@ export class TableComponent<T> implements OnInit, OnChanges {
     this.router.navigateByUrl(this.columns.find((column: TableColumn) => column.type === TableDataType.EDIT).editRoute.replace(':id', `${id}`));
   }
 
-  public searchFilter(filterValue: string): void {
-    this.applyFilter(filterValue);
-  }
-
-  private applyFilter(filterValue: string): void {
-    this.dataSource.filterPredicate = (data, filter) => (data as any)['name'].toString().toLowerCase().includes(filterValue.toLowerCase());
-
-    this.dataSource.filter = filterValue;
+  public onFilterChange(filterValues: any): void {
+    this.dataSource.filter = filterValues;
   }
 
   private getDataForSkeleton(): T[] {
@@ -114,6 +109,35 @@ export class TableComponent<T> implements OnInit, OnChanges {
     this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
 
     this.filters = this.columns.filter((value: TableColumn) => value.filterProperties).map((value: TableColumn) => value.filterProperties);
+
+    this.dataSource.filterPredicate = (data, filter): boolean => {
+      return this.filters.every((filterProperty: FilterProperty) => {
+        if (this.getFilterTypeByField(filterProperty.field) === FilterType.TEXT) {
+          return (
+            (data as any)[filterProperty.field]
+              .toString()
+              .trim()
+              .toLowerCase()
+              .indexOf((filter as any)[filterProperty.field].toLowerCase()) !== -1
+          );
+        } else {
+          console.log((filter as any)[filterProperty.field].length);
+          if ((filter as any)[filterProperty.field].length) {
+            for (const filterValue of (filter as any)[filterProperty.field]) {
+              if ((data as any)[filterProperty.field].trim() === filterValue) {
+                return true;
+              }
+            }
+            return false;
+          }
+          return true;
+        }
+      });
+    };
+  }
+
+  private getFilterTypeByField(field: string): FilterType {
+    return this.filters.find((filterProperty: FilterProperty) => filterProperty.field === field).type;
   }
 }
 

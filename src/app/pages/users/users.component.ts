@@ -46,22 +46,20 @@ export class UsersComponent implements OnInit {
         .setHeaderName('Role')
         .setDataType(TableDataType.BADGE)
         .canSort(false)
+        .setTranslationKey('USER_ROLE')
         .setBadge((badgeBuilder: BadgeBuilder) => {
-          badgeBuilder
-            .setTranslationKey('USER_ROLE')
-            .setSize(BadgeSize.MD)
-            .setColors(
-              new Map([
-                [UserRole.STUDENT, Color.INDIGO],
-                [UserRole.PHD, Color.YELLOW],
-                [UserRole.PROFESSOR, Color.FUCHSIA],
-                [UserRole.INCOMPLETE_PROFILE, Color.ROSE],
-                [UserRole.ADMIN, Color.ORANGE]
-              ])
-            );
+          badgeBuilder.setSize(BadgeSize.MD).setColors(
+            new Map([
+              [UserRole.STUDENT, Color.INDIGO],
+              [UserRole.PHD, Color.YELLOW],
+              [UserRole.PROFESSOR, Color.FUCHSIA],
+              [UserRole.INCOMPLETE_PROFILE, Color.ROSE],
+              [UserRole.ADMIN, Color.ORANGE]
+            ])
+          );
         })
         .setFilter((filterBuilder: FilterBuilder) => {
-          filterBuilder.setType(FilterType.ENUM).setEnumValues([UserRole.STUDENT, UserRole.PHD, UserRole.PROFESSOR, UserRole.INCOMPLETE_PROFILE, UserRole.ADMIN]).build();
+          filterBuilder.setType(FilterType.ENUM).setEnumValues(Object.keys(UserRole)).build();
         })
         .build(),
       new ColumnBuilder().setField('universityId').setHeaderName('University ID').setDataType(TableDataType.TEXT).canSort(true).build(),

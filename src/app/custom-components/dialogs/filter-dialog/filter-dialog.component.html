@@ -1,10 +1,6 @@
-<div class="filter flex-row" [formGroup]="filterForm">
-  <ng-container *ngFor="let filter of filters">
-    <mat-form-field *ngIf="filter.type === filterType.TEXT" class="filter__search full-width">
-      <mat-icon matIconPrefix svgIcon="search"></mat-icon>
-      <input matInput [formControlName]="filter.field" [placeholder]="'Search for ' + filter.field" />
-    </mat-form-field>
-    <mat-form-field *ngIf="filter.type === filterType.ENUM" class="other-filter">
+<div class="filter flex-column">
+  <form *ngFor="let filter of filters" class="filter__form flex-column" [formGroup]="filterForm">
+    <mat-form-field *ngIf="filter.type === filterType.ENUM" class="other-filter" (click)="$event.stopPropagation()">
       <mat-select [formControlName]="filter.field" [placeholder]="'Select ' + filter.field" multiple>
         <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
           {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
@@ -18,9 +14,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </ng-container>
-  <button mat-stroked-button class="filter__button md" (click)="openFilterDialog()">
-    <mat-icon svgIcon="filter-lines"></mat-icon>
-    More filters
-  </button>
+  </form>
+  <footer class="filter__actions flex-row">
+    <button mat-stroked-button class="full-width" (click)="cancel()">Cancel</button>
+    <button mat-flat-button class="full-width" color="primary" (click)="confirm()">Apply</button>
+  </footer>
 </div>

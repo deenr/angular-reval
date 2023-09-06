@@ -1,20 +1,21 @@
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {TableDataType} from '../table-data-type.enum';
-import {BadgeBuilder, BadgeProperties} from './badge-builder';
+import {BadgeBuilder, BadgeProperty} from './badge-builder';
 import {TableColumn} from './table-column';
 import {Color} from '@shared/enums/general/colors.enum';
-import {FilterBuilder, FilterProperties, FilterType} from './filter-builder';
+import {FilterBuilder, FilterProperty, FilterType} from './filter-builder';
 
 export class ColumnBuilder {
-  public badgeProperties?: BadgeProperties;
-  public filterProperties?: FilterProperties;
+  public badgeProperties?: BadgeProperty;
+  public filterProperties?: FilterProperty;
+  public translationKey?: string;
   private field: string = '';
   private name: string = '';
   private type: TableDataType = TableDataType.TEXT;
   private sort: boolean = false;
   private avatarNameKey?: string;
   private avatarEmailKey?: string;
-  private sortId?: string;
+  private sortField?: string;
   private onDelete?: (id: string) => void;
   private editRoute?: string;
 
@@ -48,8 +49,14 @@ export class ColumnBuilder {
     return this;
   }
 
-  public setSortId(sortId: string): ColumnBuilder {
-    this.sortId = sortId;
+  public setSortId(sortField: string): ColumnBuilder {
+    this.sortField = sortField;
+    return this;
+  }
+
+  public setTranslationKey(translationKey: string): ColumnBuilder {
+    this.translationKey = translationKey;
+
     return this;
   }
 
@@ -83,14 +90,14 @@ export class ColumnBuilder {
   public setFilter(configureFilter: (filterBuilder: FilterBuilder) => void): ColumnBuilder {
     const filterBuilder = new FilterBuilder(this);
     configureFilter(filterBuilder);
-    this.filterProperties.field = this.field;
+    this.filterProperties.field = this.sortField ?? this.field;
 
     return this;
   }
 
   public build(): TableColumn {
-    if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !this.sortId)) {
-      throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortId properties.');
+    if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !this.sortField)) {
+      throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortField properties.');
     } else if (this.type === TableDataType.BADGE && !this.badgeProperties) {
       throw new Error('Badge columns require badgeProperties');
     }
@@ -102,11 +109,12 @@ export class ColumnBuilder {
       this.sort ?? false,
       this.avatarNameKey,
       this.avatarEmailKey,
-      this.sortId,
+      this.sortField,
       this.badgeProperties,
       this.onDelete,
       this.editRoute,
-      this.filterProperties
+      this.filterProperties,
+      this.translationKey
     );
   }
 }

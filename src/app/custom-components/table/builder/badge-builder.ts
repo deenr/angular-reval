@@ -2,8 +2,7 @@ import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {ColumnBuilder} from './column-builder';
 import {Color} from '@shared/enums/general/colors.enum';
 
-export interface BadgeProperties {
-  translationKey: string;
+export interface BadgeProperty {
   size: BadgeSize;
   colors: Map<any, Color>;
 }
@@ -11,15 +10,9 @@ export interface BadgeProperties {
 export class BadgeBuilder {
   constructor(private columnBuilder: ColumnBuilder) {
     this.columnBuilder.badgeProperties = {
-      translationKey: '',
       size: BadgeSize.MD,
       colors: new Map()
     };
-  }
-
-  public setTranslationKey(translationKey: string): BadgeBuilder {
-    this.columnBuilder.badgeProperties.translationKey = translationKey;
-    return this;
   }
 
   public setSize(size: BadgeSize): BadgeBuilder {

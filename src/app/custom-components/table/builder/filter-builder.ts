@@ -6,10 +6,11 @@ export enum FilterType {
   DATE = 'DATE'
 }
 
-export interface FilterProperties {
+export interface FilterProperty {
   type: FilterType;
   field: string;
   enumValues?: string[];
+  translationKey?: string;
 }
 
 export class FilterBuilder {
@@ -40,6 +41,7 @@ export class FilterBuilder {
     ) {
       throw new Error('enumValues must be provided for ENUM filter type.');
     }
+    this.columnBuilder.filterProperties.translationKey = this.columnBuilder.translationKey;
 
     return this.columnBuilder;
   }

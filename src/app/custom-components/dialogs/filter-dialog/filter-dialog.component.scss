@@ -1,0 +1,21 @@
+:host {
+  .filter {
+    min-width: 200px;
+    padding: 24px;
+    gap: 32px;
+
+    &__form {
+      gap: 16px;
+    }
+
+    &__actions {
+      gap: 12px;
+    }
+  }
+}
+
+::ng-deep {
+  .cdk-overlay-backdrop:not(:first-of-type) {
+    opacity: 0 !important;
+  }
+}

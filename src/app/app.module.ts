@@ -78,6 +78,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {TranslatePipe} from '@shared/pipes/translate/translate.pipe';
 import {TableAvatarComponent} from '@custom-components/table/table-avatar/table-avatar.component';
 import {FilterComponent} from '@custom-components/filter/filter.component';
+import { FilterDialogComponent } from './custom-components/dialogs/filter-dialog/filter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import {FilterComponent} from '@custom-components/filter/filter.component';
     TableComponent,
     FilterComponent,
     TableAvatarComponent,
-    TranslatePipe
+    TranslatePipe,
+    FilterDialogComponent
   ],
   imports: [
     CommonModule,
