@@ -4,6 +4,10 @@
   .table {
     gap: 24px;
 
+    @include breakpoint-sm() {
+      box-shadow: none;
+    }
+
     &__filter {
       @include breakpoint-sm() {
         padding: 0 16px;
@@ -19,7 +23,6 @@
       @include breakpoint-sm() {
         border-radius: 0;
         border: none;
-        box-shadow: none;
       }
 
       &__header {
