@@ -80,6 +80,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/clock.svg"
   },
   {
+    "name": "close-badge",
+    "path": "./assets/svg/close-badge.svg"
+  },
+  {
     "name": "close-small",
     "path": "./assets/svg/close-small.svg"
   },

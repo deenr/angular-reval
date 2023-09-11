@@ -92,7 +92,7 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
         })
         .afterClosed()
         .subscribe((value: Date | DateRange) => {
-          if (value) {
+          if ((value && (value as Date) instanceof Date) || (Object.keys(value).length > 1 && Object.keys(value).every((key: string) => (value as any)[key]))) {
             this.value = value;
           }
         });

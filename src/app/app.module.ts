@@ -11,7 +11,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {MatDividerModule} from '@angular/material/divider';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -168,6 +168,8 @@ import {DatepickerModule} from '@custom-components/datepicker/datepicker.module'
     DatepickerModule
   ],
   providers: [
+    DatePipe,
+    TranslatePipe,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {appearance: 'outline', floatLabel: 'always', subscriptSizing: 'dynamic'}
