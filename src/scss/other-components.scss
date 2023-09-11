@@ -66,6 +66,7 @@
   max-width: 350px !important;
 
   .mat-mdc-menu-content {
+    font-family: $font-family !important;
     padding: 0;
     gap: 4px;
   }

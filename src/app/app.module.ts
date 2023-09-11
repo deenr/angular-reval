@@ -17,7 +17,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
-import {CustomDatepickerComponent} from '@custom-components/custom-datepicker/custom-datepicker.component';
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
 import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -78,12 +77,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {TranslatePipe} from '@shared/pipes/translate/translate.pipe';
 import {TableAvatarComponent} from '@custom-components/table/table-avatar/table-avatar.component';
 import {FilterComponent} from '@custom-components/filter/filter.component';
-import { FilterDialogComponent } from './custom-components/dialogs/filter-dialog/filter-dialog.component';
+import {FilterDialogComponent} from './custom-components/dialogs/filter-dialog/filter-dialog.component';
+import {DatepickerModule} from '@custom-components/datepicker/datepicker.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomDatepickerComponent,
     LoginComponent,
     ProgressStepsComponent,
     DividerWithTextComponent,
@@ -165,7 +164,8 @@ import { FilterDialogComponent } from './custom-components/dialogs/filter-dialog
     DragDropModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DatepickerModule
   ],
   providers: [
     {

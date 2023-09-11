@@ -3,10 +3,10 @@
 
 .mat-mdc-checkbox {
   margin-top: -3px;
-  --mdc-checkbox-selected-pressed-state-layer-color: #e0d7fe;
-  --mdc-checkbox-selected-focus-state-layer-color: #f4ebff;
-  --mdc-checkbox-unselected-pressed-state-layer-color: #fff;
-  --mdc-checkbox-unselected-focus-state-layer-color: #f4ebff;
+  --mdc-checkbox-selected-pressed-state-layer-color: #{$color-primary-200};
+  --mdc-checkbox-selected-focus-state-layer-color: #{$color-primary-100};
+  --mdc-checkbox-unselected-pressed-state-layer-color: #{$color-white};
+  --mdc-checkbox-unselected-focus-state-layer-color: #{$color-primary-100};
 
   .mdc-form-field {
     .mdc-checkbox {

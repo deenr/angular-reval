@@ -6,6 +6,6 @@ import {UserRole} from '@shared/enums/user/user-role.enum';
 })
 export class RoleService {
   public getCurrentRole(): UserRole {
-    return (JSON.parse(localStorage.getItem('user')) as {id: string; role: UserRole}).role;
+    return (JSON.parse(localStorage.getItem('user')) as {id: string; role: UserRole})?.role;
   }
 }

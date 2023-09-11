@@ -63,7 +63,15 @@ export class UsersComponent implements OnInit {
         })
         .build(),
       new ColumnBuilder().setField('universityId').setHeaderName('University ID').setDataType(TableDataType.TEXT).canSort(true).build(),
-      new ColumnBuilder().setField('joined').setHeaderName('Joined').setDataType(TableDataType.DATE).canSort(true).build(),
+      new ColumnBuilder()
+        .setField('joined')
+        .setHeaderName('Joined')
+        .setDataType(TableDataType.DATE)
+        .canSort(true)
+        .setFilter((filterBuilder: FilterBuilder) => {
+          filterBuilder.setType(FilterType.DATE).build();
+        })
+        .build(),
       new ColumnBuilder()
         .setDelete((id: string) => {
           console.log(id);
@@ -96,9 +104,28 @@ function createNewUser(id: number): UserOverview {
     name: name,
     email: `${name.replace('.', '').replace(' ', '.').toLowerCase()}@gmail.com`,
     role: getRandomEnumValue(UserRole),
-    joined: new Date(Math.random() * 1e12),
+    joined: getRandomDateWithinOneMonthRange(),
     universityId: `${Math.floor(Math.random() * 90000) + 10000}`
   };
+}
+
+function getRandomDateWithinOneMonthRange(): Date {
+  const currentDate = new Date();
+
+  // Calculate the minimum and maximum dates
+  const minDate = new Date(currentDate);
+  minDate.setMonth(currentDate.getMonth() - 1);
+
+  const maxDate = new Date(currentDate);
+  maxDate.setMonth(currentDate.getMonth() + 1);
+
+  // Generate a random timestamp between minDate and maxDate
+  const randomTimestamp = minDate.getTime() + Math.random() * (maxDate.getTime() - minDate.getTime());
+
+  // Create a new Date object from the random timestamp
+  const randomDate = new Date(randomTimestamp);
+
+  return randomDate;
 }
 
 function getRandomEnumValue<T>(enumObj: T): T[keyof T] {

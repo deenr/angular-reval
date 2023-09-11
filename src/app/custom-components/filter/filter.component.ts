@@ -27,10 +27,10 @@ export class FilterComponent implements OnInit {
       this.filterForm.addControl(filter.field, new FormControl(filter.type === FilterType.TEXT ? '' : null));
     });
 
-    console.log(this.filterForm);
-
     this.filterForm.valueChanges.subscribe(() => {
       this.filterChange.emit(this.filterForm.value);
+
+      console.log(this.filterForm.value);
     });
   }
 

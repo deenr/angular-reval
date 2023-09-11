@@ -96,7 +96,7 @@
     background-color: $color-white;
     color: $color-grey-700 !important;
     border: 1px solid $color-grey-300 !important;
-    --mat-mdc-button-ripple-color: #fff !important;
+    --mat-mdc-button-ripple-color: #{$color-white} !important;
     box-shadow: 0px 1px 2px $color-grey-100;
 
     .mat-mdc-button-ripple {
@@ -108,7 +108,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-grey-100;
+      box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-grey-100 !important;
     }
 
     &:disabled {
@@ -121,7 +121,7 @@
   &.mat-primary {
     color: $color-primary-700 !important;
     border: 1px solid $color-primary-300 !important;
-    --mat-mdc-button-ripple-color: #fff !important;
+    --mat-mdc-button-ripple-color: #{$color-white} !important;
     box-shadow: 0px 1px 2px $color-primary-100;
 
     .mat-mdc-button-ripple {
@@ -133,7 +133,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100;
+      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100 !important;
     }
 
     &:disabled {
@@ -146,7 +146,7 @@
   &.mat-accent {
     color: $color-accent-700 !important;
     border: 1px solid $color-accent-300 !important;
-    --mat-mdc-button-ripple-color: #fff !important;
+    --mat-mdc-button-ripple-color: #{$color-white} !important;
     box-shadow: 0px 1px 2px $color-accent-100;
 
     .mat-mdc-button-ripple {
@@ -158,7 +158,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100;
+      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100 !important;
     }
 
     &:disabled {
@@ -171,7 +171,7 @@
   &.mat-warn {
     color: $color-error-700 !important;
     border: 1px solid $color-error-300 !important;
-    --mat-mdc-button-ripple-color: #fff !important;
+    --mat-mdc-button-ripple-color: #{$color-white} !important;
     box-shadow: 0px 1px 2px $color-error-100;
 
     .mat-mdc-button-ripple {
@@ -183,7 +183,7 @@
     }
 
     &:active {
-      box-shadow: 0px 1px 2px $color-error-100, 0px 0px 0px 4px $color-error-100;
+      box-shadow: 0px 1px 2px $color-error-100, 0px 0px 0px 4px $color-error-100 !important;
     }
 
     &:disabled {
@@ -200,13 +200,13 @@
 
   &.mat-unthemed {
     background-color: $color-grey-600 !important;
-    --mat-mdc-button-ripple-color: #475467 !important;
+    --mat-mdc-button-ripple-color: #{$color-grey-600} !important;
 
     &:hover {
       background-color: $color-grey-700 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-grey-100;
+      box-shadow: 0px 1px 2px $color-grey-100, 0px 0px 0px 4px $color-grey-100 !important;
     }
 
     &:disabled {
@@ -217,13 +217,13 @@
 
   &.mat-primary {
     background-color: $color-primary-600 !important;
-    --mat-mdc-button-ripple-color: #7f56d9 !important;
+    --mat-mdc-button-ripple-color: #{$color-primary-600} !important;
 
     &:hover {
       background-color: $color-primary-800 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100;
+      box-shadow: 0px 1px 2px $color-primary-100, 0px 0px 0px 4px $color-primary-100 !important;
     }
 
     &:disabled {
@@ -234,13 +234,13 @@
 
   &.mat-accent {
     background-color: $color-accent-600 !important;
-    --mat-mdc-button-ripple-color: #57bb86 !important;
+    --mat-mdc-button-ripple-color: #{$color-accent-600} !important;
 
     &:hover {
       background-color: $color-accent-700 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100;
+      box-shadow: 0px 1px 2px $color-accent-100, 0px 0px 0px 4px $color-accent-100 !important;
     }
 
     &:disabled {
@@ -251,13 +251,13 @@
 
   &.mat-warn {
     background-color: $color-error-600 !important;
-    --mat-mdc-button-ripple-color: #d92d20 !important;
+    --mat-mdc-button-ripple-color: #{$color-error-600} !important;
 
     &:hover {
       background-color: $color-error-700 !important;
     }
     &:active {
-      box-shadow: 0px 1px 2px $color-error-100, 0px 0px 0px 4px $color-error-100;
+      box-shadow: 0px 1px 2px $color-error-100, 0px 0px 0px 4px $color-error-100 !important;
     }
 
     &:disabled {

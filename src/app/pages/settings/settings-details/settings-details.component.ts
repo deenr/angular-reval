@@ -36,7 +36,7 @@ export class SettingsDetailsComponent {
     faculty: FormControl<Faculty>;
     program: FormControl<Program>;
     universityId: FormControl<string>;
-    yearOfGraduation: FormControl<string>;
+    yearOfGraduation: FormControl<number>;
   }>;
   @Input() public loadingUser: boolean;
   @Output() public userUpdated = new EventEmitter<User>();
@@ -171,6 +171,20 @@ export class SettingsDetailsComponent {
   }
 
   private getUserToSave(id: string): User {
+    console.log(
+      new User(
+        id,
+        this.detailsForm.value.firstName,
+        this.detailsForm.value.lastName,
+        this.detailsForm.value.phoneNumber,
+        this.detailsForm.value.email,
+        this.detailsForm.value.faculty,
+        this.detailsForm.value.program,
+        this.detailsForm.value.universityId,
+        this.detailsForm.value.yearOfGraduation,
+        this.detailsForm.value.role
+      )
+    );
     return new User(
       id,
       this.detailsForm.value.firstName,

@@ -1,15 +1,41 @@
+@import 'variables';
+
 :host {
   .filter {
     min-width: 200px;
-    padding: 24px;
-    gap: 32px;
+
+    &__header {
+      position: relative;
+      padding: 20px 16px;
+      gap: 4px;
+
+      p {
+        color: $color-grey-600;
+      }
+
+      .header__close {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        color: $color-grey-500;
+      }
+    }
 
     &__form {
+      padding: 20px 16px 24px 16px;
       gap: 16px;
     }
 
     &__actions {
+      padding: 16px;
       gap: 12px;
+
+      @include breakpoint-sm() {
+        flex-direction: column-reverse;
+      }
     }
   }
 }

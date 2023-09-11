@@ -89,6 +89,7 @@
         border-radius: 8px;
         border: 1px solid $color-grey-300;
         background-color: $color-white;
+        box-shadow: 0px 1px 2px 0px rgba($color-grey-900, 0.05);
 
         &:hover {
           border: 1px solid $color-primary-400;
@@ -105,7 +106,6 @@
 
           padding: 8px 12px;
           border-radius: 7px;
-          box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
         }
 
         input::placeholder {

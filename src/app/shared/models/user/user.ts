@@ -11,7 +11,7 @@ export class User {
   private _faculty: Faculty;
   private _program: Program;
   private _universityId: string;
-  private _yearOfGraduation: string;
+  private _yearOfGraduation: number;
   private _role: UserRole;
 
   public constructor(
@@ -23,7 +23,7 @@ export class User {
     faculty: Faculty,
     program: Program,
     universityId: string,
-    yearOfGraduation: string,
+    yearOfGraduation: number,
     role: UserRole
   ) {
     this._id = id;
@@ -102,11 +102,11 @@ export class User {
     this._universityId = universityId;
   }
 
-  public get yearOfGraduation(): string {
+  public get yearOfGraduation(): number {
     return this._yearOfGraduation;
   }
 
-  public set yearOfGraduation(yearOfGraduation: string) {
+  public set yearOfGraduation(yearOfGraduation: number) {
     this._yearOfGraduation = yearOfGraduation;
   }
 

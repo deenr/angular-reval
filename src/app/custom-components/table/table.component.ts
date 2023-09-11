@@ -9,6 +9,7 @@ import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {Router} from '@angular/router';
 import {Color} from '@shared/enums/general/colors.enum';
 import {FilterProperty, FilterType} from './builder/filter-builder';
+import {DateRange} from '@custom-components/datepicker/date-range.interface';
 
 @Component({
   selector: 'app-table',
@@ -112,25 +113,32 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
     this.dataSource.filterPredicate = (data, filter): boolean => {
       return this.filters.every((filterProperty: FilterProperty) => {
-        if (this.getFilterTypeByField(filterProperty.field) === FilterType.TEXT) {
-          return (
-            (data as any)[filterProperty.field]
-              .toString()
-              .trim()
-              .toLowerCase()
-              .indexOf((filter as any)[filterProperty.field].toLowerCase()) !== -1
-          );
-        } else {
-          console.log((filter as any)[filterProperty.field].length);
-          if ((filter as any)[filterProperty.field].length) {
-            for (const filterValue of (filter as any)[filterProperty.field]) {
-              if ((data as any)[filterProperty.field].trim() === filterValue) {
-                return true;
+        switch (this.getFilterTypeByField(filterProperty.field)) {
+          case FilterType.ENUM:
+            if ((filter as any)[filterProperty.field]?.length) {
+              for (const filterValue of (filter as any)[filterProperty.field]) {
+                if ((data as any)[filterProperty.field].trim() === filterValue) {
+                  return true;
+                }
               }
+              return false;
             }
-            return false;
-          }
-          return true;
+            return true;
+
+          case FilterType.DATE:
+            const filterDates = (filter as any)[filterProperty.field] as DateRange;
+            const date = (data as any)[filterProperty.field];
+            return filterDates ? date >= filterDates.startDate && date <= filterDates.endDate : true;
+          case FilterType.TEXT:
+            return (
+              (data as any)[filterProperty.field]
+                .toString()
+                .trim()
+                .toLowerCase()
+                .indexOf((filter as any)[filterProperty.field].toLowerCase()) !== -1
+            );
+          default:
+            return true;
         }
       });
     };

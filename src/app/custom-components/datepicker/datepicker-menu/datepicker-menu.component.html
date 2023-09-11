@@ -1,0 +1,63 @@
+<div class="datepicker">
+  <div class="datepicker__content flex-column">
+    <header class="content__month flex-row">
+      <mat-icon svgIcon="chevron-left" aria-hidden="false" (click)="goToPreviousMonth()"></mat-icon>
+      <h3 class="text-md text-semibold">{{ currentMonth }}</h3>
+      <mat-icon svgIcon="chevron-right" aria-hidden="false" (click)="goToNextMonth()"></mat-icon>
+    </header>
+
+    <div class="content__actions flex-row" [class.multi-select]="dateRange" [formGroup]="dateForm">
+      <ng-container *ngIf="!dateRange; else multiSelectActions">
+        <mat-form-field class="full-width">
+          <input matInput type="text" placeholder="Select date" [value]="selectedSingleDate | date" readonly />
+        </mat-form-field>
+        <button mat-stroked-button class="md" (click)="changeToToday()">Today</button>
+      </ng-container>
+      <ng-template #multiSelectActions>
+        <mat-form-field class="full-width">
+          <input matInput type="text" placeholder="Select date" [value]="selectedStartDate | date" readonly />
+        </mat-form-field>
+        <span class="text-md text-regular">-</span>
+        <mat-form-field class="full-width">
+          <input matInput type="text" placeholder="Select date" [value]="selectedEndDate | date" readonly />
+        </mat-form-field>
+      </ng-template>
+    </div>
+
+    <div class="content__dates">
+      <div class="dates__weekdays flex-row">
+        <div *ngFor="let weekday of weekdays" class="date">
+          <span class="text-sm text-medium"> {{ weekday }}</span>
+        </div>
+      </div>
+      <div class="calendar">
+        <div class="calendar__days">
+          <div
+            *ngFor="let date of calendarDates"
+            class="date"
+            [class.selected]="isDateEqual(date, selectedSingleDate) || isDateEqual(date, selectedStartDate) || isDateEqual(date, selectedEndDate)"
+            [class.in-current-month]="isDateInCurrentMonth(date)"
+            [class.today]="isDateToday(date)"
+            [class.in-range]="isDateInRange(date)"
+            (click)="selectDate(date)"
+          >
+            <span class="text-sm text-regular"> {{ date.getDate() }}</span>
+          </div>
+        </div>
+        <div class="calendar__range">
+          <div
+            *ngFor="let date of getRangeDates()"
+            class="range"
+            [class.in-range]="isDateInRange(date)"
+            [class.in-range--saturday]="isDateInRangeAndSaturday(date)"
+            [class.in-range--sunday]="isDateInRangeAndSunday(date)"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer *ngIf="actions" class="datepicker__actions flex-row">
+    <button mat-stroked-button class="md full-width" (click)="cancel()">Cancel</button>
+    <button mat-flat-button class="md full-width" color="primary" (click)="apply()">Apply</button>
+  </footer>
+</div>

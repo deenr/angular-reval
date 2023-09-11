@@ -2,7 +2,7 @@
 @import './typography.scss';
 
 .mat-mdc-radio-button {
-  --mat-radio-checked-ripple-color: #f4ebff;
+  --mat-radio-checked-ripple-color: #{$color-primary-100};
 
   .mdc-form-field {
     .mdc-radio {

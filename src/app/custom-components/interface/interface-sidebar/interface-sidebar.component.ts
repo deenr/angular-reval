@@ -64,8 +64,8 @@ export class InterfaceSidebarComponent implements OnInit {
     });
 
     const localUserNameAndEmail = JSON.parse(localStorage.getItem('user')) as {email: string; name: string};
-    this.userEmail = localUserNameAndEmail.email;
-    this.userName = localUserNameAndEmail.name;
+    this.userEmail = localUserNameAndEmail?.email;
+    this.userName = localUserNameAndEmail?.name;
   }
 
   public canShowNavigationItem(permissions: UserRole[]): boolean {

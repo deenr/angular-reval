@@ -12,11 +12,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field *ngIf="filter.type === filterType.DATE" class="other-filter">
-      <mat-select [formControlName]="filter.field" [placeholder]="'Select ' + filter.field">
-        <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
-          {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
-        </mat-option>
-      </mat-select>
+      <app-datepicker-input [formControlName]="filter.field"></app-datepicker-input>
     </mat-form-field>
   </ng-container>
   <button mat-stroked-button class="filter__button md" (click)="openFilterDialog()">

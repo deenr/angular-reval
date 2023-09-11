@@ -1,0 +1,163 @@
+@import 'variables';
+
+:host {
+  .datepicker {
+    width: 354px;
+    // border-radius: 8px;
+    // border: 1px solid $color-grey-200;
+    // background-color: $color-white;
+
+    &__content {
+      padding: 20px 24px;
+      gap: 12px;
+
+      .content__month {
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+          color: $color-grey-700;
+        }
+
+        .mat-icon {
+          width: 36px;
+          height: 36px;
+          padding: 8px;
+          color: $color-grey-500;
+          cursor: pointer;
+        }
+      }
+
+      .content__actions {
+        gap: 12px;
+        align-items: center;
+
+        &.multi-select {
+          gap: 8px;
+
+          span {
+            color: $color-grey-500;
+          }
+        }
+
+        ::ng-deep .mat-mdc-form-field {
+          pointer-events: none;
+
+          .mat-mdc-form-field-infix {
+            min-height: 40px;
+            height: 40px;
+          }
+        }
+      }
+
+      .content__dates {
+        .date {
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          width: 40px;
+          height: 40px;
+          padding: 10px 8px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 20px;
+
+          &:not(.in-current-month) span {
+            color: $color-grey-500;
+          }
+
+          &.today:not(.in-range):not(.selected) {
+            border: 2px solid $color-grey-100;
+
+            &:hover {
+              border: none;
+            }
+          }
+
+          &.selected {
+            background-color: $color-primary-600;
+
+            span {
+              color: $color-white;
+              font-weight: $fw-500;
+            }
+          }
+
+          &.in-range {
+            span {
+              font-weight: $fw-500;
+            }
+          }
+
+          &:hover {
+            &.selected {
+              background-color: $color-primary-700;
+            }
+
+            &.in-range:not(.selected) {
+              background-color: $color-grey-100;
+            }
+
+            &:not(.selected):not(.in-range) {
+              background-color: $color-grey-50;
+            }
+          }
+        }
+
+        .dates__weekdays {
+          color: $color-grey-700;
+          gap: 4px;
+        }
+
+        .calendar {
+          position: relative;
+
+          &__days,
+          &__range {
+            row-gap: 4px;
+          }
+
+          &__days {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(7, 40px);
+            column-gap: 4px;
+            color: $color-grey-700;
+          }
+
+          &__range {
+            display: grid;
+            width: calc(100% - 4px);
+            grid-template-columns: repeat(14, 1fr);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            .in-range {
+              background-color: $color-grey-50;
+
+              &--saturday {
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
+              }
+
+              &--sunday {
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__actions {
+      padding: 16px;
+      gap: 12px;
+      border-top: 1px solid $color-grey-200;
+    }
+  }
+}

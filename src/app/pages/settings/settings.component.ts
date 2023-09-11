@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
     faculty: FormControl<Faculty>;
     program: FormControl<Program>;
     universityId: FormControl<string>;
-    yearOfGraduation: FormControl<string>;
+    yearOfGraduation: FormControl<number>;
   }> = new FormGroup({
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
@@ -77,7 +77,7 @@ export class SettingsComponent implements OnInit {
       this.detailsForm.controls.email.setValue(localUserIdAndEmail.email);
       this.loadingUser = false;
     } else {
-      this.httpUserService.getUserDetailsById(localUserIdAndEmail.id).subscribe((user: User) => {
+      this.httpUserService.getUserDetailsById(localUserIdAndEmail?.id).subscribe((user: User) => {
         this.initialUser = user;
         this.setSettingsDetailsForm(this.initialUser);
         this.loadingUser = false;
@@ -137,7 +137,7 @@ export class SettingsComponent implements OnInit {
       faculty: user.faculty,
       program: user.program,
       universityId: user.universityId,
-      yearOfGraduation: user.yearOfGraduation
+      yearOfGraduation: user.yearOfGraduation as number
     });
 
     this.detailsForm.controls.role.setValue(this.roleService.getCurrentRole());
