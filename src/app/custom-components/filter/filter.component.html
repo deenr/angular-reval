@@ -1,25 +1,27 @@
-<div class="filter flex-row" [formGroup]="filterForm">
-  <ng-container *ngFor="let filter of filters">
-    <mat-form-field *ngIf="filter.type === filterType.TEXT" class="filter__search full-width">
-      <mat-icon matIconPrefix svgIcon="search"></mat-icon>
-      <input matInput [formControlName]="filter.field" [placeholder]="'Search for ' + filter.field" />
-    </mat-form-field>
-    <mat-form-field *ngIf="filter.type === filterType.ENUM" class="other-filter">
-      <mat-select [formControlName]="filter.field" [placeholder]="'Select ' + filter.field" multiple>
-        <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
-          {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="filter.type === filterType.DATE" class="other-filter">
-      <app-datepicker-input [formControlName]="filter.field"></app-datepicker-input>
-    </mat-form-field>
-  </ng-container>
-  <button mat-stroked-button class="filter__button md" (click)="openFilterDialog()">
-    <mat-icon svgIcon="filter-lines"></mat-icon>
-    More filters
-  </button>
-  <div *ngIf="isMobile && getFilterChips().length > 0" class="active-filters flex-row">
+<div class="filter flex-column" [formGroup]="filterForm">
+  <div class="filter__input flex-row full-width">
+    <ng-container *ngFor="let filter of filters">
+      <mat-form-field *ngIf="filter.type === filterType.TEXT" class="filter__input--search full-width">
+        <mat-icon matIconPrefix svgIcon="search"></mat-icon>
+        <input matInput [formControlName]="filter.field" [placeholder]="'Search for ' + filter.field" />
+      </mat-form-field>
+      <mat-form-field *ngIf="filter.type === filterType.ENUM" class="filter__input--other">
+        <mat-select [formControlName]="filter.field" [placeholder]="'Select ' + filter.field" multiple>
+          <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
+            {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="filter.type === filterType.DATE" class="filter__input--other">
+        <app-datepicker-input [formControlName]="filter.field"></app-datepicker-input>
+      </mat-form-field>
+    </ng-container>
+    <button mat-stroked-button class="filter__button md" (click)="openFilterDialog()">
+      <mat-icon svgIcon="filter-lines"></mat-icon>
+      More filters
+    </button>
+  </div>
+  <div *ngIf="isTablet && getFilterChips().length > 0" class="filter__active flex-row">
     <app-badge *ngFor="let filterChip of getFilterChips()" [type]="badgeType.CLOSE" (closeClick)="removeFilter(filterChip.field)">{{ filterChip.value }}</app-badge>
   </div>
 </div>

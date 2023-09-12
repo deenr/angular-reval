@@ -20,7 +20,7 @@ export class FilterComponent implements OnInit {
   public badgeType = BadgeType;
   public filterType = FilterType;
   public filterForm = new FormGroup({});
-  public isMobile: boolean;
+  public isTablet: boolean;
 
   public get otherFilters(): FilterProperty[] {
     return this.filters.filter((filter: FilterProperty) => filter.type !== FilterType.TEXT);
@@ -30,7 +30,7 @@ export class FilterComponent implements OnInit {
 
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe(() => {
-      this.isMobile = this.breakpointService.isMobile;
+      this.isTablet = this.breakpointService.isTablet;
     });
 
     this.filters.forEach((filter: FilterProperty) => {
