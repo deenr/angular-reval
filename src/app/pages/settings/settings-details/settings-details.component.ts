@@ -15,10 +15,10 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {UserInfo} from '@shared/models/user/user-info';
 import {RoleService} from '@shared/services/role/role.service';
 import {AuthService} from '@shared/services/auth/auth.service';
-import {HttpUserService} from '@shared/services/user/http-user.service';
+import {HttpUserInfoService} from '@shared/services/user/http-user-info.service';
 
 @Component({
   selector: 'app-settings-details',
@@ -39,7 +39,7 @@ export class SettingsDetailsComponent {
     yearOfGraduation: FormControl<number>;
   }>;
   @Input() public loadingUser: boolean;
-  @Output() public userUpdated = new EventEmitter<User>();
+  @Output() public userUpdated = new EventEmitter<UserInfo>();
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
 
@@ -94,7 +94,12 @@ export class SettingsDetailsComponent {
     [UserRole.PROFESSOR, 'Professor']
   ]);
 
-  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute, private readonly roleService: RoleService, private readonly httpUserService: HttpUserService) {}
+  public constructor(
+    private readonly authService: AuthService,
+    private readonly route: ActivatedRoute,
+    private readonly roleService: RoleService,
+    private readonly userInfoService: HttpUserInfoService
+  ) {}
 
   public getRoleTranslation(UserRole: UserRole): string {
     return this.rolesTranslation.get(UserRole);
@@ -153,7 +158,7 @@ export class SettingsDetailsComponent {
       if (this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
         const userToSave = this.getUserToSave(this.route.snapshot.paramMap.get('id'));
         this.authService
-          .setUserInformation(userToSave)
+          .setUserInfo(userToSave)
           .then(() => {
             this.savingDetails = false;
             this.userUpdated.emit(userToSave);
@@ -162,7 +167,7 @@ export class SettingsDetailsComponent {
       } else {
         const currentUser = JSON.parse(localStorage.getItem('user')) as {id: string};
         const userToSave = this.getUserToSave(currentUser.id);
-        this.httpUserService.updateUserProfile(userToSave).subscribe(() => {
+        this.userInfoService.updateUserProfile(userToSave).subscribe(() => {
           this.savingDetails = false;
           this.userUpdated.emit(userToSave);
         });
@@ -170,9 +175,9 @@ export class SettingsDetailsComponent {
     }
   }
 
-  private getUserToSave(id: string): User {
+  private getUserToSave(id: string): UserInfo {
     console.log(
-      new User(
+      new UserInfo(
         id,
         this.detailsForm.value.firstName,
         this.detailsForm.value.lastName,
@@ -185,7 +190,7 @@ export class SettingsDetailsComponent {
         this.detailsForm.value.role
       )
     );
-    return new User(
+    return new UserInfo(
       id,
       this.detailsForm.value.firstName,
       this.detailsForm.value.lastName,

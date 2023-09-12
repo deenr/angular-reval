@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {UserInfo} from '@shared/models/user/user-info';
 import {
   AuthChangeEvent,
   AuthError,
@@ -17,9 +17,9 @@ import {
   VerifyEmailOtpParams,
   createClient
 } from '@supabase/supabase-js';
-import {BehaviorSubject, Observable, Subject, forkJoin} from 'rxjs';
+import {BehaviorSubject, Observable, forkJoin} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {HttpUserService} from '../user/http-user.service';
+import {HttpUserInfoService} from '../user/http-user-info.service';
 import {ChangePasswordResponse} from './change-password-response.enum';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class AuthService {
 
   private supabase: SupabaseClient;
 
-  public constructor(private readonly userService: HttpUserService) {
+  public constructor(private readonly userInfoService: HttpUserInfoService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
     this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
@@ -52,7 +52,7 @@ export class AuthService {
         if (error) {
           reject([null, error]);
         } else if (data) {
-          forkJoin([this.userService.getUserRole(data.user.id), this.userService.getUserDetailsById(data.user.id)]).subscribe(([userRole, user]: [UserRole, User]) => {
+          forkJoin([this.userInfoService.getUserRole(data.user.id), this.userInfoService.getUserInfoById(data.user.id)]).subscribe(([userRole, user]: [UserRole, UserInfo]) => {
             localStorage.setItem('user', JSON.stringify({id: data.user.id, name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '', email, role: userRole}));
             resolve([{id: data.user.id, role: userRole}, null]);
           });
@@ -61,7 +61,7 @@ export class AuthService {
     });
   }
 
-  public setUserInformation(user: User): Promise<any> {
+  public setUserInfo(user: UserInfo): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
         const updateUserProfile = this.supabase

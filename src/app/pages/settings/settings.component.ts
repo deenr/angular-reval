@@ -10,10 +10,10 @@ import {Tab} from '@custom-components/tabs/tab.interface';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {UserInfo} from '@shared/models/user/user-info';
 import {ActivatedRoute} from '@angular/router';
 import {RoleService} from '@shared/services/role/role.service';
-import {HttpUserService} from '@shared/services/user/http-user.service';
+import {HttpUserInfoService} from '@shared/services/user/http-user-info.service';
 
 @Component({
   selector: 'app-settings',
@@ -62,13 +62,13 @@ export class SettingsComponent implements OnInit {
     confirmNewPassword: new FormControl(null, Validators.required)
   });
 
-  private initialUser: User;
+  private initialUser: UserInfo;
 
   public constructor(
     private readonly breakpointService: BreakpointService,
     private readonly roleService: RoleService,
     private readonly route: ActivatedRoute,
-    private readonly httpUserService: HttpUserService
+    private readonly userInfoService: HttpUserInfoService
   ) {}
 
   public ngOnInit(): void {
@@ -77,7 +77,7 @@ export class SettingsComponent implements OnInit {
       this.detailsForm.controls.email.setValue(localUserIdAndEmail.email);
       this.loadingUser = false;
     } else {
-      this.httpUserService.getUserDetailsById(localUserIdAndEmail?.id).subscribe((user: User) => {
+      this.userInfoService.getUserInfoById(localUserIdAndEmail?.id).subscribe((user: UserInfo) => {
         this.initialUser = user;
         this.setSettingsDetailsForm(this.initialUser);
         this.loadingUser = false;
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
     return this.hasUnsavedDetailsChanges() || this.hasUnsavedPasswordChanges();
   }
 
-  public onUserUpdate(user: User): void {
+  public onUserUpdate(user: UserInfo): void {
     this.initialUser = user;
   }
 
@@ -127,7 +127,7 @@ export class SettingsComponent implements OnInit {
     this.passwordForm.reset();
   }
 
-  private setSettingsDetailsForm(user: User): void {
+  private setSettingsDetailsForm(user: UserInfo): void {
     this.detailsForm.setValue({
       firstName: user.firstName,
       lastName: user.lastName,

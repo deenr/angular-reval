@@ -2,7 +2,7 @@ import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 
-export class User {
+export class UserInfo {
   private _id: string;
   private _firstName: string;
   private _lastName: string;
@@ -133,7 +133,7 @@ export class User {
     };
   }
 
-  public static fromJSON(json: any): User {
+  public static fromJSON(json: any): UserInfo {
     const id = json.id;
     const firstName = json.firstName;
     const lastName = json.lastName;
@@ -145,6 +145,6 @@ export class User {
     const yearOfGraduation = json.yearOfGraduation;
     const role = json.role;
 
-    return new User(id, firstName, lastName, phoneNumber, email, faculty, program, universityId, yearOfGraduation, role);
+    return new UserInfo(id, firstName, lastName, phoneNumber, email, faculty, program, universityId, yearOfGraduation, role);
   }
 }
