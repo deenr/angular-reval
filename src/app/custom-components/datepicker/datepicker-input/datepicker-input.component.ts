@@ -28,6 +28,7 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
   @ViewChild(MatInput, {static: false}) private input: MatInput;
   @Input() public dateRange = true;
 
+  public isMobile: boolean;
   public isTablet: boolean;
 
   constructor(
@@ -46,19 +47,20 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
 
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe(() => {
+      this.isMobile = this.breakpointService.isMobile;
       this.isTablet = this.breakpointService.isTablet;
     });
   }
 
   public onMenuClose(closeValue: Date | DateRange): void {
-    if (!this.isTablet) {
+    if (!(this.isMobile || this.isTablet)) {
       this.value = closeValue;
       this.trigger.closeMenu();
     }
   }
 
   public focus(): void {
-    if (!this.isTablet) {
+    if (!(this.isMobile || this.isTablet)) {
       this.input.focus();
       this.trigger.openMenu();
     }
@@ -81,7 +83,7 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
   }
 
   public openDatepickerDialog(): void {
-    if (this.isTablet) {
+    if (this.isMobile || this.isTablet) {
       this.dialog
         .open(DatepickerMenuComponent, {
           maxWidth: 'calc(100vw - 32px)',
@@ -92,7 +94,7 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
         })
         .afterClosed()
         .subscribe((value: Date | DateRange) => {
-          if ((value && (value as Date) instanceof Date) || (Object.keys(value).length > 1 && Object.keys(value).every((key: string) => (value as any)[key]))) {
+          if ((value && (value as Date) instanceof Date) || (value && Object.keys(value).length > 1 && Object.keys(value).every((key: string) => (value as any)[key]))) {
             this.value = value;
           }
         });
