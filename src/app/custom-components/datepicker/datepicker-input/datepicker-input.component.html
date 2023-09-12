@@ -1,6 +1,6 @@
-<div class="datepicker flex-row" [matMenuTriggerFor]="isMobile ? null : calendar" (click)="openDatepickerDialog()">
+<div class="datepicker flex-row" [matMenuTriggerFor]="isTablet ? null : calendar" (click)="openDatepickerDialog()">
   <input #input matInput class="datepicker__input" [placeholder]="getPlaceholder()" [value]="getDisplayValue()" [disabled]="disabled" readonly />
-  <mat-icon *ngIf="!isMobile && value" class="datepicker__icon cursor-pointer" svgIcon="close-small" (click)="$event.stopPropagation(); clear()"></mat-icon>
+  <mat-icon *ngIf="!isTablet && value" class="datepicker__icon cursor-pointer" svgIcon="close-small" (click)="$event.stopPropagation(); clear()"></mat-icon>
   <mat-icon class="datepicker__icon cursor-pointer" svgIcon="calendar"></mat-icon>
 </div>
 <mat-menu class="calendar-menu shadow-xl-important" #calendar="matMenu">

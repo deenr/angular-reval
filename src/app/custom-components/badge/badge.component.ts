@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BadgeSize} from './badge-size.enum';
 import {BadgeType} from './badge-type.enum';
 import {Color} from '@shared/enums/general/colors.enum';
@@ -13,6 +13,9 @@ export class BadgeComponent {
   @Input() public size = BadgeSize.MD;
   @Input() public type = BadgeType.NONE;
   @Input() public icon: string;
+  @Output() public leadingClick = new EventEmitter<void>();
+  @Output() public trailingClick = new EventEmitter<void>();
+  @Output() public closeClick = new EventEmitter<void>();
 
   public badgeType = BadgeType;
 

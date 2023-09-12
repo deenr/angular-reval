@@ -85,4 +85,7 @@ export class FilterComponent implements OnInit {
         }
       });
   }
+  public removeFilter(field: string): void {
+    (this.filterForm.controls as any)[field].setValue(null);
+  }
 }

@@ -20,6 +20,6 @@
     More filters
   </button>
   <div *ngIf="isMobile && getFilterChips().length > 0" class="active-filters flex-row">
-    <app-badge *ngFor="let filterChip of getFilterChips()" [type]="badgeType.TRAILING_ICON" icon="close-badge">{{ filterChip.value }}</app-badge>
+    <app-badge *ngFor="let filterChip of getFilterChips()" [type]="badgeType.CLOSE" (closeClick)="removeFilter(filterChip.field)">{{ filterChip.value }}</app-badge>
   </div>
 </div>

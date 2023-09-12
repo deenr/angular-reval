@@ -8,14 +8,17 @@
     align-items: center;
     background-color: $color-grey-50;
 
-    @include breakpoint-sm() {
-      flex-direction: column;
+    @include breakpoint-md() {
       padding: 0;
       background-color: transparent;
     }
 
+    @include breakpoint-sm() {
+      flex-direction: column;
+    }
+
     &__search {
-      max-width: 400px;
+      flex: 3;
       margin-right: auto;
 
       @include breakpoint-sm() {
@@ -33,7 +36,9 @@
     }
 
     .other-filter {
-      @include breakpoint-sm() {
+      flex: 2;
+
+      @include breakpoint-md() {
         display: none;
       }
     }
@@ -41,8 +46,12 @@
     &__button {
       display: none;
 
-      @include breakpoint-sm() {
+      @include breakpoint-md() {
         display: block;
+        width: 20%;
+      }
+
+      @include breakpoint-sm() {
         width: 100%;
       }
     }

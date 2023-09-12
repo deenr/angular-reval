@@ -1,8 +1,9 @@
 <span [class]="getBadgeClasses()">
   <div *ngIf="type === badgeType.DOT"></div>
-  <mat-icon *ngIf="type === badgeType.LEADING_ICON" class="icon" [svgIcon]="icon"></mat-icon>
+  <mat-icon *ngIf="type === badgeType.LEADING_ICON" class="icon" [svgIcon]="icon" (click)="leadingClick.emit()"></mat-icon>
   <p class="text-sm text-medium">
     <ng-content></ng-content>
   </p>
-  <mat-icon *ngIf="type === badgeType.TRAILING_ICON" class="icon" [svgIcon]="icon"></mat-icon>
+  <mat-icon *ngIf="type === badgeType.TRAILING_ICON" class="icon" [svgIcon]="icon" (click)="trailingClick.emit()"></mat-icon>
+  <mat-icon *ngIf="type === badgeType.CLOSE" class="icon" svgIcon="close-badge" (click)="closeClick.emit()"></mat-icon>
 </span>

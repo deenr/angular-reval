@@ -28,7 +28,7 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
   @ViewChild(MatInput, {static: false}) private input: MatInput;
   @Input() public dateRange = true;
 
-  public isMobile: boolean;
+  public isTablet: boolean;
 
   constructor(
     @Optional() @Self() ngControl: NgControl,
@@ -46,19 +46,19 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
 
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe(() => {
-      this.isMobile = this.breakpointService.isMobile;
+      this.isTablet = this.breakpointService.isTablet;
     });
   }
 
   public onMenuClose(closeValue: Date | DateRange): void {
-    if (!this.isMobile) {
+    if (!this.isTablet) {
       this.value = closeValue;
       this.trigger.closeMenu();
     }
   }
 
   public focus(): void {
-    if (!this.isMobile) {
+    if (!this.isTablet) {
       this.input.focus();
       this.trigger.openMenu();
     }
@@ -81,11 +81,11 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
   }
 
   public openDatepickerDialog(): void {
-    if (this.isMobile) {
+    if (this.isTablet) {
       this.dialog
         .open(DatepickerMenuComponent, {
-          width: 'calc(100vw - 32px)',
           maxWidth: 'calc(100vw - 32px)',
+          hasBackdrop: true,
           data: {
             actions: true
           }

@@ -216,3 +216,9 @@
     }
   }
 }
+
+.cdk-global-overlay-wrapper {
+  @include breakpoint-md() {
+    backdrop-filter: blur(5px);
+  }
+}

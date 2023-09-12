@@ -2,7 +2,7 @@
 
 :host {
   .datepicker {
-    width: 354px;
+    max-width: 354px;
     // border-radius: 8px;
     // border: 1px solid $color-grey-200;
     // background-color: $color-white;
@@ -17,6 +17,7 @@
 
         h3 {
           color: $color-grey-700;
+          text-align: center;
         }
 
         .mat-icon {
@@ -55,9 +56,10 @@
           position: relative;
           cursor: pointer;
           display: flex;
-          width: 40px;
+          max-width: 40px;
+          width: 100%;
           height: 40px;
-          padding: 10px 8px;
+          // padding: 10px 8px;
           justify-content: center;
           align-items: center;
           border-radius: 20px;
@@ -121,7 +123,7 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: repeat(7, 40px);
+            grid-template-columns: repeat(7, auto);
             column-gap: 4px;
             color: $color-grey-700;
           }
