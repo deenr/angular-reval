@@ -22,30 +22,18 @@ import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-i
 import {AppRoutingModule} from './app-routing.module';
 import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
-import {EmailVerificationComponent} from '@pages/email-verification/email-verification.component';
-import {LandingPageComponent} from '@pages/landing-page/landing-page.component';
-import {LoginComponent} from '@pages/login/login.component';
-import {RegisterComponent} from '@pages/register/register.component';
 import {SkeletonDirective} from '@shared/directives/skeleton/skeleton.directive';
 import {ProgressStepsComponent} from '@custom-components/progress-steps/progress-steps.component';
-import {NotFoundComponent} from './pages/not-found/not-found.component';
-import {FeatureCardComponent} from './pages/landing-page/feature-card/feature-card.component';
 import {BreakpointDirective} from './shared/directives/breakpoint/breakpoint.directive';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {PrivacyPolicyComponent} from './pages/privacy-policy/privacy-policy.component';
 import {MAT_TABS_CONFIG, MatTabsModule} from '@angular/material/tabs';
 import {NavigationHeaderComponent} from './custom-components/navigation/navigation-header/navigation-header.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {NavigationSidebarComponent} from './custom-components/navigation/navigation-sidebar/navigation-sidebar.component';
 import {FooterComponent} from './custom-components/footer/footer.component';
-import {ContactComponent} from './pages/contact/contact.component';
-import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {MetricsSectionComponent} from './custom-components/metrics-section/metrics-section.component';
 import {CountUpDirective} from './shared/directives/count-up/count-up.directive';
-import {NewsComponent} from './pages/news/news.component';
 import {ArticleCardComponent} from './custom-components/article-card/article-card.component';
-import {ArticleComponent} from './pages/news/article/article.component';
-import {TermsOfServiceComponent} from './pages/terms-of-service/terms-of-service.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {NavigationItemComponent} from './custom-components/navigation/navigation-item/navigation-item.component';
 import {AuthenticationComponent} from './layouts/authentication/authentication.component';
@@ -57,14 +45,10 @@ import {VerificationCodeInputComponent} from './custom-components/verification-c
 import {HasErrorDirective} from './shared/directives/has-error/has-error.directive';
 import {InterfaceComponent} from './layouts/interface//interface.component';
 import {InterfaceSidebarComponent} from './custom-components/interface/interface-sidebar/interface-sidebar.component';
-import {SettingsComponent} from './pages/settings/settings.component';
-import {SettingsDetailsComponent} from '@pages/settings/settings-details/settings-details.component';
 import {InterfaceHeaderComponent} from './custom-components/interface/interface-header/interface-header.component';
 import {TabsComponent} from './custom-components/tabs/tabs.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {PasswordComponent} from './pages/settings/settings-password/settings-password.component';
 import {MatChipsModule} from '@angular/material/chips';
-import {UsersComponent} from './pages/users/users.component';
 import {HeaderComponent} from './custom-components/header/header.component';
 import {MetricsCardComponent} from './custom-components/metrics-card/metrics-card.component';
 import {BadgeComponent} from './custom-components/badge/badge.component';
@@ -79,6 +63,22 @@ import {TableAvatarComponent} from '@custom-components/table/table-avatar/table-
 import {FilterComponent} from '@custom-components/filter/filter.component';
 import {FilterDialogComponent} from './custom-components/dialogs/filter-dialog/filter-dialog.component';
 import {DatepickerModule} from '@custom-components/datepicker/datepicker.module';
+import {EmailVerificationComponent} from '@pages/authentication/email-verification/email-verification.component';
+import {LoginComponent} from '@pages/authentication/login/login.component';
+import {RegisterComponent} from '@pages/authentication/register/register.component';
+import {AboutUsComponent} from '@pages/home/about-us/about-us.component';
+import {ContactComponent} from '@pages/home/contact/contact.component';
+import {FeatureCardComponent} from '@pages/home/landing-page/feature-card/feature-card.component';
+import {LandingPageComponent} from '@pages/home/landing-page/landing-page.component';
+import {ArticleComponent} from '@pages/home/news/article/article.component';
+import {NewsComponent} from '@pages/home/news/news.component';
+import {NotFoundComponent} from '@pages/home/not-found/not-found.component';
+import {PrivacyPolicyComponent} from '@pages/home/privacy-policy/privacy-policy.component';
+import {TermsOfServiceComponent} from '@pages/home/terms-of-service/terms-of-service.component';
+import {SettingsDetailsComponent} from '@pages/interface/settings/settings-details/settings-details.component';
+import {PasswordComponent} from '@pages/interface/settings/settings-password/settings-password.component';
+import {SettingsComponent} from '@pages/interface/settings/settings.component';
+import {UsersComponent} from '@pages/interface/users/users.component';
 
 @NgModule({
   declarations: [

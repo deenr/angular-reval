@@ -32,7 +32,7 @@
       top: 28px;
       left: 50%;
       transform: translate(-50%, -50%);
-      mask-image: url('../../../assets/svg/illustration/grid-desktop.svg');
+      mask-image: url('../../../../assets/svg/illustration/grid-desktop.svg');
       background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
       content: '';
     }
@@ -99,7 +99,7 @@
       aspect-ratio: 2.5;
       border-radius: 8px;
       // background-color: $color-primary-600;
-      background-image: url('../../../assets/image/person-in-lab.webp');
+      background-image: url('../../../../assets/image/person-in-lab.webp');
       background-position: 50% 80%;
       background-size: cover;
 

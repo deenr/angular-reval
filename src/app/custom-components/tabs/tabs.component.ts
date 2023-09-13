@@ -1,15 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tab} from './tab.interface';
-import {SettingsTab} from '@pages/settings/settings-tab.enum';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
-import {FormGroup, FormControl} from '@angular/forms';
-import {MatSelectChange} from '@angular/material/select';
+import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
 import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {DialogCloseType} from '@custom-components/dialogs/dialog-close-type.enum';
-import {TabConfirmationType} from './tab-confirmation-type.enum';
-import {map, pairwise, startWith, switchMap} from 'rxjs';
+import {pairwise, startWith} from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
