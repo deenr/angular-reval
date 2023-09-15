@@ -1,8 +1,8 @@
-<div class="table flex-column full-height shadow-xs">
+<div class="table flex-column full-height">
   <app-filter class="table__filter" [filters]="filters" (filterChange)="onFilterChange($event)"></app-filter>
 
   <div class="table__element flex-column full-height">
-    <mat-table class="full-height" [dataSource]="dataSource" matSort classSm="shadow-xs">
+    <mat-table class="full-height shadow-xs" [dataSource]="dataSource" matSort>
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
         {{ column.field }}
         <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortField ? column.sortField : column.field" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
@@ -10,12 +10,15 @@
         <mat-cell *matCellDef="let row">
           <ng-container [ngSwitch]="column.type">
             <ng-container *ngSwitchCase="tableDataType.TEXT">
-              <span *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] }}</span>
+              <span class="data-type__text" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] }}</span>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.BADGE">
               <app-badge *skeleton="loadingData; type: skeletonType.BADGE_SM" [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
                 {{ getBadgeTranslationKey(column.field, row[column.field]) | translate }}
               </app-badge>
+            </ng-container>
+            <ng-container *ngSwitchCase="tableDataType.MULTIPLE_BADGES">
+              <app-multiple-badges class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.AVATAR">
               <app-table-avatar *skeleton="loadingData; type: skeletonType.TABLE_AVATAR" [name]="row[column.avatarNameKey]" [email]="row[column.avatarEmailKey]"></app-table-avatar>

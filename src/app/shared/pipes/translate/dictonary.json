@@ -5,5 +5,22 @@
     "PROFESSOR": "Professor",
     "ADMIN": "Admin",
     "INCOMPLETE_PROFILE": "Incomplete profile"
+  },
+  "ARTICLE_CATEGORY": {
+    "RESEARCH_TOOLS": "Tools",
+    "APPLICATION_DEVELOPMENT": "Development",
+    "TEAM_UPDATES": "Team updates",
+    "COMPANY_NEWS": "Company news",
+    "FUTURE_PLANS": "Future plans",
+    "INNOVATION": "Innovation",
+    "AWARDS": "Awards",
+    "INNOVATIONS": "Innovations",
+    "COLLABORATION": "Collaboration",
+    "PRODUCT_UPDATES": "Product updates",
+    "GLOBAL_EXPANSION": "Global expension",
+    "DATA_ANALYSIS": "Data analysis",
+    "RESEARCH_PARTNERSHIPS": "Research partnerships",
+    "USER_EXPERIENCE": "User experience",
+    "APPLICATION_DESIGN": "Application design"
   }
 }

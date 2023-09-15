@@ -61,7 +61,7 @@ export class ColumnBuilder {
   }
 
   public setBadge(configureBadge: (badgeBuilder: BadgeBuilder) => void): ColumnBuilder {
-    if (this.type === TableDataType.BADGE) {
+    if (this.type === TableDataType.BADGE || this.type === TableDataType.MULTIPLE_BADGES) {
       const badgeBuilder = new BadgeBuilder(this);
       configureBadge(badgeBuilder);
     } else {

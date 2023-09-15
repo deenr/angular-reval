@@ -1,0 +1,63 @@
+@import 'variables';
+
+:host {
+  .articles {
+    position: relative;
+    overflow: hidden;
+    padding-top: 32px;
+    gap: 32px;
+
+    @include breakpoint-md() {
+      overflow: scroll;
+    }
+
+    &__header {
+      padding: 0px 32px;
+      gap: 16px;
+      justify-content: space-between;
+
+      @include breakpoint-sm() {
+        padding: 0px 16px;
+      }
+
+      .header__title-and-description {
+        gap: 4px;
+      }
+
+      .header__actions {
+        gap: 12px;
+      }
+    }
+
+    &__table {
+      overflow: hidden;
+      padding: 0 32px 32px 32px;
+
+      @include breakpoint-sm() {
+        padding: 0 0 32px 0;
+        overflow: unset;
+      }
+    }
+  }
+}
+::ng-deep {
+  .mat-column-title {
+    min-width: 400px !important;
+    flex: 3;
+  }
+
+  .mat-column-author {
+    min-width: 180px !important;
+    max-width: 190px !important;
+  }
+
+  .mat-column-published {
+    min-width: 140px !important;
+    max-width: 150px !important;
+  }
+
+  .mat-column-categories {
+    min-width: 300px !important;
+    flex: 2;
+  }
+}

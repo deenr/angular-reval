@@ -18,6 +18,7 @@ import {NotFoundComponent} from '@pages/home/not-found/not-found.component';
 import {PrivacyPolicyComponent} from '@pages/home/privacy-policy/privacy-policy.component';
 import {TermsOfServiceComponent} from '@pages/home/terms-of-service/terms-of-service.component';
 import {UsersComponent} from '@pages/interface/users/users.component';
+import {ArticlesComponent} from '@pages/interface/articles/articles.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,8 @@ const routes: Routes = [
       {path: 'settings', component: SettingsComponent},
       {path: 'settings/:id', component: SettingsComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'users/:id', component: UsersComponent}
+      {path: 'users/:id', component: UsersComponent},
+      {path: 'articles', component: ArticlesComponent}
     ]
   },
   {path: '**', redirectTo: ''}

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
 import {BadgeSize} from './badge-size.enum';
 import {BadgeType} from './badge-type.enum';
 import {Color} from '@shared/enums/general/colors.enum';
@@ -18,6 +18,8 @@ export class BadgeComponent {
   @Output() public closeClick = new EventEmitter<void>();
 
   public badgeType = BadgeType;
+
+  public constructor(public elementRef: ElementRef) {}
 
   public getBadgeClasses(): string {
     return `badge ${this.color.toLowerCase().toLowerCase().replace('_', '-')} ${this.size.toLowerCase()} ${this.type !== BadgeType.NONE ? this.type.toLowerCase().replace('_', '-') : ''}`;

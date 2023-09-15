@@ -1,0 +1,12 @@
+<div #wrapper class="multiple-badges flex-row full-width">
+  <app-badge *ngFor="let badge of badges" [color]="getBadgeColor(badge)" [size]="getBadgeSize()">
+    {{ getBadgeTranslationKey(badge) | translate }}
+  </app-badge>
+
+  <app-badge #overflowIndicator *ngIf="overflowBadges.length > 0" class="cursor-pointer" [color]="getBadgeColor(badges[0])" [size]="getBadgeSize()" [matMenuTriggerFor]="overflowBadgeMenu">
+    +{{ overflowBadges.length }}
+  </app-badge>
+</div>
+<mat-menu #overflowBadgeMenu="matMenu">
+  <app-badge *ngFor="let badge of overflowBadges" [color]="badge.color" [size]="badge.size"> {{ badge.elementRef.nativeElement.innerText }}</app-badge>
+</mat-menu>

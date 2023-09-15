@@ -33,7 +33,7 @@ export class FilterComponent implements OnInit {
       this.isTablet = this.breakpointService.isTablet;
     });
 
-    this.filters.forEach((filter: FilterProperty) => {
+    this.filters?.forEach((filter: FilterProperty) => {
       this.filterForm.addControl(filter.field, new FormControl(filter.type === FilterType.TEXT ? '' : null));
     });
 

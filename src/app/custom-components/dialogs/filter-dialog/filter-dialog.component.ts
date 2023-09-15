@@ -28,7 +28,7 @@ export class FilterDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.filters.forEach((filter: FilterProperty) => {
+    this.filters?.forEach((filter: FilterProperty) => {
       this.filterForm.addControl(filter.field, new FormControl(this.filterFormValues[filter.field]));
     });
   }

@@ -50,6 +50,17 @@
         }
       }
 
+      .data-type {
+        &__text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &__multiple-badges {
+          gap: 8px;
+        }
+      }
+
       .action-icon {
         min-width: 40px;
         width: 40px;

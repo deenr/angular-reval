@@ -27,7 +27,7 @@ export class InterfaceSidebarComponent implements OnInit {
     {id: 'equipments', name: 'Equipment', icon: 'microscope', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'documents', name: 'Documents', icon: 'file', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'users', name: 'Users', icon: 'users', routerLink: '/app/users', permissions: [UserRole.ADMIN]},
-    {id: 'news', name: 'News', icon: 'newspaper', permissions: [UserRole.ADMIN]}
+    {id: 'articles', name: 'Articles', icon: 'newspaper', routerLink: '/app/articles', permissions: [UserRole.ADMIN]}
   ] as NavigationItem[];
 
   public bottomNavigationItems = [

@@ -10,13 +10,9 @@ export class TranslatePipe implements PipeTransform {
     let result: any = dictionaryJSON;
 
     for (const key of keys) {
-      result = result[key];
+      result = result?.[key];
     }
 
-    if (typeof result === 'string') {
-      return result;
-    } else {
-      throw 'Translation not found';
-    }
+    return typeof result === 'string' ? result : value;
   }
 }

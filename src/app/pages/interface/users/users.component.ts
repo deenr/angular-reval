@@ -16,14 +16,6 @@ import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  public tabs = [
-    {id: UsersTab.OVERVIEW, name: 'Overview', disabled: false, active: true},
-    {id: UsersTab.INSIGHT, name: 'Insight', disabled: false, active: false},
-    {id: UsersTab.TABLE, name: 'Table', disabled: false, active: false}
-  ] as Tab[];
-
-  public usersTab = UsersTab;
-
   public tableColumns: TableColumn[];
   public tableData: UserOverview[];
 
@@ -85,14 +77,6 @@ export class UsersComponent implements OnInit {
       users.push(createNewUser(i));
     }
     this.tableData = users;
-  }
-
-  public isTabActive(usersTab: UsersTab): boolean {
-    return this.getActiveTab().id === usersTab;
-  }
-
-  private getActiveTab(): Tab {
-    return this.tabs.find((tab: Tab) => tab.active);
   }
 }
 

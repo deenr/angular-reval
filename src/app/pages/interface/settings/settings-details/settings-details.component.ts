@@ -145,7 +145,6 @@ export class SettingsDetailsComponent {
       this.detailsForm.controls.program.setValue(null);
       this.detailsForm.controls.program.enable();
     } else {
-      console.log('hi');
       this.detailsForm.controls.program.disable();
     }
   }
@@ -176,20 +175,6 @@ export class SettingsDetailsComponent {
   }
 
   private getUserToSave(id: string): UserInfo {
-    console.log(
-      new UserInfo(
-        id,
-        this.detailsForm.value.firstName,
-        this.detailsForm.value.lastName,
-        this.detailsForm.value.phoneNumber,
-        this.detailsForm.value.email,
-        this.detailsForm.value.faculty,
-        this.detailsForm.value.program,
-        this.detailsForm.value.universityId,
-        this.detailsForm.value.yearOfGraduation,
-        this.detailsForm.value.role
-      )
-    );
     return new UserInfo(
       id,
       this.detailsForm.value.firstName,

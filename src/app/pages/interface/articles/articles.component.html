@@ -1,0 +1,16 @@
+<div class="articles flex-column full-height">
+  <header class="flex-row articles__header">
+    <div class="header__title-and-description flex-column">
+      <h2 class="display-sm text-semibold" classMd="display-xs">Articles</h2>
+      <p class="text-md text-regular">View more data and information</p>
+    </div>
+    <div class="header__actions flex-row" classMd="hidden">
+      <button mat-stroked-button class="md">
+        <mat-icon svgIcon="cloud-download"></mat-icon>
+        Download CSV
+      </button>
+    </div>
+  </header>
+
+  <app-table class="articles__table" [data]="tableData" [columns]="tableColumns"></app-table>
+</div>

@@ -8,12 +8,12 @@ import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 })
 export class ArticleCardComponent {
   @Input() public loadingArticle = false;
-  @Input() public image: string = 'first-team-picture';
-  @Input() public subHeading: string = 'Design';
-  @Input() public heading: string = 'UX review presentations';
-  @Input() public supportingText: string = 'How do you create compelling presentations that wow your colleagues and impress your managers?';
-  @Input() public author: string = 'Olivia Rhye';
-  @Input() public published: string = '20 Jan 2024';
+  @Input() public image: string;
+  @Input() public subHeading: string;
+  @Input() public heading: string;
+  @Input() public supportingText: string;
+  @Input() public author: string;
+  @Input() public published: string;
   public skeletonType = SkeletonType;
 
   public getImageSource(): string {

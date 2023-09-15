@@ -66,7 +66,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   public getBadgeColor(field: string, value: any): Color {
-    return this.columns.find((column: TableColumn) => column.field === field).badgeProperties.colors.get(value);
+    return this.columns.find((column: TableColumn) => column.field === field).badgeProperties.colors.get(value) ?? Color.GREY;
   }
 
   public getRangeLabel(page: number, pageSize: number, length: number): string {
@@ -109,7 +109,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   private setColumns(): void {
     this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
 
-    this.filters = this.columns.filter((value: TableColumn) => value.filterProperties).map((value: TableColumn) => value.filterProperties);
+    this.filters = this.columns?.filter((value: TableColumn) => value.filterProperties).map((value: TableColumn) => value.filterProperties);
 
     this.dataSource.filterPredicate = (data, filter): boolean => {
       return this.filters.every((filterProperty: FilterProperty) => {
@@ -117,7 +117,15 @@ export class TableComponent<T> implements OnInit, OnChanges {
           case FilterType.ENUM:
             if ((filter as any)[filterProperty.field]?.length) {
               for (const filterValue of (filter as any)[filterProperty.field]) {
-                if ((data as any)[filterProperty.field].trim() === filterValue) {
+                const dataValue = (data as any)[filterProperty.field];
+
+                if (Array.isArray(dataValue)) {
+                  for (const data of dataValue) {
+                    if (data.trim() === filterValue) {
+                      return true;
+                    }
+                  }
+                } else if (dataValue.trim() === filterValue) {
                   return true;
                 }
               }
