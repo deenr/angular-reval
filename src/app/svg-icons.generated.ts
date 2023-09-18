@@ -304,6 +304,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/plus-circle.svg"
   },
   {
+    "name": "plus",
+    "path": "./assets/svg/plus.svg"
+  },
+  {
     "name": "question",
     "path": "./assets/svg/question.svg"
   },

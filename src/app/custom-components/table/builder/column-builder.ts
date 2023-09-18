@@ -18,6 +18,8 @@ export class ColumnBuilder {
   private sortField?: string;
   private onDelete?: (id: string) => void;
   private editRoute?: string;
+  private titleKey?: string;
+  private descriptionKey?: string;
 
   public setField(field: string): ColumnBuilder {
     this.field = field;
@@ -46,6 +48,16 @@ export class ColumnBuilder {
 
   public setAvatarEmailKey(avatarEmailKey: string): ColumnBuilder {
     this.avatarEmailKey = avatarEmailKey;
+    return this;
+  }
+
+  public setTitleKey(titleKey: string): ColumnBuilder {
+    this.titleKey = titleKey;
+    return this;
+  }
+
+  public setDescriptionKey(descriptionKey: string): ColumnBuilder {
+    this.descriptionKey = descriptionKey;
     return this;
   }
 
@@ -100,6 +112,8 @@ export class ColumnBuilder {
       throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortField properties.');
     } else if (this.type === TableDataType.BADGE && !this.badgeProperties) {
       throw new Error('Badge columns require badgeProperties');
+    } else if (this.type === TableDataType.TEXT_AND_DESCRIPTION && (!this.titleKey || !this.descriptionKey || !this.sortField)) {
+      throw new Error('Avatar columns require titleKey, descriptionKey and sortField properties.');
     }
 
     return new TableColumn(
@@ -114,7 +128,9 @@ export class ColumnBuilder {
       this.onDelete,
       this.editRoute,
       this.filterProperties,
-      this.translationKey
+      this.translationKey,
+      this.titleKey,
+      this.descriptionKey
     );
   }
 }

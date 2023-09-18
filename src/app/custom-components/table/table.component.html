@@ -12,6 +12,12 @@
             <ng-container *ngSwitchCase="tableDataType.TEXT">
               <span class="data-type__text" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] }}</span>
             </ng-container>
+            <ng-container *ngSwitchCase="tableDataType.TEXT_AND_DESCRIPTION">
+              <div class="data-type__text-and-description flex-column full-width">
+                <h4 class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.titleKey] }}</h4>
+                <p class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.descriptionKey] }}</p>
+              </div>
+            </ng-container>
             <ng-container *ngSwitchCase="tableDataType.BADGE">
               <app-badge *skeleton="loadingData; type: skeletonType.BADGE_SM" [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
                 {{ getBadgeTranslationKey(column.field, row[column.field]) | translate }}

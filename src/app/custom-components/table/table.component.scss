@@ -56,6 +56,17 @@
           text-overflow: ellipsis;
         }
 
+        &__text-and-description {
+          * {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          p {
+            color: $color-grey-500;
+          }
+        }
+
         &__multiple-badges {
           gap: 8px;
         }

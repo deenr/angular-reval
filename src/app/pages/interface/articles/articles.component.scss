@@ -17,6 +17,7 @@
       justify-content: space-between;
 
       @include breakpoint-sm() {
+        flex-direction: column;
         padding: 0px 16px;
       }
 

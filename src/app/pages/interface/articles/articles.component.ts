@@ -28,11 +28,13 @@ export class ArticlesComponent implements OnInit {
       new ColumnBuilder()
         .setField('title')
         .setHeaderName('Title')
+        .setDataType(TableDataType.TEXT_AND_DESCRIPTION)
+        .setTitleKey('title')
+        .setDescriptionKey('subtitle')
         .canSort(true)
+        .setSortId('title')
         .setFilter((filterBuilder: FilterBuilder) => filterBuilder.setType(FilterType.TEXT).build())
         .build(),
-      // new ColumnBuilder().setField('subtitle').setHeaderName('Subtitle').canSort(true).build(),
-
       new ColumnBuilder().setField('author').setHeaderName('Author').canSort(true).build(),
       new ColumnBuilder()
         .setField('published')
@@ -55,7 +57,7 @@ export class ArticlesComponent implements OnInit {
           console.log(id);
         })
         .build(),
-      new ColumnBuilder().setEdit('app/users/:id').build()
+      new ColumnBuilder().setEdit('app/articles/:id').build()
     ];
   }
 }

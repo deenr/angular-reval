@@ -19,6 +19,7 @@ import {PrivacyPolicyComponent} from '@pages/home/privacy-policy/privacy-policy.
 import {TermsOfServiceComponent} from '@pages/home/terms-of-service/terms-of-service.component';
 import {UsersComponent} from '@pages/interface/users/users.component';
 import {ArticlesComponent} from '@pages/interface/articles/articles.component';
+import {AddArticleComponent} from '@pages/interface/articles/add-article/add-article.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,8 @@ const routes: Routes = [
       {path: 'settings/:id', component: SettingsComponent},
       {path: 'users', component: UsersComponent},
       {path: 'users/:id', component: UsersComponent},
-      {path: 'articles', component: ArticlesComponent}
+      {path: 'articles', component: ArticlesComponent},
+      {path: 'articles/:id', component: AddArticleComponent}
     ]
   },
   {path: '**', redirectTo: ''}

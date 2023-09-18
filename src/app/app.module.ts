@@ -81,6 +81,7 @@ import {SettingsComponent} from '@pages/interface/settings/settings.component';
 import {UsersComponent} from '@pages/interface/users/users.component';
 import {ArticlesComponent} from './pages/interface/articles/articles.component';
 import { MultipleBadgesComponent } from './custom-components/table/multiple-badges/multiple-badges.component';
+import { AddArticleComponent } from './pages/interface/articles/add-article/add-article.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { MultipleBadgesComponent } from './custom-components/table/multiple-badg
     TranslatePipe,
     FilterDialogComponent,
     ArticlesComponent,
-    MultipleBadgesComponent
+    MultipleBadgesComponent,
+    AddArticleComponent
   ],
   imports: [
     CommonModule,

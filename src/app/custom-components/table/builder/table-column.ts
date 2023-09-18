@@ -15,6 +15,8 @@ export class TableColumn {
     public onDelete?: (id: string) => void,
     public editRoute?: string,
     public filterProperties?: FilterProperty,
-    public translationKey?: string
+    public translationKey?: string,
+    public titleKey?: string,
+    public descriptionKey?: string
   ) {}
 }
