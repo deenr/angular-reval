@@ -1,0 +1,44 @@
+@import 'variables';
+
+:host {
+  .article-general {
+    overflow: scroll;
+    padding: 32px 32px 24px 32px;
+
+    @include breakpoint-sm() {
+      padding: 32px 16px 24px 16px;
+    }
+
+    &__header {
+      gap: 24px;
+
+      &.university-header {
+        margin-top: 32px;
+      }
+    }
+
+    &__content {
+      display: flex !important;
+      flex-direction: column;
+      margin-top: 24px;
+      gap: 20px;
+
+      p {
+        flex: 0 1 200px;
+      }
+
+      .content-field {
+        gap: 32px;
+
+        .form-fields {
+          max-width: 512px;
+          gap: 24px;
+
+          @include breakpoint-md() {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}

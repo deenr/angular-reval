@@ -1,1 +1,13 @@
-<p>add-article works!</p>
+<div class="add-article flex-column full-height">
+  <app-header title="Add article" [tabs]="tabs"></app-header>
+  <app-add-article-general *ngIf="isTabActive(addArticleTab.GENERAL)" class="add-article__field full-height" [isMobile]="isMobile" [articleForm]="articleForm"></app-add-article-general>
+  <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field full-height"></app-add-article-preview>
+
+  <footer class="add-article__footer">
+    <mat-divider class="full-width"></mat-divider>
+    <div class="actions flex-row full-width">
+      <button mat-stroked-button class="md">Cancel</button>
+      <app-progress-button size="md">Save</app-progress-button>
+    </div>
+  </footer>
+</div>

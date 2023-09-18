@@ -82,6 +82,8 @@ import {UsersComponent} from '@pages/interface/users/users.component';
 import {ArticlesComponent} from './pages/interface/articles/articles.component';
 import { MultipleBadgesComponent } from './custom-components/table/multiple-badges/multiple-badges.component';
 import { AddArticleComponent } from './pages/interface/articles/add-article/add-article.component';
+import { AddArticleGeneralComponent } from './pages/interface/articles/add-article/add-article-general/add-article-general.component';
+import { AddArticlePreviewComponent } from './pages/interface/articles/add-article/add-article-preview/add-article-preview.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +139,9 @@ import { AddArticleComponent } from './pages/interface/articles/add-article/add-
     FilterDialogComponent,
     ArticlesComponent,
     MultipleBadgesComponent,
-    AddArticleComponent
+    AddArticleComponent,
+    AddArticleGeneralComponent,
+    AddArticlePreviewComponent
   ],
   imports: [
     CommonModule,

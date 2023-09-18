@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {UserInfo} from '@shared/models/user/user-info';
+import {User} from '@shared/models/user/user';
 import {
   AuthChangeEvent,
   AuthError,
@@ -19,7 +19,7 @@ import {
 } from '@supabase/supabase-js';
 import {BehaviorSubject, Observable, forkJoin} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {HttpUserInfoService} from '../user/http-user-info.service';
+import {HttpUserService} from '../user/http-user.service';
 import {ChangePasswordResponse} from './change-password-response.enum';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class AuthService {
 
   private supabase: SupabaseClient;
 
-  public constructor(private readonly userInfoService: HttpUserInfoService) {
+  public constructor(private readonly userService: HttpUserService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
     this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
@@ -52,7 +52,7 @@ export class AuthService {
         if (error) {
           reject([null, error]);
         } else if (data) {
-          forkJoin([this.userInfoService.getUserRole(data.user.id), this.userInfoService.getUserInfoById(data.user.id)]).subscribe(([userRole, user]: [UserRole, UserInfo]) => {
+          forkJoin([this.userService.getUserRole(data.user.id), this.userService.getUserInfoById(data.user.id)]).subscribe(([userRole, user]: [UserRole, User]) => {
             localStorage.setItem('user', JSON.stringify({id: data.user.id, name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '', email, role: userRole}));
             resolve([{id: data.user.id, role: userRole}, null]);
           });
@@ -61,10 +61,10 @@ export class AuthService {
     });
   }
 
-  public setUserInfo(user: UserInfo): Promise<any> {
+  public setUserInfo(user: User): Promise<any> {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const updateUserProfile = this.supabase
+        const updateUserInfo = this.supabase
           .from('users')
           .update({
             firstName: user.firstName,
@@ -78,7 +78,7 @@ export class AuthService {
           .eq('id', user.id);
         const updateUserRole = this.supabase.from('user_roles').update({role: user.role}).eq('user_id', user.id);
 
-        await Promise.all([updateUserProfile, updateUserRole]);
+        await Promise.all([updateUserInfo, updateUserRole]);
 
         localStorage.setItem('user', JSON.stringify({id: user.id, name: `${user.firstName} ${user.lastName}`, email: user.email, role: user.role}));
         resolve(null);

@@ -1,0 +1,38 @@
+@import 'variables';
+
+:host {
+  .add-article {
+    position: relative;
+    overflow: hidden;
+    padding-top: 32px;
+
+    @include breakpoint-sm() {
+      overflow: scroll;
+    }
+
+    &__field {
+      display: flex;
+      overflow: hidden;
+
+      @include breakpoint-sm() {
+        overflow: unset;
+      }
+    }
+
+    &__footer {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 20px;
+      padding: 0px 32px 32px 32px;
+
+      @include breakpoint-sm() {
+        padding: 0px 16px;
+      }
+
+      .actions {
+        gap: 12px;
+        justify-content: end;
+      }
+    }
+  }
+}

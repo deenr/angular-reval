@@ -55,6 +55,12 @@ export class TableComponent<T> implements OnInit, OnChanges {
     this.dataSource.sort = this.sort;
   }
 
+  public getAvatarName(field: string, data: any): string {
+    const nameKey = this.columns.find((column: TableColumn) => column.field === field).avatarNameKey;
+
+    return Array.isArray(nameKey) ? nameKey.map((key: string) => data[key]).join(' ') : data[nameKey];
+  }
+
   public getBadgeTranslationKey(field: string, value: any): string {
     const translationKey = this.columns.find((column: TableColumn) => column.field === field).translationKey;
 
@@ -82,6 +88,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   public edit(id: string): void {
+    console.log(this.data);
     this.router.navigateByUrl(this.columns.find((column: TableColumn) => column.type === TableDataType.EDIT).editRoute.replace(':id', `${id}`));
   }
 
@@ -113,6 +120,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
     this.dataSource.filterPredicate = (data, filter): boolean => {
       return this.filters.every((filterProperty: FilterProperty) => {
+        console.log(filterProperty.field, (data as any)[filterProperty.field], this.getFilterTypeByField(filterProperty.field));
         switch (this.getFilterTypeByField(filterProperty.field)) {
           case FilterType.ENUM:
             if ((filter as any)[filterProperty.field]?.length) {
@@ -140,7 +148,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
           case FilterType.TEXT:
             return (
               (data as any)[filterProperty.field]
-                .toString()
+                ?.toString()
                 .trim()
                 .toLowerCase()
                 .indexOf((filter as any)[filterProperty.field].toLowerCase()) !== -1

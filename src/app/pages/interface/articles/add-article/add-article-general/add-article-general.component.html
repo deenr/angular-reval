@@ -1,0 +1,53 @@
+<mat-card class="article-general full-width full-height">
+  <mat-card-header class="flex-column article-general__header">
+    <mat-card-title>Article details</mat-card-title>
+    <mat-card-subtitle>Take a quick glance at the article details</mat-card-subtitle>
+    <mat-divider></mat-divider>
+  </mat-card-header>
+  <mat-card-content class="flex-column article-general__content" [formGroup]="articleForm">
+    <div class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">Title</p>
+      <div class="flex-row form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Title</mat-label>
+          <input formControlName="title" matInput text="text" placeholder="Enter title" />
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">Subtitle</p>
+      <div class="flex-row form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Subtitle</mat-label>
+          <input formControlName="subtitle" matInput text="text" placeholder="Enter subtitle" />
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">Author</p>
+      <div class="flex-row form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Author</mat-label>
+          <mat-select formControlName="author" placeholder="Select author">
+            <!-- <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
+              {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
+            </mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">Published</p>
+      <div class="flex-row form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Published</mat-label>
+          <app-datepicker-input formControlName="published" [dateRange]="false"></app-datepicker-input>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>

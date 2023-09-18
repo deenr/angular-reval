@@ -9,6 +9,8 @@ import {TableDataType} from '@custom-components/table/table-data-type.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {Color} from '@shared/enums/general/colors.enum';
 import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter-builder';
+import {UserOverview} from '@shared/models/user/user-overview';
+import {StubUserService} from '@shared/services/user/stub-user.service';
 
 @Component({
   selector: 'app-users',
@@ -19,16 +21,20 @@ export class UsersComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: UserOverview[];
 
+  public constructor(private readonly userService: StubUserService) {}
+
   public ngOnInit(): void {
+    this.userService.getUsersOverview().subscribe((usersOverview: UserOverview[]) => (this.tableData = usersOverview));
+
     this.tableColumns = [
       new ColumnBuilder()
         .setField('user')
         .setHeaderName('User')
         .setDataType(TableDataType.AVATAR)
         .canSort(true)
-        .setAvatarNameKey('name')
+        .setAvatarNameKey(['firstName', 'lastName'])
         .setAvatarEmailKey('email')
-        .setSortId('name')
+        .setSortId('firstName')
         .setFilter((filterBuilder: FilterBuilder) => {
           filterBuilder.setType(FilterType.TEXT).build();
         })
@@ -71,80 +77,5 @@ export class UsersComponent implements OnInit {
         .build(),
       new ColumnBuilder().setEdit('app/users/:id').build()
     ];
-
-    const users: UserOverview[] = [];
-    for (let i = 1; i <= 85; i++) {
-      users.push(createNewUser(i));
-    }
-    this.tableData = users;
   }
-}
-
-function createNewUser(id: number): UserOverview {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' + NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    email: `${name.replace('.', '').replace(' ', '.').toLowerCase()}@gmail.com`,
-    role: getRandomEnumValue(UserRole),
-    joined: getRandomDateWithinOneMonthRange(),
-    universityId: `${Math.floor(Math.random() * 90000) + 10000}`
-  };
-}
-
-function getRandomDateWithinOneMonthRange(): Date {
-  const currentDate = new Date();
-
-  // Calculate the minimum and maximum dates
-  const minDate = new Date(currentDate);
-  minDate.setMonth(currentDate.getMonth() - 1);
-
-  const maxDate = new Date(currentDate);
-  maxDate.setMonth(currentDate.getMonth() + 1);
-
-  // Generate a random timestamp between minDate and maxDate
-  const randomTimestamp = minDate.getTime() + Math.random() * (maxDate.getTime() - minDate.getTime());
-
-  // Create a new Date object from the random timestamp
-  const randomDate = new Date(randomTimestamp);
-
-  return randomDate;
-}
-
-function getRandomEnumValue<T>(enumObj: T): T[keyof T] {
-  const enumValues = Object.values(enumObj);
-  const randomIndex = Math.floor(Math.random() * enumValues.length);
-  return enumValues[randomIndex];
-}
-
-const NAMES = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth'
-];
-
-interface UserOverview {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
-  joined: Date;
-  universityId: string;
 }

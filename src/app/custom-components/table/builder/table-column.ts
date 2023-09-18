@@ -8,7 +8,7 @@ export class TableColumn {
     public name: string,
     public type: TableDataType,
     public sort: boolean,
-    public avatarNameKey?: string,
+    public avatarNameKey?: string | string[],
     public avatarEmailKey?: string,
     public sortField?: string,
     public badgeProperties?: BadgeProperty,

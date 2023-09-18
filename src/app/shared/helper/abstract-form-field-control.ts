@@ -15,10 +15,8 @@ class _AbstractMatFormFieldBase implements CanUpdateErrorState {
 
   public errorStateMatcher: ErrorStateMatcher = {
     isErrorState: (control: AbstractControl<any>, form: FormGroupDirective | NgForm): boolean => {
-      const isSubmitted = form && form.submitted;
       const isControlInvalid = control && control.invalid;
-      const isParentInvalid = form && form.invalid && (form.dirty || form.touched || isSubmitted);
-      return !!(isControlInvalid || isParentInvalid) && (control.touched || form.touched);
+      return !!isControlInvalid && control.touched && form.touched;
     }
   };
 

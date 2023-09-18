@@ -13,7 +13,7 @@ export class ColumnBuilder {
   private name: string = '';
   private type: TableDataType = TableDataType.TEXT;
   private sort: boolean = false;
-  private avatarNameKey?: string;
+  private avatarNameKey?: string | string[];
   private avatarEmailKey?: string;
   private sortField?: string;
   private onDelete?: (id: string) => void;
@@ -41,7 +41,7 @@ export class ColumnBuilder {
     return this;
   }
 
-  public setAvatarNameKey(avatarNameKey: string): ColumnBuilder {
+  public setAvatarNameKey(avatarNameKey: string | string[]): ColumnBuilder {
     this.avatarNameKey = avatarNameKey;
     return this;
   }

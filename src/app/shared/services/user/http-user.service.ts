@@ -1,4 +1,4 @@
-import {UserInfo} from '@shared/models/user/user-info';
+import {User} from '@shared/models/user/user';
 import {Observable, from} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
@@ -8,25 +8,34 @@ import {environment} from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpUserInfoService {
+export class HttpUserService {
   private supabase: SupabaseClient;
 
   public constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
-  public getUserInfoById(id: string): Observable<UserInfo> {
+  public getUsersInfo(): Observable<User[]> {
+    return from(
+      this.supabase
+        .from('users')
+        .select('*')
+        .then(({data}) => data?.map((userInfoJSON: any) => User.fromJSON(userInfoJSON)))
+    );
+  }
+
+  public getUserInfoById(id: string): Observable<User> {
     return from(
       this.supabase
         .from('users')
         .select('*')
         .eq('id', id)
         .single()
-        .then(({data}) => UserInfo.fromJSON(data))
+        .then(({data}) => User.fromJSON(data))
     );
   }
 
-  public updateUserProfile(user: UserInfo): Observable<void> {
+  public updateUserInfo(user: User): Observable<void> {
     return new Observable<void>((observer) => {
       this.supabase
         .from('users')

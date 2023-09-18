@@ -15,10 +15,10 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {UserInfo} from '@shared/models/user/user-info';
+import {User} from '@shared/models/user/user';
 import {RoleService} from '@shared/services/role/role.service';
 import {AuthService} from '@shared/services/auth/auth.service';
-import {HttpUserInfoService} from '@shared/services/user/http-user-info.service';
+import {HttpUserService} from '@shared/services/user/http-user.service';
 
 @Component({
   selector: 'app-settings-details',
@@ -39,7 +39,7 @@ export class SettingsDetailsComponent {
     yearOfGraduation: FormControl<number>;
   }>;
   @Input() public loadingUser: boolean;
-  @Output() public userUpdated = new EventEmitter<UserInfo>();
+  @Output() public userUpdated = new EventEmitter<User>();
 
   public faculties = Object.keys(Faculty).map((faculty: string) => faculty as Faculty);
 
@@ -94,12 +94,7 @@ export class SettingsDetailsComponent {
     [UserRole.PROFESSOR, 'Professor']
   ]);
 
-  public constructor(
-    private readonly authService: AuthService,
-    private readonly route: ActivatedRoute,
-    private readonly roleService: RoleService,
-    private readonly userInfoService: HttpUserInfoService
-  ) {}
+  public constructor(private readonly authService: AuthService, private readonly route: ActivatedRoute, private readonly roleService: RoleService, private readonly userService: HttpUserService) {}
 
   public getRoleTranslation(UserRole: UserRole): string {
     return this.rolesTranslation.get(UserRole);
@@ -166,7 +161,7 @@ export class SettingsDetailsComponent {
       } else {
         const currentUser = JSON.parse(localStorage.getItem('user')) as {id: string};
         const userToSave = this.getUserToSave(currentUser.id);
-        this.userInfoService.updateUserProfile(userToSave).subscribe(() => {
+        this.userService.updateUserInfo(userToSave).subscribe(() => {
           this.savingDetails = false;
           this.userUpdated.emit(userToSave);
         });
@@ -174,18 +169,19 @@ export class SettingsDetailsComponent {
     }
   }
 
-  private getUserToSave(id: string): UserInfo {
-    return new UserInfo(
+  private getUserToSave(id: string): User {
+    return new User(
       id,
       this.detailsForm.value.firstName,
       this.detailsForm.value.lastName,
-      this.detailsForm.value.phoneNumber,
       this.detailsForm.value.email,
+      this.detailsForm.value.universityId,
+      this.detailsForm.value.role,
+      new Date(),
+      this.detailsForm.value.phoneNumber,
       this.detailsForm.value.faculty,
       this.detailsForm.value.program,
-      this.detailsForm.value.universityId,
-      this.detailsForm.value.yearOfGraduation,
-      this.detailsForm.value.role
+      this.detailsForm.value.yearOfGraduation
     );
   }
 }
