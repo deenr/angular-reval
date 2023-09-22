@@ -20,7 +20,6 @@ export class AddArticleGeneralComponent {
     author: FormControl<User>;
     categories: FormControl<ArticleCategory[]>;
     published: FormControl<Date>;
-    content: FormArray<any>;
   }>;
   @Input() public authors: User[];
   @Input() public loadingArticle: boolean;

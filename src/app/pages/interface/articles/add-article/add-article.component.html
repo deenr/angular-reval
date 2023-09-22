@@ -12,9 +12,8 @@
     *ngIf="isTabActive(addArticleTab.CONTENT)"
     class="add-article__field full-height"
     [isMobile]="isMobile"
-    [article]="article"
     [authors]="authors"
-    [loadingArticle]="loadingArticle"
+    [contentForm]="contentForm"
   ></app-add-article-content>
   <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field preview full-height" [article]="getArticleToSave()"></app-add-article-preview>
 

@@ -10,7 +10,7 @@
       <div class="flex-row form-fields full-width">
         <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Title</mat-label>
-          <input formControlName="title" matInput text="text" placeholder="Enter title" />
+          <textarea formControlName="title" matInput text="text" placeholder="Enter title"></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <div class="flex-row form-fields full-width">
         <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Subtitle</mat-label>
-          <input formControlName="subtitle" matInput text="text" placeholder="Enter subtitle" />
+          <textarea formControlName="subtitle" matInput text="text" placeholder="Enter subtitle"></textarea>
         </mat-form-field>
       </div>
     </div>

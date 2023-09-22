@@ -31,7 +31,14 @@ export class AddArticleComponent implements OnInit {
     author: FormControl<User>;
     categories: FormControl<ArticleCategory[]>;
     published: FormControl<Date>;
-    content: FormArray<any>;
+  }>;
+
+  public contentForm: FormGroup<{
+    content: FormArray<
+      | FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>
+      | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<string>}>
+      | FormGroup<{type: FormControl<ArticleContentType.IMAGE>; source: FormControl<string>}>
+    >;
   }>;
 
   public authors: User[];
@@ -61,11 +68,12 @@ export class AddArticleComponent implements OnInit {
   }
 
   public isTabActive(addArticleTab: AddArticleTab): boolean {
+    this.getArticleToSave();
     return this.getActiveTab().id === addArticleTab;
   }
 
   public getArticleToSave(): Article {
-    const content = this.articleForm.value.content.map((content: TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup, index: number) => {
+    const content = this.contentForm.value.content.map((content: Partial<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>, index: number) => {
       if ((content as QuoteContentFormGroup).quote) {
         const quoteContent = content as QuoteContentFormGroup;
         return new QuoteContent(quoteContent.author, quoteContent.quote);
@@ -76,11 +84,11 @@ export class AddArticleComponent implements OnInit {
         const textContent = content as TextContentFormGroup;
 
         if (index === 0) {
-          return new IntroductionContent(textContent.title, textContent.text);
-        } else if (index === this.articleForm.value.content.length - 1) {
-          return new ConclusionContent(textContent.title, textContent.text);
+          return new IntroductionContent(textContent.title, textContent.text.split('\n\n'));
+        } else if (index === this.contentForm.value.content.length - 1) {
+          return new ConclusionContent(textContent.title, textContent.text.split('\n\n'));
         } else {
-          return new TextContent(textContent.title, textContent.text);
+          return new TextContent(textContent.title, textContent.text.split('\n\n'));
         }
       }
     });
@@ -107,7 +115,10 @@ export class AddArticleComponent implements OnInit {
       subtitle: new FormControl(null, Validators.required),
       author: new FormControl(null, Validators.required),
       categories: new FormControl(null, Validators.required),
-      published: new FormControl(null, Validators.required),
+      published: new FormControl(null, Validators.required)
+    });
+
+    this.contentForm = new FormGroup({
       content: new FormArray([])
     });
   }
@@ -118,8 +129,7 @@ export class AddArticleComponent implements OnInit {
       subtitle: article.subtitle,
       author: authors.find((user: User) => article.author === user.id),
       categories: article.categories,
-      published: article.published,
-      content: []
+      published: article.published
     });
 
     this.article.content.forEach((content: ArticleContent) => {
@@ -127,28 +137,31 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.INTRODUCTION:
           const introductionContent = content as IntroductionContent;
 
-          this.articleForm.controls.content.push(
+          this.contentForm.controls.content.push(
             new FormGroup({
+              type: new FormControl(ArticleContentType.TEXT),
               title: new FormControl(introductionContent.title, Validators.required),
-              text: new FormControl(introductionContent.text, Validators.required)
+              text: new FormControl(introductionContent.text.join('\n\n'), Validators.required)
             })
           );
           break;
         case ArticleContentType.TEXT:
           const textContent = content as TextContent;
 
-          this.articleForm.controls.content.push(
+          this.contentForm.controls.content.push(
             new FormGroup({
+              type: new FormControl(ArticleContentType.TEXT),
               title: new FormControl(textContent.title, Validators.required),
-              text: new FormControl(textContent.text, Validators.required)
+              text: new FormControl(textContent.text.join('\n\n'), Validators.required)
             })
           );
           break;
         case ArticleContentType.IMAGE:
           const imageContent = content as ImageContent;
 
-          this.articleForm.controls.content.push(
+          this.contentForm.controls.content.push(
             new FormGroup({
+              type: new FormControl(ArticleContentType.IMAGE),
               source: new FormControl(imageContent.source, Validators.required)
             })
           );
@@ -156,8 +169,9 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.QUOTE:
           const qouteContent = content as QuoteContent;
 
-          this.articleForm.controls.content.push(
+          this.contentForm.controls.content.push(
             new FormGroup({
+              type: new FormControl(ArticleContentType.QUOTE),
               quote: new FormControl(qouteContent.quote, Validators.required),
               author: new FormControl(qouteContent.author, Validators.required)
             })
@@ -166,10 +180,11 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.CONCLUSION:
           const conclusionContent = content as ConclusionContent;
 
-          this.articleForm.controls.content.push(
+          this.contentForm.controls.content.push(
             new FormGroup({
+              type: new FormControl(ArticleContentType.TEXT),
               title: new FormControl(conclusionContent.title, Validators.required),
-              text: new FormControl(conclusionContent.text, Validators.required)
+              text: new FormControl(conclusionContent.text.join('\n\n'), Validators.required)
             })
           );
           break;
@@ -182,16 +197,19 @@ export class AddArticleComponent implements OnInit {
   }
 }
 
-interface TextContentFormGroup {
+export interface TextContentFormGroup {
+  type: ArticleContentType;
   title: string;
-  text: string[];
+  text: string;
 }
 
-interface QuoteContentFormGroup {
+export interface QuoteContentFormGroup {
+  type: ArticleContentType;
   quote: string;
   author: string;
 }
 
-interface ImageContentFormGroup {
+export interface ImageContentFormGroup {
+  type: ArticleContentType;
   source: string;
 }
