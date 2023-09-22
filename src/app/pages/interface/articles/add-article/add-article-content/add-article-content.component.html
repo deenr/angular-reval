@@ -1,0 +1,45 @@
+<mat-card-header class="flex-column article-general__header content-header">
+  <mat-card-title>Article content</mat-card-title>
+  <mat-card-subtitle>Update the article content here</mat-card-subtitle>
+  <mat-divider></mat-divider>
+</mat-card-header>
+<mat-card-content class="flex-column article-general__content" formArrayName="content">
+  <ng-container *ngFor="let content of article?.content; let formIndex = index" [formGroupName]="formIndex">
+    <div *ngIf="isContentIntroduction(content.type) || isContentText(content.type) || isContentConclusion(content.type)" class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</p>
+      <div class="flex-column form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</mat-label>
+          <input matInput text="text" formControlName="title" placeholder="Enter title" />
+        </mat-form-field>
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <!-- <mat-label *ngIf="isMobile" class="text-sm text-medium">Text</mat-label> -->
+          <textarea matInput text="text" formControlName="text" placeholder="Enter text"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="isContentQuote(content.type)" class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</p>
+      <div class="flex-column form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</mat-label>
+          <textarea matInput text="text" formControlName="quote" placeholder="Enter text"></textarea>
+        </mat-form-field>
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <!-- <mat-label *ngIf="isMobile" class="text-sm text-medium">Author</mat-label> -->
+          <input matInput text="text" formControlName="author" placeholder="Enter title" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="isContentImage(content.type)" class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</p>
+      <div class="flex-column form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">{{ 'ARTICLE_CONTENT_TYPE.' + content.type | translate }}</mat-label>
+          <input matInput text="text" formControlName="source" placeholder="Enter source" />
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-card-content>

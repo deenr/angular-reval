@@ -79,16 +79,23 @@ export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRa
   }
 
   public clear(): void {
+    this.ngControl?.control?.markAsTouched();
     this.value = null;
+  }
+
+  public isDatepickerMenuOpen(): boolean {
+    return document.getElementsByClassName('calendar-menu')?.length > 0 || document.getElementsByTagName('app-datepicker-menu')?.length > 0;
   }
 
   public openDatepickerDialog(): void {
     if (this.isMobile || this.isTablet) {
       this.dialog
         .open(DatepickerMenuComponent, {
+          width: 'calc(100vw - 32px)',
           maxWidth: 'calc(100vw - 32px)',
           hasBackdrop: true,
           data: {
+            dateRange: this.dateRange,
             actions: true
           }
         })

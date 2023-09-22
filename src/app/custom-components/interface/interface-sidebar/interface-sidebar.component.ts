@@ -35,12 +35,13 @@ export class InterfaceSidebarComponent implements OnInit {
     {id: 'settings', name: 'Settings', icon: 'setting', routerLink: '/app/settings', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN, UserRole.INCOMPLETE_PROFILE]}
   ] as NavigationItem[];
 
-  public urlToNavigationIdMap = new Map<string, string>([
+  public BASE_URL_TO_NAVIGATION_ID = new Map<string, string>([
     ['/app', 'home'],
     ['/app/dashboard', 'dashboard'],
     ['/app/equipments', 'equipments'],
     ['/app/documents', 'documents'],
     ['/app/users', 'users'],
+    ['/app/articles', 'articles'],
     ['/app/support', 'support'],
     ['/app/settings', 'settings']
   ]);
@@ -73,7 +74,9 @@ export class InterfaceSidebarComponent implements OnInit {
   }
 
   public isNavigationItemActive(id: string): boolean {
-    return this.urlToNavigationIdMap.get(this.router.url) === id;
+    const baseUrl = [...this.BASE_URL_TO_NAVIGATION_ID.keys()].reverse().find((url: string) => this.router.url.includes(url));
+
+    return baseUrl && this.BASE_URL_TO_NAVIGATION_ID.get(baseUrl) === id;
   }
 
   public getSidebarWidth(): string {

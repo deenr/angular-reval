@@ -22,5 +22,12 @@
     "RESEARCH_PARTNERSHIPS": "Research partnerships",
     "USER_EXPERIENCE": "User experience",
     "APPLICATION_DESIGN": "Application design"
+  },
+  "ARTICLE_CONTENT_TYPE": {
+    "TEXT": "Text",
+    "IMAGE": "Image",
+    "QUOTE": "Quote",
+    "INTRODUCTION": "Introduction",
+    "CONCLUSION": "Conclusion"
   }
 }

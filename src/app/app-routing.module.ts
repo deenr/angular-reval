@@ -55,7 +55,8 @@ const routes: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'users/:id', component: UsersComponent},
       {path: 'articles', component: ArticlesComponent},
-      {path: 'articles/:id', component: AddArticleComponent}
+      {path: 'articles/add', component: AddArticleComponent},
+      {path: 'articles/edit/:id', component: AddArticleComponent}
     ]
   },
   {path: '**', redirectTo: ''}

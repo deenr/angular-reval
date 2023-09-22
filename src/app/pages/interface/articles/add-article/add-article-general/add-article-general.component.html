@@ -1,10 +1,10 @@
-<mat-card class="article-general full-width full-height">
+<mat-card class="article-general full-width full-height" [formGroup]="articleForm">
   <mat-card-header class="flex-column article-general__header">
     <mat-card-title>Article details</mat-card-title>
     <mat-card-subtitle>Take a quick glance at the article details</mat-card-subtitle>
     <mat-divider></mat-divider>
   </mat-card-header>
-  <mat-card-content class="flex-column article-general__content" [formGroup]="articleForm">
+  <mat-card-content class="flex-column article-general__content">
     <div class="flex-row content-field">
       <p *ngIf="!isMobile" class="text-sm text-semibold">Title</p>
       <div class="flex-row form-fields full-width">
@@ -14,7 +14,6 @@
         </mat-form-field>
       </div>
     </div>
-    <mat-divider></mat-divider>
     <div class="flex-row content-field">
       <p *ngIf="!isMobile" class="text-sm text-semibold">Subtitle</p>
       <div class="flex-row form-fields full-width">
@@ -31,10 +30,18 @@
         <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Author</mat-label>
           <mat-select formControlName="author" placeholder="Select author">
-            <!-- <mat-option *ngFor="let enumValue of filter.enumValues" [value]="enumValue">
-              {{ getEnumTranslationKey(filter.field, enumValue) | translate }}
-            </mat-option> -->
+            <mat-option *ngFor="let author of authors" [value]="author"> {{ author.firstName }} {{ author.lastName }} </mat-option>
           </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex-row content-field">
+      <p *ngIf="!isMobile" class="text-sm text-semibold">Categories</p>
+      <div class="flex-row form-fields full-width">
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Categories</mat-label>
+          <input formControlName="categories" matInput text="text" placeholder="Enter categories" />
         </mat-form-field>
       </div>
     </div>
@@ -48,6 +55,5 @@
         </mat-form-field>
       </div>
     </div>
-    <mat-divider></mat-divider>
   </mat-card-content>
 </mat-card>

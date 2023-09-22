@@ -1,7 +1,22 @@
 <div class="add-article flex-column full-height">
   <app-header title="Add article" [tabs]="tabs"></app-header>
-  <app-add-article-general *ngIf="isTabActive(addArticleTab.GENERAL)" class="add-article__field full-height" [isMobile]="isMobile" [articleForm]="articleForm"></app-add-article-general>
-  <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field full-height"></app-add-article-preview>
+  <app-add-article-general
+    *ngIf="isTabActive(addArticleTab.GENERAL)"
+    class="add-article__field full-height"
+    [isMobile]="isMobile"
+    [articleForm]="articleForm"
+    [authors]="authors"
+    [loadingArticle]="loadingArticle"
+  ></app-add-article-general>
+  <app-add-article-content
+    *ngIf="isTabActive(addArticleTab.CONTENT)"
+    class="add-article__field full-height"
+    [isMobile]="isMobile"
+    [article]="article"
+    [authors]="authors"
+    [loadingArticle]="loadingArticle"
+  ></app-add-article-content>
+  <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field preview full-height" [article]="getArticleToSave()"></app-add-article-preview>
 
   <footer class="add-article__footer">
     <mat-divider class="full-width"></mat-divider>

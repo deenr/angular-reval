@@ -162,7 +162,8 @@
       }
     }
 
-    &.mdc-text-field--focused {
+    &.mdc-text-field--focused,
+    &:has(.datepicker__focused) {
       .mat-mdc-form-field-flex {
         .mat-mdc-form-field-infix {
           border: 1px solid $color-primary-300;

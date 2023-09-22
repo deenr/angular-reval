@@ -32,9 +32,11 @@ export class DatepickerMenuComponent implements OnInit {
     public dialogRef: MatDialogRef<DatepickerMenuComponent>,
     @Inject(MAT_DIALOG_DATA)
     public readonly data: {
+      dateRange: boolean;
       actions: boolean;
     }
   ) {
+    this.dateRange = data.dateRange;
     this.actions = data.actions;
   }
 

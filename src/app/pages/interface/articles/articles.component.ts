@@ -6,7 +6,6 @@ import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter
 import {TableColumn} from '@custom-components/table/builder/table-column';
 import {TableDataType} from '@custom-components/table/table-data-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {Color} from '@shared/enums/general/colors.enum';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {StubArticleService} from '@shared/services/article/stub-article.service';
 
@@ -57,7 +56,7 @@ export class ArticlesComponent implements OnInit {
           console.log(id);
         })
         .build(),
-      new ColumnBuilder().setEdit('app/articles/:id').build()
+      new ColumnBuilder().setEdit('app/articles/edit/:id').build()
     ];
   }
 }

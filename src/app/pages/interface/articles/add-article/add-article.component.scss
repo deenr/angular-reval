@@ -15,7 +15,11 @@
       overflow: hidden;
 
       @include breakpoint-sm() {
-        overflow: unset;
+        overflow: unset !important;
+      }
+
+      &.preview {
+        overflow: scroll;
       }
     }
 

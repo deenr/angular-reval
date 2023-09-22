@@ -3,8 +3,11 @@ import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {StubArticleOverview} from '@shared/models/article/stub-article-overview';
-import {HttpArticleService} from '@shared/services/article/http-article.service';
+import {UserOverview} from '@shared/models/user/user-overview';
+import {StubArticleService} from '@shared/services/article/stub-article.service';
+import {StubUserService} from '@shared/services/user/stub-user.service';
 import * as moment from 'moment';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-news',
@@ -36,7 +39,7 @@ export class NewsComponent implements OnInit {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
-  public constructor(private readonly articleService: HttpArticleService) {}
+  public constructor(private readonly articleService: StubArticleService, private readonly userService: StubUserService) {}
 
   public ngOnInit(): void {
     this.getArticles();
@@ -56,10 +59,19 @@ export class NewsComponent implements OnInit {
 
   private getArticles(): void {
     this.loadingArticles = true;
+
     this.mainArticle = StubArticleOverview.getEmptyArticleOverview();
     this.otherArticles = [...Array(9).keys()].map((index: number) => StubArticleOverview.getEmptyArticleOverviewWithId(`${index}`));
-    this.articleService.getOverview().subscribe((news: ArticleOverview[]) => {
-      if (news) {
+
+    forkJoin([this.articleService.getOverview(), this.userService.getUsersOverview()]).subscribe(([articles, users]: [ArticleOverview[], UserOverview[]]) => {
+      if (articles) {
+        const news = articles.map((article: ArticleOverview) => {
+          const user = users.find((user: UserOverview) => user.id === article.author);
+          const name = `${user.firstName} ${user.lastName}`;
+          article.author = name;
+          return article;
+        });
+
         this.mainArticle = news?.shift();
         this.otherArticles = news;
         this.loadingArticles = false;

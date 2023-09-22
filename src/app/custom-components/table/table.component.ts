@@ -88,7 +88,6 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   public edit(id: string): void {
-    console.log(this.data);
     this.router.navigateByUrl(this.columns.find((column: TableColumn) => column.type === TableDataType.EDIT).editRoute.replace(':id', `${id}`));
   }
 
@@ -120,7 +119,6 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
     this.dataSource.filterPredicate = (data, filter): boolean => {
       return this.filters.every((filterProperty: FilterProperty) => {
-        console.log(filterProperty.field, (data as any)[filterProperty.field], this.getFilterTypeByField(filterProperty.field));
         switch (this.getFilterTypeByField(filterProperty.field)) {
           case FilterType.ENUM:
             if ((filter as any)[filterProperty.field]?.length) {

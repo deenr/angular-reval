@@ -1,21 +1,27 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ArticleCardComponent} from './article-card.component';
 
-import {ArticleComponent} from './article-card.component';
-
-describe('ArticleComponent', () => {
-  let component: ArticleComponent;
-  let fixture: ComponentFixture<ArticleComponent>;
+describe('ArticleCardComponent', () => {
+  let component: ArticleCardComponent;
+  let fixture: ComponentFixture<ArticleCardComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ArticleComponent]
+      declarations: [ArticleCardComponent]
     });
-    fixture = TestBed.createComponent(ArticleComponent);
+    fixture = TestBed.createComponent(ArticleCardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('getImageSource', () => {
+    it('should return the correct image path', () => {
+      component.image = 'image';
+
+      expect(component.getImageSource()).toEqual('../../../assets/image/image.webp');
+    });
   });
 });

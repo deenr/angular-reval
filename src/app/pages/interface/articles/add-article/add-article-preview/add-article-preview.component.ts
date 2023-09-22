@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Article} from '@shared/models/article/article.model';
 
 @Component({
   selector: 'app-add-article-preview',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-article-preview.component.scss']
 })
 export class AddArticlePreviewComponent {
-
+  @Input() public article: Article;
 }

@@ -31,7 +31,9 @@
     <mat-divider *ngIf="isMobile" class="footer-divider"></mat-divider>
     <div *ngIf="!isUserProfileIncomplete()" class="profile-item" [class.compact]="isDesktopSidebarCollapsed()">
       <div class="profile flex-row cursor-pointer">
-        <div class="profile__avatar"></div>
+        <div class="profile__avatar">
+          <mat-icon svgIcon="user"></mat-icon>
+        </div>
         <div *ngIf="!isDesktopSidebarCollapsed()">
           <h3 *ngIf="userName" class="profile__name text-sm text-semibold">{{ userName }}</h3>
           <p class="profile__email text-sm text-regular">{{ userEmail }}</p>

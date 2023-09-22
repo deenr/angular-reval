@@ -18,7 +18,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DividerWithTextComponent} from '@custom-components/divider-with-text/divider-with-text.component';
-import {CustomTextInputWithIconComponent} from '@custom-components/custom-text-input-with-icon/custom-text-input-with-icon.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ProgressButtonComponent} from '@custom-components/progress-button/progress-button.component';
 import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
@@ -80,10 +79,12 @@ import {PasswordComponent} from '@pages/interface/settings/settings-password/set
 import {SettingsComponent} from '@pages/interface/settings/settings.component';
 import {UsersComponent} from '@pages/interface/users/users.component';
 import {ArticlesComponent} from './pages/interface/articles/articles.component';
-import { MultipleBadgesComponent } from './custom-components/table/multiple-badges/multiple-badges.component';
-import { AddArticleComponent } from './pages/interface/articles/add-article/add-article.component';
-import { AddArticleGeneralComponent } from './pages/interface/articles/add-article/add-article-general/add-article-general.component';
-import { AddArticlePreviewComponent } from './pages/interface/articles/add-article/add-article-preview/add-article-preview.component';
+import {MultipleBadgesComponent} from './custom-components/table/multiple-badges/multiple-badges.component';
+import {AddArticleComponent} from './pages/interface/articles/add-article/add-article.component';
+import {AddArticleGeneralComponent} from './pages/interface/articles/add-article/add-article-general/add-article-general.component';
+import {AddArticlePreviewComponent} from './pages/interface/articles/add-article/add-article-preview/add-article-preview.component';
+import {ArticlePreviewComponent} from './custom-components/article-preview/article-preview.component';
+import { AddArticleContentComponent } from './pages/interface/articles/add-article/add-article-content/add-article-content.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,6 @@ import { AddArticlePreviewComponent } from './pages/interface/articles/add-artic
     LoginComponent,
     ProgressStepsComponent,
     DividerWithTextComponent,
-    CustomTextInputWithIconComponent,
     LandingPageComponent,
     ProgressButtonComponent,
     SkeletonComponent,
@@ -141,7 +141,9 @@ import { AddArticlePreviewComponent } from './pages/interface/articles/add-artic
     MultipleBadgesComponent,
     AddArticleComponent,
     AddArticleGeneralComponent,
-    AddArticlePreviewComponent
+    AddArticlePreviewComponent,
+    ArticlePreviewComponent,
+    AddArticleContentComponent
   ],
   imports: [
     CommonModule,

@@ -176,33 +176,25 @@
           gap: 12px;
 
           &__avatar {
+            display: grid;
+            place-items: center;
             position: relative;
             min-width: 40px;
             min-height: 40px;
             background-color: $color-primary-500;
             border-radius: 50%;
 
-            @include breakpoint-md() {
-              background-color: $color-grey-200;
-            }
-
-            &::after {
-              content: '';
-              position: absolute;
-              width: 100%;
-              height: 100%;
-              top: 49%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              mask-image: url('../../../../assets/svg/user.svg');
-              mask-repeat: no-repeat;
-              mask-position: 50% 50%;
-              background-color: $color-primary-300;
+            mat-icon {
+              color: $color-primary-300;
 
               @include breakpoint-md() {
-                background-color: $color-grey-700;
+                color: $color-grey-700;
               }
             }
+          }
+
+          @include breakpoint-md() {
+            background-color: $color-grey-200;
           }
 
           &__name {
