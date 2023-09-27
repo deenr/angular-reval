@@ -100,7 +100,7 @@ export class UserOverview {
     return new UserOverview(id, firstName, lastName, email, universityId, role, joined);
   }
 
-  public static convertUserToUserOverview(user: User): UserOverview {
+  public static fromUser(user: User): UserOverview {
     return new UserOverview(user.id, user.firstName, user.lastName, user.email, user.universityId, user.role, user.joined);
   }
 }

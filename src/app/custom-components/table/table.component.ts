@@ -58,7 +58,20 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public getAvatarName(field: string, data: any): string {
     const nameKey = this.columns.find((column: TableColumn) => column.field === field).avatarNameKey;
 
-    return Array.isArray(nameKey) ? nameKey.map((key: string) => data[key]).join(' ') : data[nameKey];
+    const name = Array.isArray(nameKey) ? nameKey.map((key: string) => data[key]).join(' ') : data[nameKey];
+    if (name === ' ' || name === '' || name === null || name === undefined) {
+      return Array.isArray(nameKey) ? nameKey.map((key: string) => data[field][key]).join(' ') : data[field][nameKey];
+    }
+
+    return name;
+  }
+
+  public getAvatarEmail(field: string, data: any): string {
+    const avatarEmailKey = this.columns.find((column: TableColumn) => column.field === field).avatarEmailKey;
+
+    const email = data[avatarEmailKey];
+
+    return email === ' ' || email === '' || email === null || email === undefined ? data[field][avatarEmailKey] : email;
   }
 
   public getBadgeTranslationKey(field: string, value: any): string {

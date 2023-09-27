@@ -4,14 +4,14 @@
     <mat-card-subtitle>Update the article content here</mat-card-subtitle>
     <mat-divider></mat-divider>
   </mat-card-header>
-  <mat-card-content class="article-content__content flex-column" formArrayName="content">
-    <section class="content-type flex-column" *ngFor="let contentControl of contentForm.controls.content.controls; let formIndex = index" [formGroupName]="formIndex">
+  <mat-card-content cdkDropList class="article-content__content flex-column" formArrayName="content" (cdkDropListDropped)="dropArticle($event)">
+    <section cdkDrag class="content-type flex-column" *ngFor="let contentControl of contentForm.controls.content.controls; let formIndex = index" [formGroupName]="formIndex">
       <div class="content-type__wrapper flex-row">
         <div class="content-type__header flex-row">
-          <mat-icon class="drag-icon" svgIcon="dots-dragging"></mat-icon>
+          <mat-icon cdkDragHandle class="drag-icon" svgIcon="dots-dragging"></mat-icon>
           <div class="flex-column">
-            <h3 class="text-sm text-semibold">{{ getHeader(contentControl) }}</h3>
-            <p class="text-sm text-regular">This is the description</p>
+            <h3 class="text-sm text-semibold">{{ getTitle(contentControl) }}</h3>
+            <p class="text-sm text-regular">{{ getDescription(contentControl) }}</p>
           </div>
         </div>
         <ng-container [ngSwitch]="contentControl.value.type">
@@ -23,18 +23,18 @@
               <textarea matInput text="text" formControlName="text" placeholder="Enter text"></textarea>
             </mat-form-field>
           </div>
-          <div class="content-type__form-fields flex-column full-width" *ngSwitchCase="articleContentType.QUOTE">
+          <div class="content-type__form-fields quote flex-column full-width" *ngSwitchCase="articleContentType.QUOTE">
             <mat-form-field>
-              <textarea matInput text="text" formControlName="quote" placeholder="Enter text"></textarea>
+              <textarea matInput text="text" formControlName="quote" placeholder="Enter quote"></textarea>
             </mat-form-field>
             <mat-form-field>
-              <input matInput text="text" formControlName="author" placeholder="Enter title" />
+              <mat-select formControlName="author" placeholder="Select author">
+                <mat-option *ngFor="let author of authors" [value]="author"> {{ author.firstName }} {{ author.lastName }} </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
           <div class="content-type__form-fields flex-column full-width" *ngSwitchCase="articleContentType.IMAGE">
-            <mat-form-field>
-              <input matInput text="text" formControlName="source" placeholder="Enter source" />
-            </mat-form-field>
+            <app-file-upload></app-file-upload>
           </div>
         </ng-container>
       </div>

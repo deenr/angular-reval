@@ -1,15 +1,17 @@
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
+import {User} from '../user/user';
+import {Article} from './article.model';
 
 export class ArticleOverview {
   private _id: string;
   private _title: string;
   private _subtitle: string;
-  private _author: string;
+  private _author: User;
   private _published: Date;
   private _categories: ArticleCategory[];
   private _image: string;
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory[], image: string) {
+  public constructor(id: string, title: string, subtitle: string, author: User, published: Date, categories: ArticleCategory[], image: string) {
     this._id = id;
     this._title = title;
     this._subtitle = subtitle;
@@ -43,11 +45,11 @@ export class ArticleOverview {
     this._subtitle = value;
   }
 
-  public get author(): string {
+  public get author(): User {
     return this._author;
   }
 
-  public set author(value: string) {
+  public set author(value: User) {
     this._author = value;
   }
 
@@ -87,7 +89,7 @@ export class ArticleOverview {
     };
   }
 
-  static fromJSON(json: any): ArticleOverview {
+  public static fromJSON(json: any): ArticleOverview {
     const id = json.id;
     const title = json.title;
     const subtitle = json.subtitle;
@@ -97,5 +99,9 @@ export class ArticleOverview {
     const image = json.image;
 
     return new ArticleOverview(id, title, subtitle, author, published, categories, image);
+  }
+
+  public static fromArticle(article: Article): ArticleOverview {
+    return new ArticleOverview(article.id, article.title, article.subtitle, article.author, article.published, article.categories, article.image);
   }
 }

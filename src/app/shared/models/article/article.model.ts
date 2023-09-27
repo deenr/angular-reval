@@ -2,11 +2,12 @@ import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, Ima
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from './article-overview.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
+import {User} from '../user/user';
 
 export class Article extends ArticleOverview {
   private _content: ArticleContent[];
 
-  public constructor(id: string, title: string, subtitle: string, author: string, published: Date, categories: ArticleCategory[], image: string, content: ArticleContent[]) {
+  public constructor(id: string, title: string, subtitle: string, author: User, published: Date, categories: ArticleCategory[], image: string, content: ArticleContent[]) {
     super(id, title, subtitle, author, published, categories, image);
     this._content = content;
   }

@@ -34,7 +34,15 @@ export class ArticlesComponent implements OnInit {
         .setSortId('title')
         .setFilter((filterBuilder: FilterBuilder) => filterBuilder.setType(FilterType.TEXT).build())
         .build(),
-      new ColumnBuilder().setField('author').setHeaderName('Author').canSort(true).build(),
+      new ColumnBuilder()
+        .setField('author')
+        .setHeaderName('Author')
+        .setDataType(TableDataType.AVATAR)
+        .canSort(true)
+        .setSortId('firstName')
+        .setAvatarNameKey(['firstName', 'lastName'])
+        .setAvatarEmailKey('email')
+        .build(),
       new ColumnBuilder()
         .setField('published')
         .setHeaderName('Published')

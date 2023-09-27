@@ -67,7 +67,8 @@ export class ArticlePreviewComponent {
   }
 
   public getQuoteAuthor(content: ArticleContent): string {
-    return (content as QuoteContent).author;
+    const author = (content as QuoteContent).author;
+    return `${author.firstName} ${author.lastName}`;
   }
 
   public isContentConclusion(articleContentType: ArticleContentType): boolean {

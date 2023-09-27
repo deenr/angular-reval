@@ -3,6 +3,7 @@
 :host {
   .avatar {
     gap: 12px;
+    overflow: hidden;
 
     &__picture {
       display: flex;
@@ -15,6 +16,12 @@
     }
 
     &__details {
+      overflow: hidden;
+    }
+
+    &__email {
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

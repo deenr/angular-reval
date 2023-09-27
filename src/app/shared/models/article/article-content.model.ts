@@ -1,4 +1,5 @@
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
+import {User} from '../user/user';
 
 export abstract class ArticleContent {
   private _type: ArticleContentType;
@@ -198,20 +199,20 @@ export class ImageContent extends ArticleContent {
 }
 
 export class QuoteContent extends ArticleContent {
-  private _author: string;
+  private _author: User;
   private _quote: string;
 
-  public constructor(author: string, quote: string) {
+  public constructor(author: User, quote: string) {
     super(ArticleContentType.QUOTE);
     this._author = author;
     this._quote = quote;
   }
 
-  public get author(): string {
+  public get author(): User {
     return this._author;
   }
 
-  public set author(value: string) {
+  public set author(value: User) {
     this._author = value;
   }
 

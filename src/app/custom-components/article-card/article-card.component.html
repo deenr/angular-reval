@@ -10,7 +10,7 @@
     <div class="content__author flex-row">
       <mat-icon svgIcon="user" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_IMAGE"></mat-icon>
       <div class="full-width" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_NAME">
-        <h5 class="text-sm text-semibold">{{ author }}</h5>
+        <h5 class="text-sm text-semibold">{{ getAuthorName() }}</h5>
         <p class="text-sm text-regular">{{ published }}</p>
       </div>
     </div>

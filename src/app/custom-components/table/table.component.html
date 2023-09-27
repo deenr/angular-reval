@@ -27,7 +27,12 @@
               <app-multiple-badges class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.AVATAR">
-              <app-table-avatar *skeleton="loadingData; type: skeletonType.TABLE_AVATAR" [name]="getAvatarName(column.field, row)" [email]="row[column.avatarEmailKey]"></app-table-avatar>
+              <app-table-avatar
+                *skeleton="loadingData; type: skeletonType.TABLE_AVATAR"
+                class="full-width"
+                [name]="getAvatarName(column.field, row)"
+                [email]="getAvatarEmail(column.field, row)"
+              ></app-table-avatar>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.DATE">
               <span *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] | date }}</span>

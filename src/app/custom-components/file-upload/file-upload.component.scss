@@ -1,0 +1,28 @@
+@import 'variables';
+
+:host {
+  .file-input {
+    display: none;
+  }
+
+  .file-upload {
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid $color-grey-200;
+
+    h3 {
+      margin-top: 12px;
+      color: $color-grey-600;
+
+      span {
+        color: $color-primary-700;
+      }
+    }
+
+    p {
+      margin-top: 4px;
+      color: $color-grey-600;
+    }
+  }
+}

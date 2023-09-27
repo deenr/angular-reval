@@ -39,9 +39,17 @@
     <div class="flex-row content-field">
       <p *ngIf="!isMobile" class="text-sm text-semibold">Categories</p>
       <div class="flex-row form-fields full-width">
-        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+        <!-- <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Categories</mat-label>
           <input formControlName="categories" matInput text="text" placeholder="Enter categories" />
+        </mat-form-field> -->
+        <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+          <mat-label *ngIf="isMobile" class="text-sm text-medium">Categories</mat-label>
+          <mat-select formControlName="categories" placeholder="Select categories" multiple>
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ getArticleCategoryTranslationKey(category) | translate }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>

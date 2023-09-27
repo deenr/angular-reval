@@ -65,15 +65,8 @@ export class NewsComponent implements OnInit {
 
     forkJoin([this.articleService.getOverview(), this.userService.getUsersOverview()]).subscribe(([articles, users]: [ArticleOverview[], UserOverview[]]) => {
       if (articles) {
-        const news = articles.map((article: ArticleOverview) => {
-          const user = users.find((user: UserOverview) => user.id === article.author);
-          const name = `${user.firstName} ${user.lastName}`;
-          article.author = name;
-          return article;
-        });
-
-        this.mainArticle = news?.shift();
-        this.otherArticles = news;
+        this.mainArticle = articles?.shift();
+        this.otherArticles = articles;
         this.loadingArticles = false;
       }
     });

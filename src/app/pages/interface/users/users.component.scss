@@ -44,17 +44,21 @@
 ::ng-deep {
   .mat-column-user {
     min-width: 300px !important;
+    flex: 2;
   }
 
   .mat-column-role {
     min-width: 193px !important;
+    flex: 1;
   }
 
   .mat-column-universityId {
     min-width: 139px !important;
+    flex: 1;
   }
 
   .mat-column-joined {
     min-width: 133px !important;
+    flex: 1;
   }
 }

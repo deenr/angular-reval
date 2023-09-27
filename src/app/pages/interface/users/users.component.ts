@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersTab} from './users-tab.enum';
-import {Tab} from '@custom-components/tabs/tab.interface';
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
 import {BadgeBuilder} from '@custom-components/table/builder/badge-builder';
 import {ColumnBuilder} from '@custom-components/table/builder/column-builder';

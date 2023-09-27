@@ -7,7 +7,7 @@ export class StubArticle {
     return this.getEmptyArticleWithId('');
   }
   public static getEmptyArticleWithId(id: string): Article {
-    return new Article(id, '', '', '', new Date(), [ArticleCategory.RESEARCH_TOOLS, ArticleCategory.APPLICATION_DEVELOPMENT], '', [
+    return new Article(id, '', '', null, new Date(), [ArticleCategory.RESEARCH_TOOLS, ArticleCategory.APPLICATION_DEVELOPMENT], '', [
       new IntroductionContent('', []),
       new TextContent('', []),
       new TextContent('', []),

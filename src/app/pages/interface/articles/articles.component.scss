@@ -48,8 +48,8 @@
   }
 
   .mat-column-author {
-    min-width: 180px !important;
-    max-width: 190px !important;
+    min-width: 255px !important;
+    flex: 2;
   }
 
   .mat-column-published {

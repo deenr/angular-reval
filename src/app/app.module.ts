@@ -84,7 +84,9 @@ import {AddArticleComponent} from './pages/interface/articles/add-article/add-ar
 import {AddArticleGeneralComponent} from './pages/interface/articles/add-article/add-article-general/add-article-general.component';
 import {AddArticlePreviewComponent} from './pages/interface/articles/add-article/add-article-preview/add-article-preview.component';
 import {ArticlePreviewComponent} from './custom-components/article-preview/article-preview.component';
-import { AddArticleContentComponent } from './pages/interface/articles/add-article/add-article-content/add-article-content.component';
+import {AddArticleContentComponent} from './pages/interface/articles/add-article/add-article-content/add-article-content.component';
+import {FileUploadModule} from '@custom-components/file-upload/file-upload.module';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -177,7 +179,9 @@ import { AddArticleContentComponent } from './pages/interface/articles/add-artic
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    DatepickerModule
+    DatepickerModule,
+    FileUploadModule,
+    MatAutocompleteModule
   ],
   providers: [
     DatePipe,

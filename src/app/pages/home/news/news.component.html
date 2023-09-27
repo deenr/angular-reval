@@ -21,7 +21,7 @@
         <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">Written by</p>
         <div class="flex-row author-and-categories__content author" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
           <mat-icon svgIcon="user"></mat-icon>
-          <p class="text-sm text-semibold">{{ mainArticle.author }}</p>
+          <p class="text-sm text-semibold">{{ mainArticle.author.firstName }} {{ mainArticle.author.lastName }}</p>
         </div>
       </div>
       <div class="flex-column">

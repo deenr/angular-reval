@@ -36,7 +36,7 @@ export class AddArticleComponent implements OnInit {
   public contentForm: FormGroup<{
     content: FormArray<
       | FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>
-      | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<string>}>
+      | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User>}>
       | FormGroup<{type: FormControl<ArticleContentType.IMAGE>; source: FormControl<string>}>
     >;
   }>;
@@ -63,7 +63,7 @@ export class AddArticleComponent implements OnInit {
       this.article = article;
       this.authors = authors;
 
-      this.setFormFieldValues(article, authors);
+      this.setFormFieldValues(article);
     });
   }
 
@@ -97,7 +97,7 @@ export class AddArticleComponent implements OnInit {
       null,
       this.articleForm.value.title,
       this.articleForm.value.subtitle,
-      this.articleForm.value.author.id,
+      this.articleForm.value.author,
       this.articleForm.value.published,
       this.articleForm.value.categories,
       null,
@@ -123,11 +123,11 @@ export class AddArticleComponent implements OnInit {
     });
   }
 
-  private setFormFieldValues(article: Article, authors: User[]): void {
+  private setFormFieldValues(article: Article): void {
     this.articleForm.setValue({
       title: article.title,
       subtitle: article.subtitle,
-      author: authors.find((user: User) => article.author === user.id),
+      author: article.author,
       categories: article.categories,
       published: article.published
     });
@@ -176,6 +176,7 @@ export class AddArticleComponent implements OnInit {
               author: new FormControl(qouteContent.author, Validators.required)
             })
           );
+
           break;
         case ArticleContentType.CONCLUSION:
           const conclusionContent = content as ConclusionContent;
@@ -206,7 +207,7 @@ export interface TextContentFormGroup {
 export interface QuoteContentFormGroup {
   type: ArticleContentType;
   quote: string;
-  author: string;
+  author: User;
 }
 
 export interface ImageContentFormGroup {

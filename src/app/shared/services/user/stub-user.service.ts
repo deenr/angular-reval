@@ -16,7 +16,7 @@ export class StubUserService {
   }
 
   public getUsersOverview(): Observable<UserOverview[]> {
-    return of(this.users.map((user: User) => UserOverview.convertUserToUserOverview(user)));
+    return of(this.users.map((user: User) => UserOverview.fromUser(user)));
   }
 
   public getUserById(id: string): Observable<User> {
