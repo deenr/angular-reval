@@ -68,7 +68,6 @@ export class AddArticleComponent implements OnInit {
   }
 
   public isTabActive(addArticleTab: AddArticleTab): boolean {
-    this.getArticleToSave();
     return this.getActiveTab().id === addArticleTab;
   }
 
@@ -84,11 +83,11 @@ export class AddArticleComponent implements OnInit {
         const textContent = content as TextContentFormGroup;
 
         if (index === 0) {
-          return new IntroductionContent(textContent.title, textContent.text.split('\n\n'));
+          return new IntroductionContent(textContent.title, textContent.text?.split('\n\n'));
         } else if (index === this.contentForm.value.content.length - 1) {
-          return new ConclusionContent(textContent.title, textContent.text.split('\n\n'));
+          return new ConclusionContent(textContent.title, textContent.text?.split('\n\n'));
         } else {
-          return new TextContent(textContent.title, textContent.text.split('\n\n'));
+          return new TextContent(textContent.title, textContent.text?.split('\n\n'));
         }
       }
     });

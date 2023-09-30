@@ -196,12 +196,20 @@ export const SVG_ICONS = [
     "path": "./assets/svg/illustration/square-desktop.svg"
   },
   {
+    "name": "image",
+    "path": "./assets/svg/image.svg"
+  },
+  {
     "name": "layer-group",
     "path": "./assets/svg/layer-group.svg"
   },
   {
     "name": "left-arrow-from-left",
     "path": "./assets/svg/left-arrow-from-left.svg"
+  },
+  {
+    "name": "letters",
+    "path": "./assets/svg/letters.svg"
   },
   {
     "name": "loading",
@@ -316,6 +324,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/question.svg"
   },
   {
+    "name": "quote",
+    "path": "./assets/svg/quote.svg"
+  },
+  {
     "name": "search",
     "path": "./assets/svg/search.svg"
   },
@@ -326,6 +338,10 @@ export const SVG_ICONS = [
   {
     "name": "sign-out",
     "path": "./assets/svg/sign-out.svg"
+  },
+  {
+    "name": "text",
+    "path": "./assets/svg/text.svg"
   },
   {
     "name": "toolbox",

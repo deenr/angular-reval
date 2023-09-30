@@ -33,4 +33,8 @@ export class FooterComponent {
       ]
     }
   ];
+
+  public openLink(url: string): void {
+    window.open(url, '_blank');
+  }
 }

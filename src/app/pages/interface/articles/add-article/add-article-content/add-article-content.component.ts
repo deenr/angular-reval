@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {FormArray, FormGroup, FormControl} from '@angular/forms';
+import {Component, Input, ViewChild} from '@angular/core';
+import {FormArray, FormGroup, FormControl, Validators} from '@angular/forms';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {User} from '@shared/models/user/user';
 import {TextContentFormGroup, QuoteContentFormGroup, ImageContentFormGroup} from '../add-article.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-add-article-content',
@@ -12,6 +13,7 @@ import {CdkDragDrop} from '@angular/cdk/drag-drop';
   styleUrls: ['./add-article-content.component.scss']
 })
 export class AddArticleContentComponent {
+  @ViewChild('changeContentMenu') public changeContentMenu: MatMenuTrigger;
   @Input() public isMobile: boolean;
   @Input() public authors: User[];
   @Input() public contentForm: FormGroup<{
@@ -63,6 +65,58 @@ export class AddArticleContentComponent {
 
   public dropArticle(event: CdkDragDrop<string[]>): void {
     this.moveItemInFormArray(this.contentForm.controls.content, event.previousIndex, event.currentIndex);
+  }
+
+  public addText(): void {
+    this.contentForm.controls.content.push(
+      new FormGroup({
+        type: new FormControl(ArticleContentType.TEXT),
+        title: new FormControl(null, Validators.required),
+        text: new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  public addImage(): void {
+    this.contentForm.controls.content.push(
+      new FormGroup({
+        type: new FormControl(ArticleContentType.IMAGE),
+        source: new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  public addQuote(): void {
+    this.contentForm.controls.content.push(
+      new FormGroup({
+        type: new FormControl(ArticleContentType.QUOTE),
+        quote: new FormControl(null, Validators.required),
+        author: new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  public deleteContent(index: number): void {
+    this.contentForm.controls.content.removeAt(index);
+  }
+
+  public changeType(contentType: ArticleContentType, index: number): void {
+    switch (contentType) {
+      case ArticleContentType.TEXT:
+        this.addText();
+        break;
+      case ArticleContentType.IMAGE:
+        this.addImage();
+        break;
+      case ArticleContentType.QUOTE:
+        this.addQuote();
+        break;
+    }
+
+    this.deleteContent(index);
+
+    const contentArray = this.contentForm.controls.content;
+    this.moveItemInFormArray(contentArray, contentArray.length - 1, index);
   }
 
   private moveItemInFormArray(formArray: FormArray, fromIndex: number, toIndex: number): void {
