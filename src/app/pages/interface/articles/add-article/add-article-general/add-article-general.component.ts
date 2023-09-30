@@ -14,7 +14,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
   templateUrl: './add-article-general.component.html',
   styleUrls: ['./add-article-general.component.scss']
 })
-export class AddArticleGeneralComponent {
+export class AddArticleGeneralComponent implements OnInit {
   @Input() public isMobile: boolean;
   @Input() public articleForm: FormGroup<{
     title: FormControl<string>;
@@ -25,6 +25,19 @@ export class AddArticleGeneralComponent {
   }>;
   @Input() public authors: User[];
   @Input() public loadingArticle: boolean;
+
+  public ngOnInit(): void {
+    const title = this.articleForm.value.title;
+    const subtitle = this.articleForm.value.subtitle;
+
+    this.articleForm.controls.title.setValue(`${title} `);
+    this.articleForm.controls.subtitle.setValue(`${subtitle} `);
+
+    setTimeout(() => {
+      this.articleForm.controls.subtitle.setValue(`${subtitle}`);
+      this.articleForm.controls.title.setValue(`${title}`);
+    });
+  }
 
   public readonly categories = [
     ArticleCategory.RESEARCH_TOOLS,
