@@ -119,6 +119,29 @@ export class AddArticleContentComponent {
     this.moveItemInFormArray(contentArray, contentArray.length - 1, index);
   }
 
+  public canMoveUp(index: number): boolean {
+    return index !== 0;
+  }
+
+  public canMoveDown(index: number): boolean {
+    const contentArray = this.contentForm.controls.content;
+    return contentArray.length > 1 && index !== contentArray.length - 1;
+  }
+
+  public moveUp(index: number): void {
+    if (this.canMoveUp(index)) {
+      const contentArray = this.contentForm.controls.content;
+      this.moveItemInFormArray(contentArray, index, index - 1);
+    }
+  }
+
+  public moveDown(index: number): void {
+    if (this.canMoveDown(index)) {
+      const contentArray = this.contentForm.controls.content;
+      this.moveItemInFormArray(contentArray, index, index + 1);
+    }
+  }
+
   private moveItemInFormArray(formArray: FormArray, fromIndex: number, toIndex: number): void {
     const dir = toIndex > fromIndex ? 1 : -1;
 

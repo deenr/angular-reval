@@ -21,12 +21,12 @@
               <input matInput text="text" formControlName="title" placeholder="Enter title" />
             </mat-form-field>
             <mat-form-field>
-              <textarea matInput text="text" formControlName="text" placeholder="Enter text"></textarea>
+              <textarea matInput text="text" formControlName="text" placeholder="Enter text" cdkTextareaAutosize></textarea>
             </mat-form-field>
           </div>
           <div class="content-type__form-fields quote flex-column full-width" *ngSwitchCase="articleContentType.QUOTE">
             <mat-form-field>
-              <textarea matInput text="text" formControlName="quote" placeholder="Enter quote"></textarea>
+              <textarea matInput text="text" formControlName="quote" placeholder="Enter quote" cdkTextareaAutosize></textarea>
             </mat-form-field>
             <mat-form-field>
               <mat-select formControlName="author" placeholder="Select author">
@@ -51,11 +51,21 @@
 
 <mat-menu class="add-content-menu shadow-xl-important" #changeContentMenu="matMenu">
   <ng-template matMenuContent let-index="index">
-    <div mat-menu-item class="cursor-pointer" [matMenuTriggerFor]="changeContentTypeMenu" [matMenuTriggerData]="{index: index}">
+    <div mat-menu-item class="mobile-only" [disabled]="!canMoveUp(index)" (click)="moveUp(index)">
+      <mat-icon svgIcon="chevron-up"></mat-icon>
+      <p class="text-sm text-medium">Move up</p>
+    </div>
+    <div mat-menu-item class="mobile-only" [disabled]="!canMoveDown(index)" (click)="moveDown(index)">
+      <mat-icon svgIcon="chevron-down"></mat-icon>
+      <p class="text-sm text-medium">Move down</p>
+    </div>
+    <mat-divider class="mobile-only"></mat-divider>
+    <div mat-menu-item [matMenuTriggerFor]="changeContentTypeMenu" [matMenuTriggerData]="{index: index}">
       <mat-icon svgIcon="text"></mat-icon>
       <p class="text-sm text-medium">Change type</p>
     </div>
-    <div mat-menu-item class="cursor-pointer" (click)="deleteContent(index)">
+    <mat-divider></mat-divider>
+    <div mat-menu-item (click)="deleteContent(index)">
       <mat-icon svgIcon="trash"></mat-icon>
       <p class="text-sm text-medium">Delete</p>
     </div>
@@ -64,15 +74,15 @@
 
 <mat-menu class="add-content-menu shadow-xl-important" #changeContentTypeMenu="matMenu">
   <ng-template matMenuContent let-index="index">
-    <div mat-menu-item class="cursor-pointer" (click)="changeType(articleContentType.TEXT, index)">
+    <div mat-menu-item (click)="changeType(articleContentType.TEXT, index)">
       <mat-icon svgIcon="letters"></mat-icon>
       <p class="text-sm text-medium">Text</p>
     </div>
-    <div mat-menu-item class="cursor-pointer" (click)="changeType(articleContentType.IMAGE, index)">
+    <div mat-menu-item (click)="changeType(articleContentType.IMAGE, index)">
       <mat-icon svgIcon="image"></mat-icon>
       <p class="text-sm text-medium">Image</p>
     </div>
-    <div mat-menu-item class="cursor-pointer" (click)="changeType(articleContentType.QUOTE, index)">
+    <div mat-menu-item (click)="changeType(articleContentType.QUOTE, index)">
       <mat-icon svgIcon="quote"></mat-icon>
       <p class="text-sm text-medium">Quote</p>
     </div>
@@ -80,15 +90,15 @@
 </mat-menu>
 
 <mat-menu class="add-content-menu shadow-xl-important" #addContentMenu="matMenu">
-  <div mat-menu-item class="cursor-pointer" (click)="addText()">
+  <div mat-menu-item (click)="addText()">
     <mat-icon svgIcon="letters"></mat-icon>
     <p class="text-sm text-medium">Text</p>
   </div>
-  <div mat-menu-item class="cursor-pointer" (click)="addImage()">
+  <div mat-menu-item (click)="addImage()">
     <mat-icon svgIcon="image"></mat-icon>
     <p class="text-sm text-medium">Image</p>
   </div>
-  <div mat-menu-item class="cursor-pointer" (click)="addQuote()">
+  <div mat-menu-item (click)="addQuote()">
     <mat-icon svgIcon="quote"></mat-icon>
     <p class="text-sm text-medium">Quote</p>
   </div>

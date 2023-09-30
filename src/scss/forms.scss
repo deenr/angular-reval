@@ -103,13 +103,20 @@
           font-weight: $fw-400;
           font-size: $fs-100;
           line-height: 150%;
-
           padding: 8px 12px;
           border-radius: 7px;
         }
 
         input::placeholder {
           color: $color-grey-500;
+        }
+
+        &:has(.cdk-textarea-autosize) {
+          padding: 8px 12px;
+
+          & > * {
+            padding: 0;
+          }
         }
 
         &:has(.mat-mdc-select[aria-expanded='true']) {
