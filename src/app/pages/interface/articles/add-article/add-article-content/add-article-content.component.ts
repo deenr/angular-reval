@@ -3,7 +3,7 @@ import {FormArray, FormGroup, FormControl, Validators} from '@angular/forms';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {User} from '@shared/models/user/user';
-import {TextContentFormGroup, QuoteContentFormGroup, ImageContentFormGroup} from '../add-article.component';
+import {TextContentFormType, QuoteContentFormType, ImageContentFormType, ImageContentFormGroup, QuoteContentFormGroup, TextContentFormGroup} from '../add-article.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {MatMenuTrigger} from '@angular/material/menu';
 
@@ -17,15 +17,13 @@ export class AddArticleContentComponent {
   @Input() public isMobile: boolean;
   @Input() public authors: User[];
   @Input() public contentForm: FormGroup<{
-    content: FormArray<
-      | FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>
-      | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User>}>
-      | FormGroup<{type: FormControl<ArticleContentType.IMAGE>; source: FormControl<string>}>
-    >;
+    content: FormArray<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>;
   }>;
 
   public skeletonType = SkeletonType;
   public articleContentType = ArticleContentType;
+
+  public constructor() {}
 
   public isContentText(articleContentType: ArticleContentType): boolean {
     return articleContentType === ArticleContentType.TEXT;
@@ -45,9 +43,9 @@ export class AddArticleContentComponent {
     } else if (contentControl.value.type === ArticleContentType.QUOTE) {
       return 'Quote';
     } else {
-      const textContent = this.contentForm.value.content.filter((content: Partial<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>) => content.type === ArticleContentType.TEXT);
+      const textContent = this.contentForm.value.content.filter((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>) => content.type === ArticleContentType.TEXT);
 
-      const index = textContent.findIndex((content: Partial<TextContentFormGroup>) => content === contentControl.value);
+      const index = textContent.findIndex((content: Partial<TextContentFormType>) => content === contentControl.value);
 
       if (index === 0) {
         return 'Introduction';
@@ -81,6 +79,8 @@ export class AddArticleContentComponent {
     this.contentForm.controls.content.push(
       new FormGroup({
         type: new FormControl(ArticleContentType.IMAGE),
+        file: new FormControl(null),
+        name: new FormControl(null, Validators.required),
         source: new FormControl(null, Validators.required)
       })
     );
@@ -142,6 +142,20 @@ export class AddArticleContentComponent {
     }
   }
 
+  public uploadFile(file: File, index: number): void {
+    const reader = new FileReader();
+    reader.onload = () => {
+      (this.contentForm.controls.content.at(index) as ImageContentFormGroup).controls.file.setValue(file);
+      (this.contentForm.controls.content.at(index) as ImageContentFormGroup).controls.name.setValue(file.name);
+      (this.contentForm.controls.content.at(index) as ImageContentFormGroup).controls.source.setValue(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  public getImage(index: number): Partial<ImageContentFormType> {
+    return (this.contentForm.controls.content.at(index) as ImageContentFormGroup).value;
+  }
+
   private moveItemInFormArray(formArray: FormArray, fromIndex: number, toIndex: number): void {
     const dir = toIndex > fromIndex ? 1 : -1;
 
@@ -155,7 +169,4 @@ export class AddArticleContentComponent {
   }
 }
 
-type ContentFormGroup =
-  | FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>
-  | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User>}>
-  | FormGroup<{type: FormControl<ArticleContentType.IMAGE>; source: FormControl<string>}>;
+type ContentFormGroup = TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup;

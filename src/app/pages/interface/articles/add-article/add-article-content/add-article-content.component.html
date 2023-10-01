@@ -34,8 +34,11 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="content-type__form-fields flex-column full-width" *ngSwitchCase="articleContentType.IMAGE">
-            <app-file-upload></app-file-upload>
+          <div class="content-type__form-fields image flex-row full-width" *ngSwitchCase="articleContentType.IMAGE">
+            <div class="image-preview" *ngIf="getImage(formIndex).source">
+              <img class="full-width full-height" [src]="getImage(formIndex).source" [alt]="getImage(formIndex).name" />
+            </div>
+            <app-file-upload (fileSelected)="uploadFile($event, formIndex)"></app-file-upload>
           </div>
         </ng-container>
       </div>

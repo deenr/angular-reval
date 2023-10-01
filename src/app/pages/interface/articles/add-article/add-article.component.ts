@@ -34,11 +34,7 @@ export class AddArticleComponent implements OnInit {
   }>;
 
   public contentForm: FormGroup<{
-    content: FormArray<
-      | FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>
-      | FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User>}>
-      | FormGroup<{type: FormControl<ArticleContentType.IMAGE>; source: FormControl<string>}>
-    >;
+    content: FormArray<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>;
   }>;
 
   public authors: User[];
@@ -81,18 +77,18 @@ export class AddArticleComponent implements OnInit {
   public getArticleToSave(): Article {
     let imageSource: string;
 
-    const content = this.contentForm.value.content.map((content: Partial<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>, index: number) => {
-      if ((content as QuoteContentFormGroup).quote) {
-        const quoteContent = content as QuoteContentFormGroup;
+    const content = this.contentForm.value.content.map((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>, index: number) => {
+      if ((content as QuoteContentFormType).quote) {
+        const quoteContent = content as QuoteContentFormType;
         return new QuoteContent(quoteContent.author, quoteContent.quote);
-      } else if ((content as ImageContentFormGroup).source) {
+      } else if ((content as ImageContentFormType).source) {
         const imageContent = content as ImageContent;
         if (imageSource === undefined) {
           imageSource = imageContent.source;
         }
         return new ImageContent(imageContent.source);
       } else {
-        const textContent = content as TextContentFormGroup;
+        const textContent = content as TextContentFormType;
 
         if (index === 0) {
           return new IntroductionContent(textContent.title, textContent.text?.split('\n\n'));
@@ -238,6 +234,8 @@ export class AddArticleComponent implements OnInit {
           this.contentForm.controls.content.push(
             new FormGroup({
               type: new FormControl(ArticleContentType.IMAGE),
+              file: new FormControl(null),
+              name: new FormControl('', Validators.required),
               source: new FormControl(imageContent.source, Validators.required)
             })
           );
@@ -286,19 +284,27 @@ export class AddArticleComponent implements OnInit {
   }
 }
 
-export interface TextContentFormGroup {
+export interface TextContentFormType {
   type: ArticleContentType;
   title: string;
   text: string;
 }
 
-export interface QuoteContentFormGroup {
+export interface QuoteContentFormType {
   type: ArticleContentType;
   quote: string;
   author: User;
 }
 
-export interface ImageContentFormGroup {
+export interface ImageContentFormType {
   type: ArticleContentType;
+  file: File;
+  name: string;
   source: string;
 }
+
+export type TextContentFormGroup = FormGroup<{type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string>}>;
+
+export type QuoteContentFormGroup = FormGroup<{type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User>}>;
+
+export type ImageContentFormGroup = FormGroup<{type: FormControl<ArticleContentType.IMAGE>; file: FormControl<File>; name: FormControl<string>; source: FormControl<string>}>;
