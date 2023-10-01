@@ -79,12 +79,17 @@ export class AddArticleComponent implements OnInit {
   }
 
   public getArticleToSave(): Article {
+    let imageSource: string;
+
     const content = this.contentForm.value.content.map((content: Partial<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>, index: number) => {
       if ((content as QuoteContentFormGroup).quote) {
         const quoteContent = content as QuoteContentFormGroup;
         return new QuoteContent(quoteContent.author, quoteContent.quote);
       } else if ((content as ImageContentFormGroup).source) {
         const imageContent = content as ImageContent;
+        if (imageSource === undefined) {
+          imageSource = imageContent.source;
+        }
         return new ImageContent(imageContent.source);
       } else {
         const textContent = content as TextContentFormGroup;
@@ -100,15 +105,24 @@ export class AddArticleComponent implements OnInit {
     });
 
     return new Article(
-      this.article?.id,
+      this.article?.id ??
+        this.articleForm.value?.title
+          .split(' ')
+          .slice(0, 5)
+          .map((value: string) => this.removeNonAlphabetCharacters(value.toLowerCase()))
+          .join('-'),
       this.articleForm.value?.title,
       this.articleForm.value?.subtitle,
       this.articleForm.value?.author,
       this.articleForm.value?.published,
       this.articleForm.value?.categories,
-      this.article?.image,
+      imageSource,
       content
     );
+  }
+
+  public cancel(): void {
+    this.location.back();
   }
 
   public saveArticle(): void {
@@ -121,12 +135,10 @@ export class AddArticleComponent implements OnInit {
       const articleToSave = this.getArticleToSave();
       if (this.isAddingArticle()) {
         this.articleService.save(articleToSave).subscribe((id: string) => {
-          console.log(id);
           this.location.back();
         });
       } else {
         this.articleService.update(articleToSave).subscribe((id: string) => {
-          console.log(id);
           this.location.back();
         });
       }
@@ -176,7 +188,7 @@ export class AddArticleComponent implements OnInit {
       //     type: new FormControl(ArticleContentType.IMAGE),
       //     source: new FormControl('', Validators.required)
       //   })
-      // );
+      // );`
 
       this.contentForm.controls.content.push(
         new FormGroup({
@@ -259,6 +271,18 @@ export class AddArticleComponent implements OnInit {
     });
 
     this.loadingArticle = false;
+  }
+
+  private removeNonAlphabetCharacters(input: string): string {
+    const regex = /[a-z]/g;
+
+    const matches = input.match(regex);
+
+    if (matches) {
+      return matches.join('');
+    } else {
+      return '';
+    }
   }
 }
 

@@ -44,8 +44,8 @@ export class StubArticleService {
   }
 
   public save(newArticle: Article): Observable<string> {
-    newArticle.id = newArticle.title.replace(' ', '-');
     this.articles.push(newArticle);
+
     return of(newArticle.id);
   }
 

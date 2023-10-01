@@ -30,12 +30,14 @@ export class AddArticleGeneralComponent implements OnInit {
     const title = this.articleForm.value.title;
     const subtitle = this.articleForm.value.subtitle;
 
-    this.articleForm.controls.title.setValue(`${title} `);
-    this.articleForm.controls.subtitle.setValue(`${subtitle} `);
-
     setTimeout(() => {
-      this.articleForm.controls.subtitle.setValue(`${subtitle}`);
-      this.articleForm.controls.title.setValue(`${title}`);
+      this.articleForm.controls.title.setValue(`${title} .`);
+      this.articleForm.controls.subtitle.setValue(`${subtitle} .`);
+
+      setTimeout(() => {
+        this.articleForm.controls.subtitle.setValue(`${subtitle}`);
+        this.articleForm.controls.title.setValue(`${title}`);
+      }, 50);
     });
   }
 
