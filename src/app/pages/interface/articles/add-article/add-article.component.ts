@@ -9,9 +9,9 @@ import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import {User} from '@shared/models/user/user';
 import {StubUserService} from '@shared/services/user/stub-user.service';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {forkJoin} from 'rxjs';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-article',
@@ -45,13 +45,15 @@ export class AddArticleComponent implements OnInit {
   public addArticleTab = AddArticleTab;
   public article: Article;
   public isMobile: boolean;
-  public loadingArticle = true;
+  public loadingArticle = false;
+  public savingArticle = false;
 
   public constructor(
     private readonly articleService: StubArticleService,
     private readonly userService: StubUserService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly breakpointService: BreakpointService
+    private readonly breakpointService: BreakpointService,
+    private readonly location: Location
   ) {}
 
   public ngOnInit(): void {
@@ -59,12 +61,17 @@ export class AddArticleComponent implements OnInit {
 
     this.setFormField();
 
-    forkJoin([this.articleService.getArticleById(this.activatedRoute.snapshot.paramMap.get('id')), this.userService.getUsers()]).subscribe(([article, authors]: [Article, User[]]) => {
-      this.article = article;
-      this.authors = authors;
+    this.userService.getUsers().subscribe((authors: User[]) => (this.authors = authors));
 
-      this.setFormFieldValues(article);
-    });
+    if (!this.isAddingArticle()) {
+      this.loadingArticle = true;
+
+      this.articleService.getArticleById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe((article: Article) => {
+        this.article = article;
+
+        this.setFormFieldValues(article);
+      });
+    }
   }
 
   public isTabActive(addArticleTab: AddArticleTab): boolean {
@@ -93,15 +100,41 @@ export class AddArticleComponent implements OnInit {
     });
 
     return new Article(
-      null,
-      this.articleForm.value.title,
-      this.articleForm.value.subtitle,
-      this.articleForm.value.author,
-      this.articleForm.value.published,
-      this.articleForm.value.categories,
-      null,
+      this.article?.id,
+      this.articleForm.value?.title,
+      this.articleForm.value?.subtitle,
+      this.articleForm.value?.author,
+      this.articleForm.value?.published,
+      this.articleForm.value?.categories,
+      this.article?.image,
       content
     );
+  }
+
+  public saveArticle(): void {
+    this.articleForm.markAllAsTouched();
+    this.contentForm.markAllAsTouched();
+
+    if (this.articleForm.valid && this.contentForm.valid) {
+      this.savingArticle = true;
+
+      const articleToSave = this.getArticleToSave();
+      if (this.isAddingArticle()) {
+        this.articleService.save(articleToSave).subscribe((id: string) => {
+          console.log(id);
+          this.location.back();
+        });
+      } else {
+        this.articleService.update(articleToSave).subscribe((id: string) => {
+          console.log(id);
+          this.location.back();
+        });
+      }
+    }
+  }
+
+  public isAddingArticle(): boolean {
+    return this.activatedRoute.snapshot.routeConfig.path.includes('add');
   }
 
   private getActiveTab(): Tab {
@@ -110,8 +143,8 @@ export class AddArticleComponent implements OnInit {
 
   private setFormField(): void {
     this.articleForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      subtitle: new FormControl(null, Validators.required),
+      title: new FormControl('', Validators.required),
+      subtitle: new FormControl('', Validators.required),
       author: new FormControl(null, Validators.required),
       categories: new FormControl(null, Validators.required),
       published: new FormControl(null, Validators.required)
@@ -120,6 +153,39 @@ export class AddArticleComponent implements OnInit {
     this.contentForm = new FormGroup({
       content: new FormArray([])
     });
+
+    if (this.isAddingArticle()) {
+      this.contentForm.controls.content.push(
+        new FormGroup({
+          type: new FormControl(ArticleContentType.TEXT),
+          title: new FormControl('', Validators.required),
+          text: new FormControl('', Validators.required)
+        })
+      );
+
+      this.contentForm.controls.content.push(
+        new FormGroup({
+          type: new FormControl(ArticleContentType.QUOTE),
+          quote: new FormControl('', Validators.required),
+          author: new FormControl(null, Validators.required)
+        })
+      );
+
+      // this.contentForm.controls.content.push(
+      //   new FormGroup({
+      //     type: new FormControl(ArticleContentType.IMAGE),
+      //     source: new FormControl('', Validators.required)
+      //   })
+      // );
+
+      this.contentForm.controls.content.push(
+        new FormGroup({
+          type: new FormControl(ArticleContentType.TEXT),
+          title: new FormControl('', Validators.required),
+          text: new FormControl('', Validators.required)
+        })
+      );
+    }
   }
 
   private setFormFieldValues(article: Article): void {
@@ -130,7 +196,6 @@ export class AddArticleComponent implements OnInit {
       categories: article.categories,
       published: article.published
     });
-
     this.article.content.forEach((content: ArticleContent) => {
       switch (content.type) {
         case ArticleContentType.INTRODUCTION:

@@ -42,4 +42,15 @@ export class StubArticleService {
   public getArticleById(id: string): Observable<Article> {
     return of(this.articles.find((article: Article) => article.id === id));
   }
+
+  public save(newArticle: Article): Observable<string> {
+    newArticle.id = newArticle.title.replace(' ', '-');
+    this.articles.push(newArticle);
+    return of(newArticle.id);
+  }
+
+  public update(newArticle: Article): Observable<string> {
+    this.articles = this.articles.map((article: Article) => (article.id === newArticle.id ? newArticle : article));
+    return of(newArticle.id);
+  }
 }

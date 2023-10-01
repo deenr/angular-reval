@@ -1,5 +1,5 @@
 <div class="add-article flex-column full-height">
-  <app-header title="Add article" [tabs]="tabs"></app-header>
+  <app-header title="{{ isAddingArticle() ? 'Add' : 'Edit' }} article" [tabs]="tabs"></app-header>
   <app-add-article-general
     *ngIf="isTabActive(addArticleTab.GENERAL)"
     class="add-article__field full-height"
@@ -21,7 +21,7 @@
     <mat-divider class="full-width"></mat-divider>
     <div class="actions flex-row full-width">
       <button mat-stroked-button class="md">Cancel</button>
-      <app-progress-button size="md">Save</app-progress-button>
+      <app-progress-button size="md" [loading]="savingArticle" (progressClick)="saveArticle()">Save</app-progress-button>
     </div>
   </footer>
 </div>
