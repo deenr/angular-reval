@@ -1,6 +1,6 @@
 <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload />
 
-<div class="file-upload flex-column cursor-pointer" (click)="fileUpload.click()">
+<div class="file-upload flex-column cursor-pointer" [class.invalid]="invalid" (click)="fileUpload.click()">
   <mat-icon class="featured-md" svgIcon="cloud-upload"></mat-icon>
 
   <h3 class="text-sm text-regular"><span class="text-semibold">Click to upload</span> or drag and drop</h3>

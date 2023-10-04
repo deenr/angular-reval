@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
@@ -11,10 +11,13 @@ import * as moment from 'moment';
   templateUrl: './article-preview.component.html',
   styleUrls: ['./article-preview.component.scss']
 })
-export class ArticlePreviewComponent {
+export class ArticlePreviewComponent implements OnInit {
   @Input() public article: Article;
+  @Input() public images: {name: string; source: string; file: File}[];
   @Input() public loadingArticle = false;
   public skeletonType = SkeletonType;
+
+  private loadedImages: {name: string; source: string}[] = [];
 
   private categoryTranslation = new Map<ArticleCategory, string>([
     [ArticleCategory.RESEARCH_TOOLS, 'Tools'],
@@ -34,6 +37,21 @@ export class ArticlePreviewComponent {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
+  public ngOnInit(): void {
+    this.images.forEach((image: {name: string; source: string; file: File}) => {
+      if (image.source) {
+        this.loadedImages.push({name: image.name, source: image.source});
+      } else {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.loadedImages.push({name: image.name, source: reader.result as string});
+          return;
+        };
+        reader.readAsDataURL(image.file);
+      }
+    });
+  }
+
   public getTitle(content: ArticleContent): string {
     return (content as IntroductionContent | TextContent | ConclusionContent).title;
   }
@@ -51,7 +69,7 @@ export class ArticlePreviewComponent {
   }
 
   public getImageSource(content: ArticleContent): string {
-    return `../../../assets/image/${(content as ImageContent).source}.webp`;
+    return this.loadedImages.find((image: {name: string; source: string}) => (content as ImageContent).name === image.name)?.source;
   }
 
   public isContentText(articleContentType: ArticleContentType): boolean {

@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -7,6 +7,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+  @Input() public invalid: boolean;
   @Output() public fileSelected = new EventEmitter<File>();
 
   public fileName = '';

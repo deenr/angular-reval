@@ -23,7 +23,7 @@ export const articles = [
         ]
       },
       {
-        source: 'first-team-picture',
+        name: 'first-team-picture.webp',
         type: 'IMAGE'
       },
       {
@@ -102,7 +102,7 @@ export const articles = [
         ]
       },
       {
-        source: 'sphience-updates',
+        name: 'sphience-updates.webp',
         type: 'IMAGE'
       },
       {
@@ -148,7 +148,7 @@ export const articles = [
         ]
       },
       {
-        source: 'sphience-team-photo',
+        name: 'sphience-team-photo.webp',
         type: 'IMAGE'
       },
       {
@@ -202,7 +202,7 @@ export const articles = [
         ]
       },
       {
-        source: 'sphience-roadmap',
+        name: 'sphience-roadmap.webp',
         type: 'IMAGE'
       },
       {
@@ -256,7 +256,7 @@ export const articles = [
         ]
       },
       {
-        source: 'sphience-award',
+        name: 'sphience-award.webp',
         type: 'IMAGE'
       },
       {
@@ -369,7 +369,7 @@ export const articles = [
       {
         title: 'Illustrating Global Presence',
         type: 'IMAGE',
-        source: 'sphience-global-presence'
+        name: 'sphience-global-presence.webp'
       },
       {
         title: 'Conclusion',
@@ -401,7 +401,7 @@ export const articles = [
       {
         title: 'Showcasing Functionality and Benefits',
         type: 'IMAGE',
-        source: 'sphience-new-modules'
+        name: 'sphience-new-modules.webp'
       },
       {
         title: 'Enhanced Data Analysis',
@@ -474,7 +474,7 @@ export const articles = [
       {
         title: 'Illustrating Collaborative Setting',
         type: 'IMAGE',
-        source: 'sphience-university-collaboration'
+        name: 'sphience-university-collaboration.webp'
       },
       {
         title: 'Future Impact',
@@ -550,7 +550,7 @@ export const articles = [
       {
         title: 'Illustrating Interface Enhancements',
         type: 'IMAGE',
-        source: 'sphience-interface-comparison'
+        name: 'sphience-interface-comparison.webp'
       },
       {
         title: 'Conclusion',

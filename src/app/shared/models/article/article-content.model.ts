@@ -169,32 +169,32 @@ export class ConclusionContent extends ArticleContent {
 }
 
 export class ImageContent extends ArticleContent {
-  private _source: string;
+  private _name: string;
 
-  public constructor(source: string) {
+  public constructor(name: string) {
     super(ArticleContentType.IMAGE);
-    this._source = source;
+    this._name = name;
   }
 
-  public get source(): string {
-    return this._source;
+  public get name(): string {
+    return this._name;
   }
 
-  public set source(value: string) {
-    this._source = value;
+  public set name(value: string) {
+    this._name = value;
   }
 
   public toJSON(): object {
     return {
       ...super.toJSON(),
-      source: this.source
+      name: this.name
     };
   }
 
   public static fromJSON(json: any): ImageContent {
-    const source = json.source;
+    const name = json.name;
 
-    return new ImageContent(source);
+    return new ImageContent(name);
   }
 }
 

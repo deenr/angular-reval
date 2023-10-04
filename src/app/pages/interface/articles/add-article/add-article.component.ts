@@ -12,6 +12,8 @@ import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {Location} from '@angular/common';
+import {Observable, connect, forkJoin} from 'rxjs';
+import {HttpImageService} from '@shared/services/image/http-image.service';
 
 @Component({
   selector: 'app-add-article',
@@ -47,6 +49,7 @@ export class AddArticleComponent implements OnInit {
   public constructor(
     private readonly articleService: StubArticleService,
     private readonly userService: StubUserService,
+    private readonly imageService: HttpImageService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly breakpointService: BreakpointService,
     private readonly location: Location
@@ -75,7 +78,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   public getArticleToSave(): Article {
-    let imageSource: string;
+    let imageName: string;
 
     const content = this.contentForm.value.content.map((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>, index: number) => {
       if ((content as QuoteContentFormType).quote) {
@@ -83,10 +86,10 @@ export class AddArticleComponent implements OnInit {
         return new QuoteContent(quoteContent.author, quoteContent.quote);
       } else if ((content as ImageContentFormType).source) {
         const imageContent = content as ImageContent;
-        if (imageSource === undefined) {
-          imageSource = imageContent.source;
+        if (imageName === undefined) {
+          imageName = imageContent.name;
         }
-        return new ImageContent(imageContent.source);
+        return new ImageContent(imageContent.name);
       } else {
         const textContent = content as TextContentFormType;
 
@@ -112,7 +115,7 @@ export class AddArticleComponent implements OnInit {
       this.articleForm.value?.author,
       this.articleForm.value?.published,
       this.articleForm.value?.categories,
-      imageSource,
+      imageName,
       content
     );
   }
@@ -129,20 +132,29 @@ export class AddArticleComponent implements OnInit {
       this.savingArticle = true;
 
       const articleToSave = this.getArticleToSave();
+
+      const articleObservables: (Observable<string> | Promise<string[]>)[] = [this.imageService.uploadImages(this.getImages().map((image: {name: string; file: File}) => image.file))];
+
       if (this.isAddingArticle()) {
-        this.articleService.save(articleToSave).subscribe((id: string) => {
-          this.location.back();
-        });
+        articleObservables.push(this.articleService.save(articleToSave));
       } else {
-        this.articleService.update(articleToSave).subscribe((id: string) => {
-          this.location.back();
-        });
+        articleObservables.push(this.articleService.update(articleToSave));
       }
+
+      forkJoin(articleObservables).subscribe(() => {
+        this.location.back();
+      });
     }
   }
 
   public isAddingArticle(): boolean {
     return this.activatedRoute.snapshot.routeConfig.path.includes('add');
+  }
+
+  public getImages(): {name: string; source: string; file: File}[] {
+    return this.contentForm.controls.content.value
+      .filter((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>) => content.type == ArticleContentType.IMAGE)
+      .map((imageContent: Partial<ImageContentFormType>) => ({name: imageContent.name, source: imageContent.source, file: imageContent.file}));
   }
 
   private getActiveTab(): Tab {
@@ -231,12 +243,14 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.IMAGE:
           const imageContent = content as ImageContent;
 
+          const imageSource = this.imageService.getImage(imageContent.name);
+
           this.contentForm.controls.content.push(
             new FormGroup({
               type: new FormControl(ArticleContentType.IMAGE),
               file: new FormControl(null),
-              name: new FormControl('', Validators.required),
-              source: new FormControl(imageContent.source, Validators.required)
+              name: new FormControl(imageContent.name, Validators.required),
+              source: new FormControl(imageSource, Validators.required)
             })
           );
           break;

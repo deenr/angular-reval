@@ -156,6 +156,11 @@ export class AddArticleContentComponent {
     return (this.contentForm.controls.content.at(index) as ImageContentFormGroup).value;
   }
 
+  public isImageInputInvalid(index: number): boolean {
+    const imageFormControl = this.contentForm.controls.content.at(index);
+    return imageFormControl.invalid && imageFormControl.touched;
+  }
+
   private moveItemInFormArray(formArray: FormArray, fromIndex: number, toIndex: number): void {
     const dir = toIndex > fromIndex ? 1 : -1;
 

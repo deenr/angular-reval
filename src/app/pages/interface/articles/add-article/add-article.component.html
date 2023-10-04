@@ -15,7 +15,7 @@
     [authors]="authors"
     [contentForm]="contentForm"
   ></app-add-article-content>
-  <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field preview full-height" [article]="getArticleToSave()"></app-add-article-preview>
+  <app-add-article-preview *ngIf="isTabActive(addArticleTab.PREVIEW)" class="add-article__field preview full-height" [article]="getArticleToSave()" [images]="getImages()"></app-add-article-preview>
 
   <footer class="add-article__footer">
     <mat-divider class="full-width"></mat-divider>

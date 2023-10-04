@@ -60,7 +60,7 @@ export class ArticleComponent implements OnInit {
   }
 
   public getImageSource(content: ArticleContent): string {
-    return `../../../assets/image/${(content as ImageContent).source}.webp`;
+    return `../../../assets/image/${(content as ImageContent).name}.webp`;
   }
 
   public isContentText(articleContentType: ArticleContentType): boolean {

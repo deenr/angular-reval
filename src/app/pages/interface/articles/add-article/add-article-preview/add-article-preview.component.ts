@@ -8,4 +8,5 @@ import {Article} from '@shared/models/article/article.model';
 })
 export class AddArticlePreviewComponent {
   @Input() public article: Article;
+  @Input() public images: {name: string; source: string; file: File}[];
 }
