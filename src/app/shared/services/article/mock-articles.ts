@@ -6,7 +6,7 @@ export const articles = [
     author: '0',
     published: 'January 20, 2024',
     categories: ['RESEARCH_TOOLS', 'APPLICATION_DEVELOPMENT'],
-    image: 'first-team-picture',
+    image: 'first-team-picture.webp',
     content: [
       {
         title: 'Inception of a Revolutionary Idea',
@@ -71,7 +71,7 @@ export const articles = [
     author: '2',
     published: 'March 12, 2024',
     categories: ['PRODUCT_UPDATES', 'RESEARCH_TOOLS'],
-    image: 'sphience-updates',
+    image: 'sphience-updates.webp',
     content: [
       {
         title: 'Introduction',
@@ -122,7 +122,7 @@ export const articles = [
     author: '3',
     published: 'May 5, 2024',
     categories: ['TEAM_UPDATES', 'COMPANY_NEWS'],
-    image: 'sphience-team-photo',
+    image: 'sphience-team-photo.webp',
     content: [
       {
         title: 'Introduction',
@@ -176,7 +176,7 @@ export const articles = [
     author: '4',
     published: 'July 18, 2024',
     categories: ['FUTURE_PLANS', 'RESEARCH_TOOLS', 'INNOVATION'],
-    image: 'sphience-roadmap',
+    image: 'sphience-roadmap.webp',
     content: [
       {
         title: 'Introduction',
@@ -230,7 +230,7 @@ export const articles = [
     author: '5',
     published: 'September 9, 2024',
     categories: ['AWARDS', 'INNOVATIONS', 'RESEARCH_TOOLS'],
-    image: 'sphience-award',
+    image: 'sphience-award.webp',
     content: [
       {
         title: 'Introduction',
@@ -276,7 +276,7 @@ export const articles = [
     author: '6',
     published: 'November 22, 2024',
     categories: ['COLLABORATION', 'RESEARCH_TOOLS', 'PRODUCT_UPDATES'],
-    image: 'sphience-new-features',
+    image: 'sphience-new-features.webp',
     content: [
       {
         title: 'Introduction',
@@ -333,7 +333,7 @@ export const articles = [
     author: '7',
     published: 'January 5, 2025',
     categories: ['GLOBAL_EXPANSION', 'RESEARCH_TOOLS', 'COMPANY_NEWS'],
-    image: 'sphience-global-presence',
+    image: 'sphience-global-presence.webp',
     content: [
       {
         title: 'Introduction',
@@ -389,7 +389,7 @@ export const articles = [
     author: '8',
     published: 'March 15, 2025',
     categories: ['PRODUCT_UPDATES', 'RESEARCH_TOOLS', 'DATA_ANALYSIS'],
-    image: 'sphience-new-modules',
+    image: 'sphience-new-modules.webp',
     content: [
       {
         title: 'Introduction',
@@ -441,7 +441,7 @@ export const articles = [
     author: '8',
     published: 'June 5, 2025',
     categories: ['COLLABORATION', 'RESEARCH_PARTNERSHIPS', 'INNOVATION'],
-    image: 'sphience-university-collaboration',
+    image: 'sphience-university-collaboration.webp',
     content: [
       {
         title: 'Introduction',
@@ -501,7 +501,7 @@ export const articles = [
     author: '10',
     published: 'September 12, 2025',
     categories: ['USER_EXPERIENCE', 'APPLICATION_DESIGN', 'PRODUCT_UPDATES'],
-    image: 'sphience-interface-comparison',
+    image: 'sphience-interface-comparison.webp',
     content: [
       {
         title: 'Introduction',

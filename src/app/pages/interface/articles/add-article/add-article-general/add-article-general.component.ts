@@ -37,7 +37,7 @@ export class AddArticleGeneralComponent implements OnInit {
       setTimeout(() => {
         this.articleForm.controls.subtitle.setValue(`${subtitle}`);
         this.articleForm.controls.title.setValue(`${title}`);
-      }, 50);
+      }, 100);
     });
   }
 

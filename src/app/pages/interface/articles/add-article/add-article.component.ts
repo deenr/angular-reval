@@ -14,6 +14,7 @@ import {ArticleContentType} from '@shared/enums/article/article-content-type.enu
 import {Location} from '@angular/common';
 import {Observable, connect, forkJoin} from 'rxjs';
 import {HttpImageService} from '@shared/services/image/http-image.service';
+import {HttpArticleService} from '@shared/services/article/http-article.service';
 
 @Component({
   selector: 'app-add-article',
@@ -47,7 +48,7 @@ export class AddArticleComponent implements OnInit {
   public savingArticle = false;
 
   public constructor(
-    private readonly articleService: StubArticleService,
+    private readonly articleService: HttpArticleService,
     private readonly userService: StubUserService,
     private readonly imageService: HttpImageService,
     private readonly activatedRoute: ActivatedRoute,
@@ -65,7 +66,7 @@ export class AddArticleComponent implements OnInit {
     if (!this.isAddingArticle()) {
       this.loadingArticle = true;
 
-      this.articleService.getArticleById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe((article: Article) => {
+      this.articleService.getById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe((article: Article) => {
         this.article = article;
 
         this.setFormFieldValues(article);
@@ -133,10 +134,16 @@ export class AddArticleComponent implements OnInit {
 
       const articleToSave = this.getArticleToSave();
 
-      const articleObservables: (Observable<string> | Promise<string[]>)[] = [this.imageService.uploadImages(this.getImages().map((image: {name: string; file: File}) => image.file))];
+      const articleObservables: (Observable<string> | Promise<string[]>)[] = [
+        this.imageService.uploadImages(
+          this.getImages()
+            .filter((image: {name: string; file: File}) => image.file)
+            .map((image: {name: string; file: File}) => image.file)
+        )
+      ];
 
       if (this.isAddingArticle()) {
-        articleObservables.push(this.articleService.save(articleToSave));
+        articleObservables.push(this.articleService.add(articleToSave));
       } else {
         articleObservables.push(this.articleService.update(articleToSave));
       }

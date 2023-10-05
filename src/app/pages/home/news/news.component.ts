@@ -5,6 +5,7 @@ import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {StubArticleOverview} from '@shared/models/article/stub-article-overview';
 import {UserOverview} from '@shared/models/user/user-overview';
 import {StubArticleService} from '@shared/services/article/stub-article.service';
+import {HttpImageService} from '@shared/services/image/http-image.service';
 import {StubUserService} from '@shared/services/user/stub-user.service';
 import * as moment from 'moment';
 import {forkJoin} from 'rxjs';
@@ -39,7 +40,7 @@ export class NewsComponent implements OnInit {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
-  public constructor(private readonly articleService: StubArticleService, private readonly userService: StubUserService) {}
+  public constructor(private readonly articleService: StubArticleService, private readonly userService: StubUserService, private readonly imageService: HttpImageService) {}
 
   public ngOnInit(): void {
     this.getArticles();
@@ -50,7 +51,7 @@ export class NewsComponent implements OnInit {
   }
 
   public getImageSource(image: string): string {
-    return `../../../assets/image/${image}.webp`;
+    return this.imageService.getImage(image);
   }
 
   public getCategoryTranslation(category: ArticleCategory): string {

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {User} from '@shared/models/user/user';
+import {HttpImageService} from '@shared/services/image/http-image.service';
 
 @Component({
   selector: 'app-article-card',
@@ -17,8 +18,10 @@ export class ArticleCardComponent {
   @Input() public published: string;
   public skeletonType = SkeletonType;
 
+  public constructor(private readonly imageService: HttpImageService) {}
+
   public getImageSource(): string {
-    return `../../../assets/image/${this.image}.webp`;
+    return this.imageService.getImage(this.image);
   }
 
   public getAuthorName(): string {

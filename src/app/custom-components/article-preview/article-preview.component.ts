@@ -4,6 +4,7 @@ import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent} from '@shared/models/article/article-content.model';
 import {Article} from '@shared/models/article/article.model';
+import {HttpImageService} from '@shared/services/image/http-image.service';
 import * as moment from 'moment';
 
 @Component({
@@ -37,8 +38,10 @@ export class ArticlePreviewComponent implements OnInit {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
+  public constructor(private readonly imageService: HttpImageService) {}
+
   public ngOnInit(): void {
-    this.images.forEach((image: {name: string; source: string; file: File}) => {
+    this.images?.forEach((image: {name: string; source: string; file: File}) => {
       if (image.source) {
         this.loadedImages.push({name: image.name, source: image.source});
       } else {
@@ -69,7 +72,8 @@ export class ArticlePreviewComponent implements OnInit {
   }
 
   public getImageSource(content: ArticleContent): string {
-    return this.loadedImages.find((image: {name: string; source: string}) => (content as ImageContent).name === image.name)?.source;
+    const imageContent = content as ImageContent;
+    return this.images === undefined ? this.imageService.getImage(imageContent.name) : this.loadedImages.find((image: {name: string; source: string}) => imageContent.name === image.name)?.source;
   }
 
   public isContentText(articleContentType: ArticleContentType): boolean {

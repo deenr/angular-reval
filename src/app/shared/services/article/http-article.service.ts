@@ -19,7 +19,12 @@ export class HttpArticleService {
     return from(
       this.supabase
         .from('articles')
-        .select('*')
+        .select(
+          `
+          *,
+          author:users(*)
+        `
+        )
         .then(({data}) => data?.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
     );
   }
@@ -28,19 +33,62 @@ export class HttpArticleService {
     return from(
       this.supabase
         .from('articles')
-        .select('*')
+        .select(
+          `
+          *,
+          author:users(*)
+        `
+        )
         .then(({data}) => data?.map((articleJSON: any) => Article.fromJSON(articleJSON)))
     );
   }
 
-  public getArticleById(id: string): Observable<Article> {
+  public getById(id: string): Observable<Article> {
     return from(
       this.supabase
         .from('articles')
-        .select('*')
+        .select(
+          `
+          *,
+          author:users(*)
+        `
+        )
         .eq('id', id)
         .single()
         .then(({data}) => Article.fromJSON(data))
     );
+  }
+
+  public add(article: Article): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.supabase
+        .from('articles')
+        .upsert(article.toJSON())
+        .then((response) => {
+          if (response.error) {
+            observer.error(response.error);
+          } else {
+            observer.next();
+            observer.complete();
+          }
+        });
+    });
+  }
+
+  public update(article: Article): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.supabase
+        .from('articles')
+        .update(article.toJSON())
+        .eq('id', article.id)
+        .then((response) => {
+          if (response.error) {
+            observer.error(response.error);
+          } else {
+            observer.next();
+            observer.complete();
+          }
+        });
+    });
   }
 }

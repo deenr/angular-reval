@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {SupabaseClient, createClient} from '@supabase/supabase-js';
+import {PostgrestSingleResponse, SupabaseClient, createClient} from '@supabase/supabase-js';
 import {environment} from 'src/environments/environment';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class HttpImageService {
   public uploadImages(images: File[]): Promise<string[]> {
     const uploadPromises: Promise<string>[] = [];
 
-    images.forEach((image: File) => {
+    images?.forEach((image: File) => {
       const uploadPromise = new Promise<string>((resolve, reject) => {
         this.supabase.storage
           .from('sphience-article-images')

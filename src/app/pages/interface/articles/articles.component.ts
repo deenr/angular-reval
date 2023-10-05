@@ -7,6 +7,7 @@ import {TableColumn} from '@custom-components/table/builder/table-column';
 import {TableDataType} from '@custom-components/table/table-data-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
+import {HttpArticleService} from '@shared/services/article/http-article.service';
 import {StubArticleService} from '@shared/services/article/stub-article.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ArticlesComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: ArticleOverview[];
 
-  public constructor(private readonly articleService: StubArticleService) {}
+  public constructor(private readonly articleService: HttpArticleService) {}
 
   public ngOnInit(): void {
     this.articleService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));

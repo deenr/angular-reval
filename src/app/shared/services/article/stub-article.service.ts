@@ -39,11 +39,11 @@ export class StubArticleService {
     return of(this.articles);
   }
 
-  public getArticleById(id: string): Observable<Article> {
+  public getById(id: string): Observable<Article> {
     return of(this.articles.find((article: Article) => article.id === id));
   }
 
-  public save(newArticle: Article): Observable<string> {
+  public add(newArticle: Article): Observable<string> {
     this.articles.push(newArticle);
 
     return of(newArticle.id);

@@ -82,7 +82,7 @@ export class ArticleOverview {
       id: this.id,
       title: this.title,
       subtitle: this.subtitle,
-      author: this.author,
+      author: this.author.id,
       published: this.published.toISOString(),
       categories: this.categories,
       image: this.image
