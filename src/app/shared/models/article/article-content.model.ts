@@ -199,21 +199,21 @@ export class ImageContent extends ArticleContent {
 }
 
 export class QuoteContent extends ArticleContent {
-  private _author: User;
+  private _authorId: string;
   private _quote: string;
 
-  public constructor(author: User, quote: string) {
+  public constructor(authorId: string, quote: string) {
     super(ArticleContentType.QUOTE);
-    this._author = author;
+    this._authorId = authorId;
     this._quote = quote;
   }
 
-  public get author(): User {
-    return this._author;
+  public get authorId(): string {
+    return this._authorId;
   }
 
-  public set author(value: User) {
-    this._author = value;
+  public set authorId(value: string) {
+    this._authorId = value;
   }
 
   public get quote(): string {
@@ -227,15 +227,15 @@ export class QuoteContent extends ArticleContent {
   public toJSON(): object {
     return {
       ...super.toJSON(),
-      author: this.author,
+      authorId: this.authorId,
       quote: this.quote
     };
   }
 
   public static fromJSON(json: any): QuoteContent {
-    const author = json.author;
+    const authorId = json.authorId;
     const quote = json.quote;
 
-    return new QuoteContent(author, quote);
+    return new QuoteContent(authorId, quote);
   }
 }

@@ -11,11 +11,11 @@ import {UserOverview} from '@shared/models/user/user-overview';
 export class StubUserService {
   public users = StubUser.createAmountOfUsers(100);
 
-  public getUsers(): Observable<User[]> {
+  public getAll(): Observable<User[]> {
     return of(this.users);
   }
 
-  public getUsersOverview(): Observable<UserOverview[]> {
+  public getOverview(): Observable<UserOverview[]> {
     return of(this.users.map((user: User) => UserOverview.fromUser(user)));
   }
 

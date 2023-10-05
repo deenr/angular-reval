@@ -4,7 +4,9 @@ import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent} from '@shared/models/article/article-content.model';
 import {Article} from '@shared/models/article/article.model';
+import {User} from '@shared/models/user/user';
 import {HttpImageService} from '@shared/services/image/http-image.service';
+import {HttpUserService} from '@shared/services/user/http-user.service';
 import * as moment from 'moment';
 
 @Component({
@@ -18,6 +20,7 @@ export class ArticlePreviewComponent implements OnInit {
   @Input() public loadingArticle = false;
   public skeletonType = SkeletonType;
 
+  private authors: User[];
   private loadedImages: {name: string; source: string}[] = [];
 
   private categoryTranslation = new Map<ArticleCategory, string>([
@@ -38,7 +41,7 @@ export class ArticlePreviewComponent implements OnInit {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
-  public constructor(private readonly imageService: HttpImageService) {}
+  public constructor(private readonly imageService: HttpImageService, private readonly userService: HttpUserService) {}
 
   public ngOnInit(): void {
     this.images?.forEach((image: {name: string; source: string; file: File}) => {
@@ -53,6 +56,8 @@ export class ArticlePreviewComponent implements OnInit {
         reader.readAsDataURL(image.file);
       }
     });
+
+    this.userService.getAll().subscribe((authors: User[]) => (this.authors = authors));
   }
 
   public getTitle(content: ArticleContent): string {
@@ -89,7 +94,7 @@ export class ArticlePreviewComponent implements OnInit {
   }
 
   public getQuoteAuthor(content: ArticleContent): string {
-    const author = (content as QuoteContent).author;
+    const author = this.authors.find((author: User) => author.id === (content as QuoteContent).authorId);
     return `${author.firstName} ${author.lastName}`;
   }
 

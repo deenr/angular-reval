@@ -60,7 +60,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
     const name = Array.isArray(nameKey) ? nameKey.map((key: string) => data[key]).join(' ') : data[nameKey];
     if (name === ' ' || name === '' || name === null || name === undefined) {
-      return Array.isArray(nameKey) ? nameKey.map((key: string) => data[field][key]).join(' ') : data[field][nameKey];
+      return Array.isArray(nameKey) ? nameKey.map((key: string) => data?.[field]?.[key]).join(' ') : data[field][nameKey];
     }
 
     return name;

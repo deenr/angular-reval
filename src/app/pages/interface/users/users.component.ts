@@ -8,7 +8,7 @@ import {UserRole} from '@shared/enums/user/user-role.enum';
 import {Color} from '@shared/enums/general/colors.enum';
 import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter-builder';
 import {UserOverview} from '@shared/models/user/user-overview';
-import {StubUserService} from '@shared/services/user/stub-user.service';
+import {HttpUserService} from '@shared/services/user/http-user.service';
 
 @Component({
   selector: 'app-users',
@@ -19,10 +19,10 @@ export class UsersComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: UserOverview[];
 
-  public constructor(private readonly userService: StubUserService) {}
+  public constructor(private readonly userService: HttpUserService) {}
 
   public ngOnInit(): void {
-    this.userService.getUsersOverview().subscribe((usersOverview: UserOverview[]) => (this.tableData = usersOverview));
+    this.userService.getOverview().subscribe((usersOverview: UserOverview[]) => (this.tableData = usersOverview));
 
     this.tableColumns = [
       new ColumnBuilder()

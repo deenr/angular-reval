@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {AddArticleTab} from './add-article-tabs.enum';
 import {Tab} from '@custom-components/tabs/tab.interface';
-import {StubArticleService} from '@shared/services/article/stub-article.service';
 import {ActivatedRoute} from '@angular/router';
 import {Article} from '@shared/models/article/article.model';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import {User} from '@shared/models/user/user';
-import {StubUserService} from '@shared/services/user/stub-user.service';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {Location} from '@angular/common';
-import {Observable, connect, forkJoin} from 'rxjs';
+import {Observable, forkJoin} from 'rxjs';
 import {HttpImageService} from '@shared/services/image/http-image.service';
 import {HttpArticleService} from '@shared/services/article/http-article.service';
+import {HttpUserService} from '@shared/services/user/http-user.service';
 
 @Component({
   selector: 'app-add-article',
@@ -49,7 +48,7 @@ export class AddArticleComponent implements OnInit {
 
   public constructor(
     private readonly articleService: HttpArticleService,
-    private readonly userService: StubUserService,
+    private readonly userService: HttpUserService,
     private readonly imageService: HttpImageService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly breakpointService: BreakpointService,
@@ -61,17 +60,21 @@ export class AddArticleComponent implements OnInit {
 
     this.setFormField();
 
-    this.userService.getUsers().subscribe((authors: User[]) => (this.authors = authors));
+    const requests: (Observable<Article> | Observable<User[]>)[] = [this.userService.getAll()];
 
     if (!this.isAddingArticle()) {
       this.loadingArticle = true;
 
-      this.articleService.getById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe((article: Article) => {
-        this.article = article;
-
-        this.setFormFieldValues(article);
-      });
+      requests.push(this.articleService.getById(this.activatedRoute.snapshot.paramMap.get('id')));
     }
+
+    forkJoin(requests).subscribe(([authors, article]: (User[] | Article)[]) => {
+      this.authors = authors as User[];
+
+      this.article = article as Article;
+
+      this.setFormFieldValues(article as Article);
+    });
   }
 
   public isTabActive(addArticleTab: AddArticleTab): boolean {
@@ -84,7 +87,7 @@ export class AddArticleComponent implements OnInit {
     const content = this.contentForm.value.content.map((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>, index: number) => {
       if ((content as QuoteContentFormType).quote) {
         const quoteContent = content as QuoteContentFormType;
-        return new QuoteContent(quoteContent.author, quoteContent.quote);
+        return new QuoteContent(quoteContent.author.id, quoteContent.quote);
       } else if ((content as ImageContentFormType).source) {
         const imageContent = content as ImageContent;
         if (imageName === undefined) {
@@ -219,7 +222,7 @@ export class AddArticleComponent implements OnInit {
     this.articleForm.setValue({
       title: article.title,
       subtitle: article.subtitle,
-      author: article.author,
+      author: this.authors.find((author: User) => author.id === article.author.id),
       categories: article.categories,
       published: article.published
     });
@@ -268,7 +271,10 @@ export class AddArticleComponent implements OnInit {
             new FormGroup({
               type: new FormControl(ArticleContentType.QUOTE),
               quote: new FormControl(qouteContent.quote, Validators.required),
-              author: new FormControl(qouteContent.author, Validators.required)
+              author: new FormControl(
+                this.authors.find((author: User) => author.id === qouteContent.authorId),
+                Validators.required
+              )
             })
           );
 

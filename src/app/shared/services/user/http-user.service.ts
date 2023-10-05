@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {SupabaseClient, createClient} from '@supabase/supabase-js';
 import {environment} from 'src/environments/environment';
+import {UserOverview} from '@shared/models/user/user-overview';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,52 @@ export class HttpUserService {
 
   public constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+  }
+
+  public getAll(): Observable<User[]> {
+    return from(
+      this.supabase
+        .from('users')
+        .select(
+          `
+          *,
+          user_roles(role)
+        `
+        )
+        .then(({data}) => {
+          return data?.map((userJSON: any) => {
+            const flattenedUser = {
+              ...userJSON,
+              role: userJSON.user_roles?.map((roleObj: any) => roleObj.role)[0]
+            };
+
+            return User.fromJSON(flattenedUser);
+          });
+        })
+    );
+  }
+
+  public getOverview(): Observable<UserOverview[]> {
+    return from(
+      this.supabase
+        .from('users')
+        .select(
+          `
+          *,
+          user_roles(role)
+        `
+        )
+        .then(({data}) => {
+          return data?.map((userJSON: any) => {
+            const flattenedUser = {
+              ...userJSON,
+              role: userJSON.user_roles?.map((roleObj: any) => roleObj.role)[0]
+            };
+
+            return UserOverview.fromJSON(flattenedUser);
+          });
+        })
+    );
   }
 
   public getUsersInfo(): Observable<User[]> {

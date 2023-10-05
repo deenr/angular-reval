@@ -22,7 +22,7 @@ export class StubArticleService {
 
       article.content = article.content.map((articleContent: ArticleContent) => {
         if (articleContent instanceof QuoteContent) {
-          articleContent.author = users[Math.floor(Math.random() * users.length)];
+          articleContent.authorId = users[Math.floor(Math.random() * users.length)].id;
         }
         return articleContent;
       });
@@ -39,7 +39,7 @@ export class StubArticleService {
     return of(this.articles);
   }
 
-  public getById(id: string): Observable<Article> {
+  public getArticleById(id: string): Observable<Article> {
     return of(this.articles.find((article: Article) => article.id === id));
   }
 
