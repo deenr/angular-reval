@@ -13,6 +13,7 @@ export enum SkeletonType {
   TEXT_XL = 'TEXT_XL',
   TEXT_MD = 'TEXT_MD',
   TEXT_SM = 'TEXT_SM',
+  TEXT_XS = 'TEXT_XS',
   PARAGRAPH_LG = 'PARAGRAPH_LG',
   BADGE_SM = 'BADGE_SM',
   BADGE_MD = 'BADGE_MD',

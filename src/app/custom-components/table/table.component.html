@@ -14,8 +14,8 @@
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.TEXT_AND_DESCRIPTION">
               <div class="data-type__text-and-description flex-column full-width">
-                <h4 class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.titleKey] }}</h4>
-                <p class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.descriptionKey] }}</p>
+                <h4 class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM; width: '90%'">{{ row[column.titleKey] }}</h4>
+                <p class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM; marginTop: '2px'; width: '50%'">{{ row[column.descriptionKey] }}</p>
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.BADGE">

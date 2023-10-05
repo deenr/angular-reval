@@ -2,6 +2,7 @@
 
 :host {
   display: block;
+  grid-area: var(--skeleton-grid-area);
   width: var(--skeleton-width);
   min-width: var(--skeleton-min-width);
   height: var(--skeleton-height);

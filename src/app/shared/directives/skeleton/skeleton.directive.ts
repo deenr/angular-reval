@@ -236,6 +236,14 @@ export class SkeletonDirective {
               height: '20px'
             });
             break;
+          case SkeletonType.TEXT_XS:
+            this.skeletonComponentRef = this.viewContainerRef.createComponent(SkeletonComponent);
+            Object.assign(this.skeletonComponentRef.instance, {
+              marginTop: this.marginTop,
+              width: this.width ?? '40%',
+              height: '18px'
+            });
+            break;
           case SkeletonType.PARAGRAPH_LG:
             this.wrapperDiv = document.createElement('div');
             this.wrapperDiv.style.width = '100%';

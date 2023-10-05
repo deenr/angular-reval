@@ -11,6 +11,7 @@ export class SkeletonComponent {
   private height: string;
   private marginTop: string;
   private borderRadius: string;
+  private gridArea: string;
 
   public constructor(private elementRef: ElementRef<HTMLElement>) {}
 
@@ -22,5 +23,6 @@ export class SkeletonComponent {
     elementRef.style.setProperty('--skeleton-height', this.height ?? '20px');
     elementRef.style.setProperty('--skeleton-margin-top', this.marginTop);
     elementRef.style.setProperty('--skeleton-border-radius', this.borderRadius ?? '8px');
+    elementRef.style.setProperty('--skeleton-grid-area', this.gridArea);
   }
 }
