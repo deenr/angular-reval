@@ -24,7 +24,7 @@
               </app-badge>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.MULTIPLE_BADGES">
-              <app-multiple-badges class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
+              <app-multiple-badges *skeleton="loadingData; type: skeletonType.BADGE_SM; amount: 2" class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
             </ng-container>
             <ng-container *ngSwitchCase="tableDataType.AVATAR">
               <app-table-avatar

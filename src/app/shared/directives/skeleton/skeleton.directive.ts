@@ -84,7 +84,7 @@ export class SkeletonDirective {
               const chipRef = this.viewContainerRef.createComponent(SkeletonComponent);
               Object.assign(chipRef.instance, {
                 borderRadius: '22px',
-                width: '120px',
+                width: '90px',
                 height: '22px'
               });
               this.wrapperDiv.appendChild(chipRef.location.nativeElement);
