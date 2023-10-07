@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {BadgeSize} from '@custom-components/badge/badge-size.enum';
+import {DialogCloseType} from '@custom-components/dialogs/dialog-close-type.enum';
+import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
+import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 import {BadgeBuilder} from '@custom-components/table/builder/badge-builder';
 import {ColumnBuilder} from '@custom-components/table/builder/column-builder';
 import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter-builder';
@@ -19,10 +23,10 @@ export class ArticlesComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: ArticleOverview[];
 
-  public constructor(private readonly articleService: HttpArticleService) {}
+  public constructor(private readonly articleService: HttpArticleService, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
-    this.articleService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));
+    this.getArticles();
 
     this.tableColumns = [
       new ColumnBuilder()
@@ -62,10 +66,29 @@ export class ArticlesComponent implements OnInit {
         .build(),
       new ColumnBuilder()
         .setDelete((id: string) => {
-          console.log(id);
+          this.dialog
+            .open(StackedLeftDialogComponent, {
+              width: '400px',
+              data: {
+                type: DialogType.ERROR,
+                icon: 'exclamation-circle',
+                title: 'Delete article',
+                description: 'Are you sure you want to delete this article? This action cannot be undone.'
+              }
+            })
+            .afterClosed()
+            .subscribe((closeType: DialogCloseType) => {
+              if (closeType === DialogCloseType.CONFIRM) {
+                this.articleService.delete(id).subscribe(() => this.getArticles());
+              }
+            });
         })
         .build(),
       new ColumnBuilder().setEdit('app/articles/edit/:id').build()
     ];
+  }
+
+  private getArticles(): void {
+    this.articleService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));
   }
 }

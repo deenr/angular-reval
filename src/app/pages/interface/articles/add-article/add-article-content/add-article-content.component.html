@@ -63,7 +63,7 @@
       <p class="text-sm text-medium">Move down</p>
     </div>
     <mat-divider class="mobile-only"></mat-divider>
-    <div mat-menu-item [matMenuTriggerFor]="changeContentTypeMenu" [matMenuTriggerData]="{index: index}">
+    <div mat-menu-item [matMenuTriggerFor]="changeContentTypeMenu" [matMenuTriggerData]="{index: index}" [disabled]="!canDeleteContent(index)">
       <mat-icon svgIcon="text"></mat-icon>
       <p class="text-sm text-medium">Change type</p>
     </div>

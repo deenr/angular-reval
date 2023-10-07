@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {COMMA} from '@angular/cdk/keycodes';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
@@ -14,7 +14,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
   templateUrl: './add-article-general.component.html',
   styleUrls: ['./add-article-general.component.scss']
 })
-export class AddArticleGeneralComponent implements OnInit {
+export class AddArticleGeneralComponent {
   @Input() public isMobile: boolean;
   @Input() public articleForm: FormGroup<{
     title: FormControl<string>;
@@ -25,21 +25,6 @@ export class AddArticleGeneralComponent implements OnInit {
   }>;
   @Input() public authors: User[];
   @Input() public loadingArticle: boolean;
-
-  public ngOnInit(): void {
-    const title = this.articleForm.value.title;
-    const subtitle = this.articleForm.value.subtitle;
-
-    setTimeout(() => {
-      this.articleForm.controls.title.setValue(`${title} .`);
-      this.articleForm.controls.subtitle.setValue(`${subtitle} .`);
-
-      setTimeout(() => {
-        this.articleForm.controls.subtitle.setValue(`${subtitle}`);
-        this.articleForm.controls.title.setValue(`${title}`);
-      }, 100);
-    });
-  }
 
   public readonly categories = [
     ArticleCategory.RESEARCH_TOOLS,

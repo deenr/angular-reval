@@ -53,4 +53,9 @@ export class StubArticleService {
     this.articles = this.articles.map((article: Article) => (article.id === newArticle.id ? newArticle : article));
     return of(newArticle.id);
   }
+
+  public delete(id: string): Observable<string> {
+    this.articles = this.articles.filter((article: Article) => article.id !== id);
+    return of(id);
+  }
 }

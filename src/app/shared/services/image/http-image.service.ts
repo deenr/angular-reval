@@ -14,30 +14,9 @@ export class HttpImageService {
 
   public uploadImage(image: File): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      this.supabase.storage
-        .from('images')
-        .upload(image.name, image, {
-          cacheControl: '3600',
-          upsert: false
-        })
-        .then((value: {data: {path: string}; error: null} | {data: null; error: RangeError}) => {
-          if (value.error) {
-            reject(value.error.message);
-          }
-
-          resolve(value.data.path);
-        })
-        .catch(() => reject());
-    });
-  }
-
-  public uploadImages(images: File[]): Promise<string[]> {
-    const uploadPromises: Promise<string>[] = [];
-
-    images?.forEach((image: File) => {
-      const uploadPromise = new Promise<string>((resolve, reject) => {
+      if (!this.getImageUrl(image.name)) {
         this.supabase.storage
-          .from('sphience-article-images')
+          .from('images')
           .upload(image.name, image, {
             cacheControl: '3600',
             upsert: false
@@ -50,6 +29,35 @@ export class HttpImageService {
             resolve(value.data.path);
           })
           .catch(() => reject());
+      } else {
+        resolve(image.name);
+      }
+    });
+  }
+
+  public uploadImages(images: File[]): Promise<string[]> {
+    const uploadPromises: Promise<string>[] = [];
+
+    images?.forEach((image: File) => {
+      const uploadPromise = new Promise<string>((resolve, reject) => {
+        if (!this.getImageUrl(image.name)) {
+          this.supabase.storage
+            .from('images')
+            .upload(image.name, image, {
+              cacheControl: '3600',
+              upsert: false
+            })
+            .then((value: {data: {path: string}; error: null} | {data: null; error: RangeError}) => {
+              if (value.error) {
+                reject(value.error.message);
+              }
+
+              resolve(value.data.path);
+            })
+            .catch(() => reject());
+        } else {
+          resolve(image.name);
+        }
       });
 
       uploadPromises.push(uploadPromise);

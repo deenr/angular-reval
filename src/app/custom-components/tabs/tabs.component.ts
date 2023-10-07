@@ -57,24 +57,25 @@ export class TabsComponent implements OnInit {
   }
 
   private openConfirmationDialog(newTab: Tab, previousTab: Tab = null): void {
-    const dialogRef = this.dialog.open(StackedLeftDialogComponent, {
-      width: '400px',
-      data: {
-        type: DialogType.WARNING,
-        icon: 'lock',
-        title: 'Unsaved changes',
-        description: 'Are you sure you want to continue without saving your changes?',
-        cancelTitle: 'Cancel',
-        confirmTitle: 'Continue'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((closeType: DialogCloseType) => {
-      if (closeType === DialogCloseType.CONFIRM) {
-        this.setTabActive(newTab);
-      } else if (this.isMobile && closeType === DialogCloseType.CANCEL) {
-        this.setTabActive(previousTab);
-      }
-    });
+    this.dialog
+      .open(StackedLeftDialogComponent, {
+        width: '400px',
+        data: {
+          type: DialogType.WARNING,
+          icon: 'lock',
+          title: 'Unsaved changes',
+          description: 'Are you sure you want to continue without saving your changes?',
+          cancelTitle: 'Cancel',
+          confirmTitle: 'Continue'
+        }
+      })
+      .afterClosed()
+      .subscribe((closeType: DialogCloseType) => {
+        if (closeType === DialogCloseType.CONFIRM) {
+          this.setTabActive(newTab);
+        } else if (this.isMobile && closeType === DialogCloseType.CANCEL) {
+          this.setTabActive(previousTab);
+        }
+      });
   }
 }

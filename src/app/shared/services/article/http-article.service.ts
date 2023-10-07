@@ -91,4 +91,21 @@ export class HttpArticleService {
         });
     });
   }
+
+  public delete(id: string): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.supabase
+        .from('articles')
+        .delete()
+        .eq('id', id)
+        .then((response) => {
+          if (response.error) {
+            observer.error(response.error);
+          } else {
+            observer.next(id);
+            observer.complete();
+          }
+        });
+    });
+  }
 }
