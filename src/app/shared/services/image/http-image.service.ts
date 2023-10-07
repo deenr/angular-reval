@@ -58,7 +58,7 @@ export class HttpImageService {
     return Promise.all(uploadPromises);
   }
 
-  public getImage(name: string): string {
+  public getImageUrl(name: string): string {
     return this.supabase.storage.from('sphience-article-images').getPublicUrl(name).data.publicUrl;
   }
 }

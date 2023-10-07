@@ -21,7 +21,7 @@ export class ArticleCardComponent {
   public constructor(private readonly imageService: HttpImageService) {}
 
   public getImageSource(): string {
-    return this.imageService.getImage(this.image);
+    return this.imageService.getImageUrl(this.image);
   }
 
   public getAuthorName(): string {

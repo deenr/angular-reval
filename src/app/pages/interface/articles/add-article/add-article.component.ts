@@ -71,9 +71,11 @@ export class AddArticleComponent implements OnInit {
     forkJoin(requests).subscribe(([authors, article]: (User[] | Article)[]) => {
       this.authors = authors as User[];
 
-      this.article = article as Article;
+      if (article) {
+        this.article = article as Article;
 
-      this.setFormFieldValues(article as Article);
+        this.setFormFieldValues(article as Article);
+      }
     });
   }
 
@@ -119,7 +121,7 @@ export class AddArticleComponent implements OnInit {
       this.articleForm.value?.author,
       this.articleForm.value?.published,
       this.articleForm.value?.categories,
-      imageName,
+      imageName ?? null,
       content
     );
   }
@@ -201,12 +203,14 @@ export class AddArticleComponent implements OnInit {
         })
       );
 
-      // this.contentForm.controls.content.push(
-      //   new FormGroup({
-      //     type: new FormControl(ArticleContentType.IMAGE),
-      //     source: new FormControl('', Validators.required)
-      //   })
-      // );`
+      this.contentForm.controls.content.push(
+        new FormGroup({
+          type: new FormControl(ArticleContentType.IMAGE),
+          file: new FormControl(null),
+          name: new FormControl(null, Validators.required),
+          source: new FormControl(null, Validators.required)
+        })
+      );
 
       this.contentForm.controls.content.push(
         new FormGroup({
@@ -253,7 +257,7 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.IMAGE:
           const imageContent = content as ImageContent;
 
-          const imageSource = this.imageService.getImage(imageContent.name);
+          const imageSource = this.imageService.getImageUrl(imageContent.name);
 
           this.contentForm.controls.content.push(
             new FormGroup({

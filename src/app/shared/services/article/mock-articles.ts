@@ -43,7 +43,7 @@ export const articles = [
         ]
       },
       {
-        author: 'Jessica Adams',
+        authorId: '0',
         type: 'QUOTE',
         quote: 'Research is the bridge between the known and the unknown.'
       },
@@ -294,7 +294,7 @@ export const articles = [
         ]
       },
       {
-        author: 'David Miller',
+        authorId: '0',
         type: 'QUOTE',
         quote: 'Collaboration is the catalyst for scientific innovation.'
       },
@@ -420,7 +420,7 @@ export const articles = [
         ]
       },
       {
-        author: 'Rebecca Carter',
+        authorId: '0',
         type: 'QUOTE',
         quote: 'The new modules in the Sphience web application empower researchers to unlock the full potential of their data and collaborate seamlessly, driving scientific discoveries forward.'
       },
@@ -459,7 +459,7 @@ export const articles = [
         ]
       },
       {
-        author: 'Daniel Williams',
+        authorId: '0',
         type: 'QUOTE',
         quote: 'By collaborating with leading universities, Sphience harnesses the power of collective intelligence and pushes the boundaries of scientific innovation.'
       },
@@ -535,7 +535,7 @@ export const articles = [
         ]
       },
       {
-        author: 'Sophia Rodriguez',
+        authorId: '0',
         type: 'QUOTE',
         quote: 'By putting users at the center of our design process, we have created an interface that simplifies research equipment management and enhances the overall user experience.'
       },

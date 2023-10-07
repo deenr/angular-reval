@@ -96,8 +96,25 @@ export class AddArticleContentComponent {
     );
   }
 
+  public canDeleteContent(index: number): boolean {
+    const canDeleteAsImage = true;
+
+    const content = this.contentForm.controls.content.at(index);
+    if (content.value.type === ArticleContentType.IMAGE) {
+      const imageContents = this.contentForm.controls.content.value.filter(
+        (content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>) => content.type == ArticleContentType.IMAGE
+      );
+
+      return imageContents.length > 1;
+    }
+
+    return index > 0 && index !== this.contentForm.controls.content.length - 1 && canDeleteAsImage;
+  }
+
   public deleteContent(index: number): void {
-    this.contentForm.controls.content.removeAt(index);
+    if (this.canDeleteContent(index)) {
+      this.contentForm.controls.content.removeAt(index);
+    }
   }
 
   public changeType(contentType: ArticleContentType, index: number): void {

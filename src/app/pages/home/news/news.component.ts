@@ -48,7 +48,7 @@ export class NewsComponent implements OnInit {
   }
 
   public getImageSource(image: string): string {
-    return this.imageService.getImage(image);
+    return this.imageService.getImageUrl(image);
   }
 
   public getCategoryTranslation(category: ArticleCategory): string {

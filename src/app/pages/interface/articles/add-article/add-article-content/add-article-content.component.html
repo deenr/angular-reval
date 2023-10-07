@@ -68,7 +68,7 @@
       <p class="text-sm text-medium">Change type</p>
     </div>
     <mat-divider></mat-divider>
-    <div mat-menu-item (click)="deleteContent(index)">
+    <div mat-menu-item (click)="deleteContent(index)" [disabled]="!canDeleteContent(index)">
       <mat-icon svgIcon="trash"></mat-icon>
       <p class="text-sm text-medium">Delete</p>
     </div>

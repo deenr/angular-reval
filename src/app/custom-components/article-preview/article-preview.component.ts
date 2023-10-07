@@ -78,7 +78,7 @@ export class ArticlePreviewComponent implements OnInit {
 
   public getImageSource(content: ArticleContent): string {
     const imageContent = content as ImageContent;
-    return this.images === undefined ? this.imageService.getImage(imageContent.name) : this.loadedImages.find((image: {name: string; source: string}) => imageContent.name === image.name)?.source;
+    return this.images === undefined ? this.imageService.getImageUrl(imageContent.name) : this.loadedImages.find((image: {name: string; source: string}) => imageContent.name === image.name)?.source;
   }
 
   public isContentText(articleContentType: ArticleContentType): boolean {
