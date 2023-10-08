@@ -9,13 +9,14 @@ export enum FilterType {
 export interface FilterProperty {
   type: FilterType;
   field: string;
+  fields: string[];
   enumValues?: string[];
   translationKey?: string;
 }
 
 export class FilterBuilder {
   constructor(private columnBuilder: ColumnBuilder) {
-    this.columnBuilder.filterProperties = {type: null, field: null, enumValues: null};
+    this.columnBuilder.filterProperties = {type: null, field: null, fields: null, enumValues: null};
   }
 
   public setType(type: FilterType): FilterBuilder {

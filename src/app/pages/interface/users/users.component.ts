@@ -9,6 +9,7 @@ import {Color} from '@shared/enums/general/colors.enum';
 import {FilterBuilder, FilterType} from '@custom-components/table/builder/filter-builder';
 import {UserOverview} from '@shared/models/user/user-overview';
 import {HttpUserService} from '@shared/services/user/http-user.service';
+import {StubUserService} from '@shared/services/user/stub-user.service';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +20,7 @@ export class UsersComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: UserOverview[];
 
-  public constructor(private readonly userService: HttpUserService) {}
+  public constructor(private readonly userService: StubUserService) {}
 
   public ngOnInit(): void {
     this.userService.getOverview().subscribe((usersOverview: UserOverview[]) => (this.tableData = usersOverview));
@@ -32,7 +33,7 @@ export class UsersComponent implements OnInit {
         .canSort(true)
         .setAvatarNameKey(['firstName', 'lastName'])
         .setAvatarEmailKey('email')
-        .setSortId('firstName')
+        .setSortIds(['firstName', 'lastName'])
         .setFilter((filterBuilder: FilterBuilder) => {
           filterBuilder.setType(FilterType.TEXT).build();
         })
@@ -67,13 +68,9 @@ export class UsersComponent implements OnInit {
         .setFilter((filterBuilder: FilterBuilder) => {
           filterBuilder.setType(FilterType.DATE).build();
         })
-        .build(),
-      new ColumnBuilder()
-        .setDelete((id: string) => {
-          console.log(id);
-        })
-        .build(),
-      new ColumnBuilder().setEdit('app/users/:id').build()
+        .build()
+      // new ColumnBuilder().setDelete((id: string) => {}).build(),
+      // new ColumnBuilder().setEdit('app/users/:id').build()
     ];
   }
 }

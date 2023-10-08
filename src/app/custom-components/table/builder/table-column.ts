@@ -11,6 +11,7 @@ export class TableColumn {
     public avatarNameKey?: string | string[],
     public avatarEmailKey?: string,
     public sortField?: string,
+    public sortFields?: string[],
     public badgeProperties?: BadgeProperty,
     public onDelete?: (id: string) => void,
     public editRoute?: string,

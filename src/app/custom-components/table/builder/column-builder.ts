@@ -16,6 +16,7 @@ export class ColumnBuilder {
   private avatarNameKey?: string | string[];
   private avatarEmailKey?: string;
   private sortField?: string;
+  private sortFields?: string[];
   private onDelete?: (id: string) => void;
   private editRoute?: string;
   private titleKey?: string;
@@ -66,6 +67,11 @@ export class ColumnBuilder {
     return this;
   }
 
+  public setSortIds(sortFields: string[]): ColumnBuilder {
+    this.sortFields = sortFields;
+    return this;
+  }
+
   public setTranslationKey(translationKey: string): ColumnBuilder {
     this.translationKey = translationKey;
 
@@ -103,13 +109,14 @@ export class ColumnBuilder {
     const filterBuilder = new FilterBuilder(this);
     configureFilter(filterBuilder);
     this.filterProperties.field = this.sortField ?? this.field;
+    this.filterProperties.fields = this.sortFields ?? null;
 
     return this;
   }
 
   public build(): TableColumn {
-    if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !this.sortField)) {
-      throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortField properties.');
+    if (this.type === TableDataType.AVATAR && (!this.avatarNameKey || !this.avatarEmailKey || !(this.sortField || this.sortFields))) {
+      throw new Error('Avatar columns require avatarNameKey, avatarEmailKey, and sortField(s) properties.');
     } else if (this.type === TableDataType.BADGE && !this.badgeProperties) {
       throw new Error('Badge columns require badgeProperties');
     } else if (this.type === TableDataType.TEXT_AND_DESCRIPTION && (!this.titleKey || !this.descriptionKey || !this.sortField)) {
@@ -124,6 +131,7 @@ export class ColumnBuilder {
       this.avatarNameKey,
       this.avatarEmailKey,
       this.sortField,
+      this.sortFields,
       this.badgeProperties,
       this.onDelete,
       this.editRoute,

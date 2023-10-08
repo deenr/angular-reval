@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {Color} from '@shared/enums/general/colors.enum';
 import {FilterProperty, FilterType} from './builder/filter-builder';
 import {DateRange} from '@custom-components/datepicker/date-range.interface';
+import {_isNumberValue} from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-table',
@@ -24,6 +25,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   @Input() public data: T[];
   @Input() public columns: TableColumn[];
 
+  MAX_SAFE_INTEGER = 9007199254740991;
   public displayedColumns: string[];
   public filters: FilterProperty[];
   public dataSource: MatTableDataSource<T>;
@@ -53,6 +55,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.sortData = this.sortData;
   }
 
   public getAvatarName(field: string, data: any): string {
@@ -115,6 +118,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   private setDataSource(): void {
     if (this.data) {
       this.dataSource = new MatTableDataSource(this.data);
+      this.setFilterPredicate();
       this.loadingData = false;
     } else {
       this.loadingData = true;
@@ -129,7 +133,14 @@ export class TableComponent<T> implements OnInit, OnChanges {
     this.displayedColumns = this.columns?.map((column: TableColumn) => column.field);
 
     this.filters = this.columns?.filter((value: TableColumn) => value.filterProperties).map((value: TableColumn) => value.filterProperties);
+    this.setFilterPredicate();
+  }
 
+  private getFilterTypeByField(field: string): FilterType {
+    return this.filters.find((filterProperty: FilterProperty) => filterProperty.field === field).type;
+  }
+
+  private setFilterPredicate(): void {
     this.dataSource.filterPredicate = (data, filter): boolean => {
       return this.filters.every((filterProperty: FilterProperty) => {
         switch (this.getFilterTypeByField(filterProperty.field)) {
@@ -157,6 +168,15 @@ export class TableComponent<T> implements OnInit, OnChanges {
             const date = (data as any)[filterProperty.field];
             return filterDates ? date >= filterDates.startDate && date <= filterDates.endDate : true;
           case FilterType.TEXT:
+            if (filterProperty.fields) {
+              return (
+                `${(data as any)[filterProperty.fields[0]]} ${(data as any)[filterProperty.fields[1]]}`
+                  ?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .indexOf((filter as any)[filterProperty.field].toLowerCase()) !== -1
+              );
+            }
             return (
               (data as any)[filterProperty.field]
                 ?.toString()
@@ -171,9 +191,48 @@ export class TableComponent<T> implements OnInit, OnChanges {
     };
   }
 
-  private getFilterTypeByField(field: string): FilterType {
-    return this.filters.find((filterProperty: FilterProperty) => filterProperty.field === field).type;
-  }
+  private sortingDataAccessor: (data: T, sortHeaderId: string) => string | number = (data: T, sortHeaderId: string): string | number => {
+    const value = (data as unknown as Record<string, any>)[sortHeaderId];
+
+    const combinedValue = this.filters
+      .find((filterProperty: FilterProperty) => filterProperty.field === sortHeaderId)
+      .fields.map((key: string) => (data as unknown as Record<string, any>)[key])
+      .join(' ');
+
+    if (_isNumberValue(value)) {
+      const numberValue = Number(value);
+
+      return numberValue < this.MAX_SAFE_INTEGER ? numberValue : value;
+    } else if (!value && combinedValue) {
+      return combinedValue;
+    }
+
+    return value;
+  };
+
+  private sortData: (data: T[], sort: MatSort) => T[] = (data: T[], sort: MatSort): T[] => {
+    const active = sort.active;
+    const direction = sort.direction;
+
+    if (!active || direction === '') {
+      return data;
+    }
+
+    return data.slice().sort((a, b) => {
+      const valueA = this.sortingDataAccessor(a, active);
+      const valueB = this.sortingDataAccessor(b, active);
+
+      console.log(valueA, valueB);
+
+      if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return valueA.localeCompare(valueB, undefined, {sensitivity: 'base'}) * (direction === 'asc' ? 1 : -1);
+      } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return (valueA - valueB) * (direction === 'asc' ? 1 : -1);
+      } else {
+        return valueA?.toString()?.localeCompare(valueB?.toString(), undefined, {sensitivity: 'base'}) * (direction === 'asc' ? 1 : -1);
+      }
+    });
+  };
 }
 
 function getPaginatorIntl() {
