@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Article} from '@shared/models/article/article.model';
 import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
 import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';

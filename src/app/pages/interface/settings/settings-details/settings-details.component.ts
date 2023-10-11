@@ -15,7 +15,7 @@ import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-pro
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {RoleService} from '@shared/services/role/role.service';
 import {AuthService} from '@shared/services/auth/auth.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';

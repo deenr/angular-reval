@@ -2,7 +2,7 @@ import {Component, Input, ViewChild} from '@angular/core';
 import {FormArray, FormGroup, FormControl, Validators} from '@angular/forms';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {TextContentFormType, QuoteContentFormType, ImageContentFormType, ImageContentFormGroup, QuoteContentFormGroup, TextContentFormGroup} from '../add-article.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {MatMenuTrigger} from '@angular/material/menu';

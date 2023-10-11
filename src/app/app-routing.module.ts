@@ -20,6 +20,7 @@ import {TermsOfServiceComponent} from '@pages/home/terms-of-service/terms-of-ser
 import {UsersComponent} from '@pages/interface/users/users.component';
 import {ArticlesComponent} from '@pages/interface/articles/articles.component';
 import {AddArticleComponent} from '@pages/interface/articles/add-article/add-article.component';
+import {EquipmentListComponent} from '@pages/interface/equipment/equipment-list.component';
 
 const routes: Routes = [
   {
@@ -56,7 +57,8 @@ const routes: Routes = [
       {path: 'users/:id', component: UsersComponent},
       {path: 'articles', component: ArticlesComponent},
       {path: 'articles/add', component: AddArticleComponent},
-      {path: 'articles/edit/:id', component: AddArticleComponent}
+      {path: 'articles/edit/:id', component: AddArticleComponent},
+      {path: 'equipment', component: EquipmentListComponent}
     ]
   },
   {path: '**', redirectTo: ''}

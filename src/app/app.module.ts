@@ -87,6 +87,8 @@ import {ArticlePreviewComponent} from './custom-components/article-preview/artic
 import {AddArticleContentComponent} from './pages/interface/articles/add-article/add-article-content/add-article-content.component';
 import {FileUploadModule} from '@custom-components/file-upload/file-upload.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {EquipmentListComponent} from './pages/interface/equipment/equipment-list.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -145,7 +147,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     AddArticleGeneralComponent,
     AddArticlePreviewComponent,
     ArticlePreviewComponent,
-    AddArticleContentComponent
+    AddArticleContentComponent,
+    EquipmentListComponent
   ],
   imports: [
     CommonModule,
@@ -181,7 +184,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatPaginatorModule,
     DatepickerModule,
     FileUploadModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ScrollingModule
   ],
   providers: [
     DatePipe,

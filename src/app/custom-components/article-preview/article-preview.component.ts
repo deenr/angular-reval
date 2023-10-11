@@ -4,7 +4,7 @@ import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent} from '@shared/models/article/article-content.model';
 import {Article} from '@shared/models/article/article.model';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {HttpImageService} from '@shared/services/image/http-image.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
 import * as moment from 'moment';

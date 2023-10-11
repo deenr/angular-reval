@@ -1,0 +1,103 @@
+@import 'variables';
+
+:host {
+  .equipment {
+    position: relative;
+    overflow: hidden;
+    padding: 32px;
+    gap: 32px;
+
+    @include breakpoint-md() {
+      overflow: scroll;
+    }
+
+    @include breakpoint-sm() {
+      padding: 32px 16px 0 16px;
+    }
+
+    .header {
+      gap: 16px;
+      justify-content: space-between;
+
+      &__title-and-description {
+        gap: 4px;
+      }
+    }
+
+    &-list {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      column-gap: 20px;
+      row-gap: 32px;
+      overflow: scroll;
+      border-radius: 16px;
+      border: 1px solid $color-grey-200;
+
+      @include breakpoint-sm() {
+        padding: 0;
+        border-radius: 0;
+        border: unset;
+        padding-bottom: 32px;
+      }
+
+      .device {
+        position: relative;
+        height: fit-content;
+
+        .hover {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: none;
+          backdrop-filter: blur(8px);
+          background-color: rgba($color-white, 0.9);
+          border-radius: 8px;
+          border: 1px solid $color-grey-200;
+        }
+
+        &:hover .hover {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+
+          @include breakpoint-md() {
+            display: none;
+          }
+        }
+
+        &__image {
+          aspect-ratio: 2.5;
+          border-radius: 8px;
+          object-fit: cover;
+        }
+
+        &__header {
+          margin-top: 16px;
+          align-items: center;
+          gap: 8px;
+
+          .available-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 6px;
+            background-color: $color-success-600;
+
+            &.unavailable {
+              background-color: $color-error-600;
+            }
+          }
+
+          h4 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+          }
+        }
+      }
+    }
+  }
+}

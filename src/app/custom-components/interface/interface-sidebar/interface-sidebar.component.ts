@@ -24,7 +24,7 @@ export class InterfaceSidebarComponent implements OnInit {
   public topNavigationItems = [
     {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'dashboard', name: 'Dashboard', icon: 'chart', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'equipments', name: 'Equipment', icon: 'microscope', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
+    {id: 'equipment', name: 'Equipment', icon: 'microscope', routerLink: '/app/equipment', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'documents', name: 'Documents', icon: 'file', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
     {id: 'users', name: 'Users', icon: 'users', routerLink: '/app/users', permissions: [UserRole.ADMIN]},
     {id: 'articles', name: 'Articles', icon: 'newspaper', routerLink: '/app/articles', permissions: [UserRole.ADMIN]}
@@ -38,7 +38,7 @@ export class InterfaceSidebarComponent implements OnInit {
   public BASE_URL_TO_NAVIGATION_ID = new Map<string, string>([
     ['/app', 'home'],
     ['/app/dashboard', 'dashboard'],
-    ['/app/equipments', 'equipments'],
+    ['/app/equipment', 'equipment'],
     ['/app/documents', 'documents'],
     ['/app/users', 'users'],
     ['/app/articles', 'articles'],

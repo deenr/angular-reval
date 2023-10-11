@@ -1,9 +1,9 @@
 import {Observable, from, of} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {StubUser} from '@shared/models/user/stub-user';
-import {UserOverview} from '@shared/models/user/user-overview';
+import {UserOverview} from '@shared/models/user/user-overview.model';
 
 @Injectable({
   providedIn: 'root'

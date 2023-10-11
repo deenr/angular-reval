@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {
   AuthChangeEvent,
   AuthError,

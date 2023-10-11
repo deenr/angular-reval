@@ -1,0 +1,26 @@
+<div class="equipment flex-column full-height">
+  <header class="flex-row header">
+    <div class="header__title-and-description flex-column">
+      <h2 class="display-sm text-semibold" classMd="display-xs">Research devices</h2>
+      <p class="text-md text-regular">Scroll to see more devices</p>
+    </div>
+  </header>
+  <article class="equipment-list full-width full-height shadow-xs">
+    <section *ngFor="let device of researchDevices" class="device">
+      <div class="hover full-width full-height">
+        <button mat-stroked-button>More info</button>
+        <button mat-flat-button color="primary">Add reservation</button>
+      </div>
+      <img class="device__image full-width" src="../../../../assets/image/device.webp" [alt]="'Picture of ' + device.name" />
+      <div class="device__header flex-row">
+        <div class="available-indicator" [class.unavailable]="!device.available"></div>
+        <h4 class="text-lg text-semibold" classMd="text-md">{{ device.name }}</h4>
+      </div>
+      <p class="text-sm text-regular">{{ 'RESEARCH_DEVICE_TYPE.' + device.type | translate }}</p>
+
+      <!-- <app-badge *ngFor="let program of device.relatedPrograms">
+        {{ 'PROGRAM.' + program | translate }}
+      </app-badge> -->
+    </section>
+  </article>
+</div>

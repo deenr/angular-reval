@@ -10,7 +10,7 @@ import {Tab} from '@custom-components/tabs/tab.interface';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {ActivatedRoute} from '@angular/router';
 import {RoleService} from '@shared/services/role/role.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';

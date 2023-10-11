@@ -4,7 +4,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContent, IntroductionContent, TextContent, ConclusionContent} from '@shared/models/article/article-content.model';
-import {User} from '@shared/models/user/user';
+import {User} from '@shared/models/user/user.model';
 import {Observable, map, startWith} from 'rxjs';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';

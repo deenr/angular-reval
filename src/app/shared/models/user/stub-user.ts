@@ -1,5 +1,5 @@
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from './user';
+import {User} from './user.model';
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {LawProgram} from '@shared/enums/faculty-and-department/law-program.enum';
 

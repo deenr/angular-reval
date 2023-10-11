@@ -1,5 +1,5 @@
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
-import {User} from '../user/user';
+import {User} from '../user/user.model';
 
 export abstract class ArticleContent {
   private _type: ArticleContentType;

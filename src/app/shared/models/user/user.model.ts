@@ -1,7 +1,7 @@
 import {Faculty} from '@shared/enums/faculty-and-department/faculty.enum';
 import {Program} from '@shared/enums/faculty-and-department/program.type';
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {UserOverview} from './user-overview';
+import {UserOverview} from './user-overview.model';
 
 export class User extends UserOverview {
   private _phoneNumber: string;

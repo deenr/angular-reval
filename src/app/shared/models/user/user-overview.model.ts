@@ -1,5 +1,5 @@
 import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from './user';
+import {User} from './user.model';
 
 export class UserOverview {
   private _id: string;

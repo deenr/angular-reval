@@ -1,5 +1,5 @@
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {User} from '../user/user';
+import {User} from '../user/user.model';
 import {Article} from './article.model';
 
 export class ArticleOverview {
