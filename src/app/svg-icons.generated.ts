@@ -200,6 +200,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/image.svg"
   },
   {
+    "name": "info-circle",
+    "path": "./assets/svg/info-circle.svg"
+  },
+  {
     "name": "layer-group",
     "path": "./assets/svg/layer-group.svg"
   },

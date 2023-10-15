@@ -9,7 +9,7 @@ export enum FilterType {
 export interface FilterProperty {
   type: FilterType;
   field: string;
-  fields: string[];
+  fields?: string[];
   enumValues?: string[];
   translationKey?: string;
 }

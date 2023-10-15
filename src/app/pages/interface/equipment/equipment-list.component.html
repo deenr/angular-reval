@@ -5,12 +5,10 @@
       <p class="text-md text-regular">Scroll to see more devices</p>
     </div>
   </header>
+
+  <app-filter class="filter" [filters]="filters" (filterChange)="onFilterChange($event)"></app-filter>
   <article class="equipment-list full-width full-height shadow-xs">
-    <section *ngFor="let device of researchDevices" class="device">
-      <div class="hover full-width full-height">
-        <button mat-stroked-button>More info</button>
-        <button mat-flat-button color="primary">Add reservation</button>
-      </div>
+    <section *ngFor="let device of filteredDevices" class="device cursor-pointer" [class.active]="device === selectedDevice" (click)="selectDevice(device)">
       <img class="device__image full-width" src="../../../../assets/image/device.webp" [alt]="'Picture of ' + device.name" />
       <div class="device__header flex-row">
         <div class="available-indicator" [class.unavailable]="!device.available"></div>
