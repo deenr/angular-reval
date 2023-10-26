@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatSidenav} from '@angular/material/sidenav';
 import {FilterProperty, FilterType} from '@custom-components/table/builder/filter-builder';
 import {ArchitectureAndArtsProgram} from '@shared/enums/faculty-and-department/architecture-and-arts-program.enum';
 import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
@@ -10,7 +11,6 @@ import {RehabilitationSciencesProgram} from '@shared/enums/faculty-and-departmen
 import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-program.enum';
 import {SocialSciencesProgram} from '@shared/enums/faculty-and-department/social-sciences-program.enum';
 import {TransportationSciencesProgram} from '@shared/enums/faculty-and-department/transportation-sciences-program.enum';
-import {Color} from '@shared/enums/general/colors.enum';
 import {ResearchDeviceType} from '@shared/enums/research-device/research-device-type.enum';
 import {ResearchDevice} from '@shared/models/research-device/research-device.model';
 import {StubResearchDevice} from '@shared/models/research-device/stub-research-device';
@@ -21,8 +21,7 @@ import {StubResearchDevice} from '@shared/models/research-device/stub-research-d
   styleUrls: ['./equipment-list.component.scss']
 })
 export class EquipmentListComponent implements OnInit {
-  public greenColor = Color.GREEN;
-  public redColor = Color.ROSE;
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
 
   public researchDevices: ResearchDevice[];
   public filteredDevices: ResearchDevice[];
@@ -64,6 +63,7 @@ export class EquipmentListComponent implements OnInit {
 
   public selectDevice(device: ResearchDevice): void {
     this.selectedDevice = device;
+    this.sidenav.open();
   }
 
   public onFilterChange(filterValues: {name: string; type: ResearchDeviceType[]; program: Program[]}): void {
@@ -77,5 +77,10 @@ export class EquipmentListComponent implements OnInit {
       );
 
     this.filteredDevices = filteredDevices;
+  }
+
+  public closeSidenav(): void {
+    this.selectedDevice = null;
+    this.sidenav.close();
   }
 }

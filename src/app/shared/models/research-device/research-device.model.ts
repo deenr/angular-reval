@@ -4,6 +4,7 @@ import {ResearchDeviceType} from '@shared/enums/research-device/research-device-
 export class ResearchDevice {
   private _id: string;
   private _name: string;
+  private _description: string;
   private _type: ResearchDeviceType;
   private _purchaseDate: Date;
   private _purchasePrice: string;
@@ -15,6 +16,7 @@ export class ResearchDevice {
   public constructor(
     id: string,
     name: string,
+    description: string,
     type: ResearchDeviceType,
     purchaseDate: Date,
     purchasePrice: string,
@@ -25,6 +27,7 @@ export class ResearchDevice {
   ) {
     this._id = id;
     this._name = name;
+    this._description = description;
     this._type = type;
     this._purchaseDate = purchaseDate;
     this._purchasePrice = purchasePrice;
@@ -48,6 +51,14 @@ export class ResearchDevice {
 
   public set name(name: string) {
     this._name = name;
+  }
+
+  public get description(): string {
+    return this._description;
+  }
+
+  public set description(description: string) {
+    this._description = description;
   }
 
   public get type(): ResearchDeviceType {
@@ -110,6 +121,7 @@ export class ResearchDevice {
     return {
       id: this._id,
       name: this._name,
+      description: this._description,
       type: this._type,
       purchaseDate: this._purchaseDate,
       purchasePrice: this._purchasePrice,
@@ -124,6 +136,7 @@ export class ResearchDevice {
     return new ResearchDevice(
       researchDeviceJSON.id,
       researchDeviceJSON.name,
+      researchDeviceJSON.description,
       researchDeviceJSON.type,
       new Date(researchDeviceJSON.purchaseDate),
       researchDeviceJSON.purchasePrice,

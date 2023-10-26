@@ -28,6 +28,10 @@ export const SVG_ICONS = [
     "path": "./assets/svg/arrow-up.svg"
   },
   {
+    "name": "bell-off",
+    "path": "./assets/svg/bell-off.svg"
+  },
+  {
     "name": "bell",
     "path": "./assets/svg/bell.svg"
   },
@@ -136,6 +140,18 @@ export const SVG_ICONS = [
     "path": "./assets/svg/exclamation-circle.svg"
   },
   {
+    "name": "favorite-filled",
+    "path": "./assets/svg/favorite-filled.svg"
+  },
+  {
+    "name": "favorite",
+    "path": "./assets/svg/favorite.svg"
+  },
+  {
+    "name": "file-pdf",
+    "path": "./assets/svg/file-pdf.svg"
+  },
+  {
     "name": "file",
     "path": "./assets/svg/file.svg"
   },
@@ -202,6 +218,10 @@ export const SVG_ICONS = [
   {
     "name": "info-circle",
     "path": "./assets/svg/info-circle.svg"
+  },
+  {
+    "name": "lab-research",
+    "path": "./assets/svg/lab-research.svg"
   },
   {
     "name": "layer-group",

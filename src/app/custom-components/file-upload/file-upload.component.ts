@@ -1,4 +1,3 @@
-import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({

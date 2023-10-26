@@ -89,6 +89,7 @@ import {FileUploadModule} from '@custom-components/file-upload/file-upload.modul
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {EquipmentListComponent} from './pages/interface/equipment/equipment-list.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { EquipmentDetailsComponent } from './pages/interface/equipment/equipment-details/equipment-details.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     AddArticlePreviewComponent,
     ArticlePreviewComponent,
     AddArticleContentComponent,
-    EquipmentListComponent
+    EquipmentListComponent,
+    EquipmentDetailsComponent
   ],
   imports: [
     CommonModule,

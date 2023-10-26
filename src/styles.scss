@@ -125,6 +125,5 @@ mat-sidenav-container {
 }
 
 ::selection {
-  color: $color-white;
-  background: $color-primary-700;
+  background: rgba($color-primary-700, 0.5);
 }

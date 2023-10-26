@@ -10,6 +10,8 @@ export class StubResearchDevice {
 
   public static getRandomResearchDeviceWithId(id: string): ResearchDevice {
     const name = MACHINE_NAMES[Math.round(Math.random() * (MACHINE_NAMES.length - 1))];
+    const description =
+      'The machine is a cutting-edge research device designed for scientific exploration and experimentation. It serves as an invaluable tool in laboratories and research facilities, enabling researchers to conduct various experiments and data analysis. With its robust capabilities, it empowers scientists to delve into diverse fields, from biology to physics, and plays a pivotal role in advancing our understanding of the natural world.';
     const type = this.getRandomEnumValue(ResearchDeviceType);
     const purchaseDate = this.getRandomDateWithinOneMonthRange();
     const purchasePrice = `${Math.floor(Math.random() * 90000) + 10000}`;
@@ -17,7 +19,7 @@ export class StubResearchDevice {
     const location = 'Lab';
     const relatedPrograms = [this.getRandomEnumValue(SciencesProgram), this.getRandomEnumValue(BusinessProgram)];
 
-    return new ResearchDevice(id, name, type, purchaseDate, purchasePrice, annualCost, location, relatedPrograms, parseInt(id) % 2 === 0);
+    return new ResearchDevice(id, name, description, type, purchaseDate, purchasePrice, annualCost, location, relatedPrograms, parseInt(id) % 2 === 0);
   }
 
   public static createAmountOfResearchDevices(amount: number): ResearchDevice[] {
@@ -60,17 +62,17 @@ const MACHINE_NAMES = [
   'Electron Microscope',
   'NMR Spectrometer',
   'Mass Spectrometer',
-  'X-ray Diffraction Machine',
+  'X-ray Machine',
   'DNA Sequencer',
   'Chromatograph',
   'Climate Simulator',
   'Geiger Counter',
-  'Superconducting Quantum Interference Device',
+  'Superconducting  Device',
   'Fusion Reactor',
   'Neutron Generator',
   'Cryostat',
-  'Electroencephalogram (EEG) Machine',
+  'Electroencephalogram',
   'Fluorometer',
-  'Gas Chromatograph-Mass Spectrometer',
+  'Gas Spectrometer',
   'Seismomete'
 ];
