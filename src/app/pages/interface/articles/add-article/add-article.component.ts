@@ -10,7 +10,7 @@ import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent} from '@shared/models/article/article-content.model';
 import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
 import {Location} from '@angular/common';
-import {Observable, forkJoin} from 'rxjs';
+import {Observable, combineLatest, forkJoin} from 'rxjs';
 import {HttpImageService} from '@shared/services/image/http-image.service';
 import {HttpArticleService} from '@shared/services/article/http-article.service';
 import {HttpUserService} from '@shared/services/user/http-user.service';
@@ -24,7 +24,7 @@ export class AddArticleComponent implements OnInit {
   public tabs = [
     {id: AddArticleTab.GENERAL, name: 'General', disabled: false, active: true},
     {id: AddArticleTab.CONTENT, name: 'Content', disabled: false, active: false},
-    {id: AddArticleTab.PREVIEW, name: 'Preview', disabled: false, active: false}
+    {id: AddArticleTab.PREVIEW, name: 'Preview', disabled: true, active: false}
   ] as Tab[];
 
   public articleForm: FormGroup<{
@@ -220,6 +220,17 @@ export class AddArticleComponent implements OnInit {
         })
       );
     }
+
+    combineLatest([this.articleForm.valueChanges, this.contentForm.valueChanges]).subscribe(() => {
+      this.tabs = this.tabs.map((tab: Tab) => {
+        if (tab.id === AddArticleTab.PREVIEW) {
+          tab.disabled = !(this.articleForm.valid && this.contentForm.valid);
+          return tab;
+        }
+
+        return tab;
+      });
+    });
   }
 
   private setFormFieldValues(article: Article): void {

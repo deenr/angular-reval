@@ -94,8 +94,8 @@ export class ArticlePreviewComponent implements OnInit {
   }
 
   public getQuoteAuthor(content: ArticleContent): string {
-    const author = this.authors.find((author: User) => author.id === (content as QuoteContent).authorId);
-    return `${author.firstName} ${author.lastName}`;
+    const author = this.authors?.find((author: User) => author.id === (content as QuoteContent).authorId);
+    return `${author?.firstName} ${author?.lastName}`;
   }
 
   public isContentConclusion(articleContentType: ArticleContentType): boolean {

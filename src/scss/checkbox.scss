@@ -1,5 +1,6 @@
 @import './colors.scss';
 @import './typography.scss';
+@import './breakpoints.scss';
 
 .mat-mdc-checkbox {
   margin-top: -3px;
@@ -229,14 +230,6 @@
         line-height: 143%;
         color: $color-grey-900;
       }
-    }
-  }
-}
-
-.cdk-overlay-container {
-  .cdk-overlay-connected-position-bounding-box {
-    .cdk-overlay-pane {
-      min-width: fit-content !important;
     }
   }
 }

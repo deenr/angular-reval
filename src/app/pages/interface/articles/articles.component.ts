@@ -12,7 +12,6 @@ import {TableDataType} from '@custom-components/table/table-data-type.enum';
 import {ArticleCategory} from '@shared/enums/article/article-category.enum';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {HttpArticleService} from '@shared/services/article/http-article.service';
-import {StubArticleService} from '@shared/services/article/stub-article.service';
 
 @Component({
   selector: 'app-articles',
@@ -52,6 +51,7 @@ export class ArticlesComponent implements OnInit {
         .setField('published')
         .setHeaderName('Published')
         .setDataType(TableDataType.DATE)
+        .canSort(true)
         .setFilter((filterBuilder: FilterBuilder) => filterBuilder.setType(FilterType.DATE).build())
         .build(),
       new ColumnBuilder()

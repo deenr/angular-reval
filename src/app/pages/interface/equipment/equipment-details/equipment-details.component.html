@@ -11,7 +11,7 @@
       <h3 class="text-xl text-semibold">{{ device?.name }}</h3>
       <p class="text-md text-regular">{{ 'RESEARCH_DEVICE_TYPE.' + device?.type | translate }}</p>
     </div>
-    <button mat-flat-button color="primary" class="md icon-only">Add reservation</button>
+    <button mat-flat-button color="primary" class="md icon-only" (click)="addReservation()">Add reservation</button>
     <p class="text-md text-regular">
       The machine is currently <app-badge [color]="device?.available ? greenColor : redColor">{{ device?.available ? 'Available' : 'Unavailable' }}</app-badge>
     </p>
@@ -51,10 +51,10 @@
           </div>
         </div>
       </div>
-      <div>
+      <!-- <div>
         <h4 class="text-md text-medium">Images</h4>
         <p class="text-md text-regular">/</p>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
