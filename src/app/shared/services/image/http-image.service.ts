@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {PostgrestSingleResponse, SupabaseClient, createClient} from '@supabase/supabase-js';
-import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ export class HttpImageService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
   }
 
   public uploadImage(image: File): Promise<string> {

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VerificationCodeInputComponent } from './verification-code-input.component';
+import {VerificationCodeInputComponent} from './verification-code-input.component';
 
 describe('VerificationCodeInputComponent', () => {
   let component: VerificationCodeInputComponent;

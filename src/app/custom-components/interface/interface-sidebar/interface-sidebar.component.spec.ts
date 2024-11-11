@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InterfaceSidebarComponent } from './interface-sidebar.component';
+import {InterfaceSidebarComponent} from './interface-sidebar.component';
 
 describe('InterfaceSidebarComponent', () => {
   let component: InterfaceSidebarComponent;

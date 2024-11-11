@@ -18,7 +18,7 @@ import {
   createClient
 } from '@supabase/supabase-js';
 import {BehaviorSubject, Observable, forkJoin} from 'rxjs';
-import {environment} from 'src/environments/environment';
+
 import {HttpUserService} from '../user/http-user.service';
 import {ChangePasswordResponse} from './change-password-response.enum';
 
@@ -31,7 +31,7 @@ export class AuthService {
   private supabase: SupabaseClient;
 
   public constructor(private readonly userService: HttpUserService) {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
 
     this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
       this._currentSession.next(value.data?.session ? value.data.session : false);

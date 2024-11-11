@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StackedLeftDialogComponent } from './stacked-left-dialog.component';
+import {StackedLeftDialogComponent} from './stacked-left-dialog.component';
 
 describe('StackedLeftDialogComponent', () => {
   let component: StackedLeftDialogComponent;

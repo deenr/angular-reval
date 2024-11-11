@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AddReservationDialogComponent} from '@custom-components/dialogs/add-reservation-dialog/add-reservation-dialog.component';
 import {DialogCloseType} from '@custom-components/dialogs/dialog-close-type.enum';
 import {Color} from '@shared/enums/general/colors.enum';
 import {ResearchDevice} from '@shared/models/research-device/research-device.model';
@@ -35,15 +34,15 @@ export class EquipmentDetailsComponent implements OnInit, AfterViewInit {
   }
 
   public addReservation(): void {
-    this.dialog
-      .open(AddReservationDialogComponent, {
-        width: this.isMobile ? 'calc(100vw - 32px)' : '800px',
-        maxWidth: this.isMobile ? 'calc(100vw - 32px)' : 'unset',
-        data: {
-          device: this.device
-        }
-      })
-      .afterClosed()
-      .subscribe((closeType: DialogCloseType) => {});
+    // this.dialog
+    //   .open(AddReservationDialogComponent, {
+    //     width: this.isMobile ? 'calc(100vw - 32px)' : '800px',
+    //     maxWidth: this.isMobile ? 'calc(100vw - 32px)' : 'unset',
+    //     data: {
+    //       device: this.device
+    //     }
+    //   })
+    //   .afterClosed()
+    //   .subscribe((closeType: DialogCloseType) => {});
   }
 }

@@ -3,7 +3,6 @@ import {Observable, from} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {UserRole} from '@shared/enums/user/user-role.enum';
 import {SupabaseClient, createClient} from '@supabase/supabase-js';
-import {environment} from 'src/environments/environment';
 import {UserOverview} from '@shared/models/user/user-overview.model';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class HttpUserService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
   }
 
   public getAll(): Observable<User[]> {

@@ -3,7 +3,6 @@ import {Observable, from} from 'rxjs';
 import {ArticleOverview} from '@shared/models/article/article-overview.model';
 import {Article} from '@shared/models/article/article.model';
 import {SupabaseClient, createClient} from '@supabase/supabase-js';
-import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class HttpArticleService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
   }
 
   public getOverview(): Observable<ArticleOverview[]> {
