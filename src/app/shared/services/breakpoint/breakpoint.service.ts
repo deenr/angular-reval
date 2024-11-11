@@ -1,7 +1,7 @@
-import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
-import {Injectable} from '@angular/core';
-import {Observable, map} from 'rxjs';
-import {Breakpoint} from './breakpoint.enum';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { Breakpoint } from './breakpoint.enum';
 
 @Injectable({
   providedIn: 'root'

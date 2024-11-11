@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {ProgressStep} from './progress-step.interface';
+import { Component, Input } from '@angular/core';
+import { ProgressStep } from './progress-step.interface';
 
 @Component({
   selector: 'app-progress-steps',

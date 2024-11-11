@@ -1,9 +1,9 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {BadgeType} from '@custom-components/badge/badge-type.enum';
-import {MetricTimeFrame} from './metric-time-frame.enum';
-import {FormControl} from '@angular/forms';
-import {Subject, distinctUntilChanged} from 'rxjs';
-import {Color} from '@shared/enums/general/colors.enum';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { BadgeType } from '@custom-components/badge/badge-type.enum';
+import { MetricTimeFrame } from './metric-time-frame.enum';
+import { FormControl } from '@angular/forms';
+import { Subject, distinctUntilChanged } from 'rxjs';
+import { Color } from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-metrics-card',

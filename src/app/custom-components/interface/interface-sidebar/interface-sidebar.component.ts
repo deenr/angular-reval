@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NavigationItem} from './navigation-item.interface';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserRole} from '@shared/enums/user/user-role.enum';
-import {RoleService} from '@shared/services/role/role.service';
-import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
-import {Breakpoint} from '@shared/services/breakpoint/breakpoint.enum';
-import {AuthService} from '@shared/services/auth/auth.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserRole } from '@shared/enums/user/user-role.enum';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { Breakpoint } from '@shared/services/breakpoint/breakpoint.enum';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
+import { LocalStorageService } from '@shared/services/local-storage.service';
+import { RoleService } from '@shared/services/role/role.service';
+import { NavigationItem } from './navigation-item.interface';
 
 @Component({
   selector: 'app-interface-sidebar',
@@ -22,26 +23,21 @@ export class InterfaceSidebarComponent implements OnInit {
   public userEmail: string;
 
   public topNavigationItems = [
-    {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'dashboard', name: 'Dashboard', icon: 'chart', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'equipment', name: 'Equipment', icon: 'microscope', routerLink: '/app/equipment', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'documents', name: 'Documents', icon: 'file', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'users', name: 'Users', icon: 'users', routerLink: '/app/users', permissions: [UserRole.ADMIN]},
-    {id: 'articles', name: 'Articles', icon: 'newspaper', routerLink: '/app/articles', permissions: [UserRole.ADMIN]}
+    // {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
+    { id: 'articles', name: 'Articles', icon: 'newspaper', routerLink: '/app', permissions: [UserRole.USER, UserRole.AUTHOR, UserRole.ADMIN] },
+    { id: 'users', name: 'Users', icon: 'users', routerLink: '/app/users', permissions: [UserRole.ADMIN] }
   ] as NavigationItem[];
 
   public bottomNavigationItems = [
-    {id: 'support', name: 'Support', icon: 'buoy', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
-    {id: 'settings', name: 'Settings', icon: 'setting', routerLink: '/app/settings', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN, UserRole.INCOMPLETE_PROFILE]}
+    { id: 'settings', name: 'Settings', icon: 'setting', routerLink: '/app/settings', permissions: [UserRole.USER, UserRole.AUTHOR, UserRole.ADMIN, UserRole.INCOMPLETE_PROFILE] }
   ] as NavigationItem[];
 
   public BASE_URL_TO_NAVIGATION_ID = new Map<string, string>([
-    ['/app', 'home'],
+    ['/app', 'articles'],
     ['/app/dashboard', 'dashboard'],
     ['/app/equipment', 'equipment'],
     ['/app/documents', 'documents'],
     ['/app/users', 'users'],
-    ['/app/articles', 'articles'],
     ['/app/support', 'support'],
     ['/app/settings', 'settings']
   ]);
@@ -49,13 +45,17 @@ export class InterfaceSidebarComponent implements OnInit {
   public isMobile: boolean;
   public isTablet: boolean;
 
-  private role: UserRole;
+  public readonly role = this.roleService.getCurrentRole();
 
-  public constructor(private readonly router: Router, private readonly roleService: RoleService, private readonly breakpointService: BreakpointService, private readonly authService: AuthService) {}
+  public constructor(
+    private readonly router: Router,
+    private readonly roleService: RoleService,
+    private readonly breakpointService: BreakpointService,
+    private readonly authService: AuthService,
+    private readonly localStorageService: LocalStorageService
+  ) {}
 
   public ngOnInit(): void {
-    this.role = this.roleService.getCurrentRole();
-
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {
       if (this.isScreenSmall(breakpoint)) {
         this.minimizeSidebar();
@@ -64,7 +64,7 @@ export class InterfaceSidebarComponent implements OnInit {
       this.isTablet = this.breakpointService.isTablet;
     });
 
-    const localUserNameAndEmail = JSON.parse(localStorage.getItem('user')) as {email: string; name: string};
+    const localUserNameAndEmail = JSON.parse(this.localStorageService.getItem('user')) as { email: string; name: string };
     this.userEmail = localUserNameAndEmail?.email;
     this.userName = localUserNameAndEmail?.name;
   }

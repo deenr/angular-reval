@@ -1,4 +1,4 @@
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export class PasswordMatchValidator {
   public static createValidator(controlToCheck: AbstractControl): ValidatorFn {
@@ -10,7 +10,7 @@ export class PasswordMatchValidator {
       }
 
       if (control.value !== controlToCheck.value) {
-        return {noMatch: true};
+        return { noMatch: true };
       }
 
       return result;

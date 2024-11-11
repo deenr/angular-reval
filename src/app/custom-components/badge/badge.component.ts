@@ -1,7 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
-import {BadgeSize} from './badge-size.enum';
-import {BadgeType} from './badge-type.enum';
-import {Color} from '@shared/enums/general/colors.enum';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { BadgeSize } from './badge-size.enum';
+import { BadgeType } from './badge-type.enum';
+import { Color } from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-badge',

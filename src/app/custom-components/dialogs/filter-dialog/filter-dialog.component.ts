@@ -1,7 +1,7 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {FilterProperty, FilterType} from '@custom-components/table/builder/filter-builder';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FilterProperty, FilterType } from '@custom-components/table/builder/filter-builder';
 
 @Component({
   selector: 'app-filter-dialog',

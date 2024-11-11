@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Metric} from './metric.interface';
+import { Component, Input } from '@angular/core';
+import { Metric } from './metric.interface';
 
 @Component({
   selector: 'app-metrics-section',

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {DateRange} from '../date-range.interface';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DateRange } from '../date-range.interface';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-datepicker-menu',
   templateUrl: 'datepicker-menu.component.html',
@@ -80,7 +80,7 @@ export class DatepickerMenuComponent implements OnInit {
         } else {
           this.selectedEndDate = date;
         }
-        this.closeMenu.emit({startDate: this.selectedStartDate, endDate: this.selectedEndDate});
+        this.closeMenu.emit({ startDate: this.selectedStartDate, endDate: this.selectedEndDate });
       } else if (this.selectedStartDate && this.selectedEndDate) {
         this.selectedStartDate = date;
         this.selectedEndDate = null;
@@ -144,11 +144,11 @@ export class DatepickerMenuComponent implements OnInit {
   }
 
   public apply(): void {
-    this.dialogRef.close(this.dateRange ? {startDate: this.selectedStartDate, endDate: this.selectedEndDate} : this.selectedSingleDate);
+    this.dialogRef.close(this.dateRange ? { startDate: this.selectedStartDate, endDate: this.selectedEndDate } : this.selectedSingleDate);
   }
 
   private getMonthYearString(date: Date): string {
-    return date.toLocaleString('default', {month: 'long', year: 'numeric'});
+    return date.toLocaleString('default', { month: 'long', year: 'numeric' });
   }
 
   private generateCalendarDates(date: Date): void {

@@ -1,5 +1,5 @@
-import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {ArticleOverview} from './article-overview.model';
+import { ArticleCategory } from '@shared/enums/article/article-category.enum';
+import { ArticleOverview } from './article-overview.model';
 
 export class StubArticleOverview {
   public static getEmptyArticleOverview(): ArticleOverview {

@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {Router} from '@angular/router';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {UserRole} from '@shared/enums/user/user-role.enum';
-import {AuthService} from '@shared/services/auth/auth.service';
-import {AuthError, AuthTokenResponse, OAuthResponse} from '@supabase/supabase-js';
-import {combineLatest} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { DialogType } from '@custom-components/dialogs/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { UserRole } from '@shared/enums/user/user-role.enum';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { AuthError } from '@supabase/supabase-js';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }> = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, Validators.required),
-    remember: new FormControl({value: null, disabled: true})
+    remember: new FormControl({ value: null, disabled: true })
   });
   public loadingLogin = false;
 
@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void {
     combineLatest([this.loginForm.controls.email.valueChanges, this.loginForm.controls.password.valueChanges]).subscribe(() => {
       if (this.loginForm.controls.email.hasError('invalid')) {
-        this.loginForm.controls.email.setErrors({invalid: null});
+        this.loginForm.controls.email.setErrors({ invalid: null });
         this.loginForm.controls.email.updateValueAndValidity();
       }
       if (this.loginForm.controls.password.hasError('invalid')) {
-        this.loginForm.controls.password.setErrors({invalid: null});
+        this.loginForm.controls.password.setErrors({ invalid: null });
         this.loginForm.controls.password.updateValueAndValidity();
       }
     });
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.loadingLogin = true;
       this.authService
         .signIn(this.loginForm.value.email, this.loginForm.value.password)
-        .then(([user, error]: [{id: string; role: UserRole}, AuthError]) => {
+        .then(([user, error]: [{ id: string; role: UserRole }, AuthError]) => {
           if (user) {
             if (user.role === UserRole.INCOMPLETE_PROFILE) {
               this.router.navigate([`/app/settings/${user.id}`]);
@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
         })
         .catch(([error]: [AuthError]) => {
           this.loadingLogin = false;
-          this.loginForm.controls.email.setErrors({invalid: true});
-          this.loginForm.controls.password.setErrors({invalid: true});
+          this.loginForm.controls.email.setErrors({ invalid: true });
+          this.loginForm.controls.password.setErrors({ invalid: true });
         });
     }
   }

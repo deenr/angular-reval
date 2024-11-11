@@ -1,5 +1,5 @@
-import {Directive, Input, TemplateRef, ViewContainerRef, Optional, Host, SkipSelf, DoCheck} from '@angular/core';
-import {FormGroupDirective, AbstractControl, FormGroup} from '@angular/forms';
+import { Directive, Input, TemplateRef, ViewContainerRef, Optional, Host, SkipSelf, DoCheck } from '@angular/core';
+import { FormGroupDirective, AbstractControl, FormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[hasError]'

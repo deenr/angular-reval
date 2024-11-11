@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MatButton} from '@angular/material/button';
-import {Subject, throttleTime} from 'rxjs';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { Subject, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-progress-button',

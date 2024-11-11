@@ -41,6 +41,11 @@
     //   background-color: $color-grey-50;
     // }
 
+    &.clickable:hover {
+      background-color: $color-grey-50;
+      cursor: pointer;
+    }
+
     .mat-mdc-cell {
       padding: 16px 24px;
       color: $color-grey-600;

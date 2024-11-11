@@ -1,5 +1,5 @@
-import {Program} from '@shared/enums/faculty-and-department/program.type';
-import {ResearchDeviceType} from '@shared/enums/research-device/research-device-type.enum';
+import { Program } from '@shared/enums/faculty-and-department/program.type';
+import { ResearchDeviceType } from '@shared/enums/research-device/research-device-type.enum';
 
 export class ResearchDevice {
   private _id: string;

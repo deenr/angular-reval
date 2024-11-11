@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {MatIconRegistry} from '@angular/material/icon';
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { MatIconRegistry } from '@angular/material/icon';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

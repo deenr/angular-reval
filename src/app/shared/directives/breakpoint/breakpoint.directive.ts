@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, Renderer2, OnInit, OnDestroy} from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, OnInit, OnDestroy } from '@angular/core';
 
 @Directive({
   selector: '[classXs], [classSm], [classMd], [classLg], [classXl]'

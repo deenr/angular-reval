@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
-import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {ArticleOverview} from '@shared/models/article/article-overview.model';
-import {StubArticleOverview} from '@shared/models/article/stub-article-overview';
-import {HttpArticleService} from '@shared/services/article/http-article.service';
-import {HttpImageService} from '@shared/services/image/http-image.service';
+import { Component, OnInit } from '@angular/core';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
+import { ArticleCategory } from '@shared/enums/article/article-category.enum';
+import { ArticleOverview } from '@shared/models/article/article-overview.model';
+import { StubArticleOverview } from '@shared/models/article/stub-article-overview';
+import { HttpArticleService } from '@shared/services/article/http-article.service';
+import { HttpImageService } from '@shared/services/image/http-image.service';
 import * as moment from 'moment';
 
 @Component({

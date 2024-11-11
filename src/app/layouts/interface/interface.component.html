@@ -8,7 +8,7 @@
       (collapsedChange)="collapsedChange($event)"
     ></app-interface-sidebar>
   </mat-sidenav>
-  <mat-sidenav-content class="sidenav-content" [ngStyle]="{'margin-left': getLeftMargin()}">
+  <mat-sidenav-content class="sidenav-content" [ngStyle]="{ 'margin-left': getLeftMargin() }">
     <app-interface-header *ngIf="isMobile || isTablet" [sidenavOpened]="sidenavOpened" (sidenavToggle)="onSidenavToggle()"></app-interface-header>
     <main class="main full-height" [class.over-opened]="!collapsed && sidenavMode === 'over'">
       <router-outlet></router-outlet>

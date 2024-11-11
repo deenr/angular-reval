@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {InterfaceHeaderComponent} from './interface-header.component';
+import { InterfaceHeaderComponent } from './interface-header.component';
 
 describe('InterfaceHeaderComponent', () => {
   let component: InterfaceHeaderComponent;

@@ -1,4 +1,4 @@
-import {ColumnBuilder} from './column-builder';
+import { ColumnBuilder } from './column-builder';
 
 export enum FilterType {
   TEXT = 'TEXT',
@@ -16,7 +16,7 @@ export interface FilterProperty {
 
 export class FilterBuilder {
   constructor(private columnBuilder: ColumnBuilder) {
-    this.columnBuilder.filterProperties = {type: null, field: null, fields: null, enumValues: null};
+    this.columnBuilder.filterProperties = { type: null, field: null, fields: null, enumValues: null };
   }
 
   public setType(type: FilterType): FilterBuilder {

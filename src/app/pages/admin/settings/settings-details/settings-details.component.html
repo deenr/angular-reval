@@ -1,0 +1,51 @@
+<section class="flex-column full-width">
+  <mat-card class="details-card full-height" [formGroup]="detailsForm">
+    <mat-card-header class="flex-column details-card__header">
+      <mat-card-title>Personal info</mat-card-title>
+      <mat-card-subtitle>Update personal details and contact information here.</mat-card-subtitle>
+      <mat-divider></mat-divider>
+    </mat-card-header>
+    <mat-card-content class="flex-column details-card__content">
+      <div class="flex-row content-field">
+        <p *ngIf="!isMobile" class="text-sm text-semibold">Name</p>
+        <div class="flex-row form-fields full-width">
+          <mat-form-field *skeleton="loadingUser; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+            <mat-label *ngIf="isMobile" class="text-sm text-medium">First name</mat-label>
+            <input formControlName="firstName" matInput type="text" placeholder="Enter first name" />
+          </mat-form-field>
+          <mat-form-field *skeleton="loadingUser; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+            <mat-label *ngIf="isMobile" class="text-sm text-medium">Last name</mat-label>
+            <input formControlName="lastName" matInput text="text" placeholder="Enter last name" />
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex-row content-field">
+        <p *ngIf="!isMobile" class="text-sm text-semibold">Phone</p>
+        <div class="form-fields full-width">
+          <mat-form-field *skeleton="loadingUser; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+            <mat-label *ngIf="isMobile" class="text-sm text-medium">Phone</mat-label>
+            <input formControlName="phoneNumber" matInput text="tel" placeholder="Enter phonenumber" />
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex-row content-field">
+        <p *ngIf="!isMobile" class="text-sm text-semibold">Email</p>
+        <div class="form-fields full-width">
+          <mat-form-field *skeleton="loadingUser; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
+            <mat-label *ngIf="isMobile" class="text-sm text-medium">Email</mat-label>
+            <input formControlName="email" matInput text="tel" placeholder="Enter email" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <footer class="details__footer">
+    <mat-divider class="full-width"></mat-divider>
+    <div class="actions flex-row full-width">
+      <button mat-stroked-button class="md">Cancel</button>
+      <app-progress-button size="md" [loading]="savingDetails" (progressClick)="saveDetails()">Save</app-progress-button>
+    </div>
+  </footer>
+</section>

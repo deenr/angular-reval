@@ -1,12 +1,12 @@
-import {DatePipe} from '@angular/common';
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {BadgeType} from '@custom-components/badge/badge-type.enum';
-import {FilterDialogComponent} from '@custom-components/dialogs/filter-dialog/filter-dialog.component';
-import {FilterProperty, FilterType} from '@custom-components/table/builder/filter-builder';
-import {TranslatePipe} from '@shared/pipes/translate/translate.pipe';
-import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
+import { DatePipe } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { BadgeType } from '@custom-components/badge/badge-type.enum';
+import { FilterDialogComponent } from '@custom-components/dialogs/filter-dialog/filter-dialog.component';
+import { FilterProperty, FilterType } from '@custom-components/table/builder/filter-builder';
+import { TranslatePipe } from '@shared/pipes/translate/translate.pipe';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-filter',
@@ -48,7 +48,7 @@ export class FilterComponent implements OnInit {
     return `${translationKey}.${value}`;
   }
 
-  public getFilterChips(): {field: string; type: FilterType; value: string}[] {
+  public getFilterChips(): { field: string; type: FilterType; value: string }[] {
     return this.filters
       .filter((filter: FilterProperty) => filter.type !== FilterType.TEXT && (this.filterForm.value as any)[filter.field])
       .map((filter: FilterProperty) => {
@@ -63,7 +63,7 @@ export class FilterComponent implements OnInit {
           const value = `${this.datePipe.transform((this.filterForm.value as any)[filter.field].startDate.toString())} - ${this.datePipe.transform(
             (this.filterForm.value as any)[filter.field].endDate.toString()
           )}`;
-          return {field: filter.field, type: filter.type, value};
+          return { field: filter.field, type: filter.type, value };
         }
       });
   }

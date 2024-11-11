@@ -1,12 +1,12 @@
-import {Injectable, OnInit} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {ArticleOverview} from '@shared/models/article/article-overview.model';
-import {Article} from '@shared/models/article/article.model';
-import {articles as articlesJSON} from './mock-articles';
-import {StubUser} from '@shared/models/user/stub-user';
-import {StubUserService} from '../user/stub-user.service';
-import {ArticleContent, QuoteContent} from '@shared/models/article/article-content.model';
-import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { ArticleOverview } from '@shared/models/article/article-overview.model';
+import { Article } from '@shared/models/article/article.model';
+import { articles as articlesJSON } from './mock-articles';
+import { StubUser } from '@shared/models/user/stub-user';
+import { StubUserService } from '../user/stub-user.service';
+import { ArticleContent, QuoteContent } from '@shared/models/article/article-content.model';
+import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
 
 @Injectable({
   providedIn: 'root'

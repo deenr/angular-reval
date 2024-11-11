@@ -1,5 +1,5 @@
 <nav class="nav flex-row full-width" [class.opened]="sidenavOpened">
-  <div class="nav__background full-width full-height" [ngStyle]="{opacity: opacity}"></div>
+  <div class="nav__background full-width full-height" [ngStyle]="{ opacity: opacity }"></div>
   <div class="nav__logo flex-row cursor-pointer" routerLink="/">
     <mat-icon svgIcon="logo-color"></mat-icon>
     <h3>Sphience</h3>
@@ -7,7 +7,7 @@
   <ul class="nav__items flex-row">
     <li class="text-md text-semibold cursor-pointer" routerLink="/">Home</li>
     <li class="text-md text-semibold cursor-pointer navigation-menu" [matMenuTriggerFor]="menu">Company</li>
-    <li class="text-md text-semibold cursor-pointer" routerLink="/app">Dashboard</li>
+    <li class="text-md text-semibold cursor-pointer" routerLink="/news">Latest news</li>
   </ul>
   <div class="nav__actions flex-row">
     <button mat-button routerLink="/login">Log in</button>
@@ -23,7 +23,7 @@
 </nav>
 
 <mat-menu #menu="matMenu" class="navigation-menu">
-  <app-navigation-item link="news" icon="newspaper" title="News" text="From lab to headlines, celebrating scientific achievements."></app-navigation-item>
+  <!-- <app-navigation-item link="news" icon="newspaper" title="News" text="From lab to headlines, celebrating scientific achievements."></app-navigation-item> -->
   <app-navigation-item link="about" icon="users" title="About us" text="Unveiling our journey, unlocking research potential."></app-navigation-item>
   <app-navigation-item link="contact" icon="phone-volume" title="Contact" text="Your gateway to reach us, start a conversation."></app-navigation-item>
 </mat-menu>

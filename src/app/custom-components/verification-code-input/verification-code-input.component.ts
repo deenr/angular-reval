@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {ControlValueAccessorHelper} from '@helper/abstract-control-value-accessor';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessorHelper } from '@helper/abstract-control-value-accessor';
 
 @Component({
   selector: 'app-verification-code-input',

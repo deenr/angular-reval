@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {UserRole} from '@shared/enums/user/user-role.enum';
-import {User} from '@shared/models/user/user.model';
+import { Injectable } from '@angular/core';
+import { UserRole } from '@shared/enums/user/user-role.enum';
+import { User } from '@shared/models/user/user.model';
 import {
   AuthChangeEvent,
   AuthError,
@@ -17,10 +17,11 @@ import {
   VerifyEmailOtpParams,
   createClient
 } from '@supabase/supabase-js';
-import {BehaviorSubject, Observable, forkJoin} from 'rxjs';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 
-import {HttpUserService} from '../user/http-user.service';
-import {ChangePasswordResponse} from './change-password-response.enum';
+import { LocalStorageService } from '../local-storage.service';
+import { HttpUserService } from '../user/http-user.service';
+import { ChangePasswordResponse } from './change-password-response.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,10 @@ export class AuthService {
 
   private supabase: SupabaseClient;
 
-  public constructor(private readonly userService: HttpUserService) {
-    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
+  public constructor(private readonly userService: HttpUserService, private readonly localStorageService: LocalStorageService) {
+    this.supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY']);
 
-    this.supabase.auth.getSession().then((value: {data: {session: AuthSession}}) => {
+    this.supabase.auth.getSession().then((value: { data: { session: AuthSession } }) => {
       this._currentSession.next(value.data?.session ? value.data.session : false);
     });
 
@@ -42,19 +43,19 @@ export class AuthService {
     });
   }
 
-  public authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void): {data: {subscription: Subscription}} {
+  public authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void): { data: { subscription: Subscription } } {
     return this.supabase.auth.onAuthStateChange(callback);
   }
 
-  public signIn(email: string, password: string): Promise<[user: {id: string; role: UserRole}, error: AuthError]> {
-    return new Promise<[user: {id: string; role: UserRole}, error: AuthError]>((resolve, reject) => {
-      this.supabase.auth.signInWithPassword({email, password}).then(({data, error}: AuthTokenResponse) => {
+  public signIn(email: string, password: string): Promise<[user: { id: string; role: UserRole }, error: AuthError]> {
+    return new Promise<[user: { id: string; role: UserRole }, error: AuthError]>((resolve, reject) => {
+      this.supabase.auth.signInWithPassword({ email, password }).then(({ data, error }: AuthTokenResponse) => {
         if (error) {
           reject([null, error]);
         } else if (data) {
           forkJoin([this.userService.getUserRole(data.user.id), this.userService.getUserInfoById(data.user.id)]).subscribe(([userRole, user]: [UserRole, User]) => {
-            localStorage.setItem('user', JSON.stringify({id: data.user.id, name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '', email, role: userRole}));
-            resolve([{id: data.user.id, role: userRole}, null]);
+            this.localStorageService.setItem('user', JSON.stringify({ id: data.user.id, name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '', email, role: userRole }));
+            resolve([{ id: data.user.id, role: userRole }, null]);
           });
         }
       });
@@ -69,18 +70,17 @@ export class AuthService {
           .update({
             firstName: user.firstName,
             lastName: user.lastName,
-            phoneNumber: user.phoneNumber,
-            faculty: user.faculty,
-            program: user.program,
-            universityId: user.universityId,
-            yearOfGraduation: user.yearOfGraduation
+            email: user.email,
+            role: user.role,
+            status: user.status,
+            phoneNumber: user.phoneNumber
           })
           .eq('id', user.id);
-        const updateUserRole = this.supabase.from('user_roles').update({role: user.role}).eq('user_id', user.id);
+        const updateUserRole = this.supabase.from('user_roles').update({ role: user.role }).eq('user_id', user.id);
 
         await Promise.all([updateUserInfo, updateUserRole]);
 
-        localStorage.setItem('user', JSON.stringify({id: user.id, name: `${user.firstName} ${user.lastName}`, email: user.email, role: user.role}));
+        this.localStorageService.setItem('user', JSON.stringify({ id: user.id, name: `${user.firstName} ${user.lastName}`, email: user.email, role: user.role }));
         resolve(null);
       } catch (error) {
         console.error('Transaction failed:', error);
@@ -102,11 +102,17 @@ export class AuthService {
   }
 
   public googleSignIn(): Promise<OAuthResponse> {
-    return this.supabase.auth.signInWithOAuth({provider: 'google', options: {redirectTo: 'http://localhost:4200/register'}});
+    return this.supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: 'http://localhost:4200/register' } });
   }
 
-  public signUp(email: string, password: string): Promise<AuthResponse> {
-    return this.supabase.auth.signUp({email, password});
+  public async signUp(email: string, password: string): Promise<AuthResponse> {
+    const authResponse = await this.supabase.auth.signUp({ email, password });
+
+    if (authResponse.error) {
+      throw authResponse.error;
+    }
+
+    return authResponse;
   }
 
   public checkDuplicateAccount(email: string): Promise<boolean> {
@@ -115,24 +121,24 @@ export class AuthService {
         .from('users')
         .select()
         .eq('email', email)
-        .then(({data}) => {
+        .then(({ data }) => {
           resolve(data.length > 0);
         });
     });
   }
 
-  public signOut(): Promise<{error: AuthError}> {
-    localStorage.removeItem('user');
+  public signOut(): Promise<{ error: AuthError }> {
+    this.localStorageService.removeItem('user');
     return this.supabase.auth.signOut();
   }
 
   public verifyEmail(token: string, email: string): Promise<AuthResponse> {
-    const params = {token, email, type: 'email'} as VerifyEmailOtpParams;
+    const params = { token, email, type: 'email' } as VerifyEmailOtpParams;
     return this.supabase.auth.verifyOtp(params);
   }
 
   public resendEmailVerification(email: string): Promise<AuthOtpResponse> {
-    const params = {email, type: 'signup'} as ResendParams;
+    const params = { email, type: 'signup' } as ResendParams;
     return this.supabase.auth.resend(params);
   }
 

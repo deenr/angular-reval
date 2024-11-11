@@ -7,6 +7,6 @@
     +{{ overflowBadges.length }}
   </app-badge>
 </div>
-<mat-menu #overflowBadgeMenu="matMenu">
+<mat-menu class="multiple-badges" #overflowBadgeMenu="matMenu">
   <app-badge *ngFor="let badge of overflowBadges" [color]="badge.color" [size]="badge.size"> {{ badge.elementRef.nativeElement.innerText }}</app-badge>
 </mat-menu>

@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {ArticlePreviewComponent} from './article-preview.component';
-import {ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent} from '@shared/models/article/article-content.model';
-import {ArticleCategory} from '@shared/enums/article/article-category.enum';
-import {ArticleContentType} from '@shared/enums/article/article-content-type.enum';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArticlePreviewComponent } from './article-preview.component';
+import { ArticleContent, IntroductionContent, TextContent, ConclusionContent, ImageContent, QuoteContent } from '@shared/models/article/article-content.model';
+import { ArticleCategory } from '@shared/enums/article/article-category.enum';
+import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
 
 describe('ArticlePreviewComponent', () => {
   let component: ArticlePreviewComponent;
@@ -26,21 +26,21 @@ describe('ArticlePreviewComponent', () => {
 
   describe('getTitle', () => {
     it('should return the title of IntroductionContent', () => {
-      const content = {type: ArticleContentType.INTRODUCTION, title: 'Intro'} as IntroductionContent;
+      const content = { type: ArticleContentType.INTRODUCTION, title: 'Intro' } as IntroductionContent;
       const title = component.getTitle(content);
 
       expect(title).toEqual('Intro');
     });
 
     it('should return the title of TextContent', () => {
-      const content = {type: ArticleContentType.TEXT, title: 'Text'} as TextContent;
+      const content = { type: ArticleContentType.TEXT, title: 'Text' } as TextContent;
       const title = component.getTitle(content);
 
       expect(title).toEqual('Text');
     });
 
     it('should return the title of ConclusionContent', () => {
-      const content = {type: ArticleContentType.CONCLUSION, title: 'Conclusion'} as ConclusionContent;
+      const content = { type: ArticleContentType.CONCLUSION, title: 'Conclusion' } as ConclusionContent;
       const title = component.getTitle(content);
 
       expect(title).toEqual('Conclusion');
@@ -63,21 +63,21 @@ describe('ArticlePreviewComponent', () => {
 
   describe('getText', () => {
     it('should return text for IntroductionContent', () => {
-      const content = {type: ArticleContentType.INTRODUCTION, text: ['Intro Text']} as IntroductionContent;
+      const content = { type: ArticleContentType.INTRODUCTION, text: ['Intro Text'] } as IntroductionContent;
       const text = component.getText(content);
 
       expect(text).toEqual(['Intro Text']);
     });
 
     it('should return text for TextContent', () => {
-      const content = {type: ArticleContentType.TEXT, text: ['Text Content']} as TextContent;
+      const content = { type: ArticleContentType.TEXT, text: ['Text Content'] } as TextContent;
       const text = component.getText(content);
 
       expect(text).toEqual(['Text Content']);
     });
 
     it('should return text for ConclusionContent', () => {
-      const content = {type: ArticleContentType.CONCLUSION, text: ['Conclusion Text']} as ConclusionContent;
+      const content = { type: ArticleContentType.CONCLUSION, text: ['Conclusion Text'] } as ConclusionContent;
       const text = component.getText(content);
 
       expect(text).toEqual(['Conclusion Text']);
@@ -100,7 +100,7 @@ describe('ArticlePreviewComponent', () => {
 
   describe('getImageSource', () => {
     it('should return the image source', () => {
-      const content = {type: ArticleContentType.IMAGE, source: 'image1'} as ImageContent;
+      const content = { type: ArticleContentType.IMAGE, source: 'image1' } as ImageContent;
       const imageSource = component.getImageSource(content);
 
       expect(imageSource).toEqual(`../../../assets/image/image1.webp`);
@@ -133,7 +133,7 @@ describe('ArticlePreviewComponent', () => {
 
   describe('getQuoteText', () => {
     it('should return the quote text', () => {
-      const content = {type: ArticleContentType.QUOTE, quote: 'A great quote'} as QuoteContent;
+      const content = { type: ArticleContentType.QUOTE, quote: 'A great quote' } as QuoteContent;
       const quoteText = component.getQuoteText(content);
 
       expect(quoteText).toEqual('A great quote');
@@ -142,7 +142,7 @@ describe('ArticlePreviewComponent', () => {
 
   describe('getQuoteAuthor', () => {
     it('should return the quote author', () => {
-      const content = {type: ArticleContentType.QUOTE, author: 'Author Name'} as QuoteContent;
+      const content = { type: ArticleContentType.QUOTE, author: 'Author Name' } as QuoteContent;
       const quoteAuthor = component.getQuoteAuthor(content);
       expect(quoteAuthor).toEqual('Author Name');
     });

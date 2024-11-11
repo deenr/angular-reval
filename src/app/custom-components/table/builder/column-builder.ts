@@ -1,9 +1,9 @@
-import {BadgeSize} from '@custom-components/badge/badge-size.enum';
-import {TableDataType} from '../table-data-type.enum';
-import {BadgeBuilder, BadgeProperty} from './badge-builder';
-import {TableColumn} from './table-column';
-import {Color} from '@shared/enums/general/colors.enum';
-import {FilterBuilder, FilterProperty, FilterType} from './filter-builder';
+import { BadgeSize } from '@custom-components/badge/badge-size.enum';
+import { TableDataType } from '../table-data-type.enum';
+import { BadgeBuilder, BadgeProperty } from './badge-builder';
+import { TableColumn } from './table-column';
+import { Color } from '@shared/enums/general/colors.enum';
+import { FilterBuilder, FilterProperty, FilterType } from './filter-builder';
 
 export class ColumnBuilder {
   public badgeProperties?: BadgeProperty;

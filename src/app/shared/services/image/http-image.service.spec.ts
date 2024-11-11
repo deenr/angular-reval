@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {HttpImageService} from './http-image.service';
+import { HttpImageService } from './http-image.service';
 
 describe('HttpImageService', () => {
   let service: HttpImageService;

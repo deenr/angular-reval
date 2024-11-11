@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Tab} from './tab.interface';
-import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
-import {FormControl} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {DialogCloseType} from '@custom-components/dialogs/dialog-close-type.enum';
-import {pairwise, startWith} from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Tab } from './tab.interface';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogType } from '@custom-components/dialogs/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { DialogCloseType } from '@custom-components/dialogs/dialog-close-type.enum';
+import { pairwise, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
@@ -33,7 +33,7 @@ export class TabsComponent implements OnInit {
     this.tabControl.setValue(this.tabs[0]);
 
     this.tabControl.valueChanges.pipe(startWith(this.tabControl.value), pairwise()).subscribe(([previousTab, currentTab]) => {
-      this.tabControl.setValue(previousTab, {emitEvent: false});
+      this.tabControl.setValue(previousTab, { emitEvent: false });
       this.onTabClick(currentTab, previousTab);
     });
   }
@@ -52,7 +52,7 @@ export class TabsComponent implements OnInit {
       return tab;
     });
 
-    this.tabControl.setValue(newActiveTab, {emitEvent: false});
+    this.tabControl.setValue(newActiveTab, { emitEvent: false });
     this.tabChange.emit(newActiveTab);
   }
 

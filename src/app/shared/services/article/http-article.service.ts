@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable, from} from 'rxjs';
-import {ArticleOverview} from '@shared/models/article/article-overview.model';
-import {Article} from '@shared/models/article/article.model';
-import {SupabaseClient, createClient} from '@supabase/supabase-js';
+import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import { ArticleOverview } from '@shared/models/article/article-overview.model';
+import { Article } from '@shared/models/article/article.model';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class HttpArticleService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
+    this.supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY']);
   }
 
   public getOverview(): Observable<ArticleOverview[]> {
@@ -24,7 +24,7 @@ export class HttpArticleService {
           author:users(*)
         `
         )
-        .then(({data}) => data?.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
+        .then(({ data }) => data?.map((articleJSON: any) => ArticleOverview.fromJSON(articleJSON)))
     );
   }
 
@@ -38,7 +38,7 @@ export class HttpArticleService {
           author:users(*)
         `
         )
-        .then(({data}) => data?.map((articleJSON: any) => Article.fromJSON(articleJSON)))
+        .then(({ data }) => data?.map((articleJSON: any) => Article.fromJSON(articleJSON)))
     );
   }
 
@@ -54,7 +54,7 @@ export class HttpArticleService {
         )
         .eq('id', id)
         .single()
-        .then(({data}) => Article.fromJSON(data))
+        .then(({ data }) => Article.fromJSON(data))
     );
   }
 

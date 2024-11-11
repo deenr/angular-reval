@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Tab} from '@custom-components/tabs/tab.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Tab } from '@custom-components/tabs/tab.interface';
 
 @Component({
   selector: 'app-header',

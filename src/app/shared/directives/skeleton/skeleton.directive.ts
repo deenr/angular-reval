@@ -1,8 +1,8 @@
-import {Directive, Input, TemplateRef, ViewContainerRef, SimpleChanges, ElementRef, ComponentRef} from '@angular/core';
-import {SkeletonComponent} from '@custom-components/skeleton/skeleton.component';
-import {SkeletonType} from './skeleton-type.enum';
+import { Directive, Input, TemplateRef, ViewContainerRef, SimpleChanges, ElementRef, ComponentRef } from '@angular/core';
+import { SkeletonComponent } from '@custom-components/skeleton/skeleton.component';
+import { SkeletonType } from './skeleton-type.enum';
 
-@Directive({selector: '[skeleton]'})
+@Directive({ selector: '[skeleton]' })
 export class SkeletonDirective {
   @Input('skeleton') public isLoading = false;
   @Input('skeletonType') public type: SkeletonType;

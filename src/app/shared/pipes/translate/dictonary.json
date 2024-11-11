@@ -1,10 +1,14 @@
 {
   "USER_ROLE": {
-    "STUDENT": "Student",
-    "PHD": "PhD",
-    "PROFESSOR": "Professor",
-    "ADMIN": "Admin",
-    "INCOMPLETE_PROFILE": "Incomplete profile"
+    "USER": "User",
+    "AUTHOR": "Author",
+    "INCOMPLETE_PROFILE": "Incomplete profile",
+    "ADMIN": "Admin"
+  },
+  "USER_STATUS": {
+    "APPROVED": "Approved",
+    "DENIED": "Denied",
+    "PENDING": "Pending"
   },
   "ARTICLE_CATEGORY": {
     "RESEARCH_TOOLS": "Tools",

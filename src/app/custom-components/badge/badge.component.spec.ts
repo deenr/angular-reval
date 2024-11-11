@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {BadgeComponent} from './badge.component';
-import {Color} from '@shared/enums/general/colors.enum';
-import {BadgeSize} from './badge-size.enum';
-import {BadgeType} from './badge-type.enum';
+import { BadgeComponent } from './badge.component';
+import { Color } from '@shared/enums/general/colors.enum';
+import { BadgeSize } from './badge-size.enum';
+import { BadgeType } from './badge-type.enum';
 
 describe('BadgeComponent', () => {
   let component: BadgeComponent;

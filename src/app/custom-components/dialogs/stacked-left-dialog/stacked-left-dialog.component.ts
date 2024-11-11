@@ -1,8 +1,8 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DialogType} from '../dialog-type.enum';
-import {Router} from '@angular/router';
-import {DialogCloseType} from '../dialog-close-type.enum';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogType } from '../dialog-type.enum';
+import { Router } from '@angular/router';
+import { DialogCloseType } from '../dialog-close-type.enum';
 
 @Component({
   selector: 'app-stacked-left-dialog',

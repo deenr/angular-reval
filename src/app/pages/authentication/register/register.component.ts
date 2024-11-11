@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {RegistrationStep} from './registration-step.enum';
-import {ProgressStep} from '@custom-components/progress-steps/progress-step.interface';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {matchValidator} from '@shared/helper/validator/match-validator';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {AuthService} from '@shared/services/auth/auth.service';
-import {finalize, interval, scan, take} from 'rxjs';
-import {Router} from '@angular/router';
-import {PasswordMatchValidator} from '@helper/validator/password-match-validator';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { DialogType } from '@custom-components/dialogs/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { ProgressStep } from '@custom-components/progress-steps/progress-step.interface';
+import { PasswordMatchValidator } from '@helper/validator/password-match-validator';
+import { matchValidator } from '@shared/helper/validator/match-validator';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { finalize, interval, scan, take } from 'rxjs';
+import { RegistrationStep } from './registration-step.enum';
 
 @Component({
   selector: 'app-register',
@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
         this.passwordForm.controls.confirmPassword.setValidators(Validators.required);
       }
 
-      this.passwordForm.controls.confirmPassword.updateValueAndValidity({emitEvent: false});
+      this.passwordForm.controls.confirmPassword.updateValueAndValidity({ emitEvent: false });
     });
   }
 
@@ -126,23 +126,35 @@ export class RegisterComponent implements OnInit {
     return this.steps.find((progressStep: ProgressStep) => progressStep.stepName === stepName).current;
   }
 
-  public goToPassword(): void {
+  public async goToPassword(): Promise<void> {
     if (this.emailForm.valid) {
-      this.authService.checkDuplicateAccount(this.emailForm.value.email).then((hasDuplicateAccount: boolean) => {
-        hasDuplicateAccount ? this.emailForm.controls.email.setErrors({duplicateEmail: true}) : this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-      });
+      try {
+        const hasDuplicateAccount = await this.authService.checkDuplicateAccount(this.emailForm.value.email);
+
+        if (hasDuplicateAccount) {
+          this.emailForm.controls.email.setErrors({ duplicateEmail: true });
+        } else {
+          this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+        }
+      } catch (error) {
+        this.emailForm.controls.email.setErrors({ duplicateEmail: true });
+      }
     }
   }
 
-  public goToEmailVerification(): void {
+  public async goToEmailVerification(): Promise<void> {
     if (this.passwordForm.valid) {
       this.loadingSignUp = true;
 
-      this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password).then(() => {
+      try {
+        await this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password);
+
         this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
         this.setResendCountdown();
+      } catch (error) {
+      } finally {
         this.loadingSignUp = false;
-      });
+      }
     }
   }
 
@@ -188,7 +200,7 @@ export class RegisterComponent implements OnInit {
       if (this.verificationCodeForm.valid) {
         this.loadingVerification = true;
 
-        this.authService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({data, error}) => {
+        this.authService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({ data, error }) => {
           if (error) {
             this.dialog.open(StackedLeftDialogComponent, {
               width: '450px',
@@ -227,9 +239,9 @@ export class RegisterComponent implements OnInit {
       if (!progressStepChanged) {
         if (progressStep.stepName === registrationStep) {
           progressStepChanged = true;
-          return {...progressStep, current: true};
+          return { ...progressStep, current: true };
         } else {
-          return {...progressStep, complete: true, current: false};
+          return { ...progressStep, complete: true, current: false };
         }
       }
 

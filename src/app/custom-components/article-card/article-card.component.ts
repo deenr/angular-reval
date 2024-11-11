@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
-import {User} from '@shared/models/user/user.model';
-import {HttpImageService} from '@shared/services/image/http-image.service';
+import { Component, Input } from '@angular/core';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
+import { User } from '@shared/models/user/user.model';
+import { HttpImageService } from '@shared/services/image/http-image.service';
 
 @Component({
   selector: 'app-article-card',

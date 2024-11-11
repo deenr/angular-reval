@@ -47,7 +47,7 @@
   </div>
 </section>
 
-<mat-menu #options="matMenu">
+<mat-menu class="metrics-card-menu" #options="matMenu">
   <mat-radio-group class="flex-column radio-group" [formControl]="timeFrameControl" (change)="toggleAnimation()">
     <mat-radio-button *ngFor="let timeFrame of timeFrames" class="text-sm text-medium small" [value]="timeFrame">{{ getTimeFrameTranslation(timeFrame) }}</mat-radio-button>
   </mat-radio-group>

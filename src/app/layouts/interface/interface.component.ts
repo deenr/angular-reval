@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
-import {Breakpoint} from '@shared/services/breakpoint/breakpoint.enum';
-import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Breakpoint } from '@shared/services/breakpoint/breakpoint.enum';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-interface',

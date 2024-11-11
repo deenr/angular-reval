@@ -1,5 +1,5 @@
-import {Directive} from '@angular/core';
-import {ControlValueAccessor} from '@angular/forms';
+import { Directive } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
 export abstract class ControlValueAccessorHelper<T> implements ControlValueAccessor {

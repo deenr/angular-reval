@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ProgressStepsComponent} from './progress-steps.component';
+import { ProgressStepsComponent } from './progress-steps.component';
 
 describe('ProgressStepsComponent', () => {
   let component: ProgressStepsComponent;

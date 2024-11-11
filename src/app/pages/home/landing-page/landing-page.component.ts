@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -89,7 +89,7 @@ export class LandingPageComponent {
 
   public onGetStartedSubmit(): void {
     if (this.getStartedForm.valid) {
-      this.router.navigate(['/register'], {state: {email: this.getStartedForm.value.email}});
+      this.router.navigate(['/register'], { state: { email: this.getStartedForm.value.email } });
     }
   }
 }

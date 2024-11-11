@@ -1,6 +1,6 @@
-import {BadgeSize} from '@custom-components/badge/badge-size.enum';
-import {ColumnBuilder} from './column-builder';
-import {Color} from '@shared/enums/general/colors.enum';
+import { BadgeSize } from '@custom-components/badge/badge-size.enum';
+import { ColumnBuilder } from './column-builder';
+import { Color } from '@shared/enums/general/colors.enum';
 
 export interface BadgeProperty {
   size: BadgeSize;

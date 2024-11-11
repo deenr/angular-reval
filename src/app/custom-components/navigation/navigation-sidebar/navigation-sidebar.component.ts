@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogType } from '@custom-components/dialogs/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
 
 @Component({
   selector: 'app-navigation-sidebar',

@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Input, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {BadgeSize} from '@custom-components/badge/badge-size.enum';
-import {BadgeComponent} from '@custom-components/badge/badge.component';
-import {Color} from '@shared/enums/general/colors.enum';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { BadgeSize } from '@custom-components/badge/badge-size.enum';
+import { BadgeComponent } from '@custom-components/badge/badge.component';
+import { Color } from '@shared/enums/general/colors.enum';
 
 @Component({
   selector: 'app-multiple-badges',

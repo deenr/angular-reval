@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
-import {AuthService} from '@shared/services/auth/auth.service';
-import {AuthResponse} from '@supabase/supabase-js';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DialogType } from '@custom-components/dialogs/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { AuthResponse } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-email-verification',
@@ -47,7 +47,7 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private verifyEmail(token: string, email: string): void {
-    this.authService.verifyEmail(token, email).then(({data, error}: AuthResponse) => {
+    this.authService.verifyEmail(token, email).then(({ data, error }: AuthResponse) => {
       if (error) {
         this.dialog.open(StackedLeftDialogComponent, {
           width: '450px',

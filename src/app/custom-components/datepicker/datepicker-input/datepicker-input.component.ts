@@ -1,16 +1,16 @@
-import {FocusMonitor} from '@angular/cdk/a11y';
-import {DatePipe} from '@angular/common';
-import {Component, ElementRef, Input, OnInit, Optional, Self, ViewChild} from '@angular/core';
-import {FormGroupDirective, NgControl, NgForm} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {MatFormFieldControl} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {MatMenuTrigger} from '@angular/material/menu';
-import {AbstractMatFormField} from '@helper/abstract-form-field-control';
-import {DateRange} from '../date-range.interface';
-import {MatDialog} from '@angular/material/dialog';
-import {DatepickerMenuComponent} from '../datepicker-menu/datepicker-menu.component';
-import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { DatePipe } from '@angular/common';
+import { Component, ElementRef, Input, OnInit, Optional, Self, ViewChild } from '@angular/core';
+import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatFormFieldControl } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { AbstractMatFormField } from '@helper/abstract-form-field-control';
+import { DateRange } from '../date-range.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { DatepickerMenuComponent } from '../datepicker-menu/datepicker-menu.component';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-datepicker-input',
@@ -25,7 +25,7 @@ import {BreakpointService} from '@shared/services/breakpoint/breakpoint.service'
 })
 export class DatepickerInputComponent extends AbstractMatFormField<Date | DateRange> implements OnInit {
   @ViewChild(MatMenuTrigger) public trigger: MatMenuTrigger;
-  @ViewChild(MatInput, {static: false}) private input: MatInput;
+  @ViewChild(MatInput, { static: false }) private input: MatInput;
   @Input() public dateRange = true;
 
   public isMobile: boolean;

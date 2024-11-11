@@ -1,7 +1,6 @@
 export enum UserRole {
-  STUDENT = 'STUDENT',
-  PHD = 'PHD',
-  PROFESSOR = 'PROFESSOR',
+  AUTHOR = 'AUTHOR',
   ADMIN = 'ADMIN',
+  USER = 'USER',
   INCOMPLETE_PROFILE = 'INCOMPLETE_PROFILE'
 }

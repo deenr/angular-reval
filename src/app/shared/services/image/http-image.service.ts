@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {PostgrestSingleResponse, SupabaseClient, createClient} from '@supabase/supabase-js';
+import { Injectable } from '@angular/core';
+import { PostgrestSingleResponse, SupabaseClient, createClient } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class HttpImageService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
+    this.supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY']);
   }
 
   public uploadImage(image: File): Promise<string> {
@@ -20,7 +20,7 @@ export class HttpImageService {
             cacheControl: '3600',
             upsert: false
           })
-          .then((value: {data: {path: string}; error: null} | {data: null; error: RangeError}) => {
+          .then((value: { data: { path: string }; error: null } | { data: null; error: RangeError }) => {
             if (value.error) {
               reject(value.error.message);
             }
@@ -46,7 +46,7 @@ export class HttpImageService {
               cacheControl: '3600',
               upsert: false
             })
-            .then((value: {data: {path: string}; error: null} | {data: null; error: RangeError}) => {
+            .then((value: { data: { path: string }; error: null } | { data: null; error: RangeError }) => {
               if (value.error) {
                 reject(value.error.message);
               }

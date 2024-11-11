@@ -1,9 +1,10 @@
-import {User} from '@shared/models/user/user.model';
-import {Observable, from} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {UserRole} from '@shared/enums/user/user-role.enum';
-import {SupabaseClient, createClient} from '@supabase/supabase-js';
-import {UserOverview} from '@shared/models/user/user-overview.model';
+import { Injectable } from '@angular/core';
+import { UserRole } from '@shared/enums/user/user-role.enum';
+import { UserStatus } from '@shared/enums/user/user-status.enum';
+import { UserOverview } from '@shared/models/user/user-overview.model';
+import { User } from '@shared/models/user/user.model';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class HttpUserService {
   private supabase: SupabaseClient;
 
   public constructor() {
-    this.supabase = createClient( process.env['SUPABASE_URL'],  process.env['SUPABASE_KEY']);
+    this.supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY']);
   }
 
   public getAll(): Observable<User[]> {
@@ -25,7 +26,7 @@ export class HttpUserService {
           user_roles(role)
         `
         )
-        .then(({data}) => {
+        .then(({ data }) => {
           return data?.map((userJSON: any) => {
             const flattenedUser = {
               ...userJSON,
@@ -45,14 +46,16 @@ export class HttpUserService {
         .select(
           `
           *,
-          user_roles(role)
+          users_role_status(status,role)
         `
         )
-        .then(({data}) => {
+        .then(({ data }) => {
           return data?.map((userJSON: any) => {
+            const { role, status } = userJSON.users_role_status[0];
             const flattenedUser = {
               ...userJSON,
-              role: userJSON.user_roles?.map((roleObj: any) => roleObj.role)[0]
+              role,
+              status
             };
 
             return UserOverview.fromJSON(flattenedUser);
@@ -66,7 +69,7 @@ export class HttpUserService {
       this.supabase
         .from('users')
         .select('*')
-        .then(({data}) => data?.map((userInfoJSON: any) => User.fromJSON(userInfoJSON)))
+        .then(({ data }) => data?.map((userInfoJSON: any) => User.fromJSON(userInfoJSON)))
     );
   }
 
@@ -77,7 +80,7 @@ export class HttpUserService {
         .select('*')
         .eq('id', id)
         .single()
-        .then(({data}) => User.fromJSON(data))
+        .then(({ data }) => User.fromJSON(data))
     );
   }
 
@@ -88,11 +91,10 @@ export class HttpUserService {
         .update({
           firstName: user.firstName,
           lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
-          faculty: user.faculty,
-          program: user.program,
-          universityId: user.universityId,
-          yearOfGraduation: user.yearOfGraduation
+          email: user.email,
+          role: user.role,
+          status: user.status,
+          phoneNumber: user.phoneNumber
         })
         .eq('id', user.id)
         .then((response) => {
@@ -106,14 +108,25 @@ export class HttpUserService {
     });
   }
 
-  public getUserRole(userId: string): Observable<UserRole> {
+  public getUserStatus(userId: string): Observable<UserStatus> {
     return from(
       this.supabase
-        .from('user_roles')
+        .from('users_role_status')
         .select('*')
         .eq('user_id', userId)
         .single()
-        .then(({data}) => data?.role)
+        .then(({ data }) => data?.status)
+    );
+  }
+
+  public getUserRole(userId: string): Observable<UserRole> {
+    return from(
+      this.supabase
+        .from('users_role_status')
+        .select('*')
+        .eq('user_id', userId)
+        .single()
+        .then(({ data }) => data?.role)
     );
   }
 }

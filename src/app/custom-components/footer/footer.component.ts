@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -10,26 +10,26 @@ export class FooterComponent {
     {
       header: 'Company',
       links: [
-        {value: 'About us', url: 'about'},
-        {value: 'News', url: 'news'},
-        {value: 'Contact', url: 'contact'}
+        { value: 'About us', url: 'about' },
+        { value: 'News', url: 'news' },
+        { value: 'Contact', url: 'contact' }
       ]
     },
     {
       header: 'Social',
       links: [
-        {value: 'Twitter', url: ''},
-        {value: 'LinkedIn', url: ''},
-        {value: 'Instagram', url: ''},
-        {value: 'GitHub', url: ''}
+        { value: 'Twitter', url: '' },
+        { value: 'LinkedIn', url: '' },
+        { value: 'Instagram', url: '' },
+        { value: 'GitHub', url: '' }
       ]
     },
     {
       header: 'Legal',
       links: [
-        {value: 'Terms', url: 'terms'},
-        {value: 'Privacy', url: 'privacy'},
-        {value: 'Contact', url: 'contact'}
+        { value: 'Terms', url: 'terms' },
+        { value: 'Privacy', url: 'privacy' },
+        { value: 'Contact', url: 'contact' }
       ]
     }
   ];

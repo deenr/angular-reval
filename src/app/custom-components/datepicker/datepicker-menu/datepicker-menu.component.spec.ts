@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DatepickerMenuComponent} from './datepicker-menu.component';
+import { DatepickerMenuComponent } from './datepicker-menu.component';
 
 describe('DatepickerInputComponent', () => {
   let component: DatepickerMenuComponent;

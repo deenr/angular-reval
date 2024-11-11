@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -9,7 +9,7 @@ export class PaginatorComponent {
   @Input() public activePage: number;
   @Input() public pages: number;
 
-  public get pageItems(): {active: boolean}[] {
-    return [...Array(this.pages).keys()].map((_, index: number) => ({active: index + 1 === this.activePage}));
+  public get pageItems(): { active: boolean }[] {
+    return [...Array(this.pages).keys()].map((_, index: number) => ({ active: index + 1 === this.activePage }));
   }
 }

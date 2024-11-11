@@ -1,22 +1,22 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {BadgeSize} from '@custom-components/badge/badge-size.enum';
-import {TableDataType} from './table-data-type.enum';
-import {TableColumn} from './builder/table-column';
-import {SkeletonType} from '@shared/directives/skeleton/skeleton-type.enum';
-import {Router} from '@angular/router';
-import {Color} from '@shared/enums/general/colors.enum';
-import {FilterProperty, FilterType} from './builder/filter-builder';
-import {DateRange} from '@custom-components/datepicker/date-range.interface';
-import {_isNumberValue} from '@angular/cdk/coercion';
+import { _isNumberValue } from '@angular/cdk/coercion';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { BadgeSize } from '@custom-components/badge/badge-size.enum';
+import { DateRange } from '@custom-components/datepicker/date-range.interface';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
+import { Color } from '@shared/enums/general/colors.enum';
+import { FilterProperty, FilterType } from './builder/filter-builder';
+import { TableColumn } from './builder/table-column';
+import { TableDataType } from './table-data-type.enum';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [{provide: MatPaginatorIntl, useValue: getPaginatorIntl()}]
+  providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }]
 })
 export class TableComponent<T> implements OnInit, OnChanges {
   @ViewChild(MatPaginator) public paginator: MatPaginator;
@@ -112,7 +112,7 @@ export class TableComponent<T> implements OnInit, OnChanges {
   }
 
   private getDataForSkeleton(): T[] {
-    return [...Array(10).keys()].map((index: number) => ({id: index} as T));
+    return [...Array(10).keys()].map((index: number) => ({ id: index } as T));
   }
 
   private setDataSource(): void {
@@ -222,14 +222,12 @@ export class TableComponent<T> implements OnInit, OnChanges {
       const valueA = this.sortingDataAccessor(a, active);
       const valueB = this.sortingDataAccessor(b, active);
 
-      console.log(valueA, valueB);
-
       if (typeof valueA === 'string' && typeof valueB === 'string') {
-        return valueA.localeCompare(valueB, undefined, {sensitivity: 'base'}) * (direction === 'asc' ? 1 : -1);
+        return valueA.localeCompare(valueB, undefined, { sensitivity: 'base' }) * (direction === 'asc' ? 1 : -1);
       } else if (typeof valueA === 'number' && typeof valueB === 'number') {
         return (valueA - valueB) * (direction === 'asc' ? 1 : -1);
       } else {
-        return valueA?.toString()?.localeCompare(valueB?.toString(), undefined, {sensitivity: 'base'}) * (direction === 'asc' ? 1 : -1);
+        return valueA?.toString()?.localeCompare(valueB?.toString(), undefined, { sensitivity: 'base' }) * (direction === 'asc' ? 1 : -1);
       }
     });
   };

@@ -1,7 +1,7 @@
-import {ResearchDeviceType} from '@shared/enums/research-device/research-device-type.enum';
-import {ResearchDevice} from './research-device.model';
-import {SciencesProgram} from '@shared/enums/faculty-and-department/sciences-program.enum';
-import {BusinessProgram} from '@shared/enums/faculty-and-department/business-program.enum';
+import { ResearchDeviceType } from '@shared/enums/research-device/research-device-type.enum';
+import { ResearchDevice } from './research-device.model';
+import { SciencesProgram } from '@shared/enums/faculty-and-department/sciences-program.enum';
+import { BusinessProgram } from '@shared/enums/faculty-and-department/business-program.enum';
 
 export class StubResearchDevice {
   public static getRandomResearchDevice(): ResearchDevice {

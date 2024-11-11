@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {animationFrameScheduler, BehaviorSubject, combineLatest, switchMap, map, interval, takeWhile, endWith, distinctUntilChanged, takeUntil} from 'rxjs';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { animationFrameScheduler, BehaviorSubject, combineLatest, switchMap, map, interval, takeWhile, endWith, distinctUntilChanged, takeUntil } from 'rxjs';
 
 /**
  * Quadratic Ease-Out Function: f(x) = x * (2 - x)

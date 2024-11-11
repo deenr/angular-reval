@@ -1,7 +1,5 @@
-import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogType} from '@custom-components/dialogs/dialog-type.enum';
-import {StackedLeftDialogComponent} from '@custom-components/dialogs/stacked-left-dialog/stacked-left-dialog.component';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navigation-header',
@@ -13,6 +11,8 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
   @Output() public sidenavToggle = new EventEmitter();
 
   public opacity = 0;
+
+  public constructor(private readonly dialog: MatDialog) {}
 
   public ngOnInit() {
     document.getElementsByClassName('mat-drawer-content')[0].addEventListener('scroll', this.onWindowScroll.bind(this));

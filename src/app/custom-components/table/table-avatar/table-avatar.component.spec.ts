@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {TableAvatarComponent} from './table-avatar.component';
+import { TableAvatarComponent } from './table-avatar.component';
 
 describe('TableAvatarComponent', () => {
   let component: TableAvatarComponent;

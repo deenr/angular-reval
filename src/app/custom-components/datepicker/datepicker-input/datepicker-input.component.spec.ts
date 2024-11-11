@@ -1,14 +1,14 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {DatepickerInputComponent} from './datepicker-input.component';
-import {DatePipe} from '@angular/common';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {DatepickerModule} from '../datepicker.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DatepickerMenuComponent} from '../datepicker-menu/datepicker-menu.component';
-import {of} from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DatepickerInputComponent } from './datepicker-input.component';
+import { DatePipe } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DatepickerModule } from '../datepicker.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatepickerMenuComponent } from '../datepicker-menu/datepicker-menu.component';
+import { of } from 'rxjs';
 
 function mockDialogRef<T, R>(component: T, result: R): MatDialogRef<any, R> {
-  return {componentInstance: component, afterClosed: () => of<R>(result)} as MatDialogRef<T, R>;
+  return { componentInstance: component, afterClosed: () => of<R>(result) } as MatDialogRef<T, R>;
 }
 
 describe('DatepickerInputComponent', () => {
@@ -20,7 +20,7 @@ describe('DatepickerInputComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DatepickerInputComponent],
       imports: [DatepickerModule, BrowserAnimationsModule],
-      providers: [{provide: MAT_DIALOG_DATA, useValue: {}}, {provide: MatDialogRef, useValue: {}}, DatePipe, MatDialog]
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }, DatePipe, MatDialog]
     });
     fixture = TestBed.createComponent(DatepickerInputComponent);
     component = fixture.componentInstance;
@@ -80,7 +80,7 @@ describe('DatepickerInputComponent', () => {
       component.dateRange = true;
       const date = 'Sep 20, 2023';
 
-      const dateRange = {startDate: new Date(date), endDate: new Date(date)};
+      const dateRange = { startDate: new Date(date), endDate: new Date(date) };
       component.value = dateRange;
       const displayValue = component.getDisplayValue();
 
