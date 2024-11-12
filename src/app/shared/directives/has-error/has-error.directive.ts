@@ -1,7 +1,8 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, Optional, Host, SkipSelf, DoCheck } from '@angular/core';
-import { FormGroupDirective, AbstractControl, FormGroup } from '@angular/forms';
+import { Directive, DoCheck, Host, Input, Optional, SkipSelf, TemplateRef, ViewContainerRef } from '@angular/core';
+import { AbstractControl, FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Directive({
+  standalone: true,
   selector: '[hasError]'
 })
 export class HasErrorDirective implements DoCheck {

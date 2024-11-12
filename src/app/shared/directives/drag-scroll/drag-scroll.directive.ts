@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[appDragScroll]'
 })
 export class DragScrollDirective {

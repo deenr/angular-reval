@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as dictionaryJSON from './dictonary.json';
+import * as dictionaryJSON from '../../../../assets/i18n/en.json';
 
 @Pipe({
+  standalone: true,
   name: 'translate'
 })
 export class TranslatePipe implements PipeTransform {

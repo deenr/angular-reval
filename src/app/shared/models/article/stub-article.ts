@@ -1,6 +1,6 @@
 import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { Article } from './article.model';
 import { IntroductionContent, TextContent } from './article-content.model';
+import { Article } from './article.model';
 
 export class StubArticle {
   public static getEmptyArticle(): Article {

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import { animationFrameScheduler, BehaviorSubject, combineLatest, switchMap, map, interval, takeWhile, endWith, distinctUntilChanged, takeUntil } from 'rxjs';
+import { animationFrameScheduler, BehaviorSubject, combineLatest, distinctUntilChanged, endWith, interval, map, switchMap, takeWhile } from 'rxjs';
 
 /**
  * Quadratic Ease-Out Function: f(x) = x * (2 - x)
@@ -7,6 +7,7 @@ import { animationFrameScheduler, BehaviorSubject, combineLatest, switchMap, map
 const easeOutQuad = (x: number): number => x * (2 - x);
 
 @Directive({
+  standalone: true,
   selector: '[countUp]'
 })
 export class CountUpDirective implements OnInit {

@@ -1,0 +1,155 @@
+@import 'variables';
+
+:host {
+  $padding-form-horizontal: 140px;
+  $padding-form-top: 128px;
+
+  .login-page {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-section {
+    position: relative;
+    width: 40%;
+    align-items: center;
+    padding-top: $padding-form-top;
+    overflow-x: hidden;
+
+    @include breakpoint-xl() {
+      width: 60%;
+    }
+
+    @include breakpoint-lg() {
+      width: 100%;
+    }
+
+    @include breakpoint-sm() {
+      padding: 48px 16px;
+    }
+
+    &::before {
+      width: 768px;
+      height: 768px;
+      position: absolute;
+      z-index: -1;
+      top: 144px;
+      left: calc(50% - 164px);
+      transform: translate(-50%, -50%);
+      mask-image: url('../../../../../assets/svg/illustration/circle-desktop.svg');
+      background: radial-gradient(50% 50% at 50% 50%, $color-grey-200 0%, transparent 100%);
+      content: '';
+
+      @include breakpoint-sm() {
+        top: 64px;
+      }
+
+      @include breakpoint-xs() {
+        left: 32px;
+      }
+    }
+  }
+
+  .login {
+    position: relative;
+    width: 360px;
+
+    @include breakpoint-xs() {
+      width: 100%;
+    }
+
+    &__logo {
+      gap: 8px;
+      align-items: center;
+
+      mat-icon {
+        min-width: 32px;
+        min-height: 32px;
+      }
+    }
+
+    &__header {
+      margin-top: 80px;
+      align-items: start;
+      gap: 12px;
+
+      h2 {
+        color: $color-grey-900;
+      }
+
+      p {
+        color: $color-grey-600;
+      }
+    }
+
+    &__form {
+      margin-top: 32px;
+      gap: 16px;
+    }
+
+    &__remember {
+      margin-top: 8px;
+      justify-content: space-between;
+
+      p {
+        margin-right: auto;
+      }
+    }
+
+    &__actions {
+      margin-top: 32px;
+      gap: 16px;
+
+      .google-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &__no-account {
+      margin-top: 32px;
+      text-align: center;
+    }
+  }
+
+  .attribution {
+    width: 60%;
+    position: relative;
+    background-color: $color-grey-100;
+    padding: 96px 64px;
+    overflow: hidden;
+
+    @include breakpoint-xl() {
+      width: 40%;
+      display: flex;
+      align-items: center;
+    }
+
+    @include breakpoint-lg() {
+      display: none;
+    }
+
+    .quote {
+      @include breakpoint-xl() {
+        display: none;
+      }
+
+      &__author {
+        margin-top: 24px;
+      }
+    }
+
+    &__image {
+      position: absolute;
+      margin-top: 112px;
+      transform-origin: top left;
+      scale: 1.5;
+
+      @include breakpoint-xl() {
+        transform-origin: center left;
+        scale: 2;
+        margin-top: 0;
+      }
+    }
+  }
+}

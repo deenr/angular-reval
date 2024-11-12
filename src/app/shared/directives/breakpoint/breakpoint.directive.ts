@@ -1,6 +1,7 @@
-import { Directive, ElementRef, Input, Renderer2, OnInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[classXs], [classSm], [classMd], [classLg], [classXl]'
 })
 export class BreakpointDirective implements OnInit, OnDestroy {
