@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpImageService } from '@core/services/image/http-image.service';
 import { HttpUserService } from '@core/services/user/http-user.service';
+import { SkeletonDirective } from '@shared/directives/skeleton/skeleton.directive';
 import { ArticleCategory } from '@shared/enums/article/article-category.enum';
 import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
 import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/article-content.model';
@@ -15,7 +16,7 @@ import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.e
   selector: 'app-article-preview',
   templateUrl: './article-preview.component.html',
   styleUrls: ['./article-preview.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, SkeletonDirective]
 })
 export class ArticlePreviewComponent implements OnInit {
   @Input() public article: Article;

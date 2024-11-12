@@ -59,7 +59,7 @@
       <div class="flex-row form-fields full-width">
         <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Published</mat-label>
-          <app-datepicker-input formControlName="published"></app-datepicker-input>
+          <app-datepicker-input formControlName="published" [dateRange]="false"></app-datepicker-input>
         </mat-form-field>
       </div>
     </div>

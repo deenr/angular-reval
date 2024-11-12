@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ArticlePreviewComponent } from '@shared/components/article-preview/article-preview.component';
+import { DatepickerModule } from '@shared/components/datepicker/datepicker.module';
 import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
 import { HeaderComponent } from '@shared/components/header/header.component';
 import { ProgressButtonComponent } from '@shared/components/progress-button/progress-button.component';
@@ -71,7 +72,8 @@ import { UsersComponent } from './pages/users/users.component';
     TranslatePipe,
     SkeletonDirective,
     MatInputModule,
-    HasErrorDirective
+    HasErrorDirective,
+    DatepickerModule
   ]
 })
 export class AdminModule {}
