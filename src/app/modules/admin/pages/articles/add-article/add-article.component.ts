@@ -140,7 +140,7 @@ export class AddArticleComponent implements OnInit {
       const articleToSave = this.getArticleToSave();
 
       const articleObservables: (Observable<string> | Promise<string[]>)[] = [
-        this.imageService.uploadImages(
+        this.imageService.uploadMultipleImages(
           this.getImages()
             .filter((image: { name: string; file: File }) => image.file)
             .map((image: { name: string; file: File }) => image.file)
