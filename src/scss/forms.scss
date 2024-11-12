@@ -112,10 +112,12 @@
         }
 
         &:has(.cdk-textarea-autosize) {
-          padding: 8px 12px;
-
           & > * {
             padding: 0;
+          }
+
+          .cdk-textarea-autosize {
+            padding: 8px 12px;
           }
         }
 

@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AddArticleTab } from './add-article-tabs.enum';
-import { Tab } from '@custom-components/tabs/tab.interface';
-import { ActivatedRoute } from '@angular/router';
-import { Article } from '@shared/models/article/article.model';
-import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { User } from '@shared/models/user/user.model';
-import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/article-content.model';
-import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
 import { Location } from '@angular/common';
-import { Observable, combineLatest, forkJoin } from 'rxjs';
-import { HttpImageService } from '@shared/services/image/http-image.service';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Tab } from '@custom-components/tabs/tab.interface';
+import { ArticleCategory } from '@shared/enums/article/article-category.enum';
+import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
+import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/article-content.model';
+import { Article } from '@shared/models/article/article.model';
+import { User } from '@shared/models/user/user.model';
 import { HttpArticleService } from '@shared/services/article/http-article.service';
+import { BreakpointService } from '@shared/services/breakpoint/breakpoint.service';
+import { HttpImageService } from '@shared/services/image/http-image.service';
 import { HttpUserService } from '@shared/services/user/http-user.service';
+import { Observable, combineLatest, forkJoin } from 'rxjs';
+import { AddArticleTab } from './add-article-tabs.enum';
 
 @Component({
   selector: 'app-add-article',

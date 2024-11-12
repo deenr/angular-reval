@@ -23,14 +23,17 @@ export class HttpUserService {
         .select(
           `
           *,
-          user_roles(role)
+          users_role_status(role)
         `
         )
+        .not('firstName', 'eq', null)
+        .not('lastName', 'eq', null)
         .then(({ data }) => {
           return data?.map((userJSON: any) => {
+            const { role } = userJSON.users_role_status[0];
             const flattenedUser = {
               ...userJSON,
-              role: userJSON.user_roles?.map((roleObj: any) => roleObj.role)[0]
+              role
             };
 
             return User.fromJSON(flattenedUser);
@@ -77,10 +80,19 @@ export class HttpUserService {
     return from(
       this.supabase
         .from('users')
-        .select('*')
+        .select('*, users_role_status(status,role)')
         .eq('id', id)
         .single()
-        .then(({ data }) => User.fromJSON(data))
+        .then(({ data }) => {
+          const { role, status } = data.users_role_status[0];
+          const flattenedUser = {
+            ...data,
+            role,
+            status
+          };
+
+          return User.fromJSON(flattenedUser);
+        })
     );
   }
 
