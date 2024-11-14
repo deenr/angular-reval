@@ -56,7 +56,7 @@ The site will be available at `http://localhost:4200` 🎉
 
 ## 📫 Contact
 
-- **Email**: [info@sphience.be](mailto:info@sphience.be)
-- **LinkedIn**: [/company/sphience](https://linkedin.com/company/sphience)
+- **X**: [@deanreymen](https://x.com/deanreymen)
+- **LinkedIn**: [/in/dean-reymen](https://linkedin.com/in/dean-reymen)
 
 Let's connect and build something great together! 🌍✨
