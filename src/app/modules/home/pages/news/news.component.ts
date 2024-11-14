@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpArticleService } from '@core/services/article/http-article.service';
-import { HttpImageService } from '@core/services/image/http-image.service';
-import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { ArticleOverview } from '@shared/models/article/article-overview.model';
-import { StubArticleOverview } from '@shared/models/article/stub-article-overview';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ARTICLES, Articles } from '@core/services/api/articles/articles.interface';
+import { Images, IMAGES } from '@core/services/api/images/images.interface';
+import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
+import { ArticleOverview } from '@shared/models/article/interfaces/article.interface';
 import * as moment from 'moment';
 import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
@@ -37,7 +36,7 @@ export class NewsComponent implements OnInit {
     [ArticleCategory.APPLICATION_DESIGN, 'Application design']
   ]);
 
-  public constructor(private readonly articleService: HttpArticleService, private readonly imageService: HttpImageService) {}
+  public constructor(@Inject(ARTICLES) private readonly articlesService: Articles, @Inject(IMAGES) private readonly imagesService: Images) {}
 
   public ngOnInit(): void {
     this.getArticles();
@@ -48,7 +47,7 @@ export class NewsComponent implements OnInit {
   }
 
   public getImageSource(image: string): string {
-    return this.imageService.getImageUrl(image);
+    return this.imagesService.getPublicImageUrl(image);
   }
 
   public getCategoryTranslation(category: ArticleCategory): string {
@@ -58,10 +57,10 @@ export class NewsComponent implements OnInit {
   private getArticles(): void {
     this.loadingArticles = true;
 
-    this.mainArticle = StubArticleOverview.getEmptyArticleOverview();
-    this.otherArticles = [...Array(9).keys()].map((index: number) => StubArticleOverview.getEmptyArticleOverviewWithId(`${index}`));
+    this.mainArticle = { id: '', title: '', subtitle: '', author: null, published: null, categories: [] } as any;
+    this.otherArticles = [...Array(9).keys()].map((index: number) => ({ id: index, title: '', subtitle: '', author: null, published: null, categories: [] } as any));
 
-    this.articleService.getOverview().subscribe((articles: ArticleOverview[]) => {
+    this.articlesService.getOverview().subscribe((articles: ArticleOverview[]) => {
       if (articles) {
         this.mainArticle = articles?.shift();
         this.otherArticles = articles;

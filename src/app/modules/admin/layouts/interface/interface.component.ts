@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Breakpoint } from '@core/services/breakpoint/breakpoint.enum';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
+import { USERS, Users } from '@core/services/api/users/users.interface';
+import { Breakpoint, BreakpointService } from '@core/services/breakpoint.service';
+import { LocalStorageService } from '@core/services/local-storage.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-interface',
@@ -20,7 +22,11 @@ export class InterfaceComponent implements OnInit {
   public sidenavMode: 'over' | 'side';
   public sidenavOpened: boolean;
 
-  public constructor(private readonly breakpointService: BreakpointService) {}
+  public user$: Observable<{ name: string; email: string }>;
+
+  public constructor(@Inject(USERS) private readonly usersService: Users, private readonly localStorageService: LocalStorageService, private readonly breakpointService: BreakpointService) {
+    this.user$ = this.usersService.getById(this.localStorageService.getItem(LocalStorageService.USER_ID)).pipe(map(({ firstName, lastName, email }) => ({ name: `${firstName} ${lastName}`, email })));
+  }
 
   public ngOnInit(): void {
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => {

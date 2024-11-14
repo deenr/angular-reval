@@ -40,8 +40,8 @@
           <mat-icon svgIcon="user"></mat-icon>
         </div>
         <div *ngIf="!isDesktopSidebarCollapsed()">
-          <h3 *ngIf="userName" class="profile__name text-sm text-semibold">{{ userName }}</h3>
-          <p class="profile__email text-sm text-regular">{{ userEmail }}</p>
+          <h3 *ngIf="user.name" class="profile__name text-sm text-semibold">{{ user.name }}</h3>
+          <p class="profile__email text-sm text-regular">{{ user.email }}</p>
         </div>
         <mat-icon class="profile__signout icon" svgIcon="sign-out" *ngIf="!isDesktopSidebarCollapsed()" (click)="signOut()"></mat-icon>
       </div>

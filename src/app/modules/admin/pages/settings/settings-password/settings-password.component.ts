@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@core/services/auth/auth.service';
-import { ChangePasswordResponse } from '@core/services/auth/change-password-response.enum';
+import { Authentication, AUTHENTICATION } from '@core/services/api/authentication/authentication.interface';
+import { ChangePasswordResponse } from '@core/services/api/authentication/supabase-authentication.service';
 import { PasswordMatchValidator } from '@shared/helper/validator/password-match-validator';
-import { combineLatest, startWith } from 'rxjs';
+import { combineLatest, startWith, take } from 'rxjs';
 import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
@@ -22,7 +22,7 @@ export class SettingsPasswordComponent implements OnInit {
 
   public skeletonType = SkeletonType;
 
-  public constructor(private readonly authService: AuthService) {}
+  public constructor(@Inject(AUTHENTICATION) private readonly authentication: Authentication) {}
 
   public ngOnInit(): void {
     combineLatest([this.passwordForm.controls.currentPassword.valueChanges.pipe(startWith(null)), this.passwordForm.controls.newPassword.valueChanges.pipe(startWith(null))]).subscribe(
@@ -48,17 +48,20 @@ export class SettingsPasswordComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.savingPassword = true;
 
-      this.authService
+      this.authentication
         .updateUserPassword(this.passwordForm.value.currentPassword, this.passwordForm.value.newPassword)
-        .then((response: ChangePasswordResponse) => {
-          this.passwordForm.reset();
-          this.savingPassword = false;
-        })
-        .catch((reason: ChangePasswordResponse) => {
-          if (reason === ChangePasswordResponse.PASSWORD_INCORRECT) {
-            this.passwordForm.controls.currentPassword.setErrors({ incorrect: true });
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.passwordForm.reset();
+            this.savingPassword = false;
+          },
+          error: (error: any) => {
+            if (error === ChangePasswordResponse.PASSWORD_INCORRECT) {
+              this.passwordForm.controls.currentPassword.setErrors({ incorrect: true });
+            }
+            this.savingPassword = false;
           }
-          this.savingPassword = false;
         });
     }
   }

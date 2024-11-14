@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpArticleService } from '@core/services/article/http-article.service';
+import { Articles, ARTICLES } from '@core/services/api/articles/articles.interface';
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
 import { DialogCloseType } from '@shared/components/stacked-left-dialog/dialog-close-type.enum';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
@@ -10,8 +10,8 @@ import { ColumnBuilder } from '@shared/components/table/builder/column-builder';
 import { FilterBuilder, FilterType } from '@shared/components/table/builder/filter-builder';
 import { TableColumn } from '@shared/components/table/builder/table-column';
 import { TableDataType } from '@shared/components/table/table-data-type.enum';
-import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { ArticleOverview } from '@shared/models/article/article-overview.model';
+import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
+import { ArticleOverview } from '@shared/models/article/interfaces/article.interface';
 
 @Component({
   selector: 'app-articles',
@@ -22,7 +22,7 @@ export class ArticlesComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: ArticleOverview[];
 
-  public constructor(private readonly articleService: HttpArticleService, private readonly dialog: MatDialog) {}
+  public constructor(@Inject(ARTICLES) private readonly articlesService: Articles, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.getArticles();
@@ -79,7 +79,7 @@ export class ArticlesComponent implements OnInit {
             .afterClosed()
             .subscribe((closeType: DialogCloseType) => {
               if (closeType === DialogCloseType.CONFIRM) {
-                this.articleService.delete(id).subscribe(() => this.getArticles());
+                this.articlesService.delete(id).subscribe(() => this.getArticles());
               }
             });
         })
@@ -89,6 +89,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   private getArticles(): void {
-    this.articleService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));
+    this.articlesService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));
   }
 }

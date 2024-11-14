@@ -13,13 +13,13 @@ export class NavigationSidebarComponent {
 
   public constructor(private readonly dialog: MatDialog) {}
 
-  public openDashboard(): void {
+  public goToDashboard(): void {
     this.dialog.open(StackedLeftDialogComponent, {
       width: '400px',
       data: {
         type: DialogType.WARNING,
         icon: 'lock',
-        title: 'Dashboard is not available yet',
+        title: 'Application is not available yet',
         description: 'Our team is diligently working towards making our incredible dashboard available to you.'
       }
     });

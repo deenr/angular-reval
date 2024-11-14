@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Color } from '@shared/enums/general/colors.enum';
+import { Color } from '@shared/models/color/enums/colors.enum';
 import { BadgeSize } from './badge-size.enum';
 import { BadgeType } from './badge-type.enum';
 import { BadgeComponent } from './badge.component';

@@ -40,12 +40,12 @@
   </section>
   <app-article-card
     class="main-article-small cursor-pointer"
+    authorName="{{ mainArticle?.author?.firstName }} {{ mainArticle?.author?.lastName }}"
     [loadingArticle]="loadingArticles"
-    [image]="mainArticle.image"
+    [image]="getImageSource(mainArticle.image)"
     [subHeading]="getCategoryTranslation(mainArticle.categories[0])"
     [heading]="mainArticle.title"
     [supportingText]="mainArticle.subtitle"
-    [author]="mainArticle.author"
     [published]="getDate(mainArticle.published)"
     [routerLink]="mainArticle.id"
   ></app-article-card>
@@ -53,12 +53,12 @@
     <div *ngFor="let article of otherArticles">
       <app-article-card
         class="cursor-pointer"
+        authorName="{{ article?.author?.firstName }} {{ article?.author?.lastName }}"
         [loadingArticle]="loadingArticles"
-        [image]="article.image"
+        [image]="getImageSource(article.image)"
         [subHeading]="getCategoryTranslation(article.categories[0])"
         [heading]="article.title"
         [supportingText]="article.subtitle"
-        [author]="article.author"
         [published]="getDate(article.published)"
         [routerLink]="article.id"
       ></app-article-card>

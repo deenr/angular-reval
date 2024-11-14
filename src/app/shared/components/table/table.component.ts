@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
 import { DateRange } from '@shared/components/datepicker/date-range.interface';
-import { Color } from '@shared/enums/general/colors.enum';
+import { Color } from '@shared/models/color/enums/colors.enum';
 import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 import { FilterProperty, FilterType } from './builder/filter-builder';
 import { TableColumn } from './builder/table-column';

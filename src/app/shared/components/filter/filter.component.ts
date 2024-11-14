@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
+import { BreakpointService } from '@core/services/breakpoint.service';
 import { BadgeType } from '@shared/components/badge/badge-type.enum';
 import { TranslatePipe } from '@shared/pipes/translate/translate.pipe';
 import { FilterProperty, FilterType } from '../table/builder/filter-builder';

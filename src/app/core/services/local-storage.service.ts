@@ -5,8 +5,10 @@ import { Inject, Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  public readonly KEY_PREFIX = 'sphience.';
+  public static readonly USER_ID = 'user_id';
+  public static readonly USER_ROLE = 'user_role';
 
+  private readonly KEY_PREFIX = 'sphience.';
   private readonly window: Window;
 
   public constructor(@Inject(DOCUMENT) private document: Document) {

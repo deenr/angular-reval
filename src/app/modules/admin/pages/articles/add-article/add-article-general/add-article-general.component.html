@@ -29,8 +29,8 @@
       <div class="flex-row form-fields full-width">
         <mat-form-field *skeleton="loadingArticle; type: isMobile ? skeletonType.FORM_FIELD : skeletonType.FORM_FIELD_WITHOUT_LABEL">
           <mat-label *ngIf="isMobile" class="text-sm text-medium">Author</mat-label>
-          <mat-select formControlName="author" placeholder="Select author">
-            <mat-option *ngFor="let author of authors" [value]="author"> {{ author.firstName }} {{ author.lastName }} </mat-option>
+          <mat-select formControlName="authorId" placeholder="Select author">
+            <mat-option *ngFor="let author of authors" [value]="author.id"> {{ author.firstName }} {{ author.lastName }} </mat-option>
           </mat-select>
         </mat-form-field>
       </div>

@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { BadgeType } from '@shared/components/badge/badge-type.enum';
-import { Color } from '@shared/enums/general/colors.enum';
+import { Color } from '@shared/models/color/enums/colors.enum';
 import { Subject, distinctUntilChanged } from 'rxjs';
 import { BadgeComponent } from '../badge/badge.component';
 import { MetricTimeFrame } from './metric-time-frame.enum';

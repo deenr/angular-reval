@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
+import { StackedLeftDialogComponent } from '@shared/components/stacked-left-dialog/stacked-left-dialog.component';
 
 @Component({
   selector: 'app-navigation-header',
@@ -11,12 +14,26 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
 
   public opacity = 0;
 
+  public constructor(private readonly dialog: MatDialog) {}
+
   public ngOnInit() {
     document.getElementsByClassName('mat-drawer-content')[0].addEventListener('scroll', this.onWindowScroll.bind(this));
   }
 
   public ngOnDestroy() {
     document.getElementsByClassName('mat-drawer-content')[0].removeEventListener('scroll', this.onWindowScroll.bind(this));
+  }
+
+  public goToDashboard(): void {
+    this.dialog.open(StackedLeftDialogComponent, {
+      width: '400px',
+      data: {
+        type: DialogType.WARNING,
+        icon: 'lock',
+        title: 'Application is not available yet',
+        description: 'Our team is diligently working towards making our incredible dashboard available to you.'
+      }
+    });
   }
 
   private onWindowScroll(): void {

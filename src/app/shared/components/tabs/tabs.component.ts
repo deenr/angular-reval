@@ -5,7 +5,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
+import { BreakpointService } from '@core/services/breakpoint.service';
 import { StackedLeftDialogComponent } from '@shared/components/stacked-left-dialog/stacked-left-dialog.component';
 import { pairwise, startWith } from 'rxjs';
 import { DialogCloseType } from '../stacked-left-dialog/dialog-close-type.enum';

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth.service';
+import { AUTHENTICATION, Authentication } from '@core/services/api/authentication/authentication.interface';
 import { ProgressStep } from '@modules/authentication/components/progress-steps/progress-step.interface';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
 import { StackedLeftDialogComponent } from '@shared/components/stacked-left-dialog/stacked-left-dialog.component';
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
   public loadingVerification = false;
   public emailVerified = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly authService: AuthService, private readonly router: Router) {}
+  public constructor(@Inject(AUTHENTICATION) private readonly authentication: Authentication, private readonly dialog: MatDialog, private readonly router: Router) {}
 
   public ngOnInit(): void {
     this.passwordForm.addValidators(matchValidator(this.passwordForm.controls.password, this.passwordForm.controls.confirmPassword));
@@ -128,17 +128,21 @@ export class RegisterComponent implements OnInit {
 
   public async goToPassword(): Promise<void> {
     if (this.emailForm.valid) {
-      try {
-        const hasDuplicateAccount = await this.authService.checkDuplicateAccount(this.emailForm.value.email);
-
-        if (hasDuplicateAccount) {
-          this.emailForm.controls.email.setErrors({ duplicateEmail: true });
-        } else {
-          this.setCurrentProgressStep(RegistrationStep.PASSWORD);
-        }
-      } catch (error) {
-        this.emailForm.controls.email.setErrors({ duplicateEmail: true });
-      }
+      this.authentication
+        .checkDuplicateAccount(this.emailForm.value.email)
+        .pipe(take(1))
+        .subscribe({
+          next: (hasDuplicateAccount: boolean) => {
+            if (hasDuplicateAccount) {
+              this.emailForm.controls.email.setErrors({ duplicateEmail: true });
+            } else {
+              this.setCurrentProgressStep(RegistrationStep.PASSWORD);
+            }
+          },
+          error: () => {
+            this.emailForm.controls.email.setErrors({ duplicateEmail: true });
+          }
+        });
     }
   }
 
@@ -146,15 +150,16 @@ export class RegisterComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.loadingSignUp = true;
 
-      try {
-        await this.authService.signUp(this.emailForm.value.email, this.passwordForm.value.password);
-
-        this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
-        this.setResendCountdown();
-      } catch (error) {
-      } finally {
-        this.loadingSignUp = false;
-      }
+      this.authentication
+        .signUp(this.emailForm.value.email, this.passwordForm.value.password)
+        .pipe(
+          take(1),
+          finalize(() => (this.loadingSignUp = false))
+        )
+        .subscribe(() => {
+          this.setCurrentProgressStep(RegistrationStep.EMAIL_VERIFICATION);
+          this.setResendCountdown();
+        });
     }
   }
 
@@ -165,7 +170,7 @@ export class RegisterComponent implements OnInit {
   public resendVerification(): void {
     if (this.canResendVerification) {
       this.setResendCountdown();
-      this.authService.resendEmailVerification(this.emailForm.value.email);
+      this.authentication.resendEmailVerification(this.emailForm.value.email).pipe(take(1)).subscribe();
     }
   }
 
@@ -200,22 +205,28 @@ export class RegisterComponent implements OnInit {
       if (this.verificationCodeForm.valid) {
         this.loadingVerification = true;
 
-        this.authService.verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email).then(({ data, error }) => {
-          if (error) {
-            this.dialog.open(StackedLeftDialogComponent, {
-              width: '450px',
-              data: {
-                type: DialogType.ERROR,
-                icon: 'exclamation-circle',
-                title: 'Error verifying email',
-                description: error.message
-              }
-            });
-          } else {
-            this.emailVerified = true;
-          }
-          this.loadingVerification = false;
-        });
+        this.authentication
+          .verifyEmail(this.verificationCodeForm.value.verificationCode, this.emailForm.value.email)
+          .pipe(
+            take(1),
+            finalize(() => (this.loadingVerification = false))
+          )
+          .subscribe({
+            next: () => {
+              this.emailVerified = true;
+            },
+            error: (error) => {
+              this.dialog.open(StackedLeftDialogComponent, {
+                width: '450px',
+                data: {
+                  type: DialogType.ERROR,
+                  icon: 'exclamation-circle',
+                  title: 'Error verifying email',
+                  description: error.message
+                }
+              });
+            }
+          });
       }
     }
   }

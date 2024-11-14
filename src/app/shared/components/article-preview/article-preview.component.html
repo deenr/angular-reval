@@ -9,33 +9,35 @@
   </header>
   <div class="content flex-column">
     <ng-container *ngFor="let content of article?.content">
-      <section class="content__item content__introduction full-width" *ngIf="isContentIntroduction(content.type)">
-        <h3 class="display-sm text-semibold title" classMd="display-xs" *skeleton="loadingArticle; type: skeletonType.DISPLAY_SM">
-          {{ getTitle(content) }}
-        </h3>
-        <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '20px'">
-          <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
+      <ng-container [ngSwitch]="content.type">
+        <section *ngSwitchCase="ArticleContentType.INTRODUCTION" class="content__item content__introduction full-width">
+          <h3 class="display-sm text-semibold title" classMd="display-xs" *skeleton="loadingArticle; type: skeletonType.DISPLAY_SM">
+            {{ getTitle(content) }}
+          </h3>
+          <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '20px'">
+            <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
+          </div>
+        </section>
+        <picture *ngSwitchCase="ArticleContentType.IMAGE" class="content__item content__image">
+          <img [src]="getImageSource(content)" alt="" srcset="" />
+        </picture>
+        <section *ngSwitchCase="ArticleContentType.TEXT" class="content__item content__text full-width">
+          <h4 class="display-xs text-semibold" classMd="text-xl" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS">{{ getTitle(content) }}</h4>
+          <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '16px'">
+            <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
+          </div>
+        </section>
+        <div *ngSwitchCase="ArticleContentType.QUOTE" class="content__item content__quote full-width">
+          <p class="display-xs text-medium text-italic quote" classMd="text-xl">''{{ getQuoteText(content) }}''</p>
+          <p class="text-md text-regular author">— {{ getQuoteAuthor(content) }}</p>
         </div>
-      </section>
-      <picture class="content__item content__image" *ngIf="isContentImage(content.type)">
-        <img [src]="getImageSource(content)" alt="" srcset="" />
-      </picture>
-      <section class="content__item content__text full-width" *ngIf="isContentText(content.type)">
-        <h4 class="display-xs text-semibold" classMd="text-xl" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS">{{ getTitle(content) }}</h4>
-        <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '16px'">
+        <section *ngSwitchCase="ArticleContentType.CONCLUSION" class="content__item content__conclusion">
+          <h4 class="display-sm text-semibold title" classMd="display-xs">
+            {{ getTitle(content) }}
+          </h4>
           <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
-        </div>
-      </section>
-      <div class="content__item content__quote full-width" *ngIf="isContentQuote(content.type)">
-        <p class="display-xs text-medium text-italic quote" classMd="text-xl">''{{ getQuoteText(content) }}''</p>
-        <p class="text-md text-regular author">— {{ getQuoteAuthor(content) }}</p>
-      </div>
-      <section class="content__item content__conclusion" *ngIf="isContentConclusion(content.type)">
-        <h4 class="display-sm text-semibold title" classMd="display-xs">
-          {{ getTitle(content) }}
-        </h4>
-        <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
-      </section>
+        </section>
+      </ng-container>
     </ng-container>
   </div>
 </div>

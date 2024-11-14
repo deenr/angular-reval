@@ -30,6 +30,6 @@ import { FilterComponent } from './filter.component';
     BadgeComponent,
     TranslatePipe
   ],
-  exports: [FilterComponent]
+  exports: [FilterComponent, FilterDialogComponent]
 })
 export class FilterModule {}

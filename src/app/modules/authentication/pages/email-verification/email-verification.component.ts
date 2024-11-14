@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth.service';
+import { AUTHENTICATION, Authentication } from '@core/services/api/authentication/authentication.interface';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
 import { StackedLeftDialogComponent } from '@shared/components/stacked-left-dialog/stacked-left-dialog.component';
-import { AuthResponse } from '@supabase/supabase-js';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-email-verification',
@@ -14,7 +14,12 @@ import { AuthResponse } from '@supabase/supabase-js';
 export class EmailVerificationComponent implements OnInit {
   public isEmailVerified = false;
 
-  public constructor(private readonly activatedRoute: ActivatedRoute, private readonly router: Router, private readonly authService: AuthService, private readonly dialog: MatDialog) {}
+  public constructor(
+    @Inject(AUTHENTICATION) private readonly authentication: Authentication,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly dialog: MatDialog
+  ) {}
 
   public ngOnInit(): void {
     this.checkForVerifyingEmail();
@@ -47,22 +52,24 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private verifyEmail(token: string, email: string): void {
-    this.authService.verifyEmail(token, email).then(({ data, error }: AuthResponse) => {
-      if (error) {
-        this.dialog.open(StackedLeftDialogComponent, {
-          width: '450px',
-          data: {
-            type: DialogType.ERROR,
-            icon: 'exclamation-circle',
-            title: 'Error verifying email',
-            description: error.message,
-            cancelRoute: '/login',
-            confirmRoute: '/login'
-          }
-        });
-      } else {
-        this.isEmailVerified = true;
-      }
-    });
+    this.authentication
+      .verifyEmail(token, email)
+      .pipe(take(1))
+      .subscribe({
+        next: () => (this.isEmailVerified = true),
+        error: (error) => {
+          this.dialog.open(StackedLeftDialogComponent, {
+            width: '450px',
+            data: {
+              type: DialogType.ERROR,
+              icon: 'exclamation-circle',
+              title: 'Error verifying email',
+              description: error.message,
+              cancelRoute: '/login',
+              confirmRoute: '/login'
+            }
+          });
+        }
+      });
   }
 }

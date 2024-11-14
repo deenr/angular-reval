@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Color } from '@shared/enums/general/colors.enum';
+import { Color } from '@shared/models/color/enums/colors.enum';
 import { BadgeSize } from './badge-size.enum';
 import { BadgeType } from './badge-type.enum';
 

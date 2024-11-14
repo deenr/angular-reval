@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { ArticleContent, ConclusionContent, IntroductionContent, TextContent } from '@shared/models/article/article-content.model';
-import { User } from '@shared/models/user/user.model';
+import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
+import { ArticleContent, ConclusionContent, IntroductionContent, TextContent } from '@shared/models/article/interfaces/article-content.interface';
+import { Author } from '@shared/models/article/interfaces/article.interface';
 import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
@@ -15,11 +15,11 @@ export class AddArticleGeneralComponent {
   @Input() public articleForm: FormGroup<{
     title: FormControl<string>;
     subtitle: FormControl<string>;
-    author: FormControl<User>;
+    authorId: FormControl<string>;
     categories: FormControl<ArticleCategory[]>;
     published: FormControl<Date>;
   }>;
-  @Input() public authors: User[];
+  @Input() public authors: Author[];
   @Input() public loadingArticle: boolean;
 
   public readonly categories = [

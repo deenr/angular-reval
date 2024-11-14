@@ -2,8 +2,8 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
-import { User } from '@shared/models/user/user.model';
+import { ArticleContentType } from '@shared/models/article/enums/article-content-type.enum';
+import { Author } from '@shared/models/article/interfaces/article.interface';
 import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 import { ImageContentFormGroup, ImageContentFormType, QuoteContentFormGroup, QuoteContentFormType, TextContentFormGroup, TextContentFormType } from '../add-article.component';
 
@@ -15,7 +15,7 @@ import { ImageContentFormGroup, ImageContentFormType, QuoteContentFormGroup, Quo
 export class AddArticleContentComponent {
   @ViewChild('changeContentMenu') public changeContentMenu: MatMenuTrigger;
   @Input() public isMobile: boolean;
-  @Input() public authors: User[];
+  @Input() public authors: Author[];
   @Input() public contentForm: FormGroup<{
     content: FormArray<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>;
   }>;
@@ -91,7 +91,7 @@ export class AddArticleContentComponent {
       new FormGroup({
         type: new FormControl(ArticleContentType.QUOTE),
         quote: new FormControl(null, Validators.required),
-        author: new FormControl(null, Validators.required)
+        authorId: new FormControl(null, Validators.required)
       })
     );
   }

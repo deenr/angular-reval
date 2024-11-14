@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth.service';
+import { AUTHENTICATION, Authentication } from '@core/services/api/authentication/authentication.interface';
+import { USERS, Users } from '@core/services/api/users/users.interface';
+import { UserRoleService } from '@core/services/user-role.service';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
 import { StackedLeftDialogComponent } from '@shared/components/stacked-left-dialog/stacked-left-dialog.component';
-import { UserRole } from '@shared/enums/user/user-role.enum';
-import { AuthError } from '@supabase/supabase-js';
-import { combineLatest } from 'rxjs';
+import { UserRole } from '@shared/models/user/enums/user-role.enum';
+import { combineLatest, finalize, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,13 @@ export class LoginComponent implements OnInit {
   });
   public loadingLogin = false;
 
-  public constructor(private readonly dialog: MatDialog, private readonly authService: AuthService, private readonly router: Router) {}
+  public constructor(
+    @Inject(USERS) private readonly usersService: Users,
+    @Inject(AUTHENTICATION) private readonly authentication: Authentication,
+    private readonly dialog: MatDialog,
+    private readonly router: Router,
+    private readonly userRoleService: UserRoleService
+  ) {}
 
   public ngOnInit(): void {
     combineLatest([this.loginForm.controls.email.valueChanges, this.loginForm.controls.password.valueChanges]).subscribe(() => {
@@ -44,28 +51,30 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.loginForm.valid) {
       this.loadingLogin = true;
-      this.authService
+      this.authentication
         .signIn(this.loginForm.value.email, this.loginForm.value.password)
-        .then(([user, error]: [{ id: string; role: UserRole }, AuthError]) => {
-          if (user) {
-            if (user.role === UserRole.INCOMPLETE_PROFILE) {
-              this.router.navigate([`/admin/settings/${user.id}`]);
-            } else {
-              this.router.navigate(['/admin']);
+        .pipe(
+          take(1),
+          switchMap(({ data, error }) => {
+            if (error) {
+              throw error;
             }
+            return this.usersService.getById(data.user.id);
+          }),
+          finalize(() => (this.loadingLogin = false))
+        )
+        .subscribe(({ id, role }) => {
+          if (role === UserRole.INCOMPLETE_PROFILE) {
+            this.router.navigate([`/admin/settings/${id}`]);
+          } else {
+            this.router.navigate(['/admin']);
           }
-        })
-        .catch(([error]: [AuthError]) => {
-          this.loadingLogin = false;
-          this.loginForm.controls.email.setErrors({ invalid: true });
-          this.loginForm.controls.password.setErrors({ invalid: true });
         });
     }
   }
 
   public googleLogin(): void {
     this.openDashboard();
-    // this.authService.googleSignIn();
   }
 
   private openDashboard(): void {

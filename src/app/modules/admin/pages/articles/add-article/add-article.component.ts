@@ -1,18 +1,18 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { HttpArticleService } from '@core/services/article/http-article.service';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
-import { HttpImageService } from '@core/services/image/http-image.service';
-import { HttpUserService } from '@core/services/user/http-user.service';
+import { ARTICLES, Articles } from '@core/services/api/articles/articles.interface';
+import { IMAGES, Images } from '@core/services/api/images/images.interface';
+import { USERS, Users } from '@core/services/api/users/users.interface';
+import { BreakpointService } from '@core/services/breakpoint.service';
 import { Tab } from '@shared/components/tabs/tab.interface';
-import { ArticleCategory } from '@shared/enums/article/article-category.enum';
-import { ArticleContentType } from '@shared/enums/article/article-content-type.enum';
-import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/article-content.model';
-import { Article } from '@shared/models/article/article.model';
-import { User } from '@shared/models/user/user.model';
-import { Observable, combineLatest, forkJoin } from 'rxjs';
+import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
+import { ArticleContentType } from '@shared/models/article/enums/article-content-type.enum';
+import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/interfaces/article-content.interface';
+import { Article, Author } from '@shared/models/article/interfaces/article.interface';
+import { UserUnsensitive } from '@shared/models/user/interfaces/user.interface';
+import { Observable, combineLatest, finalize, forkJoin, take } from 'rxjs';
 import { AddArticleTab } from './add-article-tabs.enum';
 
 @Component({
@@ -30,7 +30,7 @@ export class AddArticleComponent implements OnInit {
   public articleForm: FormGroup<{
     title: FormControl<string>;
     subtitle: FormControl<string>;
-    author: FormControl<User>;
+    authorId: FormControl<string>;
     categories: FormControl<ArticleCategory[]>;
     published: FormControl<Date>;
   }>;
@@ -39,7 +39,7 @@ export class AddArticleComponent implements OnInit {
     content: FormArray<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>;
   }>;
 
-  public authors: User[];
+  public authors: Author[];
   public addArticleTab = AddArticleTab;
   public article: Article;
   public isMobile: boolean;
@@ -47,9 +47,9 @@ export class AddArticleComponent implements OnInit {
   public savingArticle = false;
 
   public constructor(
-    private readonly articleService: HttpArticleService,
-    private readonly userService: HttpUserService,
-    private readonly imageService: HttpImageService,
+    @Inject(ARTICLES) private readonly articlesService: Articles,
+    @Inject(USERS) private readonly usersService: Users,
+    @Inject(IMAGES) private readonly imagesService: Images,
     private readonly activatedRoute: ActivatedRoute,
     private readonly breakpointService: BreakpointService,
     private readonly location: Location
@@ -60,21 +60,20 @@ export class AddArticleComponent implements OnInit {
 
     this.setFormField();
 
-    const requests: (Observable<Article> | Observable<User[]>)[] = [this.userService.getAll()];
+    const requests: (Observable<Article> | Observable<UserUnsensitive[]>)[] = [this.usersService.getAllUnsensitive().pipe(take(1))];
 
     if (!this.isAddingArticle()) {
       this.loadingArticle = true;
 
-      requests.push(this.articleService.getById(this.activatedRoute.snapshot.paramMap.get('id')));
+      requests.push(this.articlesService.getById(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)));
     }
 
-    forkJoin(requests).subscribe(([authors, article]: (User[] | Article)[]) => {
-      this.authors = authors as User[];
+    forkJoin(requests).subscribe(([authors, article]: (UserUnsensitive[] | Article)[]) => {
+      this.authors = authors as Author[];
 
       if (article) {
         this.article = article as Article;
-
-        this.setFormFieldValues(article as Article);
+        this.setFormFieldValues(this.article);
       }
     });
   }
@@ -89,41 +88,62 @@ export class AddArticleComponent implements OnInit {
     const content = this.contentForm.value.content.map((content: Partial<TextContentFormType | QuoteContentFormType | ImageContentFormType>, index: number) => {
       if ((content as QuoteContentFormType).quote) {
         const quoteContent = content as QuoteContentFormType;
-        return new QuoteContent(quoteContent.author.id, quoteContent.quote);
+
+        return {
+          type: ArticleContentType.QUOTE,
+          author: this.authors.find((author) => author.id === quoteContent.authorId),
+          quote: quoteContent.quote
+        } as QuoteContent;
       } else if ((content as ImageContentFormType).source) {
-        const imageContent = content as ImageContent;
+        const imageContent = content as ImageContentFormType;
         if (imageName === undefined) {
           imageName = imageContent.name;
         }
-        return new ImageContent(imageContent.name);
+        return {
+          type: ArticleContentType.IMAGE,
+          name: imageContent.name
+        } as ImageContent;
       } else {
         const textContent = content as TextContentFormType;
 
         if (index === 0) {
-          return new IntroductionContent(textContent.title, textContent.text?.split('\n\n'));
+          return {
+            type: ArticleContentType.INTRODUCTION,
+            title: textContent.title,
+            text: textContent.text?.split('\n\n')
+          } as IntroductionContent;
         } else if (index === this.contentForm.value.content.length - 1) {
-          return new ConclusionContent(textContent.title, textContent.text?.split('\n\n'));
+          return {
+            type: ArticleContentType.CONCLUSION,
+            title: textContent.title,
+            text: textContent.text?.split('\n\n')
+          } as ConclusionContent;
         } else {
-          return new TextContent(textContent.title, textContent.text?.split('\n\n'));
+          return {
+            type: ArticleContentType.TEXT,
+            title: textContent.title,
+            text: textContent.text?.split('\n\n')
+          } as TextContent;
         }
       }
     });
 
-    return new Article(
-      this.article?.id ??
+    return {
+      id:
+        this.article?.id ??
         this.articleForm.value?.title
           .split(' ')
           .slice(0, 5)
           .map((value: string) => this.removeNonAlphabetCharacters(value.toLowerCase()))
           .join('-'),
-      this.articleForm.value?.title,
-      this.articleForm.value?.subtitle,
-      this.articleForm.value?.author,
-      this.articleForm.value?.published,
-      this.articleForm.value?.categories,
-      imageName ?? null,
-      content
-    );
+      title: this.articleForm.value.title,
+      subtitle: this.articleForm.value.subtitle,
+      author: this.authors.find((author) => author.id === this.articleForm.value.authorId),
+      published: this.articleForm.value.published,
+      categories: this.articleForm.value.categories,
+      image: imageName ?? null,
+      content: content
+    };
   }
 
   public cancel(): void {
@@ -139,8 +159,8 @@ export class AddArticleComponent implements OnInit {
 
       const articleToSave = this.getArticleToSave();
 
-      const articleObservables: (Observable<string> | Promise<string[]>)[] = [
-        this.imageService.uploadMultipleImages(
+      const articleObservables: (Observable<string> | Observable<string[]>)[] = [
+        this.imagesService.uploadMultipleImages(
           this.getImages()
             .filter((image: { name: string; file: File }) => image.file)
             .map((image: { name: string; file: File }) => image.file)
@@ -148,14 +168,19 @@ export class AddArticleComponent implements OnInit {
       ];
 
       if (this.isAddingArticle()) {
-        articleObservables.push(this.articleService.add(articleToSave));
+        articleObservables.push(this.articlesService.add(articleToSave));
       } else {
-        articleObservables.push(this.articleService.update(articleToSave));
+        articleObservables.push(this.articlesService.update(articleToSave));
       }
 
-      forkJoin(articleObservables).subscribe(() => {
-        this.location.back();
-      });
+      forkJoin(articleObservables)
+        .pipe(
+          take(1),
+          finalize(() => (this.savingArticle = false))
+        )
+        .subscribe(() => {
+          this.location.back();
+        });
     }
   }
 
@@ -177,7 +202,7 @@ export class AddArticleComponent implements OnInit {
     this.articleForm = new FormGroup({
       title: new FormControl('', Validators.required),
       subtitle: new FormControl('', Validators.required),
-      author: new FormControl(null, Validators.required),
+      authorId: new FormControl(null, Validators.required),
       categories: new FormControl(null, Validators.required),
       published: new FormControl(null, Validators.required)
     });
@@ -199,7 +224,7 @@ export class AddArticleComponent implements OnInit {
         new FormGroup({
           type: new FormControl(ArticleContentType.QUOTE),
           quote: new FormControl('', Validators.required),
-          author: new FormControl(null, Validators.required)
+          authorId: new FormControl(null, Validators.required)
         })
       );
 
@@ -237,10 +262,11 @@ export class AddArticleComponent implements OnInit {
     this.articleForm.setValue({
       title: article.title,
       subtitle: article.subtitle,
-      author: this.authors.find((author: User) => author.id === article.author.id),
+      authorId: article.author.id,
       categories: article.categories,
       published: article.published
     });
+
     this.article.content.forEach((content: ArticleContent) => {
       switch (content.type) {
         case ArticleContentType.INTRODUCTION:
@@ -268,7 +294,7 @@ export class AddArticleComponent implements OnInit {
         case ArticleContentType.IMAGE:
           const imageContent = content as ImageContent;
 
-          const imageSource = this.imageService.getImageUrl(imageContent.name);
+          const imageSource = this.imagesService.getPublicImageUrl(imageContent.name);
 
           this.contentForm.controls.content.push(
             new FormGroup({
@@ -286,10 +312,7 @@ export class AddArticleComponent implements OnInit {
             new FormGroup({
               type: new FormControl(ArticleContentType.QUOTE),
               quote: new FormControl(qouteContent.quote, Validators.required),
-              author: new FormControl(
-                this.authors.find((author: User) => author.id === qouteContent.authorId),
-                Validators.required
-              )
+              authorId: new FormControl(qouteContent.author.id, Validators.required)
             })
           );
 
@@ -335,7 +358,7 @@ export interface TextContentFormType {
 export interface QuoteContentFormType {
   type: ArticleContentType;
   quote: string;
-  author: User;
+  authorId: string;
 }
 
 export interface ImageContentFormType {
@@ -347,6 +370,6 @@ export interface ImageContentFormType {
 
 export type TextContentFormGroup = FormGroup<{ type: FormControl<ArticleContentType.TEXT>; title: FormControl<string>; text: FormControl<string> }>;
 
-export type QuoteContentFormGroup = FormGroup<{ type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; author: FormControl<User> }>;
+export type QuoteContentFormGroup = FormGroup<{ type: FormControl<ArticleContentType.QUOTE>; quote: FormControl<string>; authorId: FormControl<string> }>;
 
 export type ImageContentFormGroup = FormGroup<{ type: FormControl<ArticleContentType.IMAGE>; file: FormControl<File>; name: FormControl<string>; source: FormControl<string> }>;

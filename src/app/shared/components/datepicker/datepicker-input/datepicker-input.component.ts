@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
+import { BreakpointService } from '@core/services/breakpoint.service';
 import { AbstractMatFormField } from '@shared/helper/abstract-form-field-control';
 import { DateRange } from '../date-range.interface';
 import { DatepickerMenuComponent } from '../datepicker-menu/datepicker-menu.component';

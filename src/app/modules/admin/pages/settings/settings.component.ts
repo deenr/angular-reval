@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Breakpoint } from '@core/services/breakpoint/breakpoint.enum';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
+import { USERS, Users } from '@core/services/api/users/users.interface';
+import { Breakpoint, BreakpointService } from '@core/services/breakpoint.service';
 import { LocalStorageService } from '@core/services/local-storage.service';
-import { RoleService } from '@core/services/role/role.service';
-import { HttpUserService } from '@core/services/user/http-user.service';
+import { UserRoleService } from '@core/services/user-role.service';
 import { Tab } from '@shared/components/tabs/tab.interface';
-import { UserRole } from '@shared/enums/user/user-role.enum';
-import { User } from '@shared/models/user/user.model';
+import { UserRole } from '@shared/models/user/enums/user-role.enum';
+import { User } from '@shared/models/user/interfaces/user.interface';
 import { SettingsTab } from './settings-tab.enum';
 
 @Component({
@@ -51,20 +50,21 @@ export class SettingsComponent implements OnInit {
   private initialUser: User;
 
   public constructor(
+    @Inject(USERS) private readonly usersService: Users,
     private readonly breakpointService: BreakpointService,
-    private readonly roleService: RoleService,
     private readonly route: ActivatedRoute,
-    private readonly userService: HttpUserService,
-    private readonly localStorageService: LocalStorageService
+    private readonly localStorageService: LocalStorageService,
+    private readonly userRoleService: UserRoleService
   ) {}
 
   public ngOnInit(): void {
-    const localUserIdAndEmail = JSON.parse(this.localStorageService.getItem('user')) as { id: string; email: string };
-    if (this.route.snapshot.paramMap.get('id') && this.roleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
-      this.detailsForm.controls.email.setValue(localUserIdAndEmail.email);
-      this.loadingUser = false;
+    if (this.route.snapshot.paramMap.get('id') && this.userRoleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
+      this.usersService.getById(this.route.snapshot.paramMap.get('id')).subscribe(({ email }) => {
+        this.detailsForm.controls.email.setValue(email);
+        this.loadingUser = false;
+      });
     } else {
-      this.userService.getUserInfoById(localUserIdAndEmail?.id).subscribe((user: User) => {
+      this.usersService.getById(this.localStorageService.getItem(LocalStorageService.USER_ID)).subscribe((user: User) => {
         this.initialUser = user;
         this.setSettingsDetailsForm(this.initialUser);
         this.loadingUser = false;
@@ -91,7 +91,7 @@ export class SettingsComponent implements OnInit {
       this.getActiveTab().id === SettingsTab.DETAILS &&
       this.initialUser &&
       this.detailsForm &&
-      this.roleService.getCurrentRole() !== UserRole.INCOMPLETE_PROFILE &&
+      this.userRoleService.getCurrentRole() !== UserRole.INCOMPLETE_PROFILE &&
       (this.initialUser.firstName !== this.detailsForm.value.firstName ||
         this.initialUser.lastName !== this.detailsForm.value.lastName ||
         this.initialUser.phoneNumber !== this.detailsForm.value.phoneNumber)

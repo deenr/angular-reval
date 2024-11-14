@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Article } from '@shared/models/article/article.model';
+import { Article } from '@shared/models/article/interfaces/article.interface';
 
 @Component({
   selector: 'app-add-article-preview',
@@ -8,5 +8,5 @@ import { Article } from '@shared/models/article/article.model';
 })
 export class AddArticlePreviewComponent {
   @Input() public article: Article;
-  @Input() public images: { name: string; source: string; file: File }[];
+  @Input() public images: { name: string; source: string }[];
 }

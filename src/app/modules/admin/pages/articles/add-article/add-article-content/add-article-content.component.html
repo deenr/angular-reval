@@ -29,8 +29,8 @@
               <textarea matInput text="text" formControlName="quote" placeholder="Enter quote" cdkTextareaAutosize></textarea>
             </mat-form-field>
             <mat-form-field>
-              <mat-select formControlName="author" placeholder="Select author">
-                <mat-option *ngFor="let author of authors" [value]="author"> {{ author.firstName }} {{ author.lastName }} </mat-option>
+              <mat-select formControlName="authorId" placeholder="Select author">
+                <mat-option *ngFor="let author of authors" [value]="author.id"> {{ author.firstName }} {{ author.lastName }} </mat-option>
               </mat-select>
             </mat-form-field>
           </div>

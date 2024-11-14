@@ -4,6 +4,7 @@
       class="sidebar full-height"
       [collapsedWidth]="collapsedWidth"
       [expandedWidth]="expandedWidth"
+      [user]="user$ | async"
       (sidenavClose)="onSidenavToggle()"
       (collapsedChange)="collapsedChange($event)"
     ></app-interface-sidebar>

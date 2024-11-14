@@ -1,5 +1,5 @@
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
-import { Color } from '@shared/enums/general/colors.enum';
+import { Color } from '@shared/models/color/enums/colors.enum';
 import { ColumnBuilder } from './column-builder';
 
 export interface BadgeProperty {

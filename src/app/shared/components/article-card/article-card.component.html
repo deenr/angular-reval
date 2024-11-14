@@ -1,5 +1,5 @@
 <article class="article">
-  <img class="article__image" [src]="getImageSource()" [alt]="image" *skeleton="loadingArticle; type: skeletonType.ARTICLE_IMAGE" />
+  <img class="article__image" [src]="image" [alt]="image" *skeleton="loadingArticle; type: skeletonType.ARTICLE_IMAGE" />
   <div class="article__content">
     <p class="text-sm text-semibold subheading" *skeleton="loadingArticle; type: skeletonType.TEXT_SM">{{ subHeading }}</p>
     <header class="flex-row content__heading" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS; marginTop: '8px'">
@@ -10,7 +10,7 @@
     <div class="content__author flex-row">
       <mat-icon svgIcon="user" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_IMAGE"></mat-icon>
       <div class="full-width" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_NAME">
-        <h5 class="text-sm text-semibold">{{ getAuthorName() }}</h5>
+        <h5 class="text-sm text-semibold">{{ authorName }}</h5>
         <p class="text-sm text-regular">{{ published }}</p>
       </div>
     </div>

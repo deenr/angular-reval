@@ -1,4 +1,4 @@
-import { UserRole } from '@shared/enums/user/user-role.enum';
+import { UserRole } from '@shared/models/user/enums/user-role.enum';
 
 export interface NavigationItem {
   id: string;

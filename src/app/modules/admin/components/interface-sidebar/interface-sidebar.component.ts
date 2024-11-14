@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth.service';
-import { Breakpoint } from '@core/services/breakpoint/breakpoint.enum';
-import { BreakpointService } from '@core/services/breakpoint/breakpoint.service';
-import { LocalStorageService } from '@core/services/local-storage.service';
-import { RoleService } from '@core/services/role/role.service';
-import { UserRole } from '@shared/enums/user/user-role.enum';
+import { AUTHENTICATION, Authentication } from '@core/services/api/authentication/authentication.interface';
+import { Breakpoint, BreakpointService } from '@core/services/breakpoint.service';
+import { UserRoleService } from '@core/services/user-role.service';
+import { UserRole } from '@shared/models/user/enums/user-role.enum';
+import { take } from 'rxjs';
 import { NavigationItem } from './navigation-item.interface';
 
 @Component({
@@ -16,11 +15,10 @@ import { NavigationItem } from './navigation-item.interface';
 export class InterfaceSidebarComponent implements OnInit {
   @Input() public collapsedWidth = 82;
   @Input() public expandedWidth = 280;
+  @Input() public user: { name: string; email: string };
   @Output() public collapsedChange = new EventEmitter<boolean>();
   @Output() public sidenavClose = new EventEmitter<void>();
   public collapsed = true;
-  public userName: string;
-  public userEmail: string;
 
   public topNavigationItems = [
     // {id: 'home', name: 'Home', icon: 'home', routerLink: '/app', permissions: [UserRole.STUDENT, UserRole.PROFESSOR, UserRole.PHD, UserRole.ADMIN]},
@@ -45,14 +43,13 @@ export class InterfaceSidebarComponent implements OnInit {
   public isMobile: boolean;
   public isTablet: boolean;
 
-  public readonly role = this.roleService.getCurrentRole();
+  public readonly role = this.userRoleService.getCurrentRole();
 
   public constructor(
+    @Inject(AUTHENTICATION) private readonly authentication: Authentication,
     private readonly router: Router,
-    private readonly roleService: RoleService,
     private readonly breakpointService: BreakpointService,
-    private readonly authService: AuthService,
-    private readonly localStorageService: LocalStorageService
+    private readonly userRoleService: UserRoleService
   ) {}
 
   public ngOnInit(): void {
@@ -63,10 +60,6 @@ export class InterfaceSidebarComponent implements OnInit {
       this.isMobile = this.breakpointService.isMobile;
       this.isTablet = this.breakpointService.isTablet;
     });
-
-    const localUserNameAndEmail = JSON.parse(this.localStorageService.getItem('user')) as { email: string; name: string };
-    this.userEmail = localUserNameAndEmail?.email;
-    this.userName = localUserNameAndEmail?.name;
   }
 
   public canShowNavigationItem(permissions: UserRole[]): boolean {
@@ -89,9 +82,12 @@ export class InterfaceSidebarComponent implements OnInit {
   }
 
   public signOut(): void {
-    this.authService.signOut().then(() => {
-      this.router.navigate(['/login']);
-    });
+    this.authentication
+      .signOut()
+      .pipe(take(1))
+      .subscribe(() => {
+        this.router.navigate(['/login']);
+      });
   }
 
   public canShowLogoutNavigationItem(): boolean {
