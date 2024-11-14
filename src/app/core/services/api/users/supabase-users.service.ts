@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserStatus } from '@shared/models/user/enums/user-status.enum';
 import { User, UserOverview, UserUnsensitive } from '@shared/models/user/interfaces/user.interface';
 import { Observable, from, map, of, switchMap } from 'rxjs';
 import { SupabaseService } from '../supabase.service';
@@ -166,6 +167,22 @@ export class SupabaseUsersService extends SupabaseService implements Users {
     );
   }
 
+  public updateStatus(id: string, status: UserStatus): Observable<string> {
+    return from(
+      this.supabase
+        .from('users_role_status')
+        .update({
+          status
+        })
+        .eq('user_id', id)
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data;
+      })
+    );
+  }
+
   public delete(id: string): Observable<string> {
     return from(
       this.supabase
@@ -183,7 +200,6 @@ export class SupabaseUsersService extends SupabaseService implements Users {
   }
 
   private mapUserDTOToUser(userDTO: UserDTO): User {
-    console.log(userDTO);
     const { id, firstName, lastName, email, joined, phoneNumber, users_role_status } = userDTO;
     const { role, status } = users_role_status[0];
 

@@ -5,43 +5,51 @@
     <mat-table class="full-height shadow-xs" [dataSource]="dataSource" matSort>
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
         {{ column.field }}
-        <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortField ? column.sortField : column.field" [disabled]="!column.sort">{{ column.name }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef [mat-sort-header]="column?.sortField ? column.sortField : column.field" [class.mat-cell-action]="isActionColumn(column)" [disabled]="!column.sort">{{
+          column.name
+        }}</mat-header-cell>
 
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" [class.mat-cell-action]="isActionColumn(column)">
           <ng-container [ngSwitch]="column.type">
-            <ng-container *ngSwitchCase="tableDataType.TEXT">
-              <span class="data-type__text" *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] }}</span>
+            <ng-container *ngSwitchCase="TableDataType.TEXT">
+              <span class="data-type__text" *skeleton="loadingData; type: SkeletonType.TEXT_SM">{{ row[column.field] }}</span>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.TEXT_AND_DESCRIPTION">
+            <ng-container *ngSwitchCase="TableDataType.TEXT_AND_DESCRIPTION">
               <div class="data-type__text-and-description flex-column full-width">
-                <h4 class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM; width: '90%'">{{ row[column.titleKey] }}</h4>
-                <p class="text-sm text-regular" *skeleton="loadingData; type: skeletonType.TEXT_SM; marginTop: '2px'; width: '50%'">{{ row[column.descriptionKey] }}</p>
+                <h4 class="text-sm text-regular" *skeleton="loadingData; type: SkeletonType.TEXT_SM; width: '90%'">{{ row[column.titleKey] }}</h4>
+                <p class="text-sm text-regular" *skeleton="loadingData; type: SkeletonType.TEXT_SM; marginTop: '2px'; width: '50%'">{{ row[column.descriptionKey] }}</p>
               </div>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.BADGE">
-              <app-badge *skeleton="loadingData; type: skeletonType.BADGE_SM" [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
+            <ng-container *ngSwitchCase="TableDataType.BADGE">
+              <app-badge *skeleton="loadingData; type: SkeletonType.BADGE_SM" [color]="getBadgeColor(column.field, row[column.field])" [size]="getBadgeSize(column.field)">
                 {{ getBadgeTranslationKey(column.field, row[column.field]) | translate }}
               </app-badge>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.MULTIPLE_BADGES">
-              <app-multiple-badges *skeleton="loadingData; type: skeletonType.BADGE_SM; amount: 2" class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
+            <ng-container *ngSwitchCase="TableDataType.MULTIPLE_BADGES">
+              <app-multiple-badges *skeleton="loadingData; type: SkeletonType.BADGE_SM; amount: 2" class="full-width" [badges]="row[column.field]" [column]="column"></app-multiple-badges>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.AVATAR">
+            <ng-container *ngSwitchCase="TableDataType.AVATAR">
               <app-table-avatar
-                *skeleton="loadingData; type: skeletonType.TABLE_AVATAR"
+                *skeleton="loadingData; type: SkeletonType.TABLE_AVATAR"
                 class="full-width"
                 [name]="getAvatarName(column.field, row)"
                 [email]="getAvatarEmail(column.field, row)"
               ></app-table-avatar>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.DATE">
-              <span *skeleton="loadingData; type: skeletonType.TEXT_SM">{{ row[column.field] | date }}</span>
+            <ng-container *ngSwitchCase="TableDataType.DATE">
+              <span *skeleton="loadingData; type: SkeletonType.TEXT_SM">{{ row[column.field] | date }}</span>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.DELETE">
+            <ng-container *ngSwitchCase="TableDataType.DELETE">
               <mat-icon class="action-icon cursor-pointer" svgIcon="trash" (click)="delete(row['id'])"></mat-icon>
             </ng-container>
-            <ng-container *ngSwitchCase="tableDataType.EDIT">
+            <ng-container *ngSwitchCase="TableDataType.EDIT">
               <mat-icon class="action-icon cursor-pointer" svgIcon="pencil" (click)="edit(row['id'])"></mat-icon>
+            </ng-container>
+            <ng-container *ngSwitchCase="TableDataType.APPROVE">
+              <mat-icon *ngIf="canShowApprove(row)" class="action-icon cursor-pointer" svgIcon="check" (click)="approve(row)"></mat-icon>
+            </ng-container>
+            <ng-container *ngSwitchCase="TableDataType.DENY">
+              <mat-icon *ngIf="canShowDeny(row)" class="action-icon cursor-pointer" svgIcon="close" (click)="deny(row)"></mat-icon>
             </ng-container>
           </ng-container>
         </mat-cell>

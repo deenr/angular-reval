@@ -16,6 +16,8 @@ export class ColumnBuilder {
   private sortField?: string;
   private sortFields?: string[];
   private onDelete?: (id: string) => void;
+  private onApprove?: { valueKey: string; value: any; action: (id: string) => void };
+  private onDeny?: { valueKey: string; value: any; action: (id: string) => void };
   private editRoute?: string;
   private titleKey?: string;
   private descriptionKey?: string;
@@ -86,6 +88,24 @@ export class ColumnBuilder {
     return this;
   }
 
+  public setApprove(valueKey: string, value: any, action: (id: string) => void): ColumnBuilder {
+    this.field = 'approve';
+    this.type = TableDataType.APPROVE;
+
+    this.onApprove = { valueKey, value, action };
+
+    return this;
+  }
+
+  public setDeny(valueKey: string, value: any, action: (id: string) => void): ColumnBuilder {
+    this.field = 'deny';
+    this.type = TableDataType.DENY;
+
+    this.onDeny = { valueKey, value, action };
+
+    return this;
+  }
+
   public setDelete(onDelete: (id: string) => void): ColumnBuilder {
     this.field = 'delete';
     this.type = TableDataType.DELETE;
@@ -132,6 +152,8 @@ export class ColumnBuilder {
       this.sortFields,
       this.badgeProperties,
       this.onDelete,
+      this.onApprove,
+      this.onDeny,
       this.editRoute,
       this.filterProperties,
       this.translationKey,

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Users, USERS } from '@core/services/api/users/users.interface';
+import { UserRoleService } from '@core/services/user-role.service';
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
 import { DialogCloseType } from '@shared/components/stacked-left-dialog/dialog-close-type.enum';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
   public tableColumns: TableColumn[];
   public tableData: UserOverview[];
 
-  public constructor(@Inject(USERS) private readonly usersService: Users, private readonly dialog: MatDialog) {}
+  public constructor(@Inject(USERS) private readonly usersService: Users, private readonly userRoleService: UserRoleService, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.getUsers();
@@ -91,35 +92,62 @@ export class UsersComponent implements OnInit {
           filterBuilder.setType(FilterType.DATE).build();
         })
         .build(),
-      new ColumnBuilder()
-        .setDelete((id: string) => {
-          this.dialog
-            .open(StackedLeftDialogComponent, {
-              width: '400px',
-              data: {
-                type: DialogType.ERROR,
-                icon: 'exclamation-circle',
-                title: 'Delete user',
-                description: 'Are you sure you want to delete this user? This action cannot be undone.'
-              }
-            })
-            .afterClosed()
-            .subscribe((closeType: DialogCloseType) => {
-              if (closeType === DialogCloseType.CONFIRM) {
-                this.usersService.delete(id).subscribe(() => this.getUsers());
-              }
-            });
-        })
-        .build()
+      ...(this.userRoleService.hasPermission([UserRole.ADMIN])
+        ? [
+            new ColumnBuilder()
+              .setApprove('status', UserStatus.PENDING, (id: string) => {
+                this.dialog
+                  .open(StackedLeftDialogComponent, {
+                    width: '400px',
+                    data: { type: DialogType.SUCCESS, icon: 'check-circle', title: 'Approve user', description: 'Are you sure you want to approve this user?' }
+                  })
+                  .afterClosed()
+                  .subscribe((closeType: DialogCloseType) => {
+                    if (closeType === DialogCloseType.CONFIRM) {
+                      this.usersService.updateStatus(id, UserStatus.APPROVED).subscribe(() => this.getUsers());
+                    }
+                  });
+              })
+              .build(),
+            new ColumnBuilder()
+              .setDeny('status', UserStatus.PENDING, (id: string) => {
+                this.dialog
+                  .open(StackedLeftDialogComponent, {
+                    width: '400px',
+                    data: { type: DialogType.ERROR, icon: 'close-circle', title: 'Deny user', description: 'Are you sure you want to deny this user?' }
+                  })
+                  .afterClosed()
+                  .subscribe((closeType: DialogCloseType) => {
+                    if (closeType === DialogCloseType.CONFIRM) {
+                      this.usersService.updateStatus(id, UserStatus.DENIED).subscribe(() => this.getUsers());
+                    }
+                  });
+              })
+              .build(),
+            new ColumnBuilder()
+              .setDelete((id: string) => {
+                this.dialog
+                  .open(StackedLeftDialogComponent, {
+                    width: '400px',
+                    data: { type: DialogType.ERROR, icon: 'exclamation-circle', title: 'Delete user', description: 'Are you sure you want to delete this user? This action cannot be undone.' }
+                  })
+                  .afterClosed()
+                  .subscribe((closeType: DialogCloseType) => {
+                    if (closeType === DialogCloseType.CONFIRM) {
+                      this.usersService.delete(id).subscribe(() => this.getUsers());
+                    }
+                  });
+              })
+              .build(),
+            new ColumnBuilder().setEdit('admin/users/:id').build()
+          ]
+        : [])
       // new ColumnBuilder().setDelete((id: string) => {}).build(),
       // new ColumnBuilder().setEdit('admin/users/:id').build()
     ];
   }
 
   private getUsers(): void {
-    this.usersService.getOverview().subscribe((usersOverview: UserOverview[]) => {
-      this.tableData = usersOverview;
-      console.log(usersOverview.length);
-    });
+    this.usersService.getOverview().subscribe((usersOverview: UserOverview[]) => (this.tableData = usersOverview));
   }
 }

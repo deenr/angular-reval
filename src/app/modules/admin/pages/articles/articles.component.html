@@ -4,7 +4,7 @@
       <h2 class="display-sm text-semibold" classMd="display-xs">Articles</h2>
       <p class="text-md text-regular">View more data and information</p>
     </div>
-    <div class="header__actions flex-row">
+    <div *ngIf="canAddArticle()" class="header__actions flex-row">
       <!-- <button mat-stroked-button class="md">
         <mat-icon svgIcon="cloud-download"></mat-icon>
         Download CSV
@@ -16,5 +16,5 @@
     </div>
   </header>
 
-  <app-table class="articles__table" [data]="tableData" [columns]="tableColumns"></app-table>
+  <app-table class="articles__table" [data]="articles$ | async" [columns]="columns"></app-table>
 </div>

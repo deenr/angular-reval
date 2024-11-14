@@ -95,30 +95,37 @@
 }
 
 ::ng-deep {
-  .mat-column-delete {
-    min-width: 72px !important;
-    max-width: 72px !important;
-    padding: 16px !important;
-  }
+  .mat-cell-action {
+    flex: 44px 0 0 !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 16px 2px !important;
 
-  .mat-column-edit {
-    min-width: 72px !important;
-    max-width: 72px !important;
-    padding: 16px !important;
-  }
+    .mat-icon {
+      width: 20px;
+      height: 20px;
+    }
 
-  .mat-mdc-header-row:has(.mat-column-delete):has(.mat-column-edit),
-  .mat-mdc-row:has(.mat-column-delete):has(.mat-column-edit) {
-    .mat-column-delete {
+    &:not(.mat-cell-action ~ .mat-cell-action).mat-cell-action,
+    &:last-child {
+      flex: 58px 0 0 !important;
       min-width: 58px !important;
       max-width: 58px !important;
+    }
+
+    &:not(.mat-cell-action ~ .mat-cell-action).mat-cell-action {
       padding: 16px 2px 16px 16px !important;
     }
 
-    .mat-column-edit {
-      min-width: 58px !important;
-      max-width: 58px !important;
+    &:last-child {
       padding: 16px 16px 16px 2px !important;
+    }
+
+    &:not(.mat-cell-action ~ .mat-cell-action).mat-cell-action:last-child {
+      flex: 72px 0 0 !important;
+      min-width: 72px !important;
+      max-width: 72px !important;
+      padding: 16px !important;
     }
   }
 }

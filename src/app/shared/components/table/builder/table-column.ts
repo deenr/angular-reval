@@ -14,6 +14,8 @@ export class TableColumn {
     public sortFields?: string[],
     public badgeProperties?: BadgeProperty,
     public onDelete?: (id: string) => void,
+    public onApprove?: { valueKey: string; value: any; action: (id: string) => void },
+    public onDeny?: { valueKey: string; value: any; action: (id: string) => void },
     public editRoute?: string,
     public filterProperties?: FilterProperty,
     public translationKey?: string,

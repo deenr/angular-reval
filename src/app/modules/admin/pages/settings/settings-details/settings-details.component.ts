@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { USERS, Users } from '@core/services/api/users/users.interface';
 import { LocalStorageService } from '@core/services/local-storage.service';
 import { UserRoleService } from '@core/services/user-role.service';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { UserRole } from '@shared/models/user/enums/user-role.enum';
 import { User } from '@shared/models/user/interfaces/user.interface';
 import { finalize, take } from 'rxjs';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   selector: 'app-settings-details',
@@ -27,7 +27,7 @@ export class SettingsDetailsComponent {
 
   public roles = [UserRole.AUTHOR];
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
   public savingDetails = false;
 
   public constructor(

@@ -1,15 +1,15 @@
 <article class="article">
-  <img class="article__image" [src]="image" [alt]="image" *skeleton="loadingArticle; type: skeletonType.ARTICLE_IMAGE" />
+  <img class="article__image" [src]="image" [alt]="image" *skeleton="loadingArticle; type: SkeletonType.ARTICLE_IMAGE" />
   <div class="article__content">
-    <p class="text-sm text-semibold subheading" *skeleton="loadingArticle; type: skeletonType.TEXT_SM">{{ subHeading }}</p>
-    <header class="flex-row content__heading" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS; marginTop: '8px'">
+    <p class="text-sm text-semibold subheading" *skeleton="loadingArticle; type: SkeletonType.TEXT_SM">{{ subHeading }}</p>
+    <header class="flex-row content__heading" *skeleton="loadingArticle; type: SkeletonType.DISPLAY_XS; marginTop: '8px'">
       <h3 class="display-xs text-semibold" classMd="text-xl">{{ heading }}</h3>
       <mat-icon svgIcon="arrow-up-right"></mat-icon>
     </header>
-    <p class="text-md text-regular supporting-text" *skeleton="loadingArticle; type: skeletonType.TEXT_MD; marginTop: '8px'">{{ supportingText }}</p>
+    <p class="text-md text-regular supporting-text" *skeleton="loadingArticle; type: SkeletonType.TEXT_MD; marginTop: '8px'">{{ supportingText }}</p>
     <div class="content__author flex-row">
-      <mat-icon svgIcon="user" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_IMAGE"></mat-icon>
-      <div class="full-width" *skeleton="loadingArticle; type: skeletonType.ARTICLE_AUTHOR_NAME">
+      <mat-icon svgIcon="user" *skeleton="loadingArticle; type: SkeletonType.ARTICLE_AUTHOR_IMAGE"></mat-icon>
+      <div class="full-width" *skeleton="loadingArticle; type: SkeletonType.ARTICLE_AUTHOR_NAME">
         <h5 class="text-sm text-semibold">{{ authorName }}</h5>
         <p class="text-sm text-regular">{{ published }}</p>
       </div>

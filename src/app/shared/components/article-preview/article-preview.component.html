@@ -1,9 +1,9 @@
 <div class="article">
   <header class="article__heading flex-column">
-    <p class="text-md text-semibold published" classMd="text-sm" *skeleton="loadingArticle; type: skeletonType.TEXT_MD">Published {{ getDate(article?.published) }}</p>
-    <h2 class="display-lg text-semibold title" classMd="display-md" *skeleton="loadingArticle; type: skeletonType.DISPLAY_LG; marginTop: '12px'">{{ article?.title }}</h2>
-    <p class="text-xl text-regular subtitle" classMd="text-lg" *skeleton="loadingArticle; type: skeletonType.TEXT_XL; marginTop: '24px'">{{ article?.subtitle }}</p>
-    <div class="flex-row categories" *skeleton="loadingArticle; type: skeletonType.BADGE_LG; marginTop: '40px'; amount: 2">
+    <p class="text-md text-semibold published" classMd="text-sm" *skeleton="loadingArticle; type: SkeletonType.TEXT_MD">Published {{ getDate(article?.published) }}</p>
+    <h2 class="display-lg text-semibold title" classMd="display-md" *skeleton="loadingArticle; type: SkeletonType.DISPLAY_LG; marginTop: '12px'">{{ article?.title }}</h2>
+    <p class="text-xl text-regular subtitle" classMd="text-lg" *skeleton="loadingArticle; type: SkeletonType.TEXT_XL; marginTop: '24px'">{{ article?.subtitle }}</p>
+    <div class="flex-row categories" *skeleton="loadingArticle; type: SkeletonType.BADGE_LG; marginTop: '40px'; amount: 2">
       <p *ngFor="let category of article?.categories" class="text-sm text-medium">{{ getCategoryTranslation(category) }}</p>
     </div>
   </header>
@@ -11,10 +11,10 @@
     <ng-container *ngFor="let content of article?.content">
       <ng-container [ngSwitch]="content.type">
         <section *ngSwitchCase="ArticleContentType.INTRODUCTION" class="content__item content__introduction full-width">
-          <h3 class="display-sm text-semibold title" classMd="display-xs" *skeleton="loadingArticle; type: skeletonType.DISPLAY_SM">
+          <h3 class="display-sm text-semibold title" classMd="display-xs" *skeleton="loadingArticle; type: SkeletonType.DISPLAY_SM">
             {{ getTitle(content) }}
           </h3>
-          <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '20px'">
+          <div *skeleton="loadingArticle; type: SkeletonType.PARAGRAPH_LG; marginTop: '20px'">
             <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
           </div>
         </section>
@@ -22,8 +22,8 @@
           <img [src]="getImageSource(content)" alt="" srcset="" />
         </picture>
         <section *ngSwitchCase="ArticleContentType.TEXT" class="content__item content__text full-width">
-          <h4 class="display-xs text-semibold" classMd="text-xl" *skeleton="loadingArticle; type: skeletonType.DISPLAY_XS">{{ getTitle(content) }}</h4>
-          <div *skeleton="loadingArticle; type: skeletonType.PARAGRAPH_LG; marginTop: '16px'">
+          <h4 class="display-xs text-semibold" classMd="text-xl" *skeleton="loadingArticle; type: SkeletonType.DISPLAY_XS">{{ getTitle(content) }}</h4>
+          <div *skeleton="loadingArticle; type: SkeletonType.PARAGRAPH_LG; marginTop: '16px'">
             <p class="text-lg text-regular" classMd="text-md" *ngFor="let text of getText(content)">{{ text }}</p>
           </div>
         </section>

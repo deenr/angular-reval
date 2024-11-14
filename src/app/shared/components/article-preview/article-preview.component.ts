@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { SkeletonDirective } from '@shared/directives/skeleton/skeleton.directive';
 import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
 import { ArticleContentType } from '@shared/models/article/enums/article-content-type.enum';
 import { ArticleContent, ConclusionContent, ImageContent, IntroductionContent, QuoteContent, TextContent } from '@shared/models/article/interfaces/article-content.interface';
 import { Article } from '@shared/models/article/interfaces/article.interface';
 import * as moment from 'moment';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   standalone: true,
@@ -20,7 +20,7 @@ export class ArticlePreviewComponent {
   @Input() public images: { name: string; source: string }[];
   @Input() public loadingArticle = false;
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
   public ArticleContentType = ArticleContentType;
 
   private categoryTranslation = new Map<ArticleCategory, string>([

@@ -33,6 +33,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
 import { SettingsDetailsComponent } from './pages/settings/settings-details/settings-details.component';
 import { SettingsPasswordComponent } from './pages/settings/settings-password/settings-password.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { AddUserComponent } from './pages/users/add-user/add-user.component';
 import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
@@ -48,7 +49,8 @@ import { UsersComponent } from './pages/users/users.component';
     SettingsComponent,
     SettingsDetailsComponent,
     SettingsPasswordComponent,
-    UsersComponent
+    UsersComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,

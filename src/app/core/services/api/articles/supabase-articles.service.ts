@@ -112,7 +112,6 @@ export class SupabaseArticlesService extends SupabaseService implements Articles
   }
 
   public add(article: Article): Observable<string> {
-    console.log(article);
     return new Observable<string>((observer) => {
       this.supabase
         .from('articles')

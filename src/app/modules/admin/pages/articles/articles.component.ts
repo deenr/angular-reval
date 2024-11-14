@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Articles, ARTICLES } from '@core/services/api/articles/articles.interface';
+import { UserRoleService } from '@core/services/user-role.service';
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
 import { DialogCloseType } from '@shared/components/stacked-left-dialog/dialog-close-type.enum';
 import { DialogType } from '@shared/components/stacked-left-dialog/dialog-type.enum';
@@ -11,7 +12,7 @@ import { FilterBuilder, FilterType } from '@shared/components/table/builder/filt
 import { TableColumn } from '@shared/components/table/builder/table-column';
 import { TableDataType } from '@shared/components/table/table-data-type.enum';
 import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
-import { ArticleOverview } from '@shared/models/article/interfaces/article.interface';
+import { UserRole } from '@shared/models/user/enums/user-role.enum';
 
 @Component({
   selector: 'app-articles',
@@ -19,15 +20,13 @@ import { ArticleOverview } from '@shared/models/article/interfaces/article.inter
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
-  public tableColumns: TableColumn[];
-  public tableData: ArticleOverview[];
+  public columns: TableColumn[];
+  public articles$ = this.articlesService.getOverview();
 
-  public constructor(@Inject(ARTICLES) private readonly articlesService: Articles, private readonly dialog: MatDialog) {}
+  public constructor(@Inject(ARTICLES) private readonly articlesService: Articles, private readonly userRoleService: UserRoleService, private readonly dialog: MatDialog) {}
 
   public ngOnInit(): void {
-    this.getArticles();
-
-    this.tableColumns = [
+    this.columns = [
       new ColumnBuilder()
         .setField('title')
         .setHeaderName('Title')
@@ -59,36 +58,38 @@ export class ArticlesComponent implements OnInit {
         .setHeaderName('Categories')
         .setDataType(TableDataType.MULTIPLE_BADGES)
         .setTranslationKey('ARTICLE_CATEGORY')
-        .setBadge((badgeBuilder: BadgeBuilder) => {
-          badgeBuilder.setSize(BadgeSize.MD);
-        })
+        .setBadge((badgeBuilder: BadgeBuilder) => badgeBuilder.setSize(BadgeSize.MD))
         .setFilter((filterBuilder: FilterBuilder) => filterBuilder.setType(FilterType.ENUM).setEnumValues(Object.keys(ArticleCategory)).build())
         .build(),
-      new ColumnBuilder()
-        .setDelete((id: string) => {
-          this.dialog
-            .open(StackedLeftDialogComponent, {
-              width: '400px',
-              data: {
-                type: DialogType.ERROR,
-                icon: 'exclamation-circle',
-                title: 'Delete article',
-                description: 'Are you sure you want to delete this article? This action cannot be undone.'
-              }
-            })
-            .afterClosed()
-            .subscribe((closeType: DialogCloseType) => {
-              if (closeType === DialogCloseType.CONFIRM) {
-                this.articlesService.delete(id).subscribe(() => this.getArticles());
-              }
-            });
-        })
-        .build(),
-      new ColumnBuilder().setEdit('admin/articles/:id').build()
+      ...(this.userRoleService.hasPermission([UserRole.ADMIN, UserRole.AUTHOR])
+        ? [
+            new ColumnBuilder()
+              .setDelete((id: string) => {
+                this.dialog
+                  .open(StackedLeftDialogComponent, {
+                    width: '400px',
+                    data: {
+                      type: DialogType.ERROR,
+                      icon: 'exclamation-circle',
+                      title: 'Delete article',
+                      description: 'Are you sure you want to delete this article? This action cannot be undone.'
+                    }
+                  })
+                  .afterClosed()
+                  .subscribe((closeType: DialogCloseType) => {
+                    if (closeType === DialogCloseType.CONFIRM) {
+                      this.articlesService.delete(id).subscribe(() => (this.articles$ = this.articlesService.getOverview()));
+                    }
+                  });
+              })
+              .build(),
+            new ColumnBuilder().setEdit('admin/articles/:id').build()
+          ]
+        : [])
     ];
   }
 
-  private getArticles(): void {
-    this.articlesService.getOverview().subscribe((articles: ArticleOverview[]) => (this.tableData = articles));
+  public canAddArticle(): boolean {
+    return this.userRoleService.hasPermission([UserRole.ADMIN, UserRole.AUTHOR]);
   }
 }

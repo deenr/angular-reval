@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { SkeletonDirective } from '@shared/directives/skeleton/skeleton.directive';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   standalone: true,
@@ -19,5 +19,5 @@ export class ArticleCardComponent {
   @Input() public authorName: string;
   @Input() public published: string;
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
 }

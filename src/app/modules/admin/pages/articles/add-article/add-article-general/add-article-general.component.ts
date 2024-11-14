@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
 import { ArticleContent, ConclusionContent, IntroductionContent, TextContent } from '@shared/models/article/interfaces/article-content.interface';
 import { Author } from '@shared/models/article/interfaces/article.interface';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   selector: 'app-add-article-general',
@@ -40,7 +40,7 @@ export class AddArticleGeneralComponent {
     ArticleCategory.APPLICATION_DESIGN
   ];
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
 
   public getTitle(content: ArticleContent): string {
     return (content as IntroductionContent | TextContent | ConclusionContent).title;

@@ -9,30 +9,30 @@
       class="main-article-big__image full-width full-height"
       [src]="getImageSource(mainArticle.image)"
       [alt]="mainArticle.image"
-      *skeleton="loadingArticles; type: skeletonType.IMAGE; height: 'calc(100% - 180px)'"
+      *skeleton="loadingArticles; type: SkeletonType.IMAGE; height: 'calc(100% - 180px)'"
     />
-    <div class="main-article-big__header flex-row" *skeleton="loadingArticles; type: skeletonType.DISPLAY_XS; marginTop: '24px'">
+    <div class="main-article-big__header flex-row" *skeleton="loadingArticles; type: SkeletonType.DISPLAY_XS; marginTop: '24px'">
       <h3 class="display-xs text-semibold">{{ mainArticle.title }}</h3>
       <mat-icon svgIcon="arrow-up-right"></mat-icon>
     </div>
-    <p class="text-md text-regular main-article-big__supporting-text" *skeleton="loadingArticles; type: skeletonType.TEXT_MD; marginTop: '8px'">{{ mainArticle.subtitle }}</p>
+    <p class="text-md text-regular main-article-big__supporting-text" *skeleton="loadingArticles; type: SkeletonType.TEXT_MD; marginTop: '8px'">{{ mainArticle.subtitle }}</p>
     <div class="flex-row main-article-big__author-and-categories">
       <div class="flex-column">
-        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">Written by</p>
-        <div class="flex-row author-and-categories__content author" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '65px'">Written by</p>
+        <div class="flex-row author-and-categories__content author" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
           <mat-icon svgIcon="user"></mat-icon>
           <p class="text-sm text-semibold">{{ mainArticle.author.firstName }} {{ mainArticle.author.lastName }}</p>
         </div>
       </div>
       <div class="flex-column">
-        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">Published on</p>
-        <p class="text-md text-semibold author-and-categories__content" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '65px'">Published on</p>
+        <p class="text-md text-semibold author-and-categories__content" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '140px'; marginTop: '16px'">
           {{ getDate(mainArticle.published) }}
         </p>
       </div>
       <div class="flex-column categories">
-        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '65px'">File under</p>
-        <div class="flex-row category__items author-and-categories__content" *skeleton="loadingArticles; type: skeletonType.TEXT_SM; width: '300px'; marginTop: '16px'">
+        <p class="text-sm text-semibold author-and-categories__heading" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '65px'">File under</p>
+        <div class="flex-row category__items author-and-categories__content" *skeleton="loadingArticles; type: SkeletonType.TEXT_SM; width: '300px'; marginTop: '16px'">
           <p *ngFor="let category of mainArticle.categories" class="text-sm text-medium">{{ getCategoryTranslation(category) }}</p>
         </div>
       </div>

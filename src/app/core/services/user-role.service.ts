@@ -13,4 +13,8 @@ export class UserRoleService {
   public getCurrentRole(): UserRole {
     return this.userRoleSignal();
   }
+
+  public hasPermission(permissions: UserRole[]): boolean {
+    return permissions.includes(this.getCurrentRole());
+  }
 }

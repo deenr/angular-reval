@@ -2,9 +2,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { ArticleContentType } from '@shared/models/article/enums/article-content-type.enum';
 import { Author } from '@shared/models/article/interfaces/article.interface';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 import { ImageContentFormGroup, ImageContentFormType, QuoteContentFormGroup, QuoteContentFormType, TextContentFormGroup, TextContentFormType } from '../add-article.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class AddArticleContentComponent {
     content: FormArray<TextContentFormGroup | QuoteContentFormGroup | ImageContentFormGroup>;
   }>;
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
   public articleContentType = ArticleContentType;
 
   public constructor() {}

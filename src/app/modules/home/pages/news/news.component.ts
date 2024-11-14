@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ARTICLES, Articles } from '@core/services/api/articles/articles.interface';
 import { Images, IMAGES } from '@core/services/api/images/images.interface';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { ArticleCategory } from '@shared/models/article/enums/article-category.enum';
 import { ArticleOverview } from '@shared/models/article/interfaces/article.interface';
 import * as moment from 'moment';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   selector: 'app-news',
@@ -14,7 +14,7 @@ import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.e
 export class NewsComponent implements OnInit {
   public mainArticle: ArticleOverview;
   public otherArticles: ArticleOverview[];
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
 
   public loadingArticles = true;
 

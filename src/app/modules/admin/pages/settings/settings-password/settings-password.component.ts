@@ -2,9 +2,9 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Authentication, AUTHENTICATION } from '@core/services/api/authentication/authentication.interface';
 import { ChangePasswordResponse } from '@core/services/api/authentication/supabase-authentication.service';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
 import { PasswordMatchValidator } from '@shared/helper/validator/password-match-validator';
 import { combineLatest, startWith, take } from 'rxjs';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 
 @Component({
   selector: 'app-settings-password',
@@ -20,7 +20,7 @@ export class SettingsPasswordComponent implements OnInit {
   }>;
   public savingPassword: boolean;
 
-  public skeletonType = SkeletonType;
+  public SkeletonType = SkeletonType;
 
   public constructor(@Inject(AUTHENTICATION) private readonly authentication: Authentication) {}
 

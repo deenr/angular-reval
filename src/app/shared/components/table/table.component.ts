@@ -6,8 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BadgeSize } from '@shared/components/badge/badge-size.enum';
 import { DateRange } from '@shared/components/datepicker/date-range.interface';
+import { SkeletonType } from '@shared/directives/skeleton/skeleton-type.enum';
+import { getNestedValue } from '@shared/helper/object.utils';
 import { Color } from '@shared/models/color/enums/colors.enum';
-import { SkeletonType } from 'src/app/shared/directives/skeleton/skeleton-type.enum';
 import { FilterProperty, FilterType } from './builder/filter-builder';
 import { TableColumn } from './builder/table-column';
 import { TableDataType } from './table-data-type.enum';
@@ -31,9 +32,9 @@ export class TableComponent<T> implements OnInit, OnChanges {
   public dataSource: MatTableDataSource<T>;
   public loadingData = true;
 
-  public tableDataType = TableDataType;
-  public badgeSize = BadgeSize;
-  public skeletonType = SkeletonType;
+  public TableDataType = TableDataType;
+  public BadgeSize = BadgeSize;
+  public SkeletonType = SkeletonType;
 
   public constructor(private readonly router: Router) {}
 
@@ -91,6 +92,10 @@ export class TableComponent<T> implements OnInit, OnChanges {
     return this.columns.find((column: TableColumn) => column.field === field).badgeProperties.colors.get(value) ?? Color.GREY;
   }
 
+  public isActionColumn(data: TableColumn): boolean {
+    return [TableDataType.DELETE, TableDataType.EDIT, TableDataType.APPROVE, TableDataType.DENY].includes(data.type);
+  }
+
   public getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0) {
       return `Page 1 of 1`;
@@ -105,6 +110,32 @@ export class TableComponent<T> implements OnInit, OnChanges {
 
   public edit(id: string): void {
     this.router.navigateByUrl(this.columns.find((column: TableColumn) => column.type === TableDataType.EDIT).editRoute.replace(':id', `${id}`));
+  }
+
+  public canShowApprove(row: T): boolean {
+    const onApproveObject = this.columns.find((column: TableColumn) => column.type === TableDataType.APPROVE).onApprove;
+
+    if (!onApproveObject) return false;
+
+    return getNestedValue(onApproveObject.valueKey, row) === onApproveObject.value;
+  }
+
+  public approve(row: T): void {
+    const { valueKey, value, action } = this.columns.find((column: TableColumn) => column.type === TableDataType.APPROVE).onApprove;
+    if (getNestedValue(valueKey, row) === value) action((row as any)['id']);
+  }
+
+  public canShowDeny(row: T): boolean {
+    const onDenyObject = this.columns.find((column: TableColumn) => column.type === TableDataType.DENY).onDeny;
+
+    if (!onDenyObject) return false;
+
+    return getNestedValue(onDenyObject.valueKey, row) === onDenyObject.value;
+  }
+
+  public deny(row: T): void {
+    const { valueKey, value, action } = this.columns.find((column: TableColumn) => column.type === TableDataType.DENY).onDeny;
+    if (getNestedValue(valueKey, row) === value) action((row as any)['id']);
   }
 
   public onFilterChange(filterValues: any): void {

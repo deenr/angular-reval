@@ -6,5 +6,7 @@ export enum TableDataType {
   AVATAR = 'AVATAR',
   DATE = 'DATE',
   DELETE = 'DELETE',
-  EDIT = 'EDIT'
+  EDIT = 'EDIT',
+  APPROVE = 'APPROVE',
+  DENY = 'DENY'
 }
