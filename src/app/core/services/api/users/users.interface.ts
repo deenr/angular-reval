@@ -9,7 +9,7 @@ export interface Users {
   getAllUnsensitive(): Observable<UserUnsensitive[]>;
   getOverview(): Observable<UserOverview[]>;
   getById(id: string): Observable<User>;
-  add(user: User): Observable<User>;
-  update(user: Partial<User>): Observable<User>;
+  add(user: User): Observable<string>;
+  update(user: Partial<User>): Observable<string>;
   delete(id: string): Observable<string>;
 }

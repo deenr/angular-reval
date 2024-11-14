@@ -84,7 +84,7 @@ export class SupabaseUsersService extends SupabaseService implements Users {
     );
   }
 
-  public add(user: User): Observable<User> {
+  public add(user: User): Observable<string> {
     const { role, status } = { ...user };
     delete user.role;
     delete user.status;
@@ -121,11 +121,11 @@ export class SupabaseUsersService extends SupabaseService implements Users {
 
         return of(data);
       }),
-      map((data) => this.mapUserDTOToUser(data))
+      map((data) => data.id)
     );
   }
 
-  public update(user: Partial<User>): Observable<User> {
+  public update(user: Partial<User>): Observable<string> {
     const { role, status } = { ...user };
     delete user.role;
     delete user.status;
@@ -162,7 +162,7 @@ export class SupabaseUsersService extends SupabaseService implements Users {
 
         return of(data);
       }),
-      map((data) => this.mapUserDTOToUser(data))
+      map((data) => data.id)
     );
   }
 
@@ -183,6 +183,7 @@ export class SupabaseUsersService extends SupabaseService implements Users {
   }
 
   private mapUserDTOToUser(userDTO: UserDTO): User {
+    console.log(userDTO);
     const { id, firstName, lastName, email, joined, phoneNumber, users_role_status } = userDTO;
     const { role, status } = users_role_status[0];
 

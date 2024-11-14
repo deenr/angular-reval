@@ -8,6 +8,7 @@ import { UserRoleService } from '@core/services/user-role.service';
 import { Tab } from '@shared/components/tabs/tab.interface';
 import { UserRole } from '@shared/models/user/enums/user-role.enum';
 import { User } from '@shared/models/user/interfaces/user.interface';
+import { finalize, take } from 'rxjs';
 import { SettingsTab } from './settings-tab.enum';
 
 @Component({
@@ -59,16 +60,26 @@ export class SettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.route.snapshot.paramMap.get('id') && this.userRoleService.getCurrentRole() === UserRole.INCOMPLETE_PROFILE) {
-      this.usersService.getById(this.route.snapshot.paramMap.get('id')).subscribe(({ email }) => {
-        this.detailsForm.controls.email.setValue(email);
-        this.loadingUser = false;
-      });
+      this.usersService
+        .getById(this.route.snapshot.paramMap.get('id'))
+        .pipe(
+          take(1),
+          finalize(() => (this.loadingUser = false))
+        )
+        .subscribe(({ email }) => {
+          this.detailsForm.controls.email.setValue(email);
+        });
     } else {
-      this.usersService.getById(this.localStorageService.getItem(LocalStorageService.USER_ID)).subscribe((user: User) => {
-        this.initialUser = user;
-        this.setSettingsDetailsForm(this.initialUser);
-        this.loadingUser = false;
-      });
+      this.usersService
+        .getById(this.localStorageService.getItem(LocalStorageService.USER_ID))
+        .pipe(
+          take(1),
+          finalize(() => (this.loadingUser = false))
+        )
+        .subscribe((user: User) => {
+          this.initialUser = user;
+          this.setSettingsDetailsForm(this.initialUser);
+        });
     }
 
     this.breakpointService.observe().subscribe((breakpoint: Breakpoint) => (this.isMobile = breakpoint === Breakpoint.SM || breakpoint === Breakpoint.XS));

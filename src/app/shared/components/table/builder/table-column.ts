@@ -1,6 +1,6 @@
 import { TableDataType } from '../table-data-type.enum';
-import { FilterProperty } from './filter-builder';
 import { BadgeProperty } from './badge-builder';
+import { FilterProperty } from './filter-builder';
 
 export class TableColumn {
   constructor(

@@ -41,6 +41,8 @@ export class SettingsDetailsComponent {
     this.detailsForm.markAllAsTouched();
 
     if (this.detailsForm.valid) {
+      const userToSave = this.getUserToSave();
+
       this.savingDetails = true;
       this.usersService
         .update(this.getUserToSave())
@@ -48,7 +50,7 @@ export class SettingsDetailsComponent {
           take(1),
           finalize(() => (this.savingDetails = false))
         )
-        .subscribe((user) => this.userUpdated.emit(user));
+        .subscribe(() => this.userUpdated.emit(userToSave as User));
     }
   }
 
