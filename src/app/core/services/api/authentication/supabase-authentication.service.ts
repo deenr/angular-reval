@@ -3,6 +3,7 @@ import { AuthChangeEvent, AuthOtpResponse, AuthResponse, AuthSession, PostgrestS
 import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 
+import { UserStatus } from '@shared/models/user/enums/user-status.enum';
 import { LocalStorageService } from '../../local-storage.service';
 import { SupabaseService } from '../supabase.service';
 import { Users, USERS } from '../users/users.interface';
@@ -20,7 +21,7 @@ export enum ChangePasswordResponse {
   providedIn: 'root'
 })
 export class SupabaseAuthenticationService extends SupabaseService implements Authentication {
-  private _currentSession = new BehaviorSubject<AuthSession | null>(null);
+  private _currentSession = new BehaviorSubject<AuthSession | boolean | null>(null);
 
   public constructor(@Inject(USERS) private readonly usersService: Users, private readonly localStorageService: LocalStorageService) {
     super();
@@ -28,7 +29,7 @@ export class SupabaseAuthenticationService extends SupabaseService implements Au
     this.initializeAuth();
   }
 
-  public getCurrentSession(): Observable<AuthSession | null> {
+  public getCurrentSession(): Observable<AuthSession | boolean | null> {
     return this._currentSession.asObservable();
   }
 
@@ -108,16 +109,22 @@ export class SupabaseAuthenticationService extends SupabaseService implements Au
       .pipe(
         take(1),
         switchMap(({ data }) => {
-          if (data) {
+          if (data.session) {
             return this.usersService.getById(data.session.user.id).pipe(
-              map(({ id, role }) => {
-                this._currentSession.next(data.session);
-                this.localStorageService.setItem(LocalStorageService.USER_ID, id);
-                this.localStorageService.setItem(LocalStorageService.USER_ROLE, role);
+              map(({ id, role, status }) => {
+                if (status === UserStatus.APPROVED) {
+                  this._currentSession.next(data.session);
+                  this.localStorageService.setItem(LocalStorageService.USER_ID, id);
+                  this.localStorageService.setItem(LocalStorageService.USER_ROLE, role);
+                } else {
+                  this._currentSession.next(false);
+                  this.localStorageService.removeItem(LocalStorageService.USER_ID);
+                  this.localStorageService.removeItem(LocalStorageService.USER_ROLE);
+                }
               })
             );
           } else {
-            this._currentSession.next(null);
+            this._currentSession.next(false);
             this.localStorageService.removeItem(LocalStorageService.USER_ID);
             this.localStorageService.removeItem(LocalStorageService.USER_ROLE);
             return of(null);

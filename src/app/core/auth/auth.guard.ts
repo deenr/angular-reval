@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = () => {
   return authentication.getCurrentSession().pipe(
     skipWhile((session: AuthSession | boolean) => session === null || session === undefined),
     switchMap((session: AuthSession | boolean) => {
-      if (session === null || session === undefined || !session) {
+      if (!session) {
         router.navigate(['/login']);
         return of(false);
       }

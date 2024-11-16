@@ -6,7 +6,7 @@ import { ChangePasswordResponse } from './supabase-authentication.service';
 export const AUTHENTICATION = new InjectionToken<Authentication>('Authentication');
 
 export interface Authentication {
-  getCurrentSession(): Observable<AuthSession | null>;
+  getCurrentSession(): Observable<AuthSession | boolean | null>;
   signIn(email: string, password: string): Observable<AuthResponse>;
   signUp(email: string, password: string): Observable<AuthResponse>;
   signOut(): Observable<void>;
